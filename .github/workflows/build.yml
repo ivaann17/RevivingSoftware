@@ -4,6 +4,7 @@ on:
     branches:
       - Master
       - Develop
+      - Feature-CapaPresentacion
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
