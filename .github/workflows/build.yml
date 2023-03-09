@@ -3,9 +3,8 @@ on:
   push:
     branches:
       - Master
+      - Develop
       - Feature-CapaPresentacion
-      - Develop 
-      
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
