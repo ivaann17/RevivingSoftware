@@ -5,6 +5,7 @@ on:
       - Master
       - Develop
       - Feature-CapaPresentacion
+      - Hotfixes
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
