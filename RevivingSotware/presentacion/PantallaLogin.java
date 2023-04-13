@@ -41,11 +41,11 @@ public class PantallaLogin extends JFrame {
 
 	public PantallaLogin() {
 		JFrame frmUclm = new JFrame("Demo application");
-		frmUclm.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				"C:\\Users\\Usuario\\git\\PROYECTOS_GIT\\TecnoSoftware\\Proyecto-ISO-2-TecnoSoftware\\Proyecto_TecnoSoftware\\Imagenes\\IconUCLM.png"));
+		frmUclm.setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaLogin.class.getResource("/IMAGES/descarga.png")));
 		frmUclm.setTitle("UCLM");
 		frmUclm.setSize(625, 428);
 		frmUclm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -53,6 +53,12 @@ public class PantallaLogin extends JFrame {
 		placeComponents(panel);
 
 		JButton loginButton = new JButton("Iniciar sesi\u00F3n");
+		loginButton.setFocusPainted(false);
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmUclm.dispose();
+			}
+		});
 		loginButton.hide();
 		loginButton.setForeground(Color.WHITE);
 		loginButton.setBackground(SystemColor.textHighlight);
@@ -101,6 +107,7 @@ public class PantallaLogin extends JFrame {
 
 		frmUclm.setVisible(true);
 		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.setFocusPainted(false);
 		btnSiguiente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSiguiente.setForeground(Color.WHITE);
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -148,6 +155,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(btnNoAcceder);
 
 		JButton btnNewButton = new JButton("Volver");
+		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -192,6 +200,11 @@ public class PantallaLogin extends JFrame {
 									&& ContraseñaText.getText().equals("admin")) {
 								JOptionPane.showMessageDialog(null, "Bienvenido.", "UCLM",
 										JOptionPane.INFORMATION_MESSAGE);
+								
+								presentacion.PantallaDireccionCursos p = new presentacion.PantallaDireccionCursos();
+								p.show();
+								setVisible(false);
+							
 							}
 
 							else {
@@ -211,8 +224,7 @@ public class PantallaLogin extends JFrame {
 		});
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(
-				"C:\\Users\\Usuario\\git\\PROYECTOS_GIT\\RevivingSoftware\\RevivingSotware\\IMAGES\\Captura de pantalla (188).png"));
+		lblNewLabel.setIcon(new ImageIcon(PantallaLogin.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		panel.add(lblNewLabel);
 

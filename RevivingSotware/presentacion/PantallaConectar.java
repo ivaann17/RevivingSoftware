@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -48,8 +49,7 @@ public class PantallaConectar extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaConectar() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				"C:\\Users\\Usuario\\git\\PROYECTOS_GIT\\TecnoSoftware\\Proyecto-ISO-2-TecnoSoftware\\Proyecto_TecnoSoftware\\Imagenes\\IconUCLM.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(625, 428);
@@ -61,26 +61,29 @@ public class PantallaConectar extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(
-				"C:\\Users\\Usuario\\git\\PROYECTOS_GIT\\RevivingSoftware\\RevivingSotware\\IMAGES\\Captura de pantalla (188).png"));
+		lblNewLabel.setIcon(new ImageIcon(PantallaLogin.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
 		JButton conectBtn = new JButton("ENTRAR");
+		conectBtn.setFocusPainted(false);
 		conectBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		conectBtn.setForeground(Color.WHITE);
 		conectBtn.setFont(new Font("Tahoma", Font.BOLD, 18));
 		conectBtn.setBackground(SystemColor.textHighlight);
 		conectBtn.setBounds(141, 172, 274, 113);
 		contentPane.add(conectBtn);
+		
+
+		
 		conectBtn.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				// try {
 				// GestorBD.connect();
+			setVisible(false);
+			new presentacion.PantallaLogin();
 
-				presentacion.PantallaLogin p = new presentacion.PantallaLogin();
-				setVisible(false);
 
 				/*
 				 * } catch (Exception ea) { JOptionPane.showMessageDialog(null,
