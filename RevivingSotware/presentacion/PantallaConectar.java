@@ -44,12 +44,14 @@ public class PantallaConectar extends JFrame {
 			}
 		});
 	}
+	
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public PantallaConectar() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaConectar.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(625, 428);
@@ -61,7 +63,7 @@ public class PantallaConectar extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PantallaLogin.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(new ImageIcon(PantallaConectar.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -87,7 +89,7 @@ public class PantallaConectar extends JFrame {
 
 				/*
 				 * } catch (Exception ea) { JOptionPane.showMessageDialog(null,
-				 * "Error al conectar con la base de datos. Revise sus datos de conexión",
+				 * "Error al conectar con la base de datos. Revise sus datos de conexion",
 				 * "ERROR", JOptionPane.ERROR_MESSAGE); return; }
 				 */
 			}

@@ -1,7 +1,5 @@
 package presentacion;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,27 +7,15 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-
 import persistencia.CursoPropioDAO;
-import persistencia.GestorBD;
-
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.Button;
-import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 
 public class PantallaDireccionCursos extends JFrame {
 	
@@ -73,6 +59,13 @@ public class PantallaDireccionCursos extends JFrame {
 
 		
 		JButton btnRealizarPropuesta = new JButton("Realizar propuesta");
+		btnRealizarPropuesta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
+				p.setVisible(true);
+				
+			}
+		});
 		btnRealizarPropuesta.setFocusPainted(false);
 		btnRealizarPropuesta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRealizarPropuesta.setForeground(Color.WHITE);
