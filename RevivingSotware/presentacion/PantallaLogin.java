@@ -2,16 +2,17 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.EventQueue;
+
 import java.awt.Font;
+
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,16 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+
 import javax.swing.border.MatteBorder;
-
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-
-import persistencia.GestorBD;
 
 public class PantallaLogin extends JFrame {
 
-	private JPanel contentPane;
 	protected static JTextField UsuarioText;
 	protected static JTextField ContraseñaText;
 	protected static JTextField user;
@@ -41,11 +37,11 @@ public class PantallaLogin extends JFrame {
 
 	public PantallaLogin() {
 		JFrame frmUclm = new JFrame("Demo application");
-		frmUclm.setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaLogin.class.getResource("/IMAGES/descarga.png")));
+		frmUclm.setIconImage(
+				Toolkit.getDefaultToolkit().getImage(PantallaLogin.class.getResource("/IMAGES/descarga.png")));
 		frmUclm.setTitle("UCLM");
 		frmUclm.setSize(625, 428);
 		frmUclm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -58,8 +54,10 @@ public class PantallaLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				frmUclm.dispose();
 			}
+
 		});
-		loginButton.hide();
+
+		loginButton.setVisible(false);
 		loginButton.setForeground(Color.WHITE);
 		loginButton.setBackground(SystemColor.textHighlight);
 		loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -73,7 +71,7 @@ public class PantallaLogin extends JFrame {
 		ContraseñaText.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
 
 		ContraseñaText.setActionCommand("");
-		ContraseñaText.hide();
+		ContraseñaText.setVisible(false);
 		ContraseñaText.setBounds(79, 191, 434, 42);
 		panel.add(ContraseñaText);
 
@@ -95,7 +93,7 @@ public class PantallaLogin extends JFrame {
 
 			}
 		});
-		btnRecuperar.hide();
+		btnRecuperar.setVisible(false);
 		btnRecuperar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnRecuperar.setForeground(SystemColor.textHighlight);
 		btnRecuperar.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -114,6 +112,7 @@ public class PantallaLogin extends JFrame {
 		btnSiguiente.setBackground(SystemColor.textHighlight);
 		btnSiguiente.setBounds(406, 316, 168, 48);
 		panel.add(btnSiguiente);
+		frmUclm.getRootPane().setDefaultButton(btnSiguiente);
 
 		JLabel userLabel = new JLabel("Iniciar sesi\u00F3n");
 		userLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -122,7 +121,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(userLabel);
 
 		JLabel passwordLabel = new JLabel("Escribir Contrase\u00F1a");
-		passwordLabel.hide();
+		passwordLabel.setVisible(false);
 		passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		passwordLabel.setBounds(80, 129, 215, 42);
 		panel.add(passwordLabel);
@@ -132,7 +131,7 @@ public class PantallaLogin extends JFrame {
 		user.setBackground(Color.WHITE);
 		user.setBorder(null);
 		user.setEditable(false);
-		user.hide();
+		user.setVisible(false);
 		user.setBounds(79, 109, 252, 19);
 		panel.add(user);
 		user.setColumns(10);
@@ -162,12 +161,12 @@ public class PantallaLogin extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(44, 316, 114, 49);
 		panel.add(btnNewButton);
-		btnNewButton.hide();
+		btnNewButton.setVisible(false);
 		btnNewButton.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmUclm.hide();
+				frmUclm.setVisible(false);
 				presentacion.PantallaLogin p = new presentacion.PantallaLogin();
-
+				p.setVisible(true);
 			}
 		});
 
@@ -178,41 +177,45 @@ public class PantallaLogin extends JFrame {
 					JOptionPane.showMessageDialog(null, "Debe introducir su usuario.", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					btnRecuperar.show();
-					btnSiguiente.hide();
-					UsuarioText.hide();
-					ContraseñaText.show();
-					loginButton.show();
-					userLabel.hide();
-					passwordLabel.show();
-					btnNoAcceder.hide();
-					btnNewButton.show();
-					user.show();
+					btnRecuperar.setVisible(true);
+					btnSiguiente.setVisible(false);
+					UsuarioText.setVisible(false);
+					ContraseñaText.setVisible(true);
+					loginButton.setVisible(true);
+					userLabel.setVisible(false);
+					passwordLabel.setVisible(true);
+					btnNoAcceder.setVisible(false);
+					btnNewButton.setVisible(true);
+					user.setVisible(true);
 					user.setText(" Usuario: " + UsuarioText.getText());
+					frmUclm.getRootPane().setDefaultButton(loginButton);
+					ContraseñaText.requestFocus();
 
 					loginButton.addActionListener((ActionListener) new ActionListener() {
 						public void actionPerformed(ActionEvent l) {
-							String pass = ContraseñaText.getText();
+							char[] passwordChars = ContraseñaText.getPassword();
+							String pass = new String(passwordChars);
+
 							if (pass.length() == 0) {
 								JOptionPane.showMessageDialog(null, "Debe introducir su contraseña.", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
-							} else if (UsuarioText.getText().equals("admin")
-									&& ContraseñaText.getText().equals("admin")) {
+							} else if (UsuarioText.getText().equals("admin") && pass.equals("admin")) {
 								JOptionPane.showMessageDialog(null, "Bienvenido.", "UCLM",
 										JOptionPane.INFORMATION_MESSAGE);
-								
+
 								presentacion.PantallaDireccionCursos p = new presentacion.PantallaDireccionCursos();
-								p.show();
+								p.setVisible(true);
 								setVisible(false);
-							
+
 							}
 
 							else {
 								JOptionPane.showMessageDialog(null,
 										"El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.",
 										"ERROR", JOptionPane.ERROR_MESSAGE);
-								frmUclm.hide();
+								frmUclm.setVisible(false);
 								PantallaLogin p = new PantallaLogin();
+								p.setVisible(true);
 
 							}
 

@@ -62,6 +62,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnRealizarPropuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
+				setVisible(false);
 				p.setVisible(true);
 				
 			}
