@@ -1,6 +1,5 @@
 package presentacion;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -55,8 +54,8 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	protected JLabel lblFacultadDondeSe;
 	protected JLabel lblTitulacinDelProfesor;
 	protected JLabel lblDuracinDelCurso;
-	protected JComboBox<TipoCurso> tipoCurso;
-	protected JComboBox<Facultad> Fac;
+	protected JComboBox tipoCurso;
+	protected JComboBox Fac;
 	private String tipoLetra = "Tahoma";
 	private String ERROR = "ERROR";
 
@@ -212,8 +211,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 
 				Num = NumCreditos.getText();
 
-				if (!textoVacio(Edicion) || !textoVacio(NombreCurso) || !textoVacio(dniProf)
-						|| !textoVacio(dniSec)) {
+				if (!textoVacio(Edicion) || !textoVacio(NombreCurso) || !textoVacio(dniProf) || !textoVacio(dniSec)) {
 					JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para realizar la propuesta.",
 							ERROR, JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -221,23 +219,29 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 						JOptionPane.showMessageDialog(null, "Introduzca los créditos de manera correcta.", ERROR,
 								JOptionPane.ERROR_MESSAGE);
 					else if (!dniDigi(dniProf)) {
-						JOptionPane.showMessageDialog(null, "Introduzca el DNI del profesor con todos sus dígitos.", ERROR,
+						JOptionPane.showMessageDialog(null, "Introduzca el DNI del profesor con todos sus dígitos.",
+								ERROR, JOptionPane.ERROR_MESSAGE);
+					} else if (!dniDigi(dniSec)) {
+						JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dígitos.",
+								ERROR, JOptionPane.ERROR_MESSAGE);
+					} else if (tipoCurso.getSelectedItem() == "") {
+						JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de curso.", ERROR,
 								JOptionPane.ERROR_MESSAGE);
-					}
-					else if (!dniDigi(dniSec)) {
-						JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dígitos.", ERROR,
+					} else if (Fac.getSelectedItem() == "") {
+						JOptionPane.showMessageDialog(null, "Debe seleccionar una facultad.", ERROR,
 								JOptionPane.ERROR_MESSAGE);
-					}
-					else {
+					} else {
+						c = (TipoCurso) tipoCurso.getSelectedItem();
 						compruebaCreditos(c);
-
 					}
 				}
 			}
 		});
 
-		tipoCurso = new JComboBox<TipoCurso>();
+		tipoCurso = new JComboBox();
 		tipoCurso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		tipoCurso.setSelectedItem("");
+		tipoCurso.addItem("");
 		tipoCurso.addItem(TipoCurso.MASTER);
 		tipoCurso.addItem(TipoCurso.ESPECIALISTA);
 		tipoCurso.addItem(TipoCurso.EXPERTO);
@@ -245,15 +249,6 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		tipoCurso.addItem(TipoCurso.FORMACION_CONTINUA);
 		tipoCurso.addItem(TipoCurso.MICROCREDENCIALES);
 		tipoCurso.addItem(TipoCurso.CORTA_DURACION);
-		tipoCurso.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				c = (TipoCurso) tipoCurso.getSelectedItem();
-
-			}
-
-		});
 		tipoCurso.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		tipoCurso.setBounds(71, 181, 259, 39);
 		contentPane.add(tipoCurso);
@@ -331,28 +326,20 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		btnNext.setBounds(594, 490, 114, 49);
 		contentPane.add(btnNext);
 
-		Fac = new JComboBox<Facultad>();
+		Fac = new JComboBox();
 		Fac.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Fac.setSelectedItem("");
+		Fac.addItem("");
 		Fac.addItem(Facultad.CAMPUS_ALBACETE);
 		Fac.addItem(Facultad.CAMPUS_ALMADEN);
 		Fac.addItem(Facultad.CAMPUS_CIUDAD_REAL);
 		Fac.addItem(Facultad.CAMPUS_CUENCA);
 		Fac.addItem(Facultad.CAMPUS_TALAVERA);
 		Fac.addItem(Facultad.CAMPUS_TOLEDO);
-		Fac.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				f = (Facultad) Fac.getSelectedItem();
-
-			}
-
-		});
 		Fac.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		Fac.setBounds(454, 308, 259, 39);
 		contentPane.add(Fac);
-		
-		
+
 	}
 
 	public void mostrarFechas() {
@@ -466,9 +453,10 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 			vacio = false;
 		return vacio;
 	}
+
 	public static boolean dniDigi(JTextField cuadro) {
 		boolean vacio = true;
-		if (cuadro.getText().length()!=9)
+		if (cuadro.getText().length() != 9)
 			vacio = false;
 		return vacio;
 	}
@@ -483,7 +471,8 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	public void focusLost(FocusEvent e) {
 		if (e.getSource() == NumCreditos) {
 			if (NumCreditos.getText().isBlank()) {
-			NumCreditos.setText("0");}
+				NumCreditos.setText("0");
+			}
 			Num = NumCreditos.getText();
 			String a = String.valueOf((Double.parseDouble(Num)) * 18.87);
 			textPrecio.setText(a);
