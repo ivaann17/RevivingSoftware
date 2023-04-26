@@ -199,12 +199,21 @@ public class PantallaLogin extends JFrame {
 							if (pass.length() == 0) {
 								JOptionPane.showMessageDialog(null, "Debe introducir su contraseña.", "ERROR",
 										JOptionPane.ERROR_MESSAGE);
-							} else if (UsuarioText.getText().equals("admin") && pass.equals("admin")) {
-								JOptionPane.showMessageDialog(null, "Bienvenido.", "UCLM",
+							} else if (UsuarioText.getText().equals("pro") && pass.equals("pro")) {
+								JOptionPane.showMessageDialog(null, "Bienvenido profesor.", "UCLM",
 										JOptionPane.INFORMATION_MESSAGE);
 
 								presentacion.PantallaDireccionCursos p = new presentacion.PantallaDireccionCursos();
 								p.setVisible(true);
+								setVisible(false);
+
+							}
+							else if (UsuarioText.getText().equals("alu") && pass.equals("alu")) {
+								JOptionPane.showMessageDialog(null, "Bienvenido alumno.", "UCLM",
+										JOptionPane.INFORMATION_MESSAGE);
+
+								presentacion.PantallaEstudiante e = new presentacion.PantallaEstudiante();
+								e.setVisible(true);
 								setVisible(false);
 
 							}
@@ -215,7 +224,6 @@ public class PantallaLogin extends JFrame {
 										"ERROR", JOptionPane.ERROR_MESSAGE);
 								frmUclm.setVisible(false);
 								PantallaLogin p = new PantallaLogin();
-								p.setVisible(true);
 
 							}
 
