@@ -79,12 +79,12 @@ public class PantallaLogin extends JFrame {
 		UsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		UsuarioText.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
 		UsuarioText.setName("");
-		UsuarioText.setToolTipText("Introduzca su correo electr\u00F3nico");
+		UsuarioText.setToolTipText("Introduzca su correo electronico");
 		UsuarioText.setBounds(79, 192, 434, 42);
 		panel.add(UsuarioText);
 		UsuarioText.setColumns(10);
 
-		JButton btnRecuperar = new JButton("He olvidado mi contrase\u00F1a");
+		JButton btnRecuperar = new JButton("He olvidado mi contraseña");
 		btnRecuperar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null,
@@ -114,13 +114,13 @@ public class PantallaLogin extends JFrame {
 		panel.add(btnSiguiente);
 		frmUclm.getRootPane().setDefaultButton(btnSiguiente);
 
-		JLabel userLabel = new JLabel("Iniciar sesi\u00F3n");
+		JLabel userLabel = new JLabel("Iniciar sesion");
 		userLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		userLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		userLabel.setBounds(80, 138, 148, 25);
 		panel.add(userLabel);
 
-		JLabel passwordLabel = new JLabel("Escribir Contrase\u00F1a");
+		JLabel passwordLabel = new JLabel("Escribir Contraseña");
 		passwordLabel.setVisible(false);
 		passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		passwordLabel.setBounds(80, 129, 215, 42);
@@ -136,7 +136,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(user);
 		user.setColumns(10);
 
-		JButton btnNoAcceder = new JButton("\u00BFNo puede acceder a su cuenta?");
+		JButton btnNoAcceder = new JButton("¿No puede acceder a su cuenta?");
 		btnNoAcceder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,
@@ -213,6 +213,16 @@ public class PantallaLogin extends JFrame {
 										JOptionPane.INFORMATION_MESSAGE);
 
 								presentacion.PantallaEstudiante e = new presentacion.PantallaEstudiante();
+								e.setVisible(true);
+								setVisible(false);
+
+							}
+							
+							else if (UsuarioText.getText().equals("vice") && pass.equals("vice")) {
+								JOptionPane.showMessageDialog(null, "Bienvenido vicerrector.", "UCLM",
+										JOptionPane.INFORMATION_MESSAGE);
+
+								presentacion.PantallaEmpleadosVicerrectorado e = new presentacion.PantallaEmpleadosVicerrectorado();
 								e.setVisible(true);
 								setVisible(false);
 

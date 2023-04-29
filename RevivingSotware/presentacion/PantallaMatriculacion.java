@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -41,6 +42,20 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnTar = new JButton("Pago con Tarjeta");
+		btnTar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar con tarjeta?",
+						"ATENCIÓN", JOptionPane.OK_CANCEL_OPTION);
+				if (respuesta == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.",
+							"INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
+					presentacion.PantallaEstudiante p = new presentacion.PantallaEstudiante();
+					p.setVisible(true);
+
+			}
+			}});
 		btnTar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTar.setForeground(Color.WHITE);
 		btnTar.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -50,6 +65,19 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.add(btnTar);
 		
 		JButton btnTrans = new JButton("Pago por transferencia");
+		btnTrans.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar mediante transferencia bancaria?",
+						"ATENCIÓN", JOptionPane.OK_CANCEL_OPTION);
+				if (respuesta == JOptionPane.OK_OPTION) {
+					JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.",
+							"INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
+					presentacion.PantallaEstudiante p = new presentacion.PantallaEstudiante();
+					p.setVisible(true);
+			}
+			}});
 		btnTrans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTrans.setForeground(Color.WHITE);
 		btnTrans.setFont(new Font("Tahoma", Font.BOLD, 15));
