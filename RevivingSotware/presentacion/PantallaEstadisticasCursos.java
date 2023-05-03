@@ -85,14 +85,9 @@ public class PantallaEstadisticasCursos extends JFrame {
 		lblIngresosTotales.setBounds(259, 385, 259, 39);
 		contentPane.add(lblIngresosTotales);
 
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(712, 108, 26, 267);
-		contentPane.add(scrollBar);
-
 		listaCursos.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
-//curso selecionado
 
 				}
 			}
