@@ -17,14 +17,14 @@ import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class PantallaDireccionCursos extends JFrame {
+public class PantallaEstudiante extends JFrame {
 
 	private JPanel contentPane;
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
 	CursoPropioDAO cDAO = new CursoPropioDAO();
 
-	public PantallaDireccionCursos() {
+	public PantallaEstudiante() {
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
@@ -37,21 +37,22 @@ public class PantallaDireccionCursos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnMostrarPendientes = new JButton("Propuestas realizadas");
-		btnMostrarPendientes.addActionListener(new ActionListener() {
+		JButton btnMisCursos = new JButton("Mis cursos\r\n");
+		btnMisCursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				presentacion.PantallaPropuestasRealizadas p = new presentacion.PantallaPropuestasRealizadas();
+				presentacion.PantallaMisCursos p = new presentacion.PantallaMisCursos();
 				setVisible(false);
 				p.setVisible(true);
+
 			}
 		});
-		btnMostrarPendientes.setFocusPainted(false);
-		btnMostrarPendientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnMostrarPendientes.setForeground(Color.WHITE);
-		btnMostrarPendientes.setBackground(SystemColor.textHighlight);
-		btnMostrarPendientes.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnMostrarPendientes.setBounds(45, 253, 228, 76);
-		contentPane.add(btnMostrarPendientes);
+		btnMisCursos.setFocusPainted(false);
+		btnMisCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnMisCursos.setForeground(Color.WHITE);
+		btnMisCursos.setBackground(SystemColor.textHighlight);
+		btnMisCursos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnMisCursos.setBounds(45, 253, 228, 76);
+		contentPane.add(btnMisCursos);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
@@ -59,22 +60,22 @@ public class PantallaDireccionCursos extends JFrame {
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		JButton btnRealizarPropuesta = new JButton("Realizar propuesta");
-		btnRealizarPropuesta.addActionListener(new ActionListener() {
+		JButton btnRealizarMatriculacion = new JButton("Realizar matriculaci\u00F3n\r\n");
+		btnRealizarMatriculacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
+				PantallaMatriculacion p = new PantallaMatriculacion();
 				setVisible(false);
 				p.setVisible(true);
 
 			}
 		});
-		btnRealizarPropuesta.setFocusPainted(false);
-		btnRealizarPropuesta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRealizarPropuesta.setForeground(Color.WHITE);
-		btnRealizarPropuesta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnRealizarPropuesta.setBackground(SystemColor.textHighlight);
-		btnRealizarPropuesta.setBounds(45, 122, 228, 76);
-		contentPane.add(btnRealizarPropuesta);
+		btnRealizarMatriculacion.setFocusPainted(false);
+		btnRealizarMatriculacion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRealizarMatriculacion.setForeground(Color.WHITE);
+		btnRealizarMatriculacion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnRealizarMatriculacion.setBackground(SystemColor.textHighlight);
+		btnRealizarMatriculacion.setBounds(45, 122, 228, 76);
+		contentPane.add(btnRealizarMatriculacion);
 
 		NombreUsu = new JTextField();
 		NombreUsu.setText("NOMBRE");
