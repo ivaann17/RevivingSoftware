@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JLabel;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -37,8 +36,6 @@ public class PantallaConectar extends JFrame {
 			}
 		});
 	}
-	
-	
 
 	/**
 	 * Create the frame.
@@ -67,24 +64,15 @@ public class PantallaConectar extends JFrame {
 		conectBtn.setFont(new Font("Tahoma", Font.BOLD, 18));
 		conectBtn.setBackground(SystemColor.textHighlight);
 		conectBtn.setBounds(141, 172, 274, 113);
+		contentPane.getRootPane().setDefaultButton(conectBtn);
 		contentPane.add(conectBtn);
-		
 
-		
 		conectBtn.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				// try {
-				// GestorBD.connect();
-			setVisible(false);
-			new presentacion.PantallaLogin();
+				setVisible(false);
+				new presentacion.PantallaLogin();
 
-
-				/*
-				 * } catch (Exception ea) { JOptionPane.showMessageDialog(null,
-				 * "Error al conectar con la base de datos. Revise sus datos de conexion",
-				 * "ERROR", JOptionPane.ERROR_MESSAGE); return; }
-				 */
 			}
 		});
 	}

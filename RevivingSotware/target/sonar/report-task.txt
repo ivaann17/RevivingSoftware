@@ -1,7 +1,0 @@
-organization=ivaann17
-projectKey=ivaann17_RevivingSoftware
-serverUrl=https://sonarcloud.io
-serverVersion=8.0.0.39003
-dashboardUrl=https://sonarcloud.io/dashboard?id=ivaann17_RevivingSoftware
-ceTaskId=AYbftYbxQPewAqMEUNOF
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYbftYbxQPewAqMEUNOF

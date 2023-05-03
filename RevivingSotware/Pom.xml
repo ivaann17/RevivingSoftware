@@ -9,7 +9,7 @@
 	<url>https://github.com/ivaann17/RevivingSoftware.git</url>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<sonar.organization>ivaann17</sonar.organization>
@@ -38,12 +38,20 @@
 		    <version>3.0.0-M7</version>
 		</dependency>
 	</dependencies>
-
+ <build>
+    <sourceDirectory>presentacion</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>14</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 	<reporting>
 		<plugins>
-			
-
-			
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

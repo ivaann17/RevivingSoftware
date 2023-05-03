@@ -2,26 +2,31 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Cursor;
-
+import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import javax.swing.border.MatteBorder;
+import javax.swing.event.HyperlinkEvent;
 
 public class PantallaLogin extends JFrame {
 
@@ -87,9 +92,7 @@ public class PantallaLogin extends JFrame {
 		JButton btnRecuperar = new JButton("He olvidado mi contraseña");
 		btnRecuperar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null,
-						"Para conocer la contraseña de prueba, debe acceder al manual de usuario: \n https://github.com/ivaann17/RevivingSoftware/blob/Master/ManualUsuario.md ",
-						"RevivingSoftware", JOptionPane.INFORMATION_MESSAGE);
+				enlaceMan();
 
 			}
 		});
@@ -138,10 +141,9 @@ public class PantallaLogin extends JFrame {
 
 		JButton btnNoAcceder = new JButton("¿No puede acceder a su cuenta?");
 		btnNoAcceder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,
-						"Para conocer los diferentes tipos de usuarios de prueba, debe acceder al manual de usuario: \n https://github.com/ivaann17/RevivingSoftware/blob/Master/ManualUsuario.md ",
-						"RevivingSoftware", JOptionPane.INFORMATION_MESSAGE);
+			public void actionPerformed(ActionEvent arg0) {
+				enlaceMan();
+
 			}
 		});
 		btnNoAcceder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -196,10 +198,7 @@ public class PantallaLogin extends JFrame {
 							char[] passwordChars = ContraseñaText.getPassword();
 							String pass = new String(passwordChars);
 
-							if (pass.length() == 0) {
-								JOptionPane.showMessageDialog(null, "Debe introducir su contraseña.", "ERROR",
-										JOptionPane.ERROR_MESSAGE);
-							} else if (UsuarioText.getText().equals("pro") && pass.equals("pro")) {
+							if (UsuarioText.getText().equals("pro") && pass.equals("pro")) {
 								JOptionPane.showMessageDialog(null, "Bienvenido profesor.", "UCLM",
 										JOptionPane.INFORMATION_MESSAGE);
 
@@ -207,8 +206,7 @@ public class PantallaLogin extends JFrame {
 								p.setVisible(true);
 								setVisible(false);
 
-							}
-							else if (UsuarioText.getText().equals("alu") && pass.equals("alu")) {
+							} else if (UsuarioText.getText().equals("alu") && pass.equals("alu")) {
 								JOptionPane.showMessageDialog(null, "Bienvenido alumno.", "UCLM",
 										JOptionPane.INFORMATION_MESSAGE);
 
@@ -217,12 +215,22 @@ public class PantallaLogin extends JFrame {
 								setVisible(false);
 
 							}
-							
+
 							else if (UsuarioText.getText().equals("vice") && pass.equals("vice")) {
 								JOptionPane.showMessageDialog(null, "Bienvenido vicerrector.", "UCLM",
 										JOptionPane.INFORMATION_MESSAGE);
 
 								presentacion.PantallaEmpleadosVicerrectorado e = new presentacion.PantallaEmpleadosVicerrectorado();
+								e.setVisible(true);
+								setVisible(false);
+
+							}
+
+							else if (UsuarioText.getText().equals("jefe") && pass.equals("jefe")) {
+								JOptionPane.showMessageDialog(null, "Bienvenido jefe.", "UCLM",
+										JOptionPane.INFORMATION_MESSAGE);
+
+								presentacion.PantallaJefeGabineteVicerrectorado e = new presentacion.PantallaJefeGabineteVicerrectorado();
 								e.setVisible(true);
 								setVisible(false);
 
@@ -251,4 +259,23 @@ public class PantallaLogin extends JFrame {
 
 	}
 
+	public void enlaceMan() {
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEditable(false);
+		editorPane.setContentType("text/html");
+		editorPane.setText(
+				"<html><body><a href=\"https://github.com/ivaann17/RevivingSoftware/blob/Master/ManualUsuario.md\">Manual de usuario</a></body></html>");
+		editorPane.addHyperlinkListener(e -> {
+			if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
+				try {
+					Desktop.getDesktop().browse(e.getURL().toURI());
+				} catch (IOException | URISyntaxException ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+
+		JOptionPane.showMessageDialog(null, editorPane, "RevivingSoftware", JOptionPane.INFORMATION_MESSAGE);
+
+	}
 }
