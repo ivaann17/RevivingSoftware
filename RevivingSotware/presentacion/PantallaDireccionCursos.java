@@ -18,21 +18,16 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class PantallaDireccionCursos extends JFrame {
-	
+
 	private JPanel contentPane;
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
 	CursoPropioDAO cDAO = new CursoPropioDAO();
 
-	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the frame.
-	 */
 	public PantallaDireccionCursos() {
 		setTitle("UCLM");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
@@ -41,8 +36,15 @@ public class PantallaDireccionCursos extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnMostrarPendientes = new JButton("Propuestas pendientes");
+
+		JButton btnMostrarPendientes = new JButton("Propuestas realizadas");
+		btnMostrarPendientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				presentacion.PantallaPropuestasRealizadas p = new presentacion.PantallaPropuestasRealizadas();
+				setVisible(false);
+				p.setVisible(true);
+			}
+		});
 		btnMostrarPendientes.setFocusPainted(false);
 		btnMostrarPendientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarPendientes.setForeground(Color.WHITE);
@@ -50,21 +52,20 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarPendientes.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnMostrarPendientes.setBounds(45, 253, 228, 76);
 		contentPane.add(btnMostrarPendientes);
-		
+
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(
+				new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
-		
 
-		
 		JButton btnRealizarPropuesta = new JButton("Realizar propuesta");
 		btnRealizarPropuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
 				setVisible(false);
 				p.setVisible(true);
-				
+
 			}
 		});
 		btnRealizarPropuesta.setFocusPainted(false);
@@ -74,8 +75,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnRealizarPropuesta.setBackground(SystemColor.textHighlight);
 		btnRealizarPropuesta.setBounds(45, 122, 228, 76);
 		contentPane.add(btnRealizarPropuesta);
-		
-		
+
 		NombreUsu = new JTextField();
 		NombreUsu.setText("NOMBRE");
 		NombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -87,8 +87,7 @@ public class PantallaDireccionCursos extends JFrame {
 		NombreUsu.setBackground(Color.WHITE);
 		NombreUsu.setBounds(552, 214, 252, 19);
 		contentPane.add(NombreUsu);
-		
-		
+
 		TipoUsuario = new JTextField();
 		TipoUsuario.setEditable(false);
 		TipoUsuario.setText("TIPO");
@@ -100,13 +99,12 @@ public class PantallaDireccionCursos extends JFrame {
 		TipoUsuario.setBackground(Color.WHITE);
 		TipoUsuario.setBounds(552, 253, 252, 19);
 		contentPane.add(TipoUsuario);
-		 
-		
+
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
-		
+
 		JButton cs = new JButton("Cerrar sesi\u00F3n\r\n");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
@@ -126,7 +124,6 @@ public class PantallaDireccionCursos extends JFrame {
 		cs.setBounds(552, 303, 176, 39);
 		contentPane.add(cs);
 
-		
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarResueltos.setForeground(Color.WHITE);

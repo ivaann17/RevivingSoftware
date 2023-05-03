@@ -18,21 +18,16 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class PantallaEstudiante extends JFrame {
-	
+
 	private JPanel contentPane;
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
 	CursoPropioDAO cDAO = new CursoPropioDAO();
 
-	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the frame.
-	 */
 	public PantallaEstudiante() {
 		setTitle("UCLM");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
@@ -41,8 +36,16 @@ public class PantallaEstudiante extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnMisCursos = new JButton("Mis cursos\r\n");
+		btnMisCursos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				presentacion.PantallaMisCursos p = new presentacion.PantallaMisCursos();
+				setVisible(false);
+				p.setVisible(true);
+
+			}
+		});
 		btnMisCursos.setFocusPainted(false);
 		btnMisCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMisCursos.setForeground(Color.WHITE);
@@ -50,21 +53,20 @@ public class PantallaEstudiante extends JFrame {
 		btnMisCursos.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnMisCursos.setBounds(45, 253, 228, 76);
 		contentPane.add(btnMisCursos);
-		
+
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(
+				new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
-		
 
-		
 		JButton btnRealizarMatriculacion = new JButton("Realizar matriculaci\u00F3n\r\n");
 		btnRealizarMatriculacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PantallaMatriculacion p = new PantallaMatriculacion();
 				setVisible(false);
 				p.setVisible(true);
-				
+
 			}
 		});
 		btnRealizarMatriculacion.setFocusPainted(false);
@@ -74,8 +76,7 @@ public class PantallaEstudiante extends JFrame {
 		btnRealizarMatriculacion.setBackground(SystemColor.textHighlight);
 		btnRealizarMatriculacion.setBounds(45, 122, 228, 76);
 		contentPane.add(btnRealizarMatriculacion);
-		
-		
+
 		NombreUsu = new JTextField();
 		NombreUsu.setText("NOMBRE");
 		NombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -87,8 +88,7 @@ public class PantallaEstudiante extends JFrame {
 		NombreUsu.setBackground(Color.WHITE);
 		NombreUsu.setBounds(552, 214, 252, 19);
 		contentPane.add(NombreUsu);
-		
-		
+
 		TipoUsuario = new JTextField();
 		TipoUsuario.setEditable(false);
 		TipoUsuario.setText("TIPO");
@@ -100,13 +100,12 @@ public class PantallaEstudiante extends JFrame {
 		TipoUsuario.setBackground(Color.WHITE);
 		TipoUsuario.setBounds(552, 253, 252, 19);
 		contentPane.add(TipoUsuario);
-		 
-		
+
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
-		
+
 		JButton cs = new JButton("Cerrar sesi\u00F3n\r\n");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
@@ -126,7 +125,6 @@ public class PantallaEstudiante extends JFrame {
 		cs.setBounds(552, 303, 176, 39);
 		contentPane.add(cs);
 
-		
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarResueltos.setForeground(Color.WHITE);

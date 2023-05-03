@@ -1,3 +1,4 @@
+
 package presentacion;
 
 import java.awt.Color;
@@ -16,19 +17,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import negocio.entities.ModoPago;
-
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Cursor;
 import javax.swing.JScrollBar;
 
-public class PantallaMatriculacion extends JFrame {
+public class PantallaMisCursos extends JFrame {
 
-	public PantallaMatriculacion() {
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(PantallaMatriculacion.class.getResource("/IMAGES/descarga.png")));
+	public PantallaMisCursos() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaMisCursos.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -40,44 +38,16 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(
-				new ImageIcon(PantallaMatriculacion.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel
+				.setIcon(new ImageIcon(PantallaMisCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		JButton btnTar = new JButton("Pago con Tarjeta");
-		btnTar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				presentacion.PantallaDatosAlumno p = new presentacion.PantallaDatosAlumno();
-				p.setVisible(true);
-				p.metoPago.setText(ModoPago.TARJETA_CREDITO.toString());
-			}
-		});
-		btnTar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnTar.setForeground(Color.WHITE);
-		btnTar.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnTar.setBackground(SystemColor.textHighlight);
-		btnTar.setBounds(56, 380, 226, 75);
-		btnTar.setVisible(false);
-		contentPane.add(btnTar);
-
-		JButton btnTrans = new JButton("Pago por transferencia");
-		btnTrans.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				presentacion.PantallaDatosAlumno p = new presentacion.PantallaDatosAlumno();
-				p.setVisible(true);
-				p.metoPago.setText(ModoPago.TRANSFERENCIA.toString());
-			}
-		});
-		btnTrans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnTrans.setForeground(Color.WHITE);
-		btnTrans.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnTrans.setBackground(SystemColor.textHighlight);
-		btnTrans.setBounds(449, 380, 226, 75);
-		btnTrans.setVisible(false);
-		contentPane.add(btnTrans);
+		JLabel lblCursosMatriculados = new JLabel("Cursos matriculados:");
+		lblCursosMatriculados.setVisible(true);
+		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCursosMatriculados.setBounds(54, 101, 379, 42);
+		contentPane.add(lblCursosMatriculados);
 
 		JButton btnNewButton = new JButton("Volver");
 		btnNewButton.setFocusPainted(false);
@@ -96,7 +66,7 @@ public class PantallaMatriculacion extends JFrame {
 		});
 
 		JList listaCursos = new JList();
-		listaCursos.setBounds(54, 108, 659, 251);
+		listaCursos.setBounds(54, 153, 659, 307);
 		contentPane.add(listaCursos);
 		DefaultListModel modelo = new DefaultListModel();
 		modelo.addElement("Elemento1");
@@ -107,8 +77,6 @@ public class PantallaMatriculacion extends JFrame {
 		listaCursos.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
-					btnTar.setVisible(true);
-					btnTrans.setVisible(true);
 
 				}
 			}
