@@ -1,56 +1,129 @@
 package persistencia;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
+
 public class GestorBD {
-
-	public GestorBD conectarBD() {
-		// TODO - implement GestorBD.conectarBD
-		throw new UnsupportedOperationException();
+	//Instancia 
+	protected static GestorBD mInstancia = null;
+	// Conexion con la base de datos
+	public static Connection mBD;
+	// Identificador ODBC de la base de datos
+	private static String url = "jdbc:mysql://db4free.net:3306/revivingsoftware";
+	// Driven para conectar con bases de datos MySQL
+	private static String driver= "com.mysql.cj.jdbc.Driver";
+	private static String user= "ivaann17_";
+	private static String password="Kikasuperbruja1";
+	
+		
+	public static void conectarBD() {
+		try {
+			Class.forName(driver);
+			mBD = DriverManager.getConnection(url, user, password);
+			mBD.setAutoCommit(true);
+		        
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,
+					"No se ha podido establecer la conexion con la base de datos.",
+					"ERROR", JOptionPane.ERROR_MESSAGE);
+			 System.exit(1);
+		}
 	}
-
-	public void desconectarBD() {
-		// TODO - implement GestorBD.desconectarBD
-		throw new UnsupportedOperationException();
+	public static void desconectarBD() {
+	    try {
+	        if (mBD != null && !mBD.isClosed()) {
+	            mBD.close();
+	            System.out.println("Conexión cerrada correctamente.");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Se ha producido un error al cerrar la conexión: " + e.getMessage());
+	        System.exit(1);
+	    }
 	}
 
 	/**
 	 * 
 	 * @param sql
 	 */
-	public void select(String sql) {
-		// TODO - implement GestorBD.select
-		throw new UnsupportedOperationException();
-	}
+	public static Vector<Object>  select(String SQL) throws Exception {
 
-	/**
-	 * 
-	 * @param sql
-	 */
+	Vector<Object> vectoradevolver = new Vector<Object>();
+	
+	Statement stmt = mBD.createStatement();
+	ResultSet res = stmt.executeQuery(SQL);
+	ResultSetMetaData rsmd = res.getMetaData();
+	int columns = rsmd.getColumnCount();
+	
+	while (res.next()) {
+		Vector<Object> v = new Vector<Object>();
+		for(int i=1; i<=columns; i++) {
+			try {
+				v.add(res.getObject(i));
+			}
+			catch(SQLException ex) {
+				continue;
+			}
+		}
+		vectoradevolver.add(v);
+	}
+	stmt.close();
+	return vectoradevolver;
+}
+
+
 	public int insert(String sql) {
-		// TODO - implement GestorBD.insert
-		throw new UnsupportedOperationException();
+	    try {
+	        Statement stmt = mBD.createStatement();
+	        int rows = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+	        ResultSet rs = stmt.getGeneratedKeys();
+	        if (rs.next()) {
+	            return rs.getInt(1);
+	        }
+	        return rows;
+	    } catch (SQLException e) {
+	        System.out.println("Se ha producido un error al ejecutar la inserción: " + e.getMessage());
+	        return 0;
+	    }
 	}
 
-	/**
-	 * 
-	 * @param sql
-	 */
+
+
 	public int update(String sql) {
-		// TODO - implement GestorBD.update
-		throw new UnsupportedOperationException();
+	    try {
+	        Statement stmt = mBD.createStatement();
+	        int rows = stmt.executeUpdate(sql);
+	        return rows;
+	    } catch (SQLException e) {
+	        System.out.println("Se ha producido un error al ejecutar la actualización: " + e.getMessage());
+	        return 0;
+	    }
 	}
 
-	/**
-	 * 
-	 * @param sql
-	 */
 	public int delete(String sql) {
-		// TODO - implement GestorBD.delete
-		throw new UnsupportedOperationException();
+	    try {
+	        Statement stmt = mBD.createStatement();
+	        int rows = stmt.executeUpdate(sql);
+	        return rows;
+	    } catch (SQLException e) {
+	        System.out.println("Se ha producido un error al ejecutar el borrado: " + e.getMessage());
+	        return 0;
+	    }
 	}
 
-	public void operation() {
-		// TODO - implement GestorBD.operation
-		throw new UnsupportedOperationException();
+	public void operation(String sql) {
+	    try {
+	        Statement stmt = mBD.createStatement();
+	        stmt.execute(sql);
+	    } catch (SQLException e) {
+	        System.out.println("Se ha producido un error al ejecutar la operación: " + e.getMessage());
+	    }
 	}
 
 }

@@ -5,13 +5,14 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
-
+import java.awt.HeadlessException;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,6 +28,9 @@ import javax.swing.SwingConstants;
 
 import javax.swing.border.MatteBorder;
 import javax.swing.event.HyperlinkEvent;
+
+import negocio.entities.TipoCurso;
+import persistencia.GestorBD;
 
 public class PantallaLogin extends JFrame {
 
@@ -84,7 +88,7 @@ public class PantallaLogin extends JFrame {
 		UsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		UsuarioText.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
 		UsuarioText.setName("");
-		UsuarioText.setToolTipText("Introduzca su correo electronico");
+		UsuarioText.setToolTipText("Introduzca su usuario");
 		UsuarioText.setBounds(79, 192, 434, 42);
 		panel.add(UsuarioText);
 		UsuarioText.setColumns(10);
@@ -195,56 +199,36 @@ public class PantallaLogin extends JFrame {
 
 					loginButton.addActionListener((ActionListener) new ActionListener() {
 						public void actionPerformed(ActionEvent l) {
-							char[] passwordChars = ContraseñaText.getPassword();
-							String pass = new String(passwordChars);
-
-							if (UsuarioText.getText().equals("pro") && pass.equals("pro")) {
-								JOptionPane.showMessageDialog(null, "Bienvenido profesor.", "UCLM",
-										JOptionPane.INFORMATION_MESSAGE);
-
-								presentacion.PantallaDireccionCursos p = new presentacion.PantallaDireccionCursos();
-								p.setVisible(true);
-								setVisible(false);
-
-							} else if (UsuarioText.getText().equals("alu") && pass.equals("alu")) {
-								JOptionPane.showMessageDialog(null, "Bienvenido alumno.", "UCLM",
-										JOptionPane.INFORMATION_MESSAGE);
-
-								presentacion.PantallaEstudiante e = new presentacion.PantallaEstudiante();
-								e.setVisible(true);
-								setVisible(false);
-
+							String sqlUser = "SELECT * FROM usuarios WHERE usuario = '" + UsuarioText.getText() + "'";
+							String sqlPass = "SELECT * FROM usuarios WHERE usuario = '" + ContraseñaText.getText()
+									+ "'";
+							Vector<Object> rUser = null;
+							Vector<Object> rPass = null;
+							try {
+								rUser = GestorBD.select(sqlUser);
+								rPass = GestorBD.select(sqlPass);
+							} catch (Exception e) {
+								e.printStackTrace();
+								throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
 							}
 
-							else if (UsuarioText.getText().equals("vice") && pass.equals("vice")) {
-								JOptionPane.showMessageDialog(null, "Bienvenido vicerrector.", "UCLM",
-										JOptionPane.INFORMATION_MESSAGE);
-
-								presentacion.PantallaEmpleadosVicerrectorado e = new presentacion.PantallaEmpleadosVicerrectorado();
-								e.setVisible(true);
-								setVisible(false);
-
-							}
-
-							else if (UsuarioText.getText().equals("jefe") && pass.equals("jefe")) {
-								JOptionPane.showMessageDialog(null, "Bienvenido jefe.", "UCLM",
-										JOptionPane.INFORMATION_MESSAGE);
-
-								presentacion.PantallaJefeGabineteVicerrectorado e = new presentacion.PantallaJefeGabineteVicerrectorado();
-								e.setVisible(true);
-								setVisible(false);
-
-							}
-
-							else {
+							if (rPass.size() > 0 && rUser.size() > 0) {
+								try {
+									cambioPantalla(UsuarioText.getText());
+								} catch (HeadlessException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							} else {
 								JOptionPane.showMessageDialog(null,
 										"El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.",
 										"ERROR", JOptionPane.ERROR_MESSAGE);
 								frmUclm.setVisible(false);
 								PantallaLogin p = new PantallaLogin();
-
 							}
-
 						}
 					});
 
@@ -278,4 +262,77 @@ public class PantallaLogin extends JFrame {
 		JOptionPane.showMessageDialog(null, editorPane, "RevivingSoftware", JOptionPane.INFORMATION_MESSAGE);
 
 	}
+
+	public void cambioPantalla(String usu) throws HeadlessException, Exception {
+		JOptionPane.showMessageDialog(null, "Bienvenido " + (tipoUsu(usu)) + ".", "UCLM",
+				JOptionPane.INFORMATION_MESSAGE);
+		switch (tipoUsu(usu).toUpperCase()) {
+		case "PROFESOR":
+			presentacion.PantallaDireccionCursos p = new presentacion.PantallaDireccionCursos();
+			setVisible(false);
+			p.setVisible(true);
+			
+			p.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
+			p.NombreUsu.setText(nombreUsu(usu));
+			break;
+		case "ESTUDIANTE":
+			presentacion.PantallaEstudiante e = new presentacion.PantallaEstudiante();
+			setVisible(false);
+			e.setVisible(true);
+		
+			e.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
+			e.NombreUsu.setText(nombreUsu(usu));
+			break;
+		case "JEFE_GABINETE":
+			presentacion.PantallaJefeGabineteVicerrectorado j = new presentacion.PantallaJefeGabineteVicerrectorado();
+			setVisible(false);
+			j.setVisible(true);
+			
+			j.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
+			j.NombreUsu.setText(nombreUsu(usu));
+			break;
+		case "VICERRECTOR":
+			presentacion.PantallaEmpleadosVicerrectorado v = new presentacion.PantallaEmpleadosVicerrectorado();
+			setVisible(false);
+			v.setVisible(true);
+		
+			v.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
+			v.NombreUsu.setText(nombreUsu(usu));
+			break;
+		}
+
+	}
+
+	public String tipoUsu(String usu) throws Exception {
+		Vector<Object> tipo = GestorBD.select("SELECT tipo FROM usuarios WHERE usuario = '" + usu + "'");
+		if (!tipo.isEmpty()) {
+			String tipoUsuario = tipo.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
+			switch (tipoUsuario) {
+			case "PROFESOR":
+				return "Profesor";
+			case "ESTUDIANTE":
+				return "Estudiante";
+			case "JEFE_GABINETE":
+				return "Jefe_Gabinete";
+			case "VICERRECTOR":
+				return "Vicerrector";
+			}
+		}
+		return "";
+
+	}
+
+	public String nombreUsu(String usu) throws Exception {
+		Vector<Object> nom = GestorBD.select("SELECT nombre FROM usuarios WHERE usuario = '" + usu + "'");
+		Vector<Object> ape = GestorBD.select("SELECT apellido FROM usuarios WHERE usuario = '" + usu + "'");
+		String nombre = null;
+		if (!nom.isEmpty() && !nom.isEmpty()) {
+			nombre = nom.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase() + " "
+					+ ape.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
+
+		}
+		return nombre;
+
+	}
+
 }

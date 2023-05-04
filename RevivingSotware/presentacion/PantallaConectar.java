@@ -5,9 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import persistencia.GestorBD;
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JLabel;
 
@@ -69,10 +73,11 @@ public class PantallaConectar extends JFrame {
 
 		conectBtn.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				setVisible(false);
-				new presentacion.PantallaLogin();
-
+				GestorBD.conectarBD();
+					setVisible(false);
+					new presentacion.PantallaLogin();
+				
+				
 			}
 		});
 	}
