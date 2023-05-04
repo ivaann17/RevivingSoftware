@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - Develop
-      - Feature-BBDD
+      - Feature-BBDD-*
       - Master
   pull_request:
     types: [opened, synchronize, reopened]
