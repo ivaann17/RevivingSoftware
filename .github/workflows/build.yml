@@ -25,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: List files in directory
-        run: ls /home/runner/work/RevivingSoftware/RevivingSoftware
+        run: ls /home/runner/work/RevivingSoftware/RevivingSotware
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -36,4 +36,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ivaann17_RevivingSoftware "-Dfile=C:/Users/Usuario/git/PROYECTOS_GIT/RevivingSoftware/RevivingSotware"
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ivaann17_RevivingSoftware 
