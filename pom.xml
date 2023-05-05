@@ -54,9 +54,7 @@
       </configuration>
     </plugin>
   </plugins>
-</build>
-
-  </build>  
+</build> 
 	<reporting>
 		<plugins>
 			<plugin>
