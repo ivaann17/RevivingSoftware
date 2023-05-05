@@ -61,7 +61,7 @@
                 <archive>
                     <manifest>
 		   	<addClasspath>true</addClasspath>
-                        <mainClass>/presentacion/PantallaConectar.java</mainClass>
+                        <mainClass>/RevivingSotware/presentacion/PantallaConectar.java</mainClass>
                     </manifest>
                 </archive>
             </configuration>
