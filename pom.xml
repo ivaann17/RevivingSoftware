@@ -4,20 +4,14 @@
 	<groupId>RevivingSoftware</groupId>
 	<artifactId>ISO2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<name>RevivingSoftware</name>
 	<url>https://github.com/ivaann17/RevivingSoftware.git</url>
-
-	<properties>
-		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<sonar.organization>ivaann17</sonar.organization>
-		<sonar.projectKey>ivaann17_RevivingSoftware</sonar.projectKey>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.login>254b489678c934f33ccdbc15b8ae99fa1ee2f851</sonar.login>
-		
-	</properties>
+	
+	
+<properties>
+  <sonar.organization>ivaann17</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/JUnit/JUnit -->
@@ -37,7 +31,16 @@
 		    <artifactId>maven-surefire-report-plugin</artifactId>
 		    <version>3.0.0-M7</version>
 		</dependency>
-	</dependencies>
+		
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.27</version>
+    </dependency>
+</dependencies>
+
+
+
  <build>
     <sourceDirectory>presentacion</sourceDirectory>
     <plugins>
@@ -48,8 +51,13 @@
           <release>14</release>
         </configuration>
       </plugin>
+         <plugin>
+      <groupId>org.sonarsource.scanner.maven</groupId>
+      <artifactId>sonar-maven-plugin</artifactId>
+      <version>3.7.0.1746</version>
+    </plugin>
     </plugins>
-  </build>
+  </build>  
 	<reporting>
 		<plugins>
 			<plugin>
