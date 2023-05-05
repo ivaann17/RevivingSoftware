@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -77,15 +78,9 @@ public class GestorBD {
 	return vectoradevolver;
 }
 
-
-	public int insert(String sql) {
+	public int insert(PreparedStatement sql) {
 	    try {
-	        Statement stmt = mBD.createStatement();
-	        int rows = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-	        ResultSet rs = stmt.getGeneratedKeys();
-	        if (rs.next()) {
-	            return rs.getInt(1);
-	        }
+	        int rows = sql.executeUpdate();
 	        return rows;
 	    } catch (SQLException e) {
 	        System.out.println("Se ha producido un error al ejecutar la inserción: " + e.getMessage());

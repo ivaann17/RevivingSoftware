@@ -37,6 +37,9 @@ public class PantallaLogin extends JFrame {
 	protected static JTextField UsuarioText;
 	protected static JTextField ContraseñaText;
 	protected static JTextField user;
+	protected static String tipo = "";
+	protected static String nom = "";
+	protected static String dni = "";
 
 	private static void placeComponents(JPanel panel) {
 
@@ -171,8 +174,8 @@ public class PantallaLogin extends JFrame {
 		btnNewButton.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmUclm.setVisible(false);
-				presentacion.PantallaLogin p = new presentacion.PantallaLogin();
-				p.setVisible(true);
+				new presentacion.PantallaLogin();
+
 			}
 		});
 
@@ -268,39 +271,44 @@ public class PantallaLogin extends JFrame {
 				JOptionPane.INFORMATION_MESSAGE);
 		switch (tipoUsu(usu).toUpperCase()) {
 		case "PROFESOR":
+
+			tipo = tipoUsu(usu).toUpperCase().toString();
+			nom = nombreUsu(usu).toUpperCase().toString();
+			dni = dniUsu(usu).toString();
 			presentacion.PantallaDireccionCursos p = new presentacion.PantallaDireccionCursos();
 			setVisible(false);
 			p.setVisible(true);
-			
-			p.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
-			p.NombreUsu.setText(nombreUsu(usu));
+
 			break;
 		case "ESTUDIANTE":
+
+			tipo = tipoUsu(usu).toUpperCase().toString();
+			nom = nombreUsu(usu).toUpperCase().toString();
 			presentacion.PantallaEstudiante e = new presentacion.PantallaEstudiante();
 			setVisible(false);
 			e.setVisible(true);
-		
-			e.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
-			e.NombreUsu.setText(nombreUsu(usu));
+
 			break;
 		case "JEFE_GABINETE":
+
+			tipo = tipoUsu(usu).toUpperCase().toString();
+			nom = nombreUsu(usu).toUpperCase().toString();
+			
+
 			presentacion.PantallaJefeGabineteVicerrectorado j = new presentacion.PantallaJefeGabineteVicerrectorado();
 			setVisible(false);
 			j.setVisible(true);
-			
-			j.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
-			j.NombreUsu.setText(nombreUsu(usu));
+
 			break;
 		case "VICERRECTOR":
+
+			tipo = tipoUsu(usu).toUpperCase().toString();
+			nom = nombreUsu(usu).toUpperCase().toString();
 			presentacion.PantallaEmpleadosVicerrectorado v = new presentacion.PantallaEmpleadosVicerrectorado();
 			setVisible(false);
 			v.setVisible(true);
-		
-			v.TipoUsuario.setText(tipoUsu(usu).toUpperCase());
-			v.NombreUsu.setText(nombreUsu(usu));
 			break;
 		}
-
 	}
 
 	public String tipoUsu(String usu) throws Exception {
@@ -326,12 +334,24 @@ public class PantallaLogin extends JFrame {
 		Vector<Object> nom = GestorBD.select("SELECT nombre FROM usuarios WHERE usuario = '" + usu + "'");
 		Vector<Object> ape = GestorBD.select("SELECT apellido FROM usuarios WHERE usuario = '" + usu + "'");
 		String nombre = null;
-		if (!nom.isEmpty() && !nom.isEmpty()) {
+		if (!nom.isEmpty() && !ape.isEmpty()) {
 			nombre = nom.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase() + " "
 					+ ape.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
-
 		}
 		return nombre;
+
+	}
+	public String dniUsu(String usu) throws Exception {
+		Vector<Object> dni = GestorBD.select("SELECT DNI FROM usuarios WHERE usuario = '" + usu + "'");
+		
+		String dniUsu = null;
+		if (!dni.isEmpty()) {
+			dniUsu = dni.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
+		
+		}
+		
+		return dniUsu;
+		
 
 	}
 

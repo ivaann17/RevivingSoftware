@@ -23,8 +23,12 @@ public class PantallaDireccionCursos extends JFrame {
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
 	CursoPropioDAO cDAO = new CursoPropioDAO();
+	
+	
+
 
 	public PantallaDireccionCursos() {
+		
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
@@ -77,7 +81,7 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.add(btnRealizarPropuesta);
 
 		NombreUsu = new JTextField();
-		NombreUsu.setText("NOMBRE");
+		NombreUsu.setText(presentacion.PantallaLogin.nom.toString());
 		NombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		NombreUsu.setEditable(false);
 		NombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
@@ -90,7 +94,7 @@ public class PantallaDireccionCursos extends JFrame {
 
 		TipoUsuario = new JTextField();
 		TipoUsuario.setEditable(false);
-		TipoUsuario.setText("TIPO");
+		TipoUsuario.setText(presentacion.PantallaLogin.tipo.toString());
 		TipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		TipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
 		TipoUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));

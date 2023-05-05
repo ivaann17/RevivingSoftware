@@ -11,10 +11,19 @@ import persistencia.GestorBD;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.Base64;
+import java.util.Vector;
 import java.awt.Color;
 import javax.swing.JLabel;
-
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -73,11 +82,11 @@ public class PantallaConectar extends JFrame {
 
 		conectBtn.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		
+
 				GestorBD.conectarBD();
-					setVisible(false);
-					new presentacion.PantallaLogin();
-				
-				
+				setVisible(false);
+				new presentacion.PantallaLogin();
 			}
 		});
 	}

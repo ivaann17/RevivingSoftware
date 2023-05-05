@@ -23,8 +23,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
+import negocio.entities.Centro;
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
 import negocio.entities.Facultad;
 import negocio.entities.TipoCurso;
+import persistencia.CursoPropioDAO;
+
 import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField.AbstractFormatter;
@@ -69,6 +74,8 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	private String fechaIni = "";
 	private String fechaFin = "";
 	private String ERROR = "ERROR";
+	protected CursoPropio curso;
+	protected CursoPropioDAO cursoDAO;
 
 	/**
 	 * Create the frame.
@@ -156,12 +163,8 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		contentPane.add(Edicion);
 
 		dniProf = new JTextField();
-		dniProf.setToolTipText("Debe introducir la letra en may\u00FAscula");
-		dniProf.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent e) {
-				comDNI(e);
-			}
-		});
+		dniProf.setEditable(false);
+		dniProf.setText(presentacion.PantallaLogin.dni.toString());
 		dniProf.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
 		dniProf.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		dniProf.setColumns(10);
@@ -220,7 +223,12 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 									"ATENCIÃ“N", JOptionPane.OK_CANCEL_OPTION);
 							if (respuesta == JOptionPane.OK_OPTION) {
 								JOptionPane.showMessageDialog(null, "Su propuesta ha sido enviada de manera correcta.",
-										"INFORMACIÃ“N", JOptionPane.INFORMATION_MESSAGE);
+										"INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+								Centro c=new Centro(Fac.getSelectedItem().toString());
+								
+								curso = new CursoPropio(c.getNombre().toString(), EstadoCurso.PROPUESTO, TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()), dniProf.getText().toString(), dniSec.getText().toString(), numRand(), NombreCurso.getText().toString(),Integer.parseInt(NumCreditos.getText().toString()) , formatoFecha(fechaIni), formatoFecha(fechaFin), Double.parseDouble(textPrecio.getText().toString()) , Integer.parseInt(Edicion.getText().toString()), "");
+								cursoDAO = new CursoPropioDAO();
+								cursoDAO.crearNuevoCurso(curso);
 								presentacion.PantallaDireccionCursos p = new presentacion.PantallaDireccionCursos();
 								setVisible(false);
 								p.setVisible(true);
@@ -257,10 +265,8 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 					if (NumCreditos.getText().isEmpty() || !isNumeric(NumCreditos.getText()))
 						JOptionPane.showMessageDialog(null, "Introduzca los créditos de manera correcta.", ERROR,
 								JOptionPane.ERROR_MESSAGE);
-					else if (!dniDigi(dniProf)) {
-						JOptionPane.showMessageDialog(null, "Introduzca el DNI del profesor con todos sus dígitos.",
-								ERROR, JOptionPane.ERROR_MESSAGE);
-					} else if (!dniDigi(dniSec)) {
+				
+					 else if (!dniDigi(dniSec)) {
 						JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dígitos.",
 								ERROR, JOptionPane.ERROR_MESSAGE);
 					} else if (tipoCurso.getSelectedItem() == "") {
