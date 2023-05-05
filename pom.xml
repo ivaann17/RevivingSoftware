@@ -60,6 +60,7 @@
             <configuration>
                 <archive>
                     <manifest>
+		   	<addClasspath>true</addClasspath>
                         <mainClass>presentacion.PantallaConectar</mainClass>
                     </manifest>
                 </archive>
