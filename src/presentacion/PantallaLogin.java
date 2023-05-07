@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -35,7 +37,7 @@ import persistencia.GestorBD;
 public class PantallaLogin extends JFrame {
 
 	protected static JTextField UsuarioText;
-	protected static JTextField ContraseñaText;
+	protected static JTextField ContrasenaText;
 	protected static JTextField user;
 	protected static String tipo = "";
 	protected static String nom = "";
@@ -48,7 +50,7 @@ public class PantallaLogin extends JFrame {
 	}
 
 	public PantallaLogin() {
-		JFrame frmUclm = new JFrame("Demo application");
+		final JFrame frmUclm = new JFrame("Demo application");
 		frmUclm.setIconImage(
 				Toolkit.getDefaultToolkit().getImage(PantallaLogin.class.getResource("/IMAGES/descarga.png")));
 		frmUclm.setTitle("UCLM");
@@ -77,15 +79,15 @@ public class PantallaLogin extends JFrame {
 		loginButton.setBounds(406, 316, 168, 48);
 		panel.add(loginButton);
 
-		JPasswordField ContraseñaText = new JPasswordField(20);
-		ContraseñaText.setToolTipText("Introduzca su contrase\u00F1a");
-		ContraseñaText.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		ContraseñaText.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+		JPasswordField ContrasenaText = new JPasswordField(20);
+		ContrasenaText.setToolTipText("Introduzca su contrase\u00F1a");
+		ContrasenaText.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		ContrasenaText.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
 
-		ContraseñaText.setActionCommand("");
-		ContraseñaText.setVisible(false);
-		ContraseñaText.setBounds(79, 191, 434, 42);
-		panel.add(ContraseñaText);
+		ContrasenaText.setActionCommand("");
+		ContrasenaText.setVisible(false);
+		ContrasenaText.setBounds(79, 191, 434, 42);
+		panel.add(ContrasenaText);
 
 		UsuarioText = new JTextField();
 		UsuarioText.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -130,7 +132,7 @@ public class PantallaLogin extends JFrame {
 		userLabel.setBounds(80, 138, 148, 25);
 		panel.add(userLabel);
 
-		JLabel passwordLabel = new JLabel("Escribir Contraseña");
+		JLabel passwordLabel = new JLabel("Escribir Contraseï¿½a");
 		passwordLabel.setVisible(false);
 		passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		passwordLabel.setBounds(80, 129, 215, 42);
@@ -146,7 +148,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(user);
 		user.setColumns(10);
 
-		JButton btnNoAcceder = new JButton("¿No puede acceder a su cuenta?");
+		JButton btnNoAcceder = new JButton("ï¿½No puede acceder a su cuenta?");
 		btnNoAcceder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				enlaceMan();
@@ -189,7 +191,7 @@ public class PantallaLogin extends JFrame {
 					btnRecuperar.setVisible(true);
 					btnSiguiente.setVisible(false);
 					UsuarioText.setVisible(false);
-					ContraseñaText.setVisible(true);
+					ContrasenaText.setVisible(true);
 					loginButton.setVisible(true);
 					userLabel.setVisible(false);
 					passwordLabel.setVisible(true);
@@ -198,18 +200,29 @@ public class PantallaLogin extends JFrame {
 					user.setVisible(true);
 					user.setText(" Usuario: " + UsuarioText.getText());
 					frmUclm.getRootPane().setDefaultButton(loginButton);
-					ContraseñaText.requestFocus();
+					ContrasenaText.requestFocus();
 
 					loginButton.addActionListener((ActionListener) new ActionListener() {
 						public void actionPerformed(ActionEvent l) {
-							String sqlUser = "SELECT * FROM usuarios WHERE usuario = '" + UsuarioText.getText() + "'";
-							String sqlPass = "SELECT * FROM usuarios WHERE usuario = '" + ContraseñaText.getText()
-									+ "'";
+							String sqlUser = "SELECT * FROM usuarios WHERE usuario = ?";
+							String sqlPass = "SELECT * FROM usuarios WHERE usuario = ?";
+							
+							  
+							 
+
+						       
+						       
+						        
 							Vector<Object> rUser = null;
 							Vector<Object> rPass = null;
 							try {
-								rUser = GestorBD.select(sqlUser);
-								rPass = GestorBD.select(sqlPass);
+								PreparedStatement psU = GestorBD.mBD.prepareStatement(sqlUser, Statement.RETURN_GENERATED_KEYS);
+								 PreparedStatement psP = GestorBD.mBD.prepareStatement(sqlPass, Statement.RETURN_GENERATED_KEYS);
+								 
+								 	psU.setString(1, UsuarioText.getText());
+							        psP.setString(1, ContrasenaText.getText());
+								rUser = GestorBD.select(psU);
+								rPass = GestorBD.select(psP);
 							} catch (Exception e) {
 								e.printStackTrace();
 								throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
@@ -227,7 +240,7 @@ public class PantallaLogin extends JFrame {
 								}
 							} else {
 								JOptionPane.showMessageDialog(null,
-										"El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.",
+										"El usuario o la contraseï¿½a son incorrectos. Por favor, introduzca correctamente los datos.",
 										"ERROR", JOptionPane.ERROR_MESSAGE);
 								frmUclm.setVisible(false);
 								PantallaLogin p = new PantallaLogin();
@@ -312,7 +325,12 @@ public class PantallaLogin extends JFrame {
 	}
 
 	public String tipoUsu(String usu) throws Exception {
-		Vector<Object> tipo = GestorBD.select("SELECT tipo FROM usuarios WHERE usuario = '" + usu + "'");
+		String sql ="SELECT tipo FROM usuarios WHERE usuario = ?";
+		PreparedStatement psT = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		 
+		 	psT.setString(1, usu);
+	        
+		Vector<Object> tipo = GestorBD.select(psT);
 		if (!tipo.isEmpty()) {
 			String tipoUsuario = tipo.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
 			switch (tipoUsuario) {
@@ -331,18 +349,29 @@ public class PantallaLogin extends JFrame {
 	}
 
 	public String nombreUsu(String usu) throws Exception {
-		Vector<Object> nom = GestorBD.select("SELECT nombre FROM usuarios WHERE usuario = '" + usu + "'");
-		Vector<Object> ape = GestorBD.select("SELECT apellido FROM usuarios WHERE usuario = '" + usu + "'");
-		String nombre = null;
-		if (!nom.isEmpty() && !ape.isEmpty()) {
-			nombre = nom.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase() + " "
-					+ ape.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
+		
+		String sqlNom= "SELECT nombre,apellido FROM usuarios WHERE usuario = ?";
+		
+		PreparedStatement psN = GestorBD.mBD.prepareStatement(sqlNom, Statement.RETURN_GENERATED_KEYS);
+		 
+	 	psN.setString(1, usu);
+		Vector<Object> nombre = GestorBD.select(psN);
+		String nom = null;
+		if (!nombre.isEmpty()) {
+			
+			nom = nombre.get(0).toString().replaceAll("[\\[\\],]","").trim().toUpperCase();
 		}
-		return nombre;
+		return nom;
 
 	}
 	public String dniUsu(String usu) throws Exception {
-		Vector<Object> dni = GestorBD.select("SELECT DNI FROM usuarios WHERE usuario = '" + usu + "'");
+		
+		String sqlDNI= "SELECT DNI FROM usuarios WHERE usuario = ?";
+		
+		PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
+		 
+	 	psD.setString(1, usu);
+		Vector<Object> dni = GestorBD.select(psD);
 		
 		String dniUsu = null;
 		if (!dni.isEmpty()) {

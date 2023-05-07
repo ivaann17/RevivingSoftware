@@ -3,16 +3,24 @@ package presentacion;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import negocio.entities.CursoPropio;
+import negocio.entities.EstadoCurso;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
 import persistencia.CursoPropioDAO;
+
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.List;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -44,9 +52,17 @@ public class PantallaDireccionCursos extends JFrame {
 		JButton btnMostrarPendientes = new JButton("Propuestas realizadas");
 		btnMostrarPendientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				presentacion.PantallaPropuestasRealizadas p = new presentacion.PantallaPropuestasRealizadas();
-				setVisible(false);
-				p.setVisible(true);
+				
+				try {
+					presentacion.PantallaPropuestasRealizadas p = new presentacion.PantallaPropuestasRealizadas();
+					agregarCursosAlModelo(p.modelo);
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
 			}
 		});
 		btnMostrarPendientes.setFocusPainted(false);
@@ -134,5 +150,12 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
+	}
+	public void agregarCursosAlModelo(DefaultListModel<CursoPropio> modelo) throws Exception {
+	    CursoPropioDAO cursoDAO = new CursoPropioDAO();
+	    List<CursoPropio> cursos = cursoDAO.listarCursos();
+	    for (CursoPropio curso : cursos) {
+	        modelo.addElement(curso);
+	    }
 	}
 }

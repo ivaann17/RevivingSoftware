@@ -5,15 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import negocio.entities.*;
 
 public class CursoPropioDAO  {
+	GestorBD gestorBD = new GestorBD();
 	public int crearNuevoCurso(CursoPropio curso) {
-	    GestorBD gestorBD = new GestorBD();
+	    
 
-	    int idCurso = 0;
+	    int id = 0;
 	    try {
 	        String sql = "INSERT INTO cursos (ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -39,13 +42,13 @@ public class CursoPropioDAO  {
 	      
 	        ResultSet rs = ps.getGeneratedKeys();
 	        if (rs.next()) {
-	            idCurso = rs.getInt(1);
+	            id = rs.getInt(1);
 	        }
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    return idCurso;
+	    return id;
 	}
 
 
@@ -57,6 +60,31 @@ public class CursoPropioDAO  {
 		// TODO - implement CursoPropioDAO.seleccionarCurso
 		throw new UnsupportedOperationException();
 	}
+	
+	public int eliminarCurso(CursoPropio curso) {
+		
+		  int eli = 0;
+		    try {
+		        String sql = "DELETE FROM cursos WHERE ID = ?";
+
+		        PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		       
+		        ps.setInt(1, curso.getId());
+		 
+		        gestorBD.delete(ps);
+
+		      
+		        ResultSet rs = ps.getGeneratedKeys();
+		        if (rs.next()) {
+		            eli = 1;
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return eli;
+		}
 
 	/**
 	 * 
@@ -72,18 +100,41 @@ public class CursoPropioDAO  {
 	 * @param estado
 	 * @param fechaInicio
 	 * @param fechaFin
+	 * @throws Exception 
 	 */
-	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado, Date fechaInicio, Date fechaFin) {
-		// TODO - implement CursoPropioDAO.listarCursosPorEstado
-		throw new UnsupportedOperationException();
-	}
+	public List<CursoPropio> listarCursos() throws Exception {
+	    List<CursoPropio> cursos = new ArrayList<>();
+	    try {
+	    	String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos ORDER BY fechaInicio";
 
-	/**
-	 * 
-	 * @param tipo
-	 * @param fechaInicio
-	 * @param fechaFin
-	 */
+	        PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+	        Vector<Object> resultado = GestorBD.select(ps);
+
+	        for (int i = 0; i < resultado.size(); i++) {
+	            Vector<Object> fila = (Vector<Object>) resultado.get(i);
+	            int id = (int) fila.get(0);
+	            String nombre = (String) fila.get(1);
+	            String dniDirector = (String) fila.get(2);
+	            String dniSecretario = (String) fila.get(3);
+	            Date fechaInicioCurso = (Date) fila.get(4);
+	            Date fechaFinCurso = (Date) fila.get(5);
+	            int creditos = (int) fila.get(6);
+	            double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
+	            TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
+	            EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
+	            String facultad = (String) fila.get(10);
+	            int edicion = (int) fila.get(11);
+	            String mensaje = (String) fila.get(12);
+
+	            CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre, creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
+	            cursos.add(curso);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return cursos;
+	}
+	        
 	public double listarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
 		// TODO - implement CursoPropioDAO.listarIngresos
 		throw new UnsupportedOperationException();

@@ -94,11 +94,6 @@ public class CursoPropio {
 
 	@Override
 	public String toString() {
-		return "CursoPropio [centro=" + centro + ", estado=" + estado + ", tipo=" + tipo + ", dniDirector="
-				+ dniDirector + ", dniSecretario=" + dniSecretario + ", id=" + id + ", nombre=" + nombre + ", ECTS="
-				+ ECTS + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", tasaMatricula=" + tasaMatricula
-				+ ", edicion=" + edicion + ", mensaje=" + mensaje + "]";
-	}
-
-
+		return "ID del curso: {"+id+"}   Nombre del curso: {"+nombre+"}   Estado del curso: {"+estado+"}";
+}
 }

@@ -43,14 +43,14 @@ public class PantallaEvaluarCurso extends JFrame {
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		JButton btnAceptar = new JButton("Aceptar propuesta\r\n");
+		final JButton btnAceptar = new JButton("Aceptar propuesta\r\n");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea aceptar la propuesta?", "ATENCIÓN",
+				int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea aceptar la propuesta?", "ATENCIï¿½N",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (respuesta == JOptionPane.OK_OPTION) {
-					JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACIÓN",
+					JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACIï¿½N",
 							JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
 					presentacion.PantallaEmpleadosVicerrectorado p = new presentacion.PantallaEmpleadosVicerrectorado();
@@ -67,17 +67,17 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnAceptar.setVisible(false);
 		contentPane.add(btnAceptar);
 
-		JButton btnRechazar = new JButton("Rechazar propuesta\r\n");
+		final JButton btnRechazar = new JButton("Rechazar propuesta\r\n");
 		btnRechazar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea rechazar la solicitud?", "Confirmación",
+				int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea rechazar la solicitud?", "Confirmaciï¿½n",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (respuesta == JOptionPane.OK_OPTION) {
 					String mensaje = "";
 					while (mensaje.equals("")) {
 						mensaje = JOptionPane.showInputDialog(null, "Escriba los motivos y recomendaciones necesarias.",
-								"Atención!", JOptionPane.PLAIN_MESSAGE);
+								"Atenciï¿½n!", JOptionPane.PLAIN_MESSAGE);
 						if (mensaje == null) {
 							return;
 						}

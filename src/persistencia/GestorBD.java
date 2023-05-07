@@ -53,30 +53,28 @@ public class GestorBD {
 	 * 
 	 * @param sql
 	 */
-	public static Vector<Object>  select(String SQL) throws Exception {
+	public static Vector<Object> select(PreparedStatement ps) throws Exception {
+	    Vector<Object> vectoradevolver = new Vector<Object>();
+	    ResultSet res = ps.executeQuery();
+	    ResultSetMetaData rsmd = res.getMetaData();
+	    int columns = rsmd.getColumnCount();
 
-	Vector<Object> vectoradevolver = new Vector<Object>();
-	
-	Statement stmt = mBD.createStatement();
-	ResultSet res = stmt.executeQuery(SQL);
-	ResultSetMetaData rsmd = res.getMetaData();
-	int columns = rsmd.getColumnCount();
-	
-	while (res.next()) {
-		Vector<Object> v = new Vector<Object>();
-		for(int i=1; i<=columns; i++) {
-			try {
-				v.add(res.getObject(i));
-			}
-			catch(SQLException ex) {
-				continue;
-			}
-		}
-		vectoradevolver.add(v);
+	    while (res.next()) {
+	        Vector<Object> v = new Vector<Object>();
+	        for(int i=1; i<=columns; i++) {
+	            try {
+	                v.add(res.getObject(i));
+	            }
+	            catch(SQLException ex) {
+	                continue;
+	            }
+	        }
+	        vectoradevolver.add(v);
+	    }
+	    ps.close();
+	    return vectoradevolver;
 	}
-	stmt.close();
-	return vectoradevolver;
-}
+
 
 	public int insert(PreparedStatement sql) {
 	    try {
@@ -100,17 +98,16 @@ public class GestorBD {
 	        return 0;
 	    }
 	}
-
-	public int delete(String sql) {
+	public int delete(PreparedStatement ps) {
 	    try {
-	        Statement stmt = mBD.createStatement();
-	        int rows = stmt.executeUpdate(sql);
+	        int rows = ps.executeUpdate();
 	        return rows;
 	    } catch (SQLException e) {
 	        System.out.println("Se ha producido un error al ejecutar el borrado: " + e.getMessage());
 	        return 0;
 	    }
 	}
+
 
 	public void operation(String sql) {
 	    try {
