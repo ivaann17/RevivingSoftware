@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
+
+import main.java.negocio.controllers.GestorConsultas;
 import main.java.persistencia.CursoPropioDAO;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
@@ -47,8 +49,15 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		btnVerPropuestas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.java.presentacion.PantallaEvaluarCurso p = new main.java.presentacion.PantallaEvaluarCurso();
-				setVisible(false);
-				p.setVisible(true);
+				try {
+					GestorConsultas.listarCursosPropuestos(p.modelo);
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
 
 			}
 		});

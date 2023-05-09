@@ -16,6 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import main.java.negocio.controllers.GestorPropuestasCursos;
+import main.java.negocio.entities.CursoPropio;
+
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -23,6 +27,10 @@ import java.awt.Cursor;
 import javax.swing.JScrollBar;
 
 public class PantallaEvaluarCurso extends JFrame {
+	public JList<CursoPropio> listaCursos;
+	DefaultListModel modelo;
+	public CursoPropio cursoSeleccionado;
+	
 
 	public PantallaEvaluarCurso() {
 		setIconImage(
@@ -43,18 +51,17 @@ public class PantallaEvaluarCurso extends JFrame {
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		final JButton btnAceptar = new JButton("Aceptar propuesta\r\n");
+		final JButton btnAceptar = new JButton("Aceptar propuesta");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea aceptar la propuesta?", "ATENCIï¿½N",
+				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea aceptar la propuesta?", "ATENCIï¿½N",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (respuesta == JOptionPane.OK_OPTION) {
-					JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACIï¿½N",
+					JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
-					setVisible(false);
-					main.java.presentacion.PantallaEmpleadosVicerrectorado p = new main.java.presentacion.PantallaEmpleadosVicerrectorado();
-					p.setVisible(true);
+					GestorPropuestasCursos.aceptarPropuesta(cursoSeleccionado);
+					modelo.removeElement(cursoSeleccionado);
 
 				}
 			}
@@ -67,17 +74,17 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnAceptar.setVisible(false);
 		contentPane.add(btnAceptar);
 
-		final JButton btnRechazar = new JButton("Rechazar propuesta\r\n");
+		final JButton btnRechazar = new JButton("Rechazar propuesta");
 		btnRechazar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea rechazar la solicitud?", "Confirmaciï¿½n",
+				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea rechazar la propuesta?", "Confirmacion",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (respuesta == JOptionPane.OK_OPTION) {
 					String mensaje = "";
 					while (mensaje.equals("")) {
 						mensaje = JOptionPane.showInputDialog(null, "Escriba los motivos y recomendaciones necesarias.",
-								"Atenciï¿½n!", JOptionPane.PLAIN_MESSAGE);
+								"Atencion!", JOptionPane.PLAIN_MESSAGE);
 						if (mensaje == null) {
 							return;
 						}
@@ -86,9 +93,8 @@ public class PantallaEvaluarCurso extends JFrame {
 						}
 
 						else {
-							setVisible(false);
-							main.java.presentacion.PantallaEmpleadosVicerrectorado p = new main.java.presentacion.PantallaEmpleadosVicerrectorado();
-							p.setVisible(true);
+							GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado,mensaje);
+							modelo.removeElement(cursoSeleccionado);
 						}
 					}
 
@@ -120,13 +126,10 @@ public class PantallaEvaluarCurso extends JFrame {
 			}
 		});
 
-		JList listaCursos = new JList();
+		listaCursos = new JList();
 		listaCursos.setBounds(54, 108, 659, 251);
 		contentPane.add(listaCursos);
-		DefaultListModel modelo = new DefaultListModel();
-		modelo.addElement("Elemento1");
-		modelo.addElement("Elemento2");
-		modelo.addElement("Elemento3");
+		modelo = new DefaultListModel();
 		listaCursos.setModel(modelo);
 
 		listaCursos.addListSelectionListener(new ListSelectionListener() {
@@ -134,6 +137,7 @@ public class PantallaEvaluarCurso extends JFrame {
 				if (!arg0.getValueIsAdjusting()) {
 					btnAceptar.setVisible(true);
 					btnRechazar.setVisible(true);
+					cursoSeleccionado = listaCursos.getSelectedValue();
 
 				}
 			}

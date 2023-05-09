@@ -88,10 +88,9 @@ public class GestorBD {
 
 
 
-	public int update(String sql) {
+	public int update(PreparedStatement ps) {
 	    try {
-	        Statement stmt = mBD.createStatement();
-	        int rows = stmt.executeUpdate(sql);
+	        int rows = ps.executeUpdate();
 	        return rows;
 	    } catch (SQLException e) {
 	        System.out.println("Se ha producido un error al ejecutar la actualización: " + e.getMessage());

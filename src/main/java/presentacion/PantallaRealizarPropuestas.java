@@ -226,7 +226,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 										"INFORMACION", JOptionPane.INFORMATION_MESSAGE);
 								Centro c=new Centro(Fac.getSelectedItem().toString());
 								
-								curso = new CursoPropio(c.getNombre().toString(), EstadoCurso.EN_IMPARTIZICION, TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()), dniProf.getText().toString(), dniSec.getText().toString(), numRand(), NombreCurso.getText().toString(),Integer.parseInt(NumCreditos.getText().toString()) , formatoFecha(fechaIni), formatoFecha(fechaFin), Double.parseDouble(textPrecio.getText().toString()) , Integer.parseInt(Edicion.getText().toString()), "");
+								curso = new CursoPropio(c.getNombre().toString(), EstadoCurso.PROPUESTO, TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()), dniProf.getText().toString(), dniSec.getText().toString(), numRand(), NombreCurso.getText().toString(),Integer.parseInt(NumCreditos.getText().toString()) , formatoFecha(fechaIni), formatoFecha(fechaFin), Double.parseDouble(textPrecio.getText().toString()) , Integer.parseInt(Edicion.getText().toString()), "");
 								cursoDAO = new CursoPropioDAO();
 								cursoDAO.crearNuevoCurso(curso);
 								main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();

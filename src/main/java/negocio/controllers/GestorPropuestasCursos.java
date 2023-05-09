@@ -1,8 +1,11 @@
 package main.java.negocio.controllers;
 
 import main.java.negocio.entities.*;
+import main.java.persistencia.CursoPropioDAO;
 
 public class GestorPropuestasCursos {
+	
+	static CursoPropioDAO cursoDAO ;
 
 	public CursoPropio realizarPropuestaCurso() {
 		// TODO - implement GestorPropuestasCursos.realizarPropuestaCurso
@@ -22,9 +25,16 @@ public class GestorPropuestasCursos {
 	 * 
 	 * @param curso
 	 */
-	public EstadoCurso evaluarPropuesta(CursoPropio curso) {
-		// TODO - implement GestorPropuestasCursos.evaluarPropuesta
-		throw new UnsupportedOperationException();
+	public static void aceptarPropuesta(CursoPropio curso) {
+		 cursoDAO = new CursoPropioDAO();
+		 cursoDAO.editarCurso(curso, EstadoCurso.VALIDADO, "");
+		
+	}
+	
+	public static void rechazarPropuesta(CursoPropio curso, String mensaje) {
+		 cursoDAO = new CursoPropioDAO();
+		 cursoDAO.editarCurso(curso, EstadoCurso.PROPUESTA_RECHAZADA, mensaje);
+		
 	}
 
 	/**
