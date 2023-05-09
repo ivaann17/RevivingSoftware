@@ -1,0 +1,10 @@
+package main.java.negocio.entities;
+
+public enum Facultad {
+	CAMPUS_ALBACETE,
+	CAMPUS_CUENCA,
+	CAMPUS_CIUDAD_REAL,
+	CAMPUS_ALMADEN,
+	CAMPUS_TOLEDO,
+	CAMPUS_TALAVERA
+}
