@@ -24,7 +24,8 @@
 	import javax.swing.JButton;
 	import java.awt.Cursor;
 
-	import main.java.negocio.entities.Centro;
+import main.java.negocio.controllers.GestorConsultas;
+import main.java.negocio.entities.Centro;
 	import main.java.negocio.entities.CursoPropio;
 	import main.java.negocio.entities.EstadoCurso;
 	import main.java.negocio.entities.Facultad;
@@ -49,6 +50,7 @@
 		public JTextField Edicion;
 		public JTextField NumCreditos;
 		public JTextField precio;
+		protected JButton btnVolver2;
 		protected JButton btnVolver;
 		protected JButton btnMen;
 		protected JLabel lblNewLabel;
@@ -118,9 +120,32 @@
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					main.java.presentacion.PantallaDireccionCursos d = new main.java.presentacion.PantallaDireccionCursos();
 					try {
-						d.agregarCursosAlModelo(p.modelo);
+						GestorConsultas.listarCursos(p.modelo);
+						setVisible(false);
+						p.setVisible(true);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				;
+
+				}
+			});
+			
+			btnVolver2 = new JButton("Volver");
+			btnVolver2.setForeground(Color.WHITE);
+			btnVolver2.setVisible(false);
+			btnVolver2.setBackground(SystemColor.textHighlight);
+			btnVolver2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnVolver2.setFont(new Font(tipoLetra, Font.BOLD, 15));
+			btnVolver2.setBounds(10, 496, 114, 49);
+			contentPane.add(btnVolver2);
+			btnVolver2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
+					try {
+						GestorConsultas.listarCursosRechazados(p.modelo);
 						setVisible(false);
 						p.setVisible(true);
 					} catch (Exception e1) {
@@ -180,7 +205,7 @@
 					
 					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
 					JOptionPane.showMessageDialog(null, mensaje ,
-							"INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+							"MENSAJE", JOptionPane.INFORMATION_MESSAGE);
 				}
 			});
 

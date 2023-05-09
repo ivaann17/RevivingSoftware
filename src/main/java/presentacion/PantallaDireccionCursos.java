@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
 
@@ -49,13 +50,13 @@ public class PantallaDireccionCursos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnMostrarPendientes = new JButton("Propuestas realizadas");
-		btnMostrarPendientes.addActionListener(new ActionListener() {
+		JButton btnMostrarHistorial = new JButton("Propuestas realizadas");
+		btnMostrarHistorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
 					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					agregarCursosAlModelo(p.modelo);
+					GestorConsultas.listarCursos(p.modelo);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
@@ -65,13 +66,13 @@ public class PantallaDireccionCursos extends JFrame {
 			
 			}
 		});
-		btnMostrarPendientes.setFocusPainted(false);
-		btnMostrarPendientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnMostrarPendientes.setForeground(Color.WHITE);
-		btnMostrarPendientes.setBackground(SystemColor.textHighlight);
-		btnMostrarPendientes.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnMostrarPendientes.setBounds(45, 253, 228, 76);
-		contentPane.add(btnMostrarPendientes);
+		btnMostrarHistorial.setFocusPainted(false);
+		btnMostrarHistorial.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnMostrarHistorial.setForeground(Color.WHITE);
+		btnMostrarHistorial.setBackground(SystemColor.textHighlight);
+		btnMostrarHistorial.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnMostrarHistorial.setBounds(45, 224, 228, 76);
+		contentPane.add(btnMostrarHistorial);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
@@ -143,6 +144,31 @@ public class PantallaDireccionCursos extends JFrame {
 		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
 		contentPane.add(cs);
+		
+		JButton btnRechazados = new JButton("Propuestas rechazadas");
+		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRechazados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
+					
+					GestorConsultas.listarCursosRechazados(p.modelo);
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+		btnRechazados.setForeground(Color.WHITE);
+		btnRechazados.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnRechazados.setFocusPainted(false);
+		btnRechazados.setBackground(SystemColor.textHighlight);
+		btnRechazados.setBounds(45, 326, 228, 76);
+		contentPane.add(btnRechazados);
 
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -150,12 +176,5 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
-	}
-	public void agregarCursosAlModelo(DefaultListModel<CursoPropio> modelo) throws Exception {
-	    CursoPropioDAO cursoDAO = new CursoPropioDAO();
-	    List<CursoPropio> cursos = cursoDAO.listarCursos();
-	    for (CursoPropio curso : cursos) {
-	        modelo.addElement(curso);
-	    }
 	}
 }

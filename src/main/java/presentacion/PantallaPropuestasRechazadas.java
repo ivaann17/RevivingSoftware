@@ -28,17 +28,17 @@ import java.awt.Font;
 import java.awt.Cursor;
 import javax.swing.JScrollBar;
 
-public class PantallaPropuestasRealizadas extends JFrame {
+public class PantallaPropuestasRechazadas extends JFrame {
 	
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
 	CursoPropioDAO curso;
 
-	public PantallaPropuestasRealizadas() {
+	public PantallaPropuestasRechazadas() {
 		
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaPropuestasRealizadas.class.getResource("/IMAGES/descarga.png")));
+				.getImage(PantallaPropuestasRechazadas.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -51,11 +51,11 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
-				new ImageIcon(PantallaPropuestasRealizadas.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaPropuestasRechazadas.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		JLabel lblCursosMatriculados = new JLabel("Historial");
+		JLabel lblCursosMatriculados = new JLabel("Propuestas rechazadas");
 		lblCursosMatriculados.setVisible(true);
 		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblCursosMatriculados.setBounds(21, 101, 379, 42);
@@ -119,6 +119,8 @@ public class PantallaPropuestasRealizadas extends JFrame {
 				main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
 				setVisible(false);
 				a.setVisible(true);
+				a.btnVolver.setVisible(false);
+				a.btnVolver2.setVisible(true);
 			infoCurso(a,cursoSeleccionado);
 			if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTA_RECHAZADA)) {
 				a.btnMen.setVisible(true);
@@ -143,11 +145,11 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		            if (cursoSeleccionado != null) {
 		            	 btnInfo.setVisible(true);
 		                
-		                if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTO)) {
-		    				btnEliminar.setVisible(true);
+		                if (cursoSeleccionado.getEstado().equals(EstadoCurso.EN_IMPARTIZICION) || cursoSeleccionado.getEstado().equals(EstadoCurso.EN_MATRICULACION) || cursoSeleccionado.getEstado().equals(EstadoCurso.VALIDADO)) {
+		    				btnEliminar.setVisible(false);
 		    			}
 		                else {
-		                	btnEliminar.setVisible(false);
+		                	btnEliminar.setVisible(true);
 		                }
 		                }
 		                
