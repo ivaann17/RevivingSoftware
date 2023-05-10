@@ -7,6 +7,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.awt.Color;
 import javax.swing.JLabel;
 
@@ -15,7 +19,12 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
+import main.java.negocio.controllers.GestorConsultas;
+import main.java.negocio.controllers.GestorMatriculacion;
+import main.java.negocio.entities.CursoPropio;
+import main.java.negocio.entities.EstadoCurso;
 import main.java.negocio.entities.Facultad;
+import main.java.negocio.entities.Matricula;
 import main.java.negocio.entities.ModoPago;
 import main.java.negocio.entities.TipoCurso;
 import java.awt.Font;
@@ -28,27 +37,25 @@ public class PantallaDatosAlumno extends JFrame {
 
 	protected JPanel contentPane;
 	protected JTextField dniAlu;
-	protected JTextField metoPago;
+	protected JTextField apeAlu;
 	protected JTextField nomAlu;
-	protected JTextField cualiAlu;
-	protected JTextField tituAlu;
 	protected JTextField textPrecio;
 	protected JButton btnNewButton;
 	protected JButton btnPagar;
 
-	protected JLabel lblDatosDeMatriculacin;
+	protected JLabel lblDatosDeMatriculacion;
 	protected JLabel lblNewLabel;
 	protected JLabel lblPrecio;
 	protected JLabel lblNomAlu;
-	protected JLabel lblTitu;
-	protected JLabel lblCuali;
-	protected JLabel lblMetoPago;
+	protected JLabel lblApellido;
 	private String tipoLetra = "Tahoma";
 
-	TipoCurso c;
-	Facultad f;
-	String Num;
-	private JLabel lblDNIAlu;
+	int ID;
+	protected JLabel lblDNIAlu;
+	main.java.presentacion.PantallaEstudiante p;
+	protected JTextField metoPago;
+	protected Matricula matricula;
+	
 
 	public PantallaDatosAlumno() {
 		setIconImage(
@@ -72,9 +79,10 @@ public class PantallaDatosAlumno extends JFrame {
 
 		dniAlu = new JTextField();
 		dniAlu.setEditable(false);
+		dniAlu.setText(main.java.presentacion.PantallaLogin.dni.toString());
 		dniAlu.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
 		dniAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		dniAlu.setBounds(71, 181, 259, 39);
+		dniAlu.setBounds(428, 235, 259, 39);
 		contentPane.add(dniAlu);
 		dniAlu.setColumns(10);
 
@@ -82,76 +90,70 @@ public class PantallaDatosAlumno extends JFrame {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnNewButton.setBounds(20, 496, 114, 49);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				main.java.presentacion.PantallaMatriculacion p = new main.java.presentacion.PantallaMatriculacion();
-				setVisible(false);
-				p.setVisible(true);
+				try {
+					GestorConsultas.listarCursos(p.modelo, EstadoCurso.EN_MATRICULACION);
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});
 
-		tituAlu = new JTextField();
-		tituAlu.setEditable(false);
-		tituAlu.setBorder(new MatteBorder(0, 0, 1, 0, SystemColor.textHighlight));
-		tituAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		tituAlu.setColumns(10);
-		tituAlu.setBounds(454, 220, 259, 39);
-		contentPane.add(tituAlu);
-
-		cualiAlu = new JTextField();
-		cualiAlu.setEditable(false);
-		cualiAlu.setBorder(new MatteBorder(0, 0, 1, 0, SystemColor.textHighlight));
-		cualiAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		cualiAlu.setColumns(10);
-		cualiAlu.setBounds(454, 308, 259, 39);
-		contentPane.add(cualiAlu);
-
 		nomAlu = new JTextField();
+		nomAlu.setText(devolverNombre(main.java.presentacion.PantallaLogin.nom.toString()));
 		nomAlu.setEditable(false);
 		nomAlu.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
 		nomAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		nomAlu.setColumns(10);
-		nomAlu.setBounds(71, 259, 259, 39);
+		nomAlu.setBounds(62, 235, 259, 39);
 		contentPane.add(nomAlu);
 
-		metoPago = new JTextField();
-		metoPago.setEditable(false);
-		metoPago.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
-		metoPago.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		metoPago.setColumns(10);
-		metoPago.setBounds(71, 337, 259, 39);
-		contentPane.add(metoPago);
+		apeAlu = new JTextField();
+		apeAlu.setText(devolverApellido(main.java.presentacion.PantallaLogin.nom.toString()));
+		apeAlu.setEditable(false);
+		apeAlu.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+		apeAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		apeAlu.setColumns(10);
+		apeAlu.setBounds(62, 313, 259, 39);
+		contentPane.add(apeAlu);
 
-		lblDatosDeMatriculacin = new JLabel("Datos de matriculaci\u00F3n:");
-		lblDatosDeMatriculacin.setVisible(false);
-		lblDatosDeMatriculacin.setFont(new Font(tipoLetra, Font.BOLD, 20));
-		lblDatosDeMatriculacin.setBounds(248, 101, 379, 42);
-		contentPane.add(lblDatosDeMatriculacin);
+		lblDatosDeMatriculacion = new JLabel("Datos de matriculaci\u00F3n:");
+		lblDatosDeMatriculacion.setVisible(true);
+		lblDatosDeMatriculacion.setFont(new Font(tipoLetra, Font.BOLD, 20));
+		lblDatosDeMatriculacion.setBounds(232, 102, 379, 42);
+		contentPane.add(lblDatosDeMatriculacion);
 
 		btnPagar = new JButton("Pagar");
 		btnPagar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPagar.setForeground(Color.WHITE);
-		btnPagar.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		btnPagar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnPagar.setBackground(SystemColor.textHighlight);
 		btnPagar.setBounds(594, 490, 114, 49);
 		btnPagar.setVisible(true);
 		contentPane.add(btnPagar);
-
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				Date fechaActual = new Date();
+				
 				if (metoPago.getText().equals(ModoPago.TARJETA_CREDITO.toString())) {
 
-					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar con tarjeta?", "ATENCIÓN",
+					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar con tarjeta?", "ATENCION",
 							JOptionPane.OK_CANCEL_OPTION);
 					if (respuesta == JOptionPane.OK_OPTION) {
-						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACIÓN",
+						matricula = new Matricula(numRand(),nomAlu.getText().toString(),apeAlu.getText().toString(),ModoPago.valueOf(ModoPago.TARJETA_CREDITO.toString()),fechaActual,dniAlu.getText().toString(),Double.parseDouble(textPrecio.getText().toString()),ID);
+						GestorMatriculacion.realizarMatriculacion(matricula);
+						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
-
+						
 						setVisible(false);
 						main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
 						p.setVisible(true);
@@ -160,7 +162,10 @@ public class PantallaDatosAlumno extends JFrame {
 					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar mediante transferencia bancaria?",
 							"ATENCIÓN", JOptionPane.OK_CANCEL_OPTION);
 					if (respuesta == JOptionPane.OK_OPTION) {
-						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACIÓN",
+						matricula = new Matricula(numRand(),nomAlu.getText().toString(),apeAlu.getText().toString(),ModoPago.valueOf(ModoPago.TRANSFERENCIA.toString()),fechaActual,dniAlu.getText().toString(),Double.parseDouble(textPrecio.getText().toString()),ID);
+						GestorMatriculacion.realizarMatriculacion(matricula);
+						
+						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
 						main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
@@ -173,35 +178,25 @@ public class PantallaDatosAlumno extends JFrame {
 		lblDNIAlu = new JLabel("DNI del alumno:\r\n");
 		lblDNIAlu.setForeground(SystemColor.textHighlight);
 		lblDNIAlu.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-		lblDNIAlu.setBounds(71, 142, 259, 39);
+		lblDNIAlu.setBounds(428, 206, 259, 39);
 		contentPane.add(lblDNIAlu);
 
 		lblNomAlu = new JLabel("Nombre del alumno:");
 		lblNomAlu.setForeground(SystemColor.textHighlight);
 		lblNomAlu.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-		lblNomAlu.setBounds(71, 230, 259, 39);
+		lblNomAlu.setBounds(62, 206, 259, 39);
 		contentPane.add(lblNomAlu);
 
-		lblTitu = new JLabel("Titulacion:\r\n");
-		lblTitu.setForeground(SystemColor.textHighlight);
-		lblTitu.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-		lblTitu.setBounds(454, 191, 259, 39);
-		contentPane.add(lblTitu);
-
-		lblCuali = new JLabel("Cualificacion:\r\n");
-		lblCuali.setForeground(SystemColor.textHighlight);
-		lblCuali.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-		lblCuali.setBounds(454, 269, 259, 39);
-		contentPane.add(lblCuali);
-
-		lblMetoPago = new JLabel("Metodo de pago:\r\n");
-		lblMetoPago.setForeground(SystemColor.textHighlight);
-		lblMetoPago.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-		lblMetoPago.setBounds(71, 308, 259, 39);
-		contentPane.add(lblMetoPago);
+		lblApellido = new JLabel("Apellido del alumno:");
+		
+		lblApellido.setForeground(SystemColor.textHighlight);
+		lblApellido.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
+		lblApellido.setBounds(62, 284, 259, 39);
+		contentPane.add(lblApellido);
 
 		textPrecio = new JTextField();
 		textPrecio.setEditable(false);
+		
 		textPrecio.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		textPrecio.setColumns(10);
 		textPrecio.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
@@ -213,7 +208,34 @@ public class PantallaDatosAlumno extends JFrame {
 		lblPrecio.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblPrecio.setBounds(232, 453, 259, 39);
 		contentPane.add(lblPrecio);
+		
+		metoPago = new JTextField();
+		metoPago.setFont(new Font("Tahoma", Font.BOLD, 13));
+		metoPago.setEditable(false);
+		metoPago.setColumns(10);
+		metoPago.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
+		metoPago.setBounds(428, 313, 259, 39);
+		contentPane.add(metoPago);
+		
+		JLabel lblMetoPago = new JLabel("Metodo de pago:");
+		lblMetoPago.setForeground(SystemColor.textHighlight);
+		lblMetoPago.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lblMetoPago.setBounds(428, 284, 259, 39);
+		contentPane.add(lblMetoPago);
 
+	}
+	public static String devolverNombre (String nombreCompleto) {
+		String[] nombreApe = nombreCompleto.split(" ");
+		 return nombreApe[0];
+	}
+	public static String devolverApellido (String nombreCompleto) {
+		String[] nombreApe = nombreCompleto.split(" ");
+		 return nombreApe[1];
+	}
+	public int numRand() {
+		int numero = (int) (Math.random() * 100 + 1);
+		return numero;
 	}
 
 }
+

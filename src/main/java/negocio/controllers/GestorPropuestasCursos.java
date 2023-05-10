@@ -2,23 +2,20 @@ package main.java.negocio.controllers;
 
 import main.java.negocio.entities.*;
 import main.java.persistencia.CursoPropioDAO;
+import main.java.persistencia.MatriculaDAO;
 
 public class GestorPropuestasCursos {
 	
 	static CursoPropioDAO cursoDAO ;
 
-	public CursoPropio realizarPropuestaCurso() {
-		// TODO - implement GestorPropuestasCursos.realizarPropuestaCurso
-		throw new UnsupportedOperationException();
+	public static void realizarPropuestaCurso(CursoPropio curso) {
+		cursoDAO = new CursoPropioDAO();
+		cursoDAO.crearNuevoCurso(curso);
 	}
 
-	/**
-	 * 
-	 * @param curso
-	 */
-	public void editarPropuestaCurso(CursoPropio curso) {
-		// TODO - implement GestorPropuestasCursos.editarPropuestaCurso
-		throw new UnsupportedOperationException();
+	public static void editarEstadoCurso(CursoPropio curso, EstadoCurso est) {
+		 cursoDAO = new CursoPropioDAO();
+		 cursoDAO.editarCurso(curso, est, "");
 	}
 
 	/**
@@ -30,6 +27,7 @@ public class GestorPropuestasCursos {
 		 cursoDAO.editarCurso(curso, EstadoCurso.VALIDADO, "");
 		
 	}
+
 	
 	public static void rechazarPropuesta(CursoPropio curso, String mensaje) {
 		 cursoDAO = new CursoPropioDAO();
@@ -45,5 +43,9 @@ public class GestorPropuestasCursos {
 		// TODO - implement GestorPropuestasCursos.altaCursoAprobado
 		throw new UnsupportedOperationException();
 	}
-
+	public static void eliminarCurso(CursoPropio curso) {
+		cursoDAO = new CursoPropioDAO();
+		cursoDAO.eliminarCurso(curso);
+	}
+	
 }

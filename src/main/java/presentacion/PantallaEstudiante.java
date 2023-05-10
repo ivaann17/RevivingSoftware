@@ -7,6 +7,11 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import main.java.negocio.controllers.GestorConsultas;
+import main.java.negocio.controllers.GestorMatriculacion;
+import main.java.negocio.entities.EstadoCurso;
 import main.java.persistencia.CursoPropioDAO;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
@@ -22,7 +27,6 @@ public class PantallaEstudiante extends JFrame {
 	private JPanel contentPane;
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
-	CursoPropioDAO cDAO = new CursoPropioDAO();
 
 	public PantallaEstudiante() {
 		setTitle("UCLM");
@@ -40,9 +44,15 @@ public class PantallaEstudiante extends JFrame {
 		JButton btnMisCursos = new JButton("Mis cursos\r\n");
 		btnMisCursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
-				setVisible(false);
-				p.setVisible(true);
+				try {
+					main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
+					GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni.toString());
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});
@@ -50,7 +60,7 @@ public class PantallaEstudiante extends JFrame {
 		btnMisCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMisCursos.setForeground(Color.WHITE);
 		btnMisCursos.setBackground(SystemColor.textHighlight);
-		btnMisCursos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnMisCursos.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnMisCursos.setBounds(45, 253, 228, 76);
 		contentPane.add(btnMisCursos);
 
@@ -60,19 +70,27 @@ public class PantallaEstudiante extends JFrame {
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		JButton btnRealizarMatriculacion = new JButton("Realizar matriculaci\u00F3n\r\n");
+		JButton btnRealizarMatriculacion = new JButton("Realizar matriculacion");
 		btnRealizarMatriculacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaMatriculacion p = new PantallaMatriculacion();
-				setVisible(false);
-				p.setVisible(true);
+
+				try {
+					main.java.presentacion.PantallaMatriculacion p = new main.java.presentacion.PantallaMatriculacion();
+					GestorConsultas.listarCursos(p.modelo, EstadoCurso.EN_MATRICULACION);
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
+
 		});
 		btnRealizarMatriculacion.setFocusPainted(false);
 		btnRealizarMatriculacion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRealizarMatriculacion.setForeground(Color.WHITE);
-		btnRealizarMatriculacion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnRealizarMatriculacion.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRealizarMatriculacion.setBackground(SystemColor.textHighlight);
 		btnRealizarMatriculacion.setBounds(45, 122, 228, 76);
 		contentPane.add(btnRealizarMatriculacion);

@@ -38,26 +38,28 @@ public class GestorConsultas {
 		throw new UnsupportedOperationException();
 	}
 	
-	public static void listarCursos(DefaultListModel<CursoPropio> modelo) throws Exception {
+	public static void listarCursos(DefaultListModel<CursoPropio> modelo, EstadoCurso estado) throws Exception {
 	    cursoDAO = new CursoPropioDAO();
-	    List<CursoPropio> cursos = cursoDAO.listarCursos();
+	    List<CursoPropio> cursos = cursoDAO.listarCursos(estado);
 	    for (CursoPropio curso : cursos) {
 	        modelo.addElement(curso);
 	    }
 	}
-	public static void listarCursosPropuestos(DefaultListModel<CursoPropio> modelo) throws Exception {
+
+	public static void listarHistorial(DefaultListModel<CursoPropio> modelo, String dni) throws Exception {
 	    cursoDAO = new CursoPropioDAO();
-	    List<CursoPropio> cursos = cursoDAO.listarCursosPropuestos();
+	    List<CursoPropio> cursos = cursoDAO.listarHistorialCursos(dni);
 	    for (CursoPropio curso : cursos) {
 	        modelo.addElement(curso);
 	    }
 	}
-	public static void listarCursosRechazados(DefaultListModel<CursoPropio> modelo) throws Exception {
-	    cursoDAO = new CursoPropioDAO();
-	    List<CursoPropio> cursos = cursoDAO.listarCursosRechazados();
-	    for (CursoPropio curso : cursos) {
-	        modelo.addElement(curso);
+		public static void listarCursosMatriculados(DefaultListModel<CursoPropio> modelo, String dni) throws Exception {
+		    cursoDAO = new CursoPropioDAO();
+		    List<CursoPropio> cursos = cursoDAO.listarCursosMatriculados(dni);
+		    for (CursoPropio curso : cursos) {
+		        modelo.addElement(curso);
+		    }
 	    }
-	}
+
 
 }

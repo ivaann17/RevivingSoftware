@@ -80,6 +80,7 @@ public class CursoPropioDAO {
 		}
 		return eli;
 	}
+	
 
 	/**
 	 * 
@@ -111,12 +112,48 @@ public class CursoPropioDAO {
 		return mod;
 	}
 
-	public List<CursoPropio> listarCursos() throws Exception {
+	public List<CursoPropio> listarCursosMatriculados(String dni) throws Exception {
 		List<CursoPropio> cursos = new ArrayList<>();
 		try {
-			String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos ORDER BY fechaInicio";
+			
+			String sql = "SELECT cursos.* FROM cursos INNER JOIN matricula ON cursos.ID = matricula.curso WHERE matricula.DNI = ?";
 
 			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+			ps.setString(1, dni);
+			Vector<Object> resultado = GestorBD.select(ps);
+
+			for (int i = 0; i < resultado.size(); i++) {
+				Vector<Object> fila = (Vector<Object>) resultado.get(i);
+				int id = (int) fila.get(0);
+				String nombre = (String) fila.get(1);
+				String dniDirector = (String) fila.get(2);
+				String dniSecretario = (String) fila.get(3);
+				Date fechaInicioCurso = (Date) fila.get(4);
+				Date fechaFinCurso = (Date) fila.get(5);
+				int creditos = (int) fila.get(6);
+				double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
+				TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
+				EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
+				String facultad = (String) fila.get(10);
+				int edicion = (int) fila.get(11);
+				String mensaje = (String) fila.get(12);
+
+				CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
+						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
+				cursos.add(curso);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cursos;
+	}
+	public List<CursoPropio> listarHistorialCursos(String dni) throws Exception {
+		List<CursoPropio> cursos = new ArrayList<>();
+		try {
+			String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos WHERE dniDirector = ? ORDER BY fechaInicio";
+
+			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+			ps.setString(1, dni);
 			Vector<Object> resultado = GestorBD.select(ps);
 
 			for (int i = 0; i < resultado.size(); i++) {
@@ -145,14 +182,16 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursosPropuestos() throws Exception {
+
+	public List<CursoPropio> listarCursos(EstadoCurso estado) throws Exception {
 		List<CursoPropio> cursos = new ArrayList<>();
 		try {
 			String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje\r\n"
-					+ "FROM cursos\r\n" + "WHERE estado = '" + EstadoCurso.PROPUESTO + "'\r\n"
+					+ "FROM cursos\r\n" + "WHERE estado = ? "
 					+ "ORDER BY fechaInicio\r\n" + "";
 
 			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+			ps.setString(1, estado.toString());
 			Vector<Object> resultado = GestorBD.select(ps);
 
 			for (int i = 0; i < resultado.size(); i++) {
@@ -181,41 +220,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 	
-	public List<CursoPropio> listarCursosRechazados() throws Exception {
-		List<CursoPropio> cursos = new ArrayList<>();
-		try {
-			String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje\r\n"
-					+ "FROM cursos\r\n" + "WHERE estado = '" + EstadoCurso.PROPUESTA_RECHAZADA + "'\r\n"
-					+ "ORDER BY fechaInicio\r\n" + "";
-
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
-			Vector<Object> resultado = GestorBD.select(ps);
-
-			for (int i = 0; i < resultado.size(); i++) {
-				Vector<Object> fila = (Vector<Object>) resultado.get(i);
-				int id = (int) fila.get(0);
-				String nombre = (String) fila.get(1);
-				String dniDirector = (String) fila.get(2);
-				String dniSecretario = (String) fila.get(3);
-				Date fechaInicioCurso = (Date) fila.get(4);
-				Date fechaFinCurso = (Date) fila.get(5);
-				int creditos = (int) fila.get(6);
-				double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
-				TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
-				EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
-				String facultad = (String) fila.get(10);
-				int edicion = (int) fila.get(11);
-				String mensaje = (String) fila.get(12);
-
-				CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
-						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
-				cursos.add(curso);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return cursos;
-	}
+	
 
 	public double listarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
 		// TODO - implement CursoPropioDAO.listarIngresos

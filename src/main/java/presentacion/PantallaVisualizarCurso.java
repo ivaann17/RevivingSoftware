@@ -62,11 +62,9 @@ import main.java.negocio.entities.Centro;
 		protected JLabel lblDNISec;
 		protected JLabel lblEdi;
 		private String tipoLetra = "Tahoma";
-		private String fechaIni = "";
-		private String fechaFin = "";
-		private String ERROR = "ERROR";
+
 		protected CursoPropio curso;
-		protected CursoPropioDAO cursoDAO;
+		
 
 		/**
 		 * Create the frame.
@@ -81,6 +79,7 @@ import main.java.negocio.entities.Centro;
 		public JTextField FechaIni;
 		private JLabel lblFechaFin;
 		public String mensaje;
+		protected JButton btnVolver3;
 
 		public PantallaVisualizarCurso() {
 			setIconImage(Toolkit.getDefaultToolkit()
@@ -114,14 +113,14 @@ import main.java.negocio.entities.Centro;
 			btnVolver.setForeground(Color.WHITE);
 			btnVolver.setBackground(SystemColor.textHighlight);
 			btnVolver.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnVolver.setFont(new Font(tipoLetra, Font.BOLD, 15));
+			btnVolver.setFont(new Font("Tahoma", Font.BOLD, 13));
 			btnVolver.setBounds(10, 496, 114, 49);
 			contentPane.add(btnVolver);
 			btnVolver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
 					try {
-						GestorConsultas.listarCursos(p.modelo);
+						GestorConsultas.listarHistorial(p.modelo, dniProf.getText().toString());
 						setVisible(false);
 						p.setVisible(true);
 					} catch (Exception e1) {
@@ -138,21 +137,21 @@ import main.java.negocio.entities.Centro;
 			btnVolver2.setVisible(false);
 			btnVolver2.setBackground(SystemColor.textHighlight);
 			btnVolver2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnVolver2.setFont(new Font(tipoLetra, Font.BOLD, 15));
+			btnVolver2.setFont(new Font("Tahoma", Font.BOLD, 13));
 			btnVolver2.setBounds(10, 496, 114, 49);
 			contentPane.add(btnVolver2);
 			btnVolver2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
 					try {
-						GestorConsultas.listarCursosRechazados(p.modelo);
+						GestorConsultas.listarCursos(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
 						setVisible(false);
 						p.setVisible(true);
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				;
+				
 
 				}
 			});
@@ -195,7 +194,7 @@ import main.java.negocio.entities.Centro;
 			btnMen.setForeground(Color.WHITE);
 			btnMen.setBackground(SystemColor.textHighlight);
 			btnMen.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnMen.setFont(new Font(tipoLetra, Font.BOLD, 15));
+			btnMen.setFont(new Font("Tahoma", Font.BOLD, 13));
 			btnMen.setBounds(294, 496, 114, 49);
 			contentPane.add(btnMen);
 			contentPane.getRootPane().setDefaultButton(btnMen);
@@ -309,6 +308,29 @@ import main.java.negocio.entities.Centro;
 			lblFechaFin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 			lblFechaFin.setBounds(454, 455, 259, 39);
 			contentPane.add(lblFechaFin);
+			
+			btnVolver3 = new JButton("Volver");
+			btnVolver3.setVisible(false);
+			btnVolver3.setForeground(Color.WHITE);
+			btnVolver3.setFont(new Font("Tahoma", Font.BOLD, 13));
+			btnVolver3.setBackground(SystemColor.textHighlight);
+			btnVolver3.setBounds(10, 496, 114, 49);
+			contentPane.add(btnVolver3);
+			btnVolver3.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
+					try {
+						GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni.toString());
+						setVisible(false);
+						p.setVisible(true);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				;
+
+				}
+			});
 		}
 
 		

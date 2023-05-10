@@ -39,6 +39,13 @@ public class CursoPropio {
 		this.mensaje = mensaje;
 	}
 
+	public CursoPropio(String centro,int id, String nombre, int edicion) {
+		this.centro = centro;
+		this.id = id;
+		this.nombre = nombre;
+		this.edicion = edicion;
+	}
+
 	public String getCentro() {
 		return centro;
 	}
@@ -91,7 +98,6 @@ public class CursoPropio {
 		return mensaje;
 	}
 
-	@Override
 	public String toString() {
 		return "ID del curso: {"+id+"}   Nombre del curso: {"+nombre+"}   Estado del curso: {"+estado+"}";
 }

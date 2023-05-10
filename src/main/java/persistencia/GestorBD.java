@@ -71,7 +71,6 @@ public class GestorBD {
 	        }
 	        vectoradevolver.add(v);
 	    }
-	    ps.close();
 	    return vectoradevolver;
 	}
 
@@ -108,13 +107,9 @@ public class GestorBD {
 	}
 
 
-	public void operation(String sql) {
-	    try {
-	        Statement stmt = mBD.createStatement();
-	        stmt.execute(sql);
-	    } catch (SQLException e) {
-	        System.out.println("Se ha producido un error al ejecutar la operación: " + e.getMessage());
-	    }
+	public ResultSet operation(PreparedStatement ps) throws SQLException {
+	    return ps.executeQuery();
 	}
+
 
 }
