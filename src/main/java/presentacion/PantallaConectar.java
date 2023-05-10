@@ -58,9 +58,11 @@ public class PantallaConectar extends JFrame {
 		setTitle("UCLM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(625, 428);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -82,7 +84,6 @@ public class PantallaConectar extends JFrame {
 
 		conectBtn.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
 
 				GestorBD.conectarBD();
 				setVisible(false);

@@ -22,7 +22,6 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	private JPanel contentPane;
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
-	CursoPropioDAO cDAO = new CursoPropioDAO();
 
 	public PantallaJefeGabineteVicerrectorado() {
 		setTitle("UCLM");
@@ -55,7 +54,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		btnVerCursos.setFocusPainted(false);
 		btnVerCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVerCursos.setForeground(Color.WHITE);
-		btnVerCursos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnVerCursos.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnVerCursos.setBackground(SystemColor.textHighlight);
 		btnVerCursos.setBounds(45, 122, 228, 76);
 		contentPane.add(btnVerCursos);

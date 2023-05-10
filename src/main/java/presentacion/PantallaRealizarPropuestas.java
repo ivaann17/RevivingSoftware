@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
+import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.Centro;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
@@ -75,7 +76,6 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	private String fechaFin = "";
 	private String ERROR = "ERROR";
 	protected CursoPropio curso;
-	protected CursoPropioDAO cursoDAO;
 
 	/**
 	 * Create the frame.
@@ -122,7 +122,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnNewButton.setBounds(20, 496, 114, 49);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -193,7 +193,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		btnFinalizar = new JButton("Finalizar");
 		btnFinalizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFinalizar.setForeground(Color.WHITE);
-		btnFinalizar.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		btnFinalizar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnFinalizar.setBackground(SystemColor.textHighlight);
 		btnFinalizar.setBounds(594, 490, 114, 49);
 		btnFinalizar.setVisible(false);
@@ -227,8 +227,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 								Centro c=new Centro(Fac.getSelectedItem().toString());
 								
 								curso = new CursoPropio(c.getNombre().toString(), EstadoCurso.PROPUESTO, TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()), dniProf.getText().toString(), dniSec.getText().toString(), numRand(), NombreCurso.getText().toString(),Integer.parseInt(NumCreditos.getText().toString()) , formatoFecha(fechaIni), formatoFecha(fechaFin), Double.parseDouble(textPrecio.getText().toString()) , Integer.parseInt(Edicion.getText().toString()), "");
-								cursoDAO = new CursoPropioDAO();
-								cursoDAO.crearNuevoCurso(curso);
+								GestorPropuestasCursos.realizarPropuestaCurso(curso);
 								main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
 								setVisible(false);
 								p.setVisible(true);
@@ -248,7 +247,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		btnSiguiente.setForeground(Color.WHITE);
 		btnSiguiente.setBackground(SystemColor.textHighlight);
 		btnSiguiente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnSiguiente.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSiguiente.setBounds(594, 490, 114, 49);
 		contentPane.add(btnSiguiente);
 		contentPane.getRootPane().setDefaultButton(btnSiguiente);
@@ -380,7 +379,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 
 		});
 		btnNext.setForeground(Color.WHITE);
-		btnNext.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		btnNext.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnNext.setBackground(SystemColor.textHighlight);
 		btnNext.setBounds(594, 490, 114, 49);
 		contentPane.add(btnNext);
@@ -654,27 +653,6 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		return numero;
 	}
 
-	public class DateLabelFormatter extends AbstractFormatter {
-
-		private String datePattern = "yyyy-MM-dd";
-		private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-
-		@Override
-		public Object stringToValue(String text) throws java.text.ParseException {
-			return dateFormatter.parseObject(text);
-		}
-
-		@Override
-		public String valueToString(Object value) {
-			if (value != null) {
-				Calendar cal = (Calendar) value;
-				return dateFormatter.format(cal.getTime());
-			}
-
-			return "";
-		}
-
-	}
 
 	public static void soloLetras(KeyEvent evt) {
 		if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)

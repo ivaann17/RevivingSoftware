@@ -68,7 +68,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		});
 		btnAceptar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAceptar.setForeground(Color.WHITE);
-		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnAceptar.setBackground(SystemColor.textHighlight);
 		btnAceptar.setBounds(56, 380, 226, 75);
 		btnAceptar.setVisible(false);
@@ -104,7 +104,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		});
 		btnRechazar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRechazar.setForeground(Color.WHITE);
-		btnRechazar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnRechazar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRechazar.setBackground(SystemColor.textHighlight);
 		btnRechazar.setBounds(449, 380, 226, 75);
 		btnRechazar.setVisible(false);
@@ -114,7 +114,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);

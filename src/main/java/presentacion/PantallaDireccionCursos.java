@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
 import main.java.persistencia.CursoPropioDAO;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -21,7 +22,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Vector;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -31,13 +35,9 @@ public class PantallaDireccionCursos extends JFrame {
 	private JPanel contentPane;
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
-	CursoPropioDAO cDAO = new CursoPropioDAO();
-	
-	
-
 
 	public PantallaDireccionCursos() {
-		
+
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
@@ -50,53 +50,6 @@ public class PantallaDireccionCursos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnMostrarHistorial = new JButton("Propuestas realizadas");
-		btnMostrarHistorial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				try {
-					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					GestorConsultas.listarCursos(p.modelo);
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			
-			}
-		});
-		btnMostrarHistorial.setFocusPainted(false);
-		btnMostrarHistorial.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnMostrarHistorial.setForeground(Color.WHITE);
-		btnMostrarHistorial.setBackground(SystemColor.textHighlight);
-		btnMostrarHistorial.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnMostrarHistorial.setBounds(45, 224, 228, 76);
-		contentPane.add(btnMostrarHistorial);
-
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(
-				new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
-		lblNewLabel.setBounds(10, 10, 310, 99);
-		contentPane.add(lblNewLabel);
-
-		JButton btnRealizarPropuesta = new JButton("Realizar propuesta");
-		btnRealizarPropuesta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
-				setVisible(false);
-				p.setVisible(true);
-
-			}
-		});
-		btnRealizarPropuesta.setFocusPainted(false);
-		btnRealizarPropuesta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRealizarPropuesta.setForeground(Color.WHITE);
-		btnRealizarPropuesta.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnRealizarPropuesta.setBackground(SystemColor.textHighlight);
-		btnRealizarPropuesta.setBounds(45, 122, 228, 76);
-		contentPane.add(btnRealizarPropuesta);
-
 		NombreUsu = new JTextField();
 		NombreUsu.setText(main.java.presentacion.PantallaLogin.nom.toString());
 		NombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -108,6 +61,55 @@ public class PantallaDireccionCursos extends JFrame {
 		NombreUsu.setBackground(Color.WHITE);
 		NombreUsu.setBounds(552, 214, 252, 19);
 		contentPane.add(NombreUsu);
+
+		JButton btnMostrarHistorial = new JButton("Historial \r\nde \r\npropuestas");
+		btnMostrarHistorial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
+					String nombre = NombreUsu.getText().toString().replaceAll("\\s.*", "");
+
+					GestorConsultas.listarHistorial(p.modelo, dni(nombre.toString()));
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		btnMostrarHistorial.setFocusPainted(false);
+		btnMostrarHistorial.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnMostrarHistorial.setForeground(Color.WHITE);
+		btnMostrarHistorial.setBackground(SystemColor.textHighlight);
+		btnMostrarHistorial.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnMostrarHistorial.setBounds(29, 266, 206, 110);
+		contentPane.add(btnMostrarHistorial);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(
+				new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setBounds(10, 10, 310, 99);
+		contentPane.add(lblNewLabel);
+
+		JButton btnRealizarPropuesta = new JButton("Realizar \r\npropuesta");
+		btnRealizarPropuesta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
+				setVisible(false);
+				p.setVisible(true);
+
+			}
+		});
+		btnRealizarPropuesta.setFocusPainted(false);
+		btnRealizarPropuesta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRealizarPropuesta.setForeground(Color.WHITE);
+		btnRealizarPropuesta.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnRealizarPropuesta.setBackground(SystemColor.textHighlight);
+		btnRealizarPropuesta.setBounds(29, 119, 206, 110);
+		contentPane.add(btnRealizarPropuesta);
 
 		TipoUsuario = new JTextField();
 		TipoUsuario.setEditable(false);
@@ -144,16 +146,16 @@ public class PantallaDireccionCursos extends JFrame {
 		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
 		contentPane.add(cs);
-		
-		JButton btnRechazados = new JButton("Propuestas rechazadas");
+
+		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRechazados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				try {
 					main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
-					
-					GestorConsultas.listarCursosRechazados(p.modelo);
+
+					GestorConsultas.listarCursos(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
@@ -161,14 +163,43 @@ public class PantallaDireccionCursos extends JFrame {
 					e1.printStackTrace();
 				}
 			}
-			
+
 		});
 		btnRechazados.setForeground(Color.WHITE);
-		btnRechazados.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnRechazados.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRechazados.setFocusPainted(false);
 		btnRechazados.setBackground(SystemColor.textHighlight);
-		btnRechazados.setBounds(45, 326, 228, 76);
+		btnRechazados.setBounds(287, 266, 206, 110);
 		contentPane.add(btnRechazados);
+		
+		JButton btnValidados = new JButton("Empezar matriculacion");
+		btnValidados.setForeground(Color.WHITE);
+		btnValidados.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnValidados.setFocusPainted(false);
+		btnValidados.setBackground(SystemColor.textHighlight);
+		btnValidados.setBounds(287, 119, 206, 110);
+		contentPane.add(btnValidados);
+		btnValidados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnValidados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				try {
+					main.java.presentacion.PantallaEmpezarMatriculacion p = new main.java.presentacion.PantallaEmpezarMatriculacion();
+					String nombre = NombreUsu.getText().toString().replaceAll("\\s.*", "");
+
+					GestorConsultas.listarCursos(p.modelo, EstadoCurso.VALIDADO);
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+			
+			
+			
+		});
 
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -176,5 +207,24 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
+	}
+
+	public static String dni(String usu) throws Exception {
+
+		String sqlDNI = "SELECT DNI FROM usuarios WHERE UPPER(nombre) = UPPER(?)";
+
+		PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
+
+		psD.setString(1, usu);
+		Vector<Object> dni = GestorBD.select(psD);
+
+		String dniUsu = null;
+		if (!dni.isEmpty()) {
+			dniUsu = dni.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
+
+		}
+
+		return dniUsu;
+
 	}
 }

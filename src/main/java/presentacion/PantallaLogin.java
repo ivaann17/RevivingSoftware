@@ -75,7 +75,7 @@ public class PantallaLogin extends JFrame {
 		loginButton.setForeground(Color.WHITE);
 		loginButton.setBackground(SystemColor.textHighlight);
 		loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		loginButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		loginButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		loginButton.setBounds(406, 316, 168, 48);
 		panel.add(loginButton);
 
@@ -120,7 +120,7 @@ public class PantallaLogin extends JFrame {
 		btnSiguiente.setFocusPainted(false);
 		btnSiguiente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSiguiente.setForeground(Color.WHITE);
-		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSiguiente.setBackground(SystemColor.textHighlight);
 		btnSiguiente.setBounds(406, 316, 168, 48);
 		panel.add(btnSiguiente);
@@ -168,7 +168,7 @@ public class PantallaLogin extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(44, 316, 114, 49);
 		panel.add(btnNewButton);
@@ -206,21 +206,17 @@ public class PantallaLogin extends JFrame {
 						public void actionPerformed(ActionEvent l) {
 							String sqlUser = "SELECT * FROM usuarios WHERE usuario = ?";
 							String sqlPass = "SELECT * FROM usuarios WHERE usuario = ?";
-							
-							  
-							 
 
-						       
-						       
-						        
 							Vector<Object> rUser = null;
 							Vector<Object> rPass = null;
 							try {
-								PreparedStatement psU = GestorBD.mBD.prepareStatement(sqlUser, Statement.RETURN_GENERATED_KEYS);
-								 PreparedStatement psP = GestorBD.mBD.prepareStatement(sqlPass, Statement.RETURN_GENERATED_KEYS);
-								 
-								 	psU.setString(1, UsuarioText.getText());
-							        psP.setString(1, ContrasenaText.getText());
+								PreparedStatement psU = GestorBD.mBD.prepareStatement(sqlUser,
+										Statement.RETURN_GENERATED_KEYS);
+								PreparedStatement psP = GestorBD.mBD.prepareStatement(sqlPass,
+										Statement.RETURN_GENERATED_KEYS);
+
+								psU.setString(1, UsuarioText.getText());
+								psP.setString(1, ContrasenaText.getText());
 								rUser = GestorBD.select(psU);
 								rPass = GestorBD.select(psP);
 							} catch (Exception e) {
@@ -297,6 +293,7 @@ public class PantallaLogin extends JFrame {
 
 			tipo = tipoUsu(usu).toUpperCase().toString();
 			nom = nombreUsu(usu).toUpperCase().toString();
+			dni = dniUsu(usu).toString();
 			main.java.presentacion.PantallaEstudiante e = new main.java.presentacion.PantallaEstudiante();
 			setVisible(false);
 			e.setVisible(true);
@@ -306,7 +303,6 @@ public class PantallaLogin extends JFrame {
 
 			tipo = tipoUsu(usu).toUpperCase().toString();
 			nom = nombreUsu(usu).toUpperCase().toString();
-			
 
 			main.java.presentacion.PantallaJefeGabineteVicerrectorado j = new main.java.presentacion.PantallaJefeGabineteVicerrectorado();
 			setVisible(false);
@@ -325,11 +321,11 @@ public class PantallaLogin extends JFrame {
 	}
 
 	public String tipoUsu(String usu) throws Exception {
-		String sql ="SELECT tipo FROM usuarios WHERE usuario = ?";
+		String sql = "SELECT tipo FROM usuarios WHERE usuario = ?";
 		PreparedStatement psT = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		 
-		 	psT.setString(1, usu);
-	        
+
+		psT.setString(1, usu);
+
 		Vector<Object> tipo = GestorBD.select(psT);
 		if (!tipo.isEmpty()) {
 			String tipoUsuario = tipo.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
@@ -349,38 +345,38 @@ public class PantallaLogin extends JFrame {
 	}
 
 	public String nombreUsu(String usu) throws Exception {
-		
-		String sqlNom= "SELECT nombre,apellido FROM usuarios WHERE usuario = ?";
-		
+
+		String sqlNom = "SELECT nombre,apellido FROM usuarios WHERE usuario = ?";
+
 		PreparedStatement psN = GestorBD.mBD.prepareStatement(sqlNom, Statement.RETURN_GENERATED_KEYS);
-		 
-	 	psN.setString(1, usu);
+
+		psN.setString(1, usu);
 		Vector<Object> nombre = GestorBD.select(psN);
 		String nom = null;
 		if (!nombre.isEmpty()) {
-			
-			nom = nombre.get(0).toString().replaceAll("[\\[\\],]","").trim().toUpperCase();
+
+			nom = nombre.get(0).toString().replaceAll("[\\[\\],]", "").trim().toUpperCase();
 		}
 		return nom;
 
 	}
-	public String dniUsu(String usu) throws Exception {
-		
-		String sqlDNI= "SELECT DNI FROM usuarios WHERE usuario = ?";
-		
+
+	public static String dniUsu(String usu) throws Exception {
+
+		String sqlDNI = "SELECT DNI FROM usuarios WHERE usuario = ?";
+
 		PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
-		 
-	 	psD.setString(1, usu);
+
+		psD.setString(1, usu);
 		Vector<Object> dni = GestorBD.select(psD);
-		
+
 		String dniUsu = null;
 		if (!dni.isEmpty()) {
 			dniUsu = dni.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
-		
+
 		}
-		
+
 		return dniUsu;
-		
 
 	}
 

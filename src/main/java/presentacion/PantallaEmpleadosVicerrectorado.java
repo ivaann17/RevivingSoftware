@@ -9,6 +9,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 
 import main.java.negocio.controllers.GestorConsultas;
+import main.java.negocio.entities.EstadoCurso;
 import main.java.persistencia.CursoPropioDAO;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
@@ -24,7 +25,6 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 	private JPanel contentPane;
 	protected final JTextField NombreUsu;
 	protected final JTextField TipoUsuario;
-	CursoPropioDAO cDAO = new CursoPropioDAO();
 
 	public PantallaEmpleadosVicerrectorado() {
 		setTitle("UCLM");
@@ -50,7 +50,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				main.java.presentacion.PantallaEvaluarCurso p = new main.java.presentacion.PantallaEvaluarCurso();
 				try {
-					GestorConsultas.listarCursosPropuestos(p.modelo);
+					GestorConsultas.listarCursos(p.modelo, EstadoCurso.PROPUESTO);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
@@ -64,7 +64,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		btnVerPropuestas.setFocusPainted(false);
 		btnVerPropuestas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVerPropuestas.setForeground(Color.WHITE);
-		btnVerPropuestas.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnVerPropuestas.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnVerPropuestas.setBackground(SystemColor.textHighlight);
 		btnVerPropuestas.setBounds(45, 122, 228, 76);
 		contentPane.add(btnVerPropuestas);
