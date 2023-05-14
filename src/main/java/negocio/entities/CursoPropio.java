@@ -3,8 +3,6 @@ package main.java.negocio.entities;
 import java.util.*;
 
 public class CursoPropio {
-	
-
 
 	String centro;
 	EstadoCurso estado;
@@ -19,10 +17,10 @@ public class CursoPropio {
 	private double tasaMatricula;
 	private int edicion;
 	private String mensaje;
-	
-	public CursoPropio(String centro, EstadoCurso estado, TipoCurso tipo,
-			String dniDirector, String dniSecretario, int id, String nombre, int eCTS, Date fechaInicio, Date fechaFin,
-			double tasaMatricula, int edicion,String mensaje) {
+
+	public CursoPropio(String centro, EstadoCurso estado, TipoCurso tipo, String dniDirector, String dniSecretario,
+			int id, String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion,
+			String mensaje) {
 		super();
 		this.centro = centro;
 		this.estado = estado;
@@ -37,13 +35,6 @@ public class CursoPropio {
 		this.tasaMatricula = tasaMatricula;
 		this.edicion = edicion;
 		this.mensaje = mensaje;
-	}
-
-	public CursoPropio(String centro,int id, String nombre, int edicion) {
-		this.centro = centro;
-		this.id = id;
-		this.nombre = nombre;
-		this.edicion = edicion;
 	}
 
 	public String getCentro() {
@@ -99,6 +90,7 @@ public class CursoPropio {
 	}
 
 	public String toString() {
-		return "ID del curso: {"+id+"}   Nombre del curso: {"+nombre+"}   Estado del curso: {"+estado+"}";
-}
+		return "ID del curso: {" + id + "}  Nombre del curso: {" + nombre + "}  Estado del curso: {" + estado
+				+ "}  Edicion: {" + edicion + "}";
+	}
 }

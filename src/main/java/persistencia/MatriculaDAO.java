@@ -1,105 +1,138 @@
-	package main.java.persistencia;
+package main.java.persistencia;
 
-	import java.sql.Date;
-	import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
-	import java.sql.SQLException;
-	import java.sql.Statement;
-	import java.util.ArrayList;
-	import java.util.List;
-	import java.util.Vector;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-	import main.java.negocio.entities.*;
+import main.java.negocio.entities.*;
 
-	public class MatriculaDAO {
-		GestorBD gestorBD = new GestorBD();
+public class MatriculaDAO {
+	GestorBD gestorBD = new GestorBD();
 
-		public int crearNuevaMatricula(Matricula matricula) {
+	public int crearNuevaMatricula(Matricula matricula) {
 
-			int id = 0;
-			try {
-				String sql = "INSERT INTO matricula (ID, nombre, apellido, DNI, precio, tipo_pago, curso, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		int id = 0;
+		try {
+			String sql = "INSERT INTO matricula (ID, nombre, apellido, DNI, precio, tipo_pago, curso, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-				PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-				ps.setInt(1, matricula.getID_Matricula());
-				ps.setString(2, matricula.getNombre());
-				ps.setString(3, matricula.getApellido());
-				ps.setString(4, matricula.getDni());
-				ps.setDouble(5, matricula.getPrecio());
-				ps.setString(6, matricula.getTipoPago().toString());
-				ps.setInt(7, matricula.getID_Curso());
-				ps.setDate(8, new java.sql.Date(matricula.getFecha().getTime()));
-				gestorBD.insert(ps);
+			ps.setInt(1, matricula.getID_Matricula());
+			ps.setString(2, matricula.getNombre());
+			ps.setString(3, matricula.getApellido());
+			ps.setString(4, matricula.getDni());
+			ps.setDouble(5, matricula.getPrecio());
+			ps.setString(6, matricula.getTipoPago().toString());
+			ps.setInt(7, matricula.getID_Curso());
+			ps.setDate(8, new java.sql.Date(matricula.getFecha().getTime()));
+			gestorBD.insert(ps);
 
-				ResultSet rs = ps.getGeneratedKeys();
-				if (rs.next()) {
-					id = rs.getInt(1);
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+
+	public boolean existeMatricula(int curso, String dni) throws Exception {
+
+		try {
+			String sql = "SELECT COUNT(*) FROM matricula WHERE curso = ? AND DNI = ? ";
+
+			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+			ps.setInt(1, curso);
+			ps.setString(2, dni);
+
+			ResultSet rs = gestorBD.operation(ps);
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				if (count > 0) {
+					return true;
+				} else {
+					return false;
 				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
-			return id;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		public boolean existeMatricula (int curso, String dni) throws Exception {
+		return false;
 
-			int id = 0;
-			try {
-				String sql = "SELECT COUNT(*) FROM matricula WHERE curso = ? AND DNI = ? ";
+	}
 
+	public double ingresosCurso(CursoPropio curso) throws Exception {
 
-				PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		double ingr = 0.0;
+		try {
+			String sql = "SELECT SUM(precio) FROM matricula WHERE curso = ?";
 
-				ps.setInt(1, curso);
-				ps.setString(2, dni);
-				
+			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-				ResultSet rs = gestorBD.operation(ps);
-				if (rs.next()) {
-				    int count = rs.getInt(1);
-				    if (count > 0) {
-				        return true;
-				    } else {
-				        return false;
-				    }
-				} 
+			ps.setInt(1, curso.getId());
 
-			} catch (SQLException e) {
-				e.printStackTrace();
+			ResultSet rs = gestorBD.operation(ps);
+			if (rs.next()) {
+				ingr = rs.getDouble(1);
 			}
-			return false;
-			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		/*public static void obtenerCursoDeMatricula(int idMatricula) {
-		    try {
-		        // Crear la consulta
-		        String consulta = "SELECT cursos.* FROM matricula " +
-		                          "JOIN cursos ON matricula.curso = cursos.id " +
-		                          "WHERE matriculas.id = ?";
-		        
-		        // Crear el objeto PreparedStatement
-		        PreparedStatement ps = conexion.prepareStatement(consulta);
-		        ps.setInt(1, idMatricula);
+		return ingr;
+	}
 
-		        // Ejecutar la consulta y obtener los resultados
-		        ResultSet rs = ps.executeQuery();
+	public boolean cursoConMatricula(CursoPropio curso) throws Exception {
 
-		        // Procesar los resultados
-		        if (rs.next()) {
-		            int idCurso = rs.getInt("id");
-		            String nombreCurso = rs.getString("nombre");
-		            int duracionHoras = rs.getInt("duracion_horas");
+		try {
+			String sql = "SELECT COUNT(curso) FROM matricula WHERE curso = ?";
 
-		            // Hacer algo con los datos del curso obtenidos
-		            System.out.println("El estudiante está matriculado en el curso con id " + idCurso + " y nombre " + nombreCurso + " (duración: " + duracionHoras + " horas)");
-		        } else {
-		            System.out.println("No se encontró ningún curso para la matrícula con id " + idMatricula);
-		        }
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
-		}*/
+			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+			ps.setInt(1, curso.getId());
+
+			ResultSet rs = gestorBD.operation(ps);
+			if (rs.next()) {
+				int count = rs.getInt(1);
+				if (count > 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	public int getNumMatriculas(CursoPropio curso) throws Exception {
+		int count = 0;
+		try {
+			String sql = "SELECT COUNT(ID) FROM matricula WHERE curso = ?";
+
+			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+			ps.setInt(1, curso.getId());
+
+			ResultSet rs = gestorBD.operation(ps);
+			if (rs.next()) {
+				count = rs.getInt(1);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+
+	}
 
 }

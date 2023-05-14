@@ -5,8 +5,9 @@ import main.java.persistencia.CursoPropioDAO;
 import main.java.persistencia.MatriculaDAO;
 
 public class GestorPropuestasCursos {
-	
-	static CursoPropioDAO cursoDAO ;
+
+	static CursoPropioDAO cursoDAO;
+	static MatriculaDAO matDAO;
 
 	public static void realizarPropuestaCurso(CursoPropio curso) {
 		cursoDAO = new CursoPropioDAO();
@@ -14,38 +15,35 @@ public class GestorPropuestasCursos {
 	}
 
 	public static void editarEstadoCurso(CursoPropio curso, EstadoCurso est) {
-		 cursoDAO = new CursoPropioDAO();
-		 cursoDAO.editarCurso(curso, est, "");
+		cursoDAO = new CursoPropioDAO();
+		cursoDAO.editarCurso(curso, est, "");
 	}
 
-	/**
-	 * 
-	 * @param curso
-	 */
 	public static void aceptarPropuesta(CursoPropio curso) {
-		 cursoDAO = new CursoPropioDAO();
-		 cursoDAO.editarCurso(curso, EstadoCurso.VALIDADO, "");
-		
+		cursoDAO = new CursoPropioDAO();
+		cursoDAO.editarCurso(curso, EstadoCurso.VALIDADO, "");
+
 	}
 
-	
 	public static void rechazarPropuesta(CursoPropio curso, String mensaje) {
-		 cursoDAO = new CursoPropioDAO();
-		 cursoDAO.editarCurso(curso, EstadoCurso.PROPUESTA_RECHAZADA, mensaje);
-		
+		cursoDAO = new CursoPropioDAO();
+		cursoDAO.editarCurso(curso, EstadoCurso.PROPUESTA_RECHAZADA, mensaje);
+
 	}
 
-	/**
-	 * 
-	 * @param curso
-	 */
-	public void altaCursoAprobado(CursoPropio curso) {
-		// TODO - implement GestorPropuestasCursos.altaCursoAprobado
-		throw new UnsupportedOperationException();
+	public static boolean existeCurso(CursoPropio curso) throws Exception {
+		cursoDAO = new CursoPropioDAO();
+		return cursoDAO.existeCurso(curso);
 	}
+
+	public static boolean existeCursoConMatricula(CursoPropio curso) throws Exception {
+		matDAO = new MatriculaDAO();
+		return matDAO.cursoConMatricula(curso);
+	}
+
 	public static void eliminarCurso(CursoPropio curso) {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.eliminarCurso(curso);
 	}
-	
+
 }

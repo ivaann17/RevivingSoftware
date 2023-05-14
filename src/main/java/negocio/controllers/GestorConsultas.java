@@ -1,65 +1,70 @@
 package main.java.negocio.controllers;
 
-import java.sql.Date;
 import java.util.List;
-
 import javax.swing.DefaultListModel;
-
 import main.java.negocio.entities.*;
 import main.java.persistencia.CursoPropioDAO;
+import main.java.persistencia.MatriculaDAO;
 
 public class GestorConsultas {
 
-	static CursoPropioDAO cursoDAO ;
-	
-	public List<CursoPropio> consultarIngresos(TipoCurso tipo, Date fechaInicio, Date fechaFin) {
-		// TODO - implement GestorConsultas.consultarIngresos
-		throw new UnsupportedOperationException();
+	static CursoPropioDAO cursoDAO;
+	static MatriculaDAO matDAO;
+
+	public static double consultarIngresos(CursoPropio curso) throws Exception {
+		matDAO = new MatriculaDAO();
+		return matDAO.ingresosCurso(curso);
 	}
 
-	/**
-	 * 
-	 * @param estadoCurso
-	 * @param fechaInicio
-	 * @param fechaFin
-	 */
-	public List<CursoPropio> consultarEstadoCursos(EstadoCurso estadoCurso, Date fechaInicio, Date fechaFin) {
-		// TODO - implement GestorConsultas.consultarEstadoCursos
-		throw new UnsupportedOperationException();
+	public static int getIdCurso(CursoPropio curso) throws Exception {
+		cursoDAO = new CursoPropioDAO();
+		return cursoDAO.getId(curso);
 	}
 
-	/**
-	 * 
-	 * @param fechaInicio
-	 * @param fechaFin
-	 */
-	public List<CursoPropio> listarEdicionesCursos(Date fechaInicio, Date fechaFin) {
-		// TODO - implement GestorConsultas.listarEdicionesCursos
-		throw new UnsupportedOperationException();
+	public static int getNumMatricula(CursoPropio curso) throws Exception {
+		matDAO = new MatriculaDAO();
+		return matDAO.getNumMatriculas(curso);
 	}
-	
-	public static void listarCursos(DefaultListModel<CursoPropio> modelo, EstadoCurso estado) throws Exception {
-	    cursoDAO = new CursoPropioDAO();
-	    List<CursoPropio> cursos = cursoDAO.listarCursos(estado);
-	    for (CursoPropio curso : cursos) {
-	        modelo.addElement(curso);
-	    }
+
+	public static void listarCursosPorEdiciones(DefaultListModel<CursoPropio> modelo) throws Exception {
+		cursoDAO = new CursoPropioDAO();
+		List<CursoPropio> cursos = cursoDAO.listarCursosPorEdicion();
+		for (CursoPropio curso : cursos) {
+			modelo.addElement(curso);
+		}
+	}
+
+	public static void listarCursos(DefaultListModel<CursoPropio> modelo) throws Exception {
+		cursoDAO = new CursoPropioDAO();
+		List<CursoPropio> cursos = cursoDAO.listarCursos();
+		for (CursoPropio curso : cursos) {
+			modelo.addElement(curso);
+		}
+	}
+
+	public static void listarCursosPorEstado(DefaultListModel<CursoPropio> modelo, EstadoCurso estado)
+			throws Exception {
+		cursoDAO = new CursoPropioDAO();
+		List<CursoPropio> cursos = cursoDAO.listarCursosPorEstado(estado);
+		for (CursoPropio curso : cursos) {
+			modelo.addElement(curso);
+		}
 	}
 
 	public static void listarHistorial(DefaultListModel<CursoPropio> modelo, String dni) throws Exception {
-	    cursoDAO = new CursoPropioDAO();
-	    List<CursoPropio> cursos = cursoDAO.listarHistorialCursos(dni);
-	    for (CursoPropio curso : cursos) {
-	        modelo.addElement(curso);
-	    }
+		cursoDAO = new CursoPropioDAO();
+		List<CursoPropio> cursos = cursoDAO.listarHistorialCursos(dni);
+		for (CursoPropio curso : cursos) {
+			modelo.addElement(curso);
+		}
 	}
-		public static void listarCursosMatriculados(DefaultListModel<CursoPropio> modelo, String dni) throws Exception {
-		    cursoDAO = new CursoPropioDAO();
-		    List<CursoPropio> cursos = cursoDAO.listarCursosMatriculados(dni);
-		    for (CursoPropio curso : cursos) {
-		        modelo.addElement(curso);
-		    }
-	    }
 
+	public static void listarCursosMatriculados(DefaultListModel<CursoPropio> modelo, String dni) throws Exception {
+		cursoDAO = new CursoPropioDAO();
+		List<CursoPropio> cursos = cursoDAO.listarCursosMatriculados(dni);
+		for (CursoPropio curso : cursos) {
+			modelo.addElement(curso);
+		}
+	}
 
 }

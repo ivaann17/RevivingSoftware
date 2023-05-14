@@ -7,7 +7,9 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
-import main.java.persistencia.CursoPropioDAO;
+
+import main.java.negocio.controllers.GestorConsultas;
+import main.java.negocio.entities.EstadoCurso;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
@@ -42,12 +44,19 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		JButton btnVerCursos = new JButton("Mostrar Cursos");
+		JButton btnVerCursos = new JButton("Estadisticas cursos");
 		btnVerCursos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaEstadisticasCursos p = new main.java.presentacion.PantallaEstadisticasCursos();
-				setVisible(false);
-				p.setVisible(true);
+
+				try {
+					main.java.presentacion.PantallaEstadisticasCursos p = new main.java.presentacion.PantallaEstadisticasCursos();
+					GestorConsultas.listarCursos(p.modelo);
+					setVisible(false);
+					p.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});
@@ -89,7 +98,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
-		JButton cs = new JButton("Cerrar sesi\u00F3n\r\n");
+		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
 		cs.addActionListener(new ActionListener() {
@@ -108,6 +117,31 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		cs.setBounds(552, 303, 176, 39);
 		contentPane.add(cs);
 
+		JButton btnComenzarCursos = new JButton("Comenzar cursos");
+		btnComenzarCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnComenzarCursos.setVisible(true);
+		btnComenzarCursos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				main.java.presentacion.PantallaComenzarCurso p = new main.java.presentacion.PantallaComenzarCurso();
+				try {
+					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
+					setVisible(false);
+					p.setVisible(true);
+
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		btnComenzarCursos.setForeground(Color.WHITE);
+		btnComenzarCursos.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnComenzarCursos.setFocusPainted(false);
+		btnComenzarCursos.setBackground(SystemColor.textHighlight);
+		btnComenzarCursos.setBounds(45, 267, 228, 76);
+		contentPane.add(btnComenzarCursos);
+
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarResueltos.setForeground(Color.WHITE);
@@ -115,4 +149,5 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
+
 }
