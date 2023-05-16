@@ -9,8 +9,11 @@
 	
 	
 <properties>
-  <sonar.organization>ivaann17</sonar.organization>
-  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<maven.compiler.source>1.8</maven.compiler.source>
+<maven.compiler.target>1.8</maven.compiler.target>
+<sonar.organization>ivaann17</sonar.organization>
+<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 </properties>
 
 	<dependencies>
@@ -37,27 +40,39 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.27</version>
     </dependency>
+      <dependency>
+    <groupId>org.jasypt</groupId>
+    <artifactId>jasypt</artifactId>
+    <version>1.9.3</version>
+</dependency>
 </dependencies>
-
-
-
- <build>
-    <sourceDirectory>presentacion</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <release>14</release>
-        </configuration>
-      </plugin>
-         <plugin>
+      <build>
+  <plugins>
+    <plugin>
       <groupId>org.sonarsource.scanner.maven</groupId>
       <artifactId>sonar-maven-plugin</artifactId>
       <version>3.7.0.1746</version>
+      <configuration>
+        <sonar.sources>RevivingSotware</sonar.sources>
+        <sonar.java.source>14</sonar.java.source>
+        <sonar.java.target>14</sonar.java.target>
+      </configuration>
     </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.0</version>
+            <configuration>
+                <archive>
+                    <manifest>
+		   	<addClasspath>true</addClasspath>
+                        <mainClass>src.presentacion.PantallaConectar</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
     </plugins>
-  </build>  
+</build> 
 	<reporting>
 		<plugins>
 			<plugin>
