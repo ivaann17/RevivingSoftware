@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -14,26 +17,30 @@ import javax.swing.JOptionPane;
 public class GestorBD {
 
 	protected static GestorBD mInstancia = null;
-
 	public static Connection mBD;
 
-	private static String url = "jdbc:mysql://db4free.net:3306/revivingsoftware";
-
-	private static String driver = "com.mysql.cj.jdbc.Driver";
-	private static String user = "ivaann17_";
-	private static String password = "Kikasuperbruja1";
-
 	public static void conectarBD() {
-		try {
-			Class.forName(driver);
-			mBD = DriverManager.getConnection(url, user, password);
-			mBD.setAutoCommit(true);
-
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexion con la base de datos.", "ERROR",
-					JOptionPane.ERROR_MESSAGE);
-			System.exit(1);
-		}
+	    Properties prop = new Properties();
+	    try (InputStream input = new FileInputStream("config.properties")) {
+	        prop.load(input);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("Error al cargar el archivo de configuración: " + e.getMessage());
+	    }
+	    
+	    String url = prop.getProperty("url");
+	    String driver = prop.getProperty("driver");
+	    String user = prop.getProperty("user");
+	    String password = prop.getProperty("password");
+	    
+	    try {
+	        Class.forName(driver);
+	        mBD = DriverManager.getConnection(url, user, password);
+	        mBD.setAutoCommit(true);
+	    } catch (Exception e) {
+	        JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexión con la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
+	        System.exit(1);
+	    }
 	}
 
 	public static void desconectarBD() {
