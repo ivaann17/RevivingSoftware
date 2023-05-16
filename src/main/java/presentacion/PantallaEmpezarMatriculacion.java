@@ -18,12 +18,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import main.java.negocio.controllers.GestorMatriculacion;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.negocio.entities.Matricula;
-import main.java.negocio.entities.ModoPago;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -124,7 +121,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		});
 
 		listaCursos = new JList();
-		listaCursos.setBounds(54, 144, 659, 226);
+		listaCursos.setBounds(54, 144, 690, 226);
 		contentPane.add(listaCursos);
 		modelo = new DefaultListModel();
 

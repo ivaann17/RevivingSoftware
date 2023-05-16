@@ -21,13 +21,11 @@ import javax.swing.event.ListSelectionListener;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.CursoPropioDAO;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Cursor;
-import javax.swing.JScrollBar;
 
 public class PantallaPropuestasRechazadas extends JFrame {
 
@@ -78,7 +76,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		});
 
 		listaCursos = new JList<CursoPropio>();
-		listaCursos.setBounds(21, 153, 584, 307);
+		listaCursos.setBounds(21, 153, 723, 220);
 		contentPane.add(listaCursos);
 		modelo = new DefaultListModel();
 		listaCursos.setModel(modelo);
@@ -106,7 +104,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnEliminar.setFocusPainted(false);
 		btnEliminar.setBackground(SystemColor.textHighlight);
-		btnEliminar.setBounds(630, 379, 114, 49);
+		btnEliminar.setBounds(439, 397, 114, 49);
 		contentPane.add(btnEliminar);
 
 		JButton btnInfo = new JButton("Info");
@@ -130,7 +128,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		btnInfo.setFocusPainted(false);
 		btnInfo.setVisible(false);
 		btnInfo.setBackground(SystemColor.textHighlight);
-		btnInfo.setBounds(630, 265, 114, 49);
+		btnInfo.setBounds(220, 397, 114, 49);
 		contentPane.add(btnInfo);
 
 		listaCursos.addListSelectionListener(new ListSelectionListener() {

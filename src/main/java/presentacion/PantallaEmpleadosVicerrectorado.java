@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 
 import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.CursoPropioDAO;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
@@ -50,14 +49,13 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				main.java.presentacion.PantallaEvaluarCurso p = new main.java.presentacion.PantallaEvaluarCurso();
 				try {
-					GestorConsultas.listarCursos(p.modelo, EstadoCurso.PROPUESTO);
+					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTO);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			
 
 			}
 		});
@@ -98,7 +96,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
-		JButton cs = new JButton("Cerrar sesi\u00F3n\r\n");
+		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
 		cs.addActionListener(new ActionListener() {

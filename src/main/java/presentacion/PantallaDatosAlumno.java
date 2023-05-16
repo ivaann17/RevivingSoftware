@@ -7,9 +7,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -21,12 +18,12 @@ import java.awt.Cursor;
 
 import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.controllers.GestorMatriculacion;
-import main.java.negocio.entities.CursoPropio;
+
 import main.java.negocio.entities.EstadoCurso;
-import main.java.negocio.entities.Facultad;
+
 import main.java.negocio.entities.Matricula;
 import main.java.negocio.entities.ModoPago;
-import main.java.negocio.entities.TipoCurso;
+
 import java.awt.Font;
 import javax.swing.JOptionPane;
 
@@ -55,7 +52,6 @@ public class PantallaDatosAlumno extends JFrame {
 	main.java.presentacion.PantallaEstudiante p;
 	protected JTextField metoPago;
 	protected Matricula matricula;
-	
 
 	public PantallaDatosAlumno() {
 		setIconImage(
@@ -97,11 +93,10 @@ public class PantallaDatosAlumno extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				main.java.presentacion.PantallaMatriculacion p = new main.java.presentacion.PantallaMatriculacion();
 				try {
-					GestorConsultas.listarCursos(p.modelo, EstadoCurso.EN_MATRICULACION);
+					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -126,7 +121,7 @@ public class PantallaDatosAlumno extends JFrame {
 		apeAlu.setBounds(62, 313, 259, 39);
 		contentPane.add(apeAlu);
 
-		lblDatosDeMatriculacion = new JLabel("Datos de matriculaci\u00F3n:");
+		lblDatosDeMatriculacion = new JLabel("Datos de matriculacion:");
 		lblDatosDeMatriculacion.setVisible(true);
 		lblDatosDeMatriculacion.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		lblDatosDeMatriculacion.setBounds(232, 102, 379, 42);
@@ -143,28 +138,32 @@ public class PantallaDatosAlumno extends JFrame {
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Date fechaActual = new Date();
-				
+
 				if (metoPago.getText().equals(ModoPago.TARJETA_CREDITO.toString())) {
 
 					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar con tarjeta?", "ATENCION",
 							JOptionPane.OK_CANCEL_OPTION);
 					if (respuesta == JOptionPane.OK_OPTION) {
-						matricula = new Matricula(numRand(),nomAlu.getText().toString(),apeAlu.getText().toString(),ModoPago.valueOf(ModoPago.TARJETA_CREDITO.toString()),fechaActual,dniAlu.getText().toString(),Double.parseDouble(textPrecio.getText().toString()),ID);
+						matricula = new Matricula(numRand(), nomAlu.getText().toString(), apeAlu.getText().toString(),
+								ModoPago.valueOf(ModoPago.TARJETA_CREDITO.toString()), fechaActual,
+								dniAlu.getText().toString(), Double.parseDouble(textPrecio.getText().toString()), ID);
 						GestorMatriculacion.realizarMatriculacion(matricula);
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
-						
+
 						setVisible(false);
 						main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
 						p.setVisible(true);
 					}
 				} else if (metoPago.getText().equals(ModoPago.TRANSFERENCIA.toString())) {
 					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar mediante transferencia bancaria?",
-							"ATENCIÓN", JOptionPane.OK_CANCEL_OPTION);
+							"ATENCION", JOptionPane.OK_CANCEL_OPTION);
 					if (respuesta == JOptionPane.OK_OPTION) {
-						matricula = new Matricula(numRand(),nomAlu.getText().toString(),apeAlu.getText().toString(),ModoPago.valueOf(ModoPago.TRANSFERENCIA.toString()),fechaActual,dniAlu.getText().toString(),Double.parseDouble(textPrecio.getText().toString()),ID);
+						matricula = new Matricula(numRand(), nomAlu.getText().toString(), apeAlu.getText().toString(),
+								ModoPago.valueOf(ModoPago.TRANSFERENCIA.toString()), fechaActual,
+								dniAlu.getText().toString(), Double.parseDouble(textPrecio.getText().toString()), ID);
 						GestorMatriculacion.realizarMatriculacion(matricula);
-						
+
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
@@ -188,7 +187,7 @@ public class PantallaDatosAlumno extends JFrame {
 		contentPane.add(lblNomAlu);
 
 		lblApellido = new JLabel("Apellido del alumno:");
-		
+
 		lblApellido.setForeground(SystemColor.textHighlight);
 		lblApellido.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblApellido.setBounds(62, 284, 259, 39);
@@ -196,7 +195,7 @@ public class PantallaDatosAlumno extends JFrame {
 
 		textPrecio = new JTextField();
 		textPrecio.setEditable(false);
-		
+
 		textPrecio.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		textPrecio.setColumns(10);
 		textPrecio.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
@@ -208,7 +207,7 @@ public class PantallaDatosAlumno extends JFrame {
 		lblPrecio.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblPrecio.setBounds(232, 453, 259, 39);
 		contentPane.add(lblPrecio);
-		
+
 		metoPago = new JTextField();
 		metoPago.setFont(new Font("Tahoma", Font.BOLD, 13));
 		metoPago.setEditable(false);
@@ -216,7 +215,7 @@ public class PantallaDatosAlumno extends JFrame {
 		metoPago.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
 		metoPago.setBounds(428, 313, 259, 39);
 		contentPane.add(metoPago);
-		
+
 		JLabel lblMetoPago = new JLabel("Metodo de pago:");
 		lblMetoPago.setForeground(SystemColor.textHighlight);
 		lblMetoPago.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
@@ -224,18 +223,20 @@ public class PantallaDatosAlumno extends JFrame {
 		contentPane.add(lblMetoPago);
 
 	}
-	public static String devolverNombre (String nombreCompleto) {
+
+	public static String devolverNombre(String nombreCompleto) {
 		String[] nombreApe = nombreCompleto.split(" ");
-		 return nombreApe[0];
+		return nombreApe[0];
 	}
-	public static String devolverApellido (String nombreCompleto) {
+
+	public static String devolverApellido(String nombreCompleto) {
 		String[] nombreApe = nombreCompleto.split(" ");
-		 return nombreApe[1];
+		return nombreApe[1];
 	}
+
 	public int numRand() {
 		int numero = (int) (Math.random() * 100 + 1);
 		return numero;
 	}
 
 }
-

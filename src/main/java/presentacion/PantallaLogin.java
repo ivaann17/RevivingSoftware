@@ -3,7 +3,6 @@ package main.java.presentacion;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.SystemColor;
@@ -24,14 +23,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import javax.swing.border.MatteBorder;
 import javax.swing.event.HyperlinkEvent;
 
-import main.java.negocio.entities.TipoCurso;
+import main.java.negocio.controllers.GestorConsultas;
+import main.java.negocio.controllers.GestorLogin;
 import main.java.persistencia.GestorBD;
 
 public class PantallaLogin extends JFrame {
@@ -62,7 +61,7 @@ public class PantallaLogin extends JFrame {
 		frmUclm.getContentPane().add(panel);
 		placeComponents(panel);
 
-		JButton loginButton = new JButton("Iniciar sesi\u00F3n");
+		JButton loginButton = new JButton("Iniciar sesion");
 		loginButton.setFocusPainted(false);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,7 +79,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(loginButton);
 
 		JPasswordField ContrasenaText = new JPasswordField(20);
-		ContrasenaText.setToolTipText("Introduzca su contrase\u00F1a");
+		ContrasenaText.setToolTipText("Introduzca su contraseña");
 		ContrasenaText.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		ContrasenaText.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
 
@@ -132,7 +131,7 @@ public class PantallaLogin extends JFrame {
 		userLabel.setBounds(80, 138, 148, 25);
 		panel.add(userLabel);
 
-		JLabel passwordLabel = new JLabel("Escribir Contraseï¿½a");
+		JLabel passwordLabel = new JLabel("Escribir Contraseña");
 		passwordLabel.setVisible(false);
 		passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		passwordLabel.setBounds(80, 129, 215, 42);
@@ -148,7 +147,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(user);
 		user.setColumns(10);
 
-		JButton btnNoAcceder = new JButton("ï¿½No puede acceder a su cuenta?");
+		JButton btnNoAcceder = new JButton("¿No puede acceder a su cuenta?");
 		btnNoAcceder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				enlaceMan();
@@ -184,6 +183,7 @@ public class PantallaLogin extends JFrame {
 		btnSiguiente.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String usu = UsuarioText.getText();
+
 				if (usu.length() == 0) {
 					JOptionPane.showMessageDialog(null, "Debe introducir su usuario.", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
@@ -202,44 +202,30 @@ public class PantallaLogin extends JFrame {
 					frmUclm.getRootPane().setDefaultButton(loginButton);
 					ContrasenaText.requestFocus();
 
-					loginButton.addActionListener((ActionListener) new ActionListener() {
+					loginButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent l) {
-							String sqlUser = "SELECT * FROM usuarios WHERE usuario = ?";
-							String sqlPass = "SELECT * FROM usuarios WHERE usuario = ?";
+							Vector<Object> rPass, rUser;
 
-							Vector<Object> rUser = null;
-							Vector<Object> rPass = null;
 							try {
-								PreparedStatement psU = GestorBD.mBD.prepareStatement(sqlUser,
-										Statement.RETURN_GENERATED_KEYS);
-								PreparedStatement psP = GestorBD.mBD.prepareStatement(sqlPass,
-										Statement.RETURN_GENERATED_KEYS);
-
-								psU.setString(1, UsuarioText.getText());
-								psP.setString(1, ContrasenaText.getText());
-								rUser = GestorBD.select(psU);
-								rPass = GestorBD.select(psP);
-							} catch (Exception e) {
-								e.printStackTrace();
-								throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
-							}
-
-							if (rPass.size() > 0 && rUser.size() > 0) {
-								try {
-									cambioPantalla(UsuarioText.getText());
-								} catch (HeadlessException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+								rPass = GestorLogin.loginContra(ContrasenaText.getText().toString());
+								rUser = GestorLogin.loginUsuario(UsuarioText.getText().toString());
+								if (rPass.size() > 0 && rUser.size() > 0) {
+									try {
+										cambioPantalla(UsuarioText.getText());
+									} catch (HeadlessException e) {
+										e.printStackTrace();
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								} else {
+									JOptionPane.showMessageDialog(null,
+											"El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.",
+											"ERROR", JOptionPane.ERROR_MESSAGE);
+									frmUclm.setVisible(false);
+									PantallaLogin p = new PantallaLogin();
 								}
-							} else {
-								JOptionPane.showMessageDialog(null,
-										"El usuario o la contraseï¿½a son incorrectos. Por favor, introduzca correctamente los datos.",
-										"ERROR", JOptionPane.ERROR_MESSAGE);
-								frmUclm.setVisible(false);
-								PantallaLogin p = new PantallaLogin();
+							} catch (Exception e1) {
+								e1.printStackTrace();
 							}
 						}
 					});
@@ -276,14 +262,14 @@ public class PantallaLogin extends JFrame {
 	}
 
 	public void cambioPantalla(String usu) throws HeadlessException, Exception {
-		JOptionPane.showMessageDialog(null, "Bienvenido " + (tipoUsu(usu)) + ".", "UCLM",
+		JOptionPane.showMessageDialog(null, "Bienvenido " + GestorConsultas.getTipoUsuLog(usu) + ".", "UCLM",
 				JOptionPane.INFORMATION_MESSAGE);
-		switch (tipoUsu(usu).toUpperCase()) {
+		switch (GestorConsultas.getTipoUsuLog(usu)) {
 		case "PROFESOR":
 
-			tipo = tipoUsu(usu).toUpperCase().toString();
-			nom = nombreUsu(usu).toUpperCase().toString();
-			dni = dniUsu(usu).toString();
+			tipo = GestorConsultas.getTipoUsuLog(usu);
+			nom = GestorConsultas.getNombreLog(usu) + " " + GestorConsultas.getApellidoLog(usu);
+			dni = GestorConsultas.getDNILog(usu);
 			main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
 			setVisible(false);
 			p.setVisible(true);
@@ -291,9 +277,9 @@ public class PantallaLogin extends JFrame {
 			break;
 		case "ESTUDIANTE":
 
-			tipo = tipoUsu(usu).toUpperCase().toString();
-			nom = nombreUsu(usu).toUpperCase().toString();
-			dni = dniUsu(usu).toString();
+			tipo = GestorConsultas.getTipoUsuLog(usu);
+			nom = GestorConsultas.getNombreLog(usu) + " " + GestorConsultas.getApellidoLog(usu);
+			dni = GestorConsultas.getDNILog(usu);
 			main.java.presentacion.PantallaEstudiante e = new main.java.presentacion.PantallaEstudiante();
 			setVisible(false);
 			e.setVisible(true);
@@ -301,8 +287,8 @@ public class PantallaLogin extends JFrame {
 			break;
 		case "JEFE_GABINETE":
 
-			tipo = tipoUsu(usu).toUpperCase().toString();
-			nom = nombreUsu(usu).toUpperCase().toString();
+			tipo = GestorConsultas.getTipoUsuLog(usu);
+			nom = GestorConsultas.getNombreLog(usu) + " " + GestorConsultas.getApellidoLog(usu);
 
 			main.java.presentacion.PantallaJefeGabineteVicerrectorado j = new main.java.presentacion.PantallaJefeGabineteVicerrectorado();
 			setVisible(false);
@@ -311,73 +297,13 @@ public class PantallaLogin extends JFrame {
 			break;
 		case "VICERRECTOR":
 
-			tipo = tipoUsu(usu).toUpperCase().toString();
-			nom = nombreUsu(usu).toUpperCase().toString();
+			tipo = GestorConsultas.getTipoUsuLog(usu);
+			nom = GestorConsultas.getNombreLog(usu) + " " + GestorConsultas.getApellidoLog(usu);
 			main.java.presentacion.PantallaEmpleadosVicerrectorado v = new main.java.presentacion.PantallaEmpleadosVicerrectorado();
 			setVisible(false);
 			v.setVisible(true);
 			break;
 		}
-	}
-
-	public String tipoUsu(String usu) throws Exception {
-		String sql = "SELECT tipo FROM usuarios WHERE usuario = ?";
-		PreparedStatement psT = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-		psT.setString(1, usu);
-
-		Vector<Object> tipo = GestorBD.select(psT);
-		if (!tipo.isEmpty()) {
-			String tipoUsuario = tipo.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
-			switch (tipoUsuario) {
-			case "PROFESOR":
-				return "Profesor";
-			case "ESTUDIANTE":
-				return "Estudiante";
-			case "JEFE_GABINETE":
-				return "Jefe_Gabinete";
-			case "VICERRECTOR":
-				return "Vicerrector";
-			}
-		}
-		return "";
-
-	}
-
-	public String nombreUsu(String usu) throws Exception {
-
-		String sqlNom = "SELECT nombre,apellido FROM usuarios WHERE usuario = ?";
-
-		PreparedStatement psN = GestorBD.mBD.prepareStatement(sqlNom, Statement.RETURN_GENERATED_KEYS);
-
-		psN.setString(1, usu);
-		Vector<Object> nombre = GestorBD.select(psN);
-		String nom = null;
-		if (!nombre.isEmpty()) {
-
-			nom = nombre.get(0).toString().replaceAll("[\\[\\],]", "").trim().toUpperCase();
-		}
-		return nom;
-
-	}
-
-	public static String dniUsu(String usu) throws Exception {
-
-		String sqlDNI = "SELECT DNI FROM usuarios WHERE usuario = ?";
-
-		PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
-
-		psD.setString(1, usu);
-		Vector<Object> dni = GestorBD.select(psD);
-
-		String dniUsu = null;
-		if (!dni.isEmpty()) {
-			dniUsu = dni.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
-
-		}
-
-		return dniUsu;
-
 	}
 
 }

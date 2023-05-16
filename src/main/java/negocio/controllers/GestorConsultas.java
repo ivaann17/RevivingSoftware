@@ -4,12 +4,14 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import main.java.negocio.entities.*;
 import main.java.persistencia.CursoPropioDAO;
+import main.java.persistencia.LoginDAO;
 import main.java.persistencia.MatriculaDAO;
 
 public class GestorConsultas {
 
 	static CursoPropioDAO cursoDAO;
 	static MatriculaDAO matDAO;
+	static LoginDAO logDAO;
 
 	public static double consultarIngresos(CursoPropio curso) throws Exception {
 		matDAO = new MatriculaDAO();
@@ -20,6 +22,27 @@ public class GestorConsultas {
 		cursoDAO = new CursoPropioDAO();
 		return cursoDAO.getId(curso);
 	}
+	
+	public static String getDNILog(String usu) throws Exception {
+		logDAO = new LoginDAO();
+		return logDAO.getDNI(usu);
+	}
+	
+	public static String getNombreLog(String usu) throws Exception {
+		logDAO = new LoginDAO();
+		return logDAO.getNombre(usu).toUpperCase();
+	}
+	
+	public static String getApellidoLog(String usu) throws Exception {
+		logDAO = new LoginDAO();
+		return logDAO.getApellidosLog(usu).toUpperCase();
+	}
+	
+	public static String getTipoUsuLog(String usu) throws Exception {
+		logDAO = new LoginDAO();
+		return logDAO.getTipoUsuLog(usu).toUpperCase();
+	}
+
 
 	public static int getNumMatricula(CursoPropio curso) throws Exception {
 		matDAO = new MatriculaDAO();

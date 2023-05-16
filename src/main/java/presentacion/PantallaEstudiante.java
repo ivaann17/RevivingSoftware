@@ -7,12 +7,9 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import main.java.negocio.controllers.GestorConsultas;
-import main.java.negocio.controllers.GestorMatriculacion;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.CursoPropioDAO;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
@@ -46,7 +43,8 @@ public class PantallaEstudiante extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
-					GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni.toString());
+					GestorConsultas.listarCursosMatriculados(p.modelo,
+							main.java.presentacion.PantallaLogin.dni.toString());
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
@@ -76,7 +74,7 @@ public class PantallaEstudiante extends JFrame {
 
 				try {
 					main.java.presentacion.PantallaMatriculacion p = new main.java.presentacion.PantallaMatriculacion();
-					GestorConsultas.listarCursos(p.modelo, EstadoCurso.EN_MATRICULACION);
+					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
@@ -124,7 +122,7 @@ public class PantallaEstudiante extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
-		JButton cs = new JButton("Cerrar sesi\u00F3n\r\n");
+		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
 		cs.addActionListener(new ActionListener() {

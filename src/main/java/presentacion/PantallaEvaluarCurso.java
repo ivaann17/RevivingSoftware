@@ -24,13 +24,15 @@ import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Cursor;
-import javax.swing.JScrollBar;
 
 public class PantallaEvaluarCurso extends JFrame {
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
-	
+	protected JLabel propuestas;
+	protected final JButton btnRechazar;
+	protected final JButton btnAceptar;
+	protected JButton btnNewButton;
 
 	public PantallaEvaluarCurso() {
 		setIconImage(
@@ -51,11 +53,17 @@ public class PantallaEvaluarCurso extends JFrame {
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
-		final JButton btnAceptar = new JButton("Aceptar propuesta");
+		propuestas = new JLabel("Propuestas de cursos:");
+		propuestas.setVisible(true);
+		propuestas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		propuestas.setBounds(54, 98, 379, 42);
+		contentPane.add(propuestas);
+
+		btnAceptar = new JButton("Aceptar propuesta");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea aceptar la propuesta?", "ATENCIï¿½N",
+				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea aceptar la propuesta?", "ATENCION",
 						JOptionPane.OK_CANCEL_OPTION);
 				if (respuesta == JOptionPane.OK_OPTION) {
 					JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACION",
@@ -70,11 +78,11 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnAceptar.setForeground(Color.WHITE);
 		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnAceptar.setBackground(SystemColor.textHighlight);
-		btnAceptar.setBounds(56, 380, 226, 75);
+		btnAceptar.setBounds(54, 398, 226, 75);
 		btnAceptar.setVisible(false);
 		contentPane.add(btnAceptar);
 
-		final JButton btnRechazar = new JButton("Rechazar propuesta");
+		btnRechazar = new JButton("Rechazar propuesta");
 		btnRechazar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -93,7 +101,7 @@ public class PantallaEvaluarCurso extends JFrame {
 						}
 
 						else {
-							GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado,mensaje);
+							GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado, mensaje);
 							modelo.removeElement(cursoSeleccionado);
 						}
 					}
@@ -106,11 +114,11 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnRechazar.setForeground(Color.WHITE);
 		btnRechazar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnRechazar.setBackground(SystemColor.textHighlight);
-		btnRechazar.setBounds(449, 380, 226, 75);
+		btnRechazar.setBounds(449, 398, 226, 75);
 		btnRechazar.setVisible(false);
 		contentPane.add(btnRechazar);
 
-		JButton btnNewButton = new JButton("Volver");
+		btnNewButton = new JButton("Volver");
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
@@ -127,7 +135,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		});
 
 		listaCursos = new JList();
-		listaCursos.setBounds(54, 108, 659, 251);
+		listaCursos.setBounds(54, 137, 690, 251);
 		contentPane.add(listaCursos);
 		modelo = new DefaultListModel();
 		listaCursos.setModel(modelo);

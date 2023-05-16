@@ -13,7 +13,6 @@ import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -23,17 +22,16 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
+import main.java.negocio.controllers.GestorEdiciones;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.Centro;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
 import main.java.negocio.entities.Facultad;
 import main.java.negocio.entities.TipoCurso;
-import main.java.persistencia.CursoPropioDAO;
 
 import java.awt.Font;
 import javax.swing.JOptionPane;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JComboBox;
 import java.awt.SystemColor;
 import javax.swing.border.MatteBorder;
@@ -106,7 +104,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		contentPane.add(lblNewLabel);
 
 		NombreCurso = new JTextField();
-		NombreCurso.setToolTipText("No se permiten caracteres num\u00E9ricos\r\n");
+		NombreCurso.setToolTipText("No se permiten caracteres numericos");
 		NombreCurso.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				soloLetras(e);
@@ -172,7 +170,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		contentPane.add(dniProf);
 
 		dniSec = new JTextField();
-		dniSec.setToolTipText("Debe introducir la letra en may\u00FAscula");
+		dniSec.setToolTipText("Debe introducir la letra en mayuscula");
 		dniSec.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				comDNI(e);
@@ -218,21 +216,41 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 							mostrarForm();
 
 						} else {
+							Centro c = new Centro(Fac.getSelectedItem().toString());
 
-							int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea enviar su propuesta de curso?",
-									"ATENCIÃ“N", JOptionPane.OK_CANCEL_OPTION);
-							if (respuesta == JOptionPane.OK_OPTION) {
-								JOptionPane.showMessageDialog(null, "Su propuesta ha sido enviada de manera correcta.",
-										"INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-								Centro c=new Centro(Fac.getSelectedItem().toString());
-								
-								curso = new CursoPropio(c.getNombre().toString(), EstadoCurso.PROPUESTO, TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()), dniProf.getText().toString(), dniSec.getText().toString(), numRand(), NombreCurso.getText().toString(),Integer.parseInt(NumCreditos.getText().toString()) , formatoFecha(fechaIni), formatoFecha(fechaFin), Double.parseDouble(textPrecio.getText().toString()) , Integer.parseInt(Edicion.getText().toString()), "");
-								GestorPropuestasCursos.realizarPropuestaCurso(curso);
+							curso = new CursoPropio(c.getNombre().toString(), EstadoCurso.PROPUESTO,
+									TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()),
+									dniProf.getText().toString(), dniSec.getText().toString(), numRand(),
+									NombreCurso.getText().toString(),
+									Integer.parseInt(NumCreditos.getText().toString()), formatoFecha(fechaIni),
+									formatoFecha(fechaFin), Double.parseDouble(textPrecio.getText().toString()),
+									Integer.parseInt(Edicion.getText().toString()), "");
+							boolean existeEdicion;
+							existeEdicion = GestorEdiciones.existeEdicion(curso.getEdicion(), curso.getNombre());
+							if (!existeEdicion) {
+								int respuesta = JOptionPane.showConfirmDialog(null,
+										"¿Desea enviar su propuesta de curso?", "ATENCIO“N",
+										JOptionPane.OK_CANCEL_OPTION);
+								if (respuesta == JOptionPane.OK_OPTION) {
+									JOptionPane.showMessageDialog(null,
+											"Su propuesta ha sido enviada de manera correcta.", "INFORMACION",
+											JOptionPane.INFORMATION_MESSAGE);
+									GestorPropuestasCursos.realizarPropuestaCurso(curso);
+									GestorEdiciones.crearEdicion(numRand(), curso.getNombre(), curso.getEdicion(),
+											curso.getId());
+									main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
+									setVisible(false);
+									p.setVisible(true);
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "La edición ya existe en la base de datos.", ERROR,
+										JOptionPane.ERROR_MESSAGE);
 								main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
 								setVisible(false);
 								p.setVisible(true);
 							}
 						}
+
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -262,11 +280,11 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 							ERROR, JOptionPane.ERROR_MESSAGE);
 				} else {
 					if (NumCreditos.getText().isEmpty() || !isNumeric(NumCreditos.getText()))
-						JOptionPane.showMessageDialog(null, "Introduzca los crï¿½ditos de manera correcta.", ERROR,
+						JOptionPane.showMessageDialog(null, "Introduzca los creditos de manera correcta.", ERROR,
 								JOptionPane.ERROR_MESSAGE);
-				
-					 else if (!dniDigi(dniSec)) {
-						JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dï¿½gitos.",
+
+					else if (!dniDigi(dniSec)) {
+						JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus digitos.",
 								ERROR, JOptionPane.ERROR_MESSAGE);
 					} else if (tipoCurso.getSelectedItem() == "") {
 						JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de curso.", ERROR,
@@ -316,7 +334,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		lblNombreDelCurso.setBounds(454, 113, 259, 39);
 		contentPane.add(lblNombreDelCurso);
 
-		lblNmeroDeCrditos = new JLabel("N\u00FAmero de cr\u00E9ditos:");
+		lblNmeroDeCrditos = new JLabel("Numero de creditos:");
 		lblNmeroDeCrditos.setForeground(SystemColor.textHighlight);
 		lblNmeroDeCrditos.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblNmeroDeCrditos.setBounds(454, 191, 259, 39);
@@ -334,7 +352,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		lblTitulacinDelProfesor.setBounds(71, 308, 259, 39);
 		contentPane.add(lblTitulacinDelProfesor);
 
-		lblDuracinDelCurso = new JLabel("Edici\u00F3n del curso:");
+		lblDuracinDelCurso = new JLabel("Edicion del curso:");
 		lblDuracinDelCurso.setForeground(SystemColor.textHighlight);
 		lblDuracinDelCurso.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblDuracinDelCurso.setBounds(454, 347, 259, 39);
@@ -348,7 +366,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		textPrecio.setBounds(232, 502, 259, 39);
 		contentPane.add(textPrecio);
 
-		lblPrecio = new JLabel("Precio de la matr\u00EDcula:");
+		lblPrecio = new JLabel("Precio de la matricula:");
 		lblPrecio.setForeground(SystemColor.textHighlight);
 		lblPrecio.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblPrecio.setBounds(232, 453, 259, 39);
@@ -457,7 +475,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		lblMes.setVisible(false);
 		contentPane.add(lblMes);
 
-		lblAno = new JLabel("A\u00F1o:");
+		lblAno = new JLabel("Año:");
 		lblAno.setForeground(SystemColor.textHighlight);
 		lblAno.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lblAno.setBounds(548, 195, 259, 39);
@@ -536,7 +554,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	public void compruebaCreditos(TipoCurso c) {
 		int num = Integer.parseInt(Num);
 
-		String err = "Introduzca los crÃ©ditos adecuados para la modalidad elegida.";
+		String err = "Introduzca los creditos adecuados para la modalidad elegida.";
 		switch (c) {
 		case MASTER:
 
@@ -629,7 +647,6 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 
 	@Override
 	public void focusGained(FocusEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -644,15 +661,12 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 			textPrecio.setText(a);
 		}
 
-		// TODO Auto-generated method stub
-
 	}
 
 	public int numRand() {
 		int numero = (int) (Math.random() * 100 + 1);
 		return numero;
 	}
-
 
 	public static void soloLetras(KeyEvent evt) {
 		if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)

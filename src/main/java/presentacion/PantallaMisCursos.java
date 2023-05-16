@@ -18,20 +18,17 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.entities.CursoPropio;
-import main.java.negocio.entities.EstadoCurso;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Cursor;
-import javax.swing.JScrollBar;
 
 public class PantallaMisCursos extends JFrame {
-	
+
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
-
 
 	public PantallaMisCursos() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaMisCursos.class.getResource("/IMAGES/descarga.png")));
@@ -41,7 +38,6 @@ public class PantallaMisCursos extends JFrame {
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -55,16 +51,16 @@ public class PantallaMisCursos extends JFrame {
 		JLabel lblCursosMatriculados = new JLabel("Cursos matriculados:");
 		lblCursosMatriculados.setVisible(true);
 		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCursosMatriculados.setBounds(23, 101, 379, 42);
+		lblCursosMatriculados.setBounds(24, 90, 379, 42);
 		contentPane.add(lblCursosMatriculados);
-		
+
 		JButton btnInfo = new JButton("Info");
 		btnInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnInfo.setFocusPainted(false);
 		btnInfo.setForeground(Color.WHITE);
 		btnInfo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnInfo.setBackground(SystemColor.textHighlight);
-		btnInfo.setBounds(630, 359, 114, 49);
+		btnInfo.setBounds(272, 398, 226, 75);
 		contentPane.add(btnInfo);
 		btnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -96,7 +92,7 @@ public class PantallaMisCursos extends JFrame {
 		});
 
 		listaCursos = new JList();
-		listaCursos.setBounds(23, 153, 597, 307);
+		listaCursos.setBounds(23, 132, 721, 258);
 		contentPane.add(listaCursos);
 		modelo = new DefaultListModel();
 		listaCursos.setModel(modelo);
@@ -107,10 +103,10 @@ public class PantallaMisCursos extends JFrame {
 					cursoSeleccionado = listaCursos.getSelectedValue();
 					if (cursoSeleccionado != null) {
 						btnInfo.setVisible(true);
-				}
+					}
 				}
 			}
-			
+
 		});
 	}
 }

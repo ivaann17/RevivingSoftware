@@ -19,14 +19,11 @@ import javax.swing.event.ListSelectionListener;
 import main.java.negocio.controllers.GestorMatriculacion;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.ModoPago;
-import main.java.persistencia.CursoPropioDAO;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Cursor;
-import javax.swing.JScrollBar;
-import java.awt.Component;
 import javax.swing.SwingConstants;
 
 public class PantallaMatriculacion extends JFrame {
@@ -111,7 +108,7 @@ public class PantallaMatriculacion extends JFrame {
 		});
 
 		listaCursos = new JList();
-		listaCursos.setBounds(54, 108, 659, 251);
+		listaCursos.setBounds(54, 108, 690, 251);
 		contentPane.add(listaCursos);
 		modelo = new DefaultListModel();
 
@@ -129,25 +126,25 @@ public class PantallaMatriculacion extends JFrame {
 			public void valueChanged(ListSelectionEvent arg0) {
 				cursoSeleccionado = listaCursos.getSelectedValue();
 				if (cursoSeleccionado != null) {
-				boolean existeMatricula;
-				try {
-					existeMatricula = GestorMatriculacion.existe(cursoSeleccionado.getId(),
-							main.java.presentacion.PantallaLogin.dni.toString());
+					boolean existeMatricula;
+					try {
+						existeMatricula = GestorMatriculacion.existe(cursoSeleccionado.getId(),
+								main.java.presentacion.PantallaLogin.dni.toString());
 
-					if (!existeMatricula) {
-						lblMatriculado.setVisible(false);
-						btnTar.setVisible(true);
-						btnTrans.setVisible(true);
-					} else {
-						btnTar.setVisible(false);
-						btnTrans.setVisible(false);
-						lblMatriculado.setVisible(true);
-						listaCursos.clearSelection();
+						if (!existeMatricula) {
+							lblMatriculado.setVisible(false);
+							btnTar.setVisible(true);
+							btnTrans.setVisible(true);
+						} else {
+							btnTar.setVisible(false);
+							btnTrans.setVisible(false);
+							lblMatriculado.setVisible(true);
+							listaCursos.clearSelection();
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
-			}
 			}
 
 		});

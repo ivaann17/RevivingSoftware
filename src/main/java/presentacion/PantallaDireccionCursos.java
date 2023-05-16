@@ -5,26 +5,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import main.java.negocio.controllers.GestorConsultas;
-import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
 
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
-import main.java.persistencia.CursoPropioDAO;
 import main.java.persistencia.GestorBD;
 
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.List;
 import java.util.Vector;
 import java.awt.Cursor;
 import javax.swing.JTextField;
@@ -74,7 +69,6 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -128,7 +122,7 @@ public class PantallaDireccionCursos extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
-		JButton cs = new JButton("Cerrar sesi\u00F3n\r\n");
+		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
 		cs.addActionListener(new ActionListener() {
@@ -155,11 +149,10 @@ public class PantallaDireccionCursos extends JFrame {
 				try {
 					main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
 
-					GestorConsultas.listarCursos(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
+					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -171,7 +164,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnRechazados.setBackground(SystemColor.textHighlight);
 		btnRechazados.setBounds(287, 266, 206, 110);
 		contentPane.add(btnRechazados);
-		
+
 		JButton btnValidados = new JButton("Empezar matriculacion");
 		btnValidados.setForeground(Color.WHITE);
 		btnValidados.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -185,20 +178,16 @@ public class PantallaDireccionCursos extends JFrame {
 
 				try {
 					main.java.presentacion.PantallaEmpezarMatriculacion p = new main.java.presentacion.PantallaEmpezarMatriculacion();
-					String nombre = NombreUsu.getText().toString().replaceAll("\\s.*", "");
 
-					GestorConsultas.listarCursos(p.modelo, EstadoCurso.VALIDADO);
+					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.VALIDADO);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
 			}
-			
-			
-			
+
 		});
 
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
