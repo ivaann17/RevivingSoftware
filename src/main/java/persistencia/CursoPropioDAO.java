@@ -17,11 +17,9 @@ public class CursoPropioDAO {
 	public int crearNuevoCurso(CursoPropio curso) {
 
 		int id = 0;
-		try {
-			String sql = "INSERT INTO cursos (ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO cursos (ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			ps.setInt(1, curso.getId());
 			ps.setString(2, curso.getNombre().toString());
 			ps.setString(3, curso.getDniDirector().toString());
@@ -46,17 +44,17 @@ public class CursoPropioDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return id;
 	}
 
 	public int getId(CursoPropio curso) throws Exception {
 
 		int id = 0;
-		try {
-			String sql = "SELECT ID FROM cursos WHERE nombre = ? AND tipo = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "SELECT ID FROM cursos WHERE nombre = ? AND tipo = ?";
 
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			ps.setString(1, curso.getNombre());
 			ps.setString(2, curso.getTipo().toString());
 
@@ -75,10 +73,9 @@ public class CursoPropioDAO {
 
 	public boolean existeCurso(CursoPropio curso) throws Exception {
 
-		try {
-			String sql = "SELECT COUNT(*) FROM edicion WHERE nombre = ? AND tipo = ? ";
+		String sql = "SELECT COUNT(*) FROM edicion WHERE nombre = ? AND tipo = ? ";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setString(1, curso.getNombre());
 			ps.setString(2, curso.getTipo().toString());
@@ -103,10 +100,10 @@ public class CursoPropioDAO {
 	public int eliminarCurso(CursoPropio curso) {
 
 		int eli = 0;
-		try {
-			String sql = "DELETE FROM cursos WHERE ID = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "DELETE FROM cursos WHERE ID = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, curso.getId());
 
@@ -126,11 +123,11 @@ public class CursoPropioDAO {
 	public int editarCurso(CursoPropio curso, EstadoCurso est, String mensaje) {
 
 		int mod = 0;
-		try {
-			String sql = "UPDATE cursos SET estado = ?, mensaje = ? WHERE ID = ?";
-			String estado = est.toString();
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "UPDATE cursos SET estado = ?, mensaje = ? WHERE ID = ?";
+		String estado = est.toString();
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setString(1, estado);
 			ps.setString(2, mensaje);
@@ -151,11 +148,10 @@ public class CursoPropioDAO {
 
 	public List<CursoPropio> listarCursosMatriculados(String dni) throws Exception {
 		List<CursoPropio> cursos = new ArrayList<>();
-		try {
 
-			String sql = "SELECT cursos.* FROM cursos INNER JOIN matricula ON cursos.ID = matricula.curso WHERE matricula.DNI = ?";
+		String sql = "SELECT cursos.* FROM cursos INNER JOIN matricula ON cursos.ID = matricula.curso WHERE matricula.DNI = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			ps.setString(1, dni);
 			Vector<Object> resultado = GestorBD.select(ps);
 
@@ -187,10 +183,10 @@ public class CursoPropioDAO {
 
 	public List<CursoPropio> listarHistorialCursos(String dni) throws Exception {
 		List<CursoPropio> cursos = new ArrayList<>();
-		try {
-			String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos WHERE dniDirector = ? ORDER BY fechaInicio";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos WHERE dniDirector = ? ORDER BY fechaInicio";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			ps.setString(1, dni);
 			Vector<Object> resultado = GestorBD.select(ps);
 
@@ -222,11 +218,10 @@ public class CursoPropioDAO {
 
 	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws Exception {
 		List<CursoPropio> cursos = new ArrayList<>();
-		try {
-			String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje\r\n"
-					+ "FROM cursos\r\n" + "WHERE estado = ? " + "ORDER BY fechaInicio\r\n" + "";
+		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje\r\n"
+				+ "FROM cursos\r\n" + "WHERE estado = ? " + "ORDER BY fechaInicio\r\n" + "";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			ps.setString(1, estado.toString());
 			Vector<Object> resultado = GestorBD.select(ps);
 
@@ -258,13 +253,13 @@ public class CursoPropioDAO {
 
 	public List<CursoPropio> listarCursosPorEdicion() throws Exception {
 		List<CursoPropio> cursos = new ArrayList<>();
-		try {
-			String sql = "SELECT * " + "FROM cursos " + "WHERE nombre IN ( " + "    SELECT nombre " + "    FROM cursos "
-					+ "    GROUP BY nombre " + "    HAVING COUNT(*) > 1 " + ") " + "AND tipo IN ( " + "    SELECT tipo "
-					+ "    FROM cursos " + "    GROUP BY tipo " + "    HAVING COUNT(*) > 1 " + ") "
-					+ "ORDER BY nombre,edicion";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+		String sql = "SELECT * " + "FROM cursos " + "WHERE nombre IN ( " + "    SELECT nombre " + "    FROM cursos "
+				+ "    GROUP BY nombre " + "    HAVING COUNT(*) > 1 " + ") " + "AND tipo IN ( " + "    SELECT tipo "
+				+ "    FROM cursos " + "    GROUP BY tipo " + "    HAVING COUNT(*) > 1 " + ") "
+				+ "ORDER BY nombre,edicion";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			Vector<Object> resultado = GestorBD.select(ps);
 
 			for (int i = 0; i < resultado.size(); i++) {
@@ -295,10 +290,10 @@ public class CursoPropioDAO {
 
 	public List<CursoPropio> listarCursos() throws Exception {
 		List<CursoPropio> cursos = new ArrayList<>();
-		try {
-			String sql = "SELECT * FROM cursos";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql);
+		String sql = "SELECT * FROM cursos";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			Vector<Object> resultado = GestorBD.select(ps);
 
 			for (int i = 0; i < resultado.size(); i++) {

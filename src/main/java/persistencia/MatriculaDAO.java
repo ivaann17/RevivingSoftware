@@ -13,10 +13,9 @@ public class MatriculaDAO {
 	public int crearNuevaMatricula(Matricula matricula) {
 
 		int id = 0;
-		try {
-			String sql = "INSERT INTO matricula (ID, nombre, apellido, DNI, precio, tipo_pago, curso, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO matricula (ID, nombre, apellido, DNI, precio, tipo_pago, curso, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, matricula.getID_Matricula());
 			ps.setString(2, matricula.getNombre());
@@ -41,10 +40,9 @@ public class MatriculaDAO {
 
 	public boolean existeMatricula(int curso, String dni) throws Exception {
 
-		try {
-			String sql = "SELECT COUNT(*) FROM matricula WHERE curso = ? AND DNI = ? ";
+		String sql = "SELECT COUNT(*) FROM matricula WHERE curso = ? AND DNI = ? ";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, curso);
 			ps.setString(2, dni);
@@ -69,10 +67,10 @@ public class MatriculaDAO {
 	public double ingresosCurso(CursoPropio curso) throws Exception {
 
 		double ingr = 0.0;
-		try {
-			String sql = "SELECT SUM(precio) FROM matricula WHERE curso = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "SELECT SUM(precio) FROM matricula WHERE curso = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, curso.getId());
 
@@ -89,10 +87,9 @@ public class MatriculaDAO {
 
 	public boolean cursoConMatricula(CursoPropio curso) throws Exception {
 
-		try {
-			String sql = "SELECT COUNT(curso) FROM matricula WHERE curso = ?";
+		String sql = "SELECT COUNT(curso) FROM matricula WHERE curso = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, curso.getId());
 
@@ -115,10 +112,10 @@ public class MatriculaDAO {
 
 	public int getNumMatriculas(CursoPropio curso) throws Exception {
 		int count = 0;
-		try {
-			String sql = "SELECT COUNT(ID) FROM matricula WHERE curso = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "SELECT COUNT(ID) FROM matricula WHERE curso = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, curso.getId());
 

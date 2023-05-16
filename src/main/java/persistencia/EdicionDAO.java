@@ -11,10 +11,9 @@ public class EdicionDAO {
 	public int crearNuevaEdicion(int id, String nombre, int edi, int id_curso) {
 
 		int i = 0;
-		try {
-			String sql = "INSERT INTO edicion (ID, nombre_curso, edicion_curso, ID_curso) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO edicion (ID, nombre_curso, edicion_curso, ID_curso) VALUES (?, ?, ?, ?)";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, id);
 			ps.setString(2, nombre);
@@ -35,10 +34,9 @@ public class EdicionDAO {
 
 	public boolean existeEdicion(int edi, String nombre) throws Exception {
 
-		try {
-			String sql = "SELECT COUNT(*) FROM edicion WHERE edicion_curso = ? AND nombre_curso = ? ";
+		String sql = "SELECT COUNT(*) FROM edicion WHERE edicion_curso = ? AND nombre_curso = ? ";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setInt(1, edi);
 			ps.setString(2, nombre);
