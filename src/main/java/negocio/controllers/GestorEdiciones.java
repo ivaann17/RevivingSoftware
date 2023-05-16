@@ -9,9 +9,9 @@ public class GestorEdiciones {
 	private GestorEdiciones() {
 	}
 
-	public static void crearEdicion(int id, String nombre, int edi, int id_cur) {
+	public static void crearEdicion(int id, String nombre, int edi, int idCurso) {
 		ediDAO = new EdicionDAO();
-		ediDAO.crearNuevaEdicion(id, nombre, edi, id_cur);
+		ediDAO.crearNuevaEdicion(id, nombre, edi, idCurso);
 	}
 
 	public static boolean existeEdicion(int edi, String nombre) throws Exception {

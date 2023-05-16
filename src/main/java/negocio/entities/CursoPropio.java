@@ -11,7 +11,7 @@ public class CursoPropio {
 	private String dniSecretario;
 	private int id;
 	private String nombre;
-	private int ECTS;
+	private int ects;
 	private Date fechaInicio;
 	private Date fechaFin;
 	private double tasaMatricula;
@@ -19,7 +19,7 @@ public class CursoPropio {
 	private String mensaje;
 
 	public CursoPropio(String centro, EstadoCurso estado, TipoCurso tipo, String dniDirector, String dniSecretario,
-			int id, String nombre, int eCTS, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion,
+			int id, String nombre, int ects, Date fechaInicio, Date fechaFin, double tasaMatricula, int edicion,
 			String mensaje) {
 		super();
 		this.centro = centro;
@@ -29,7 +29,7 @@ public class CursoPropio {
 		this.dniSecretario = dniSecretario;
 		this.id = id;
 		this.nombre = nombre;
-		ECTS = eCTS;
+		this.ects = ects;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.tasaMatricula = tasaMatricula;
@@ -66,7 +66,7 @@ public class CursoPropio {
 	}
 
 	public int getECTS() {
-		return ECTS;
+		return ects;
 	}
 
 	public Date getFechaInicio() {

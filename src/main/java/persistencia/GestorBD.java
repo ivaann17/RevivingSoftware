@@ -13,41 +13,43 @@ import java.util.Properties;
 import java.util.Vector;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import javax.swing.JOptionPane;
+import main.java.persistencia.Excepciones.ConfigFileException;
 
 public class GestorBD {
 
 	protected static GestorBD mInstancia = null;
 	public static Connection mBD;
 
-
 	public static void conectarBD() {
-	    Properties prop = new Properties();
-	    try (InputStream input = new FileInputStream("config.properties")) {
-	        prop.load(input);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        throw new RuntimeException("Error al cargar el archivo de configuración: " + e.getMessage());
-	    }
-	    
-	    String urlEncriptada = prop.getProperty("url");
-	    String driverEncriptado = prop.getProperty("driver");
-	    String usuarioEncriptado = prop.getProperty("user");
-	    String contraseñaEncriptada = prop.getProperty("password");
-	   
-	    try {
-	        Class.forName(desencriptarContraseña(driverEncriptado));
-	        mBD = DriverManager.getConnection(desencriptarContraseña(urlEncriptada), desencriptarContraseña(usuarioEncriptado),  desencriptarContraseña(contraseñaEncriptada));
-	        mBD.setAutoCommit(true);
-	    } catch (Exception e) {
-	        JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexión con la base de datos.", "ERROR", JOptionPane.ERROR_MESSAGE);
-	        System.exit(1);
-	    }
+		Properties prop = new Properties();
+		try (InputStream input = new FileInputStream("config.properties")) {
+			prop.load(input);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new ConfigFileException("Error al cargar el archivo de configuración: " + e.getMessage());
+		}
+
+		String urlEncriptada = prop.getProperty("url");
+		String driverEncriptado = prop.getProperty("driver");
+		String usuarioEncriptado = prop.getProperty("user");
+		String contraseñaEncriptada = prop.getProperty("password");
+
+		try {
+			Class.forName(desencriptarContraseña(driverEncriptado));
+			mBD = DriverManager.getConnection(desencriptarContraseña(urlEncriptada),
+					desencriptarContraseña(usuarioEncriptado), desencriptarContraseña(contraseñaEncriptada));
+			mBD.setAutoCommit(true);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexión con la base de datos.", "ERROR",
+					JOptionPane.ERROR_MESSAGE);
+			System.exit(1);
+		}
 	}
 
 	public static String desencriptarContraseña(String contraseñaEncriptada) {
-	    StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-	    encryptor.setPassword("proyectoISO2");
-	    return encryptor.decrypt(contraseñaEncriptada);
+		StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+		encryptor.setPassword("proyectoISO2");
+		return encryptor.decrypt(contraseñaEncriptada);
 	}
 
 	public static void desconectarBD() {
