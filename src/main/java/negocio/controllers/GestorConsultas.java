@@ -13,6 +13,10 @@ public class GestorConsultas {
 	static MatriculaDAO matDAO;
 	static LoginDAO logDAO;
 
+    private GestorConsultas() {
+    }
+
+
 	public static double consultarIngresos(CursoPropio curso) throws Exception {
 		matDAO = new MatriculaDAO();
 		return matDAO.ingresosCurso(curso);

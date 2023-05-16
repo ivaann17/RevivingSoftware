@@ -9,6 +9,9 @@ public class GestorPropuestasCursos {
 	static CursoPropioDAO cursoDAO;
 	static MatriculaDAO matDAO;
 
+	private GestorPropuestasCursos() {
+	}
+
 	public static void realizarPropuestaCurso(CursoPropio curso) {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.crearNuevoCurso(curso);

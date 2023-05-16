@@ -6,6 +6,9 @@ public class GestorEdiciones {
 
 	static EdicionDAO ediDAO;
 
+	private GestorEdiciones() {
+	}
+
 	public static void crearEdicion(int id, String nombre, int edi, int id_cur) {
 		ediDAO = new EdicionDAO();
 		ediDAO.crearNuevaEdicion(id, nombre, edi, id_cur);
