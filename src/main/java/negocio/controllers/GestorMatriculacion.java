@@ -7,6 +7,9 @@ public class GestorMatriculacion {
 
 	static MatriculaDAO matDAO;
 
+	private GestorMatriculacion() {
+	}
+
 	public static void realizarMatriculacion(Matricula mat) {
 		matDAO = new MatriculaDAO();
 		matDAO.crearNuevaMatricula(mat);
