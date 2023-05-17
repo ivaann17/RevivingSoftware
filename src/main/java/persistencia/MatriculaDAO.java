@@ -10,7 +10,7 @@ import main.java.negocio.entities.*;
 public class MatriculaDAO {
 	GestorBD gestorBD = new GestorBD();
 
-	public int crearNuevaMatricula(Matricula matricula) {
+	public int crearNuevaMatricula(Matricula matricula) throws SQLException {
 
 		int id = 0;
 		String sql = "INSERT INTO matricula (ID, nombre, apellido, DNI, precio, tipo_pago, curso, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -32,9 +32,7 @@ public class MatriculaDAO {
 				id = rs.getInt(1);
 			}
 
-		} catch (SQLException e) {
-
-		}
+		} 
 		return id;
 	}
 
@@ -48,11 +46,10 @@ public class MatriculaDAO {
 			ps.setString(2, dni);
 
 			ResultSet rs = gestorBD.operation(ps);
-			try {
+		
 			    return main.java.persistencia.CursoPropioDAO.isResultSetMayorCero(rs);
-			} catch (SQLException e) {
-			}
-			return false;
+			
+		
 		}
 
 	}
@@ -72,9 +69,7 @@ public class MatriculaDAO {
 				ingr = rs.getDouble(1);
 			}
 
-		} catch (SQLException e) {
-
-		}
+		} 
 		return ingr;
 	}
 
@@ -96,9 +91,7 @@ public class MatriculaDAO {
 				}
 			}
 
-		} catch (SQLException e) {
-	
-		}
+		} 
 		return false;
 
 	}
@@ -118,9 +111,7 @@ public class MatriculaDAO {
 
 			}
 
-		} catch (SQLException e) {
-	
-		}
+		} 
 		return count;
 
 	}

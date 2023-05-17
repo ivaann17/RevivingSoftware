@@ -14,7 +14,7 @@ import main.java.negocio.entities.*;
 public class CursoPropioDAO {
 	GestorBD gestorBD = new GestorBD();
 
-	public int crearNuevoCurso(CursoPropio curso) {
+	public int crearNuevoCurso(CursoPropio curso) throws SQLException {
 
 		int id = 0;
 		String sql = "INSERT INTO cursos (ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -41,8 +41,7 @@ public class CursoPropioDAO {
 				id = rs.getInt(1);
 			}
 
-		} catch (SQLException e) {
-		}
+		} 
 
 		return id;
 	}
@@ -64,8 +63,7 @@ public class CursoPropioDAO {
 				id = rs.getInt(1);
 			}
 
-		} catch (SQLException e) {
-		}
+		} 
 		return id;
 	}
 
@@ -79,18 +77,15 @@ public class CursoPropioDAO {
 			ps.setString(2, curso.getTipo().toString());
 
 			ResultSet rs = gestorBD.operation(ps);
-			try {
+			
 			    return isResultSetMayorCero(rs);
-			} catch (SQLException e) {
-
-			}
-			return false;
+			
 		}
 
 
 	}
 
-	public int eliminarCurso(CursoPropio curso) {
+	public int eliminarCurso(CursoPropio curso) throws SQLException {
 
 		int eli = 0;
 
@@ -107,12 +102,11 @@ public class CursoPropioDAO {
 				eli = 1;
 			}
 
-		} catch (SQLException e) {
 		}
 		return eli;
 	}
 
-	public int editarCurso(CursoPropio curso, EstadoCurso est, String mensaje) {
+	public int editarCurso(CursoPropio curso, EstadoCurso est, String mensaje) throws SQLException {
 
 		int mod = 0;
 
@@ -132,8 +126,7 @@ public class CursoPropioDAO {
 				mod = 1;
 			}
 
-		} catch (SQLException e) {
-		}
+		} 
 		return mod;
 	}
 
@@ -166,8 +159,7 @@ public class CursoPropioDAO {
 						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
 				cursos.add(curso);
 			}
-		} catch (SQLException e) {
-		}
+		} 
 		return cursos;
 	}
 
@@ -200,7 +192,6 @@ public class CursoPropioDAO {
 						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
 				cursos.add(curso);
 			}
-		} catch (SQLException e) {
 		}
 		return cursos;
 	}
@@ -234,8 +225,7 @@ public class CursoPropioDAO {
 						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
 				cursos.add(curso);
 			}
-		} catch (SQLException e) {
-		}
+		} 
 		return cursos;
 	}
 
@@ -270,8 +260,7 @@ public class CursoPropioDAO {
 						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
 				cursos.add(curso);
 			}
-		} catch (SQLException e) {
-		}
+		} 
 		return cursos;
 	}
 
@@ -303,8 +292,7 @@ public class CursoPropioDAO {
 						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
 				cursos.add(curso);
 			}
-		} catch (SQLException e) {
-		}
+		} 
 		return cursos;
 	}
 	protected static boolean isResultSetMayorCero(ResultSet rs) throws SQLException {

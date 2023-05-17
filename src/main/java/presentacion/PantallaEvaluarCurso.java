@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -68,7 +69,12 @@ public class PantallaEvaluarCurso extends JFrame {
 				if (respuesta == JOptionPane.OK_OPTION) {
 					JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
-					GestorPropuestasCursos.aceptarPropuesta(cursoSeleccionado);
+					try {
+						GestorPropuestasCursos.aceptarPropuesta(cursoSeleccionado);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					modelo.removeElement(cursoSeleccionado);
 
 				}
@@ -101,7 +107,12 @@ public class PantallaEvaluarCurso extends JFrame {
 						}
 
 						else {
-							GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado, mensaje);
+							try {
+								GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado, mensaje);
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							modelo.removeElement(cursoSeleccionado);
 						}
 					}

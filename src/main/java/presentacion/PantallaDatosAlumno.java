@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.SecureRandom;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -59,7 +60,7 @@ public class PantallaDatosAlumno extends JFrame {
 	private static final SecureRandom random = new SecureRandom();
 
 
-	public PantallaDatosAlumno() {
+	public PantallaDatosAlumno() throws SQLException{
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(PantallaDatosAlumno.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM\r\n");
@@ -152,7 +153,12 @@ public class PantallaDatosAlumno extends JFrame {
 						matricula = new Matricula(numRand(), nomAlu.getText(), apeAlu.getText(),
 								ModoPago.valueOf(ModoPago.TARJETA_CREDITO.toString()), fechaActual, dniAlu.getText(),
 								Double.parseDouble(textPrecio.getText()), id);
-						GestorMatriculacion.realizarMatriculacion(matricula);
+						try {
+							GestorMatriculacion.realizarMatriculacion(matricula);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
 
@@ -167,7 +173,12 @@ public class PantallaDatosAlumno extends JFrame {
 						matricula = new Matricula(numRand(), nomAlu.getText(), apeAlu.getText(),
 								ModoPago.valueOf(ModoPago.TRANSFERENCIA.toString()), fechaActual, dniAlu.getText(),
 								Double.parseDouble(textPrecio.getText()), id);
-						GestorMatriculacion.realizarMatriculacion(matricula);
+						try {
+							GestorMatriculacion.realizarMatriculacion(matricula);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);

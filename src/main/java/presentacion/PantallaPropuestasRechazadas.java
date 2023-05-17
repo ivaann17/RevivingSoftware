@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -93,7 +94,12 @@ public class PantallaPropuestasRechazadas extends JFrame {
 					JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
 
-					GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+					try {
+						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					modelo.removeElement(cursoSeleccionado);
 
 				}

@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -65,7 +66,12 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea comenzar la matriculacion de este curso?",
 						"ATENCIÃ“N", JOptionPane.OK_CANCEL_OPTION);
 				if (respuesta == JOptionPane.OK_OPTION) {
-					GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_MATRICULACION);
+					try {
+						GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_MATRICULACION);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					modelo.removeElement(cursoSeleccionado);
 					JOptionPane.showMessageDialog(null, "El curso ha sido dado de alta.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -90,7 +96,12 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 					JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
 
-					GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+					try {
+						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					modelo.removeElement(cursoSeleccionado);
 				}
 

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -30,7 +31,7 @@ import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class PantallaComenzarCurso extends JFrame {
+public class PantallaComenzarCurso extends JFrame  {
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
@@ -72,9 +73,16 @@ public class PantallaComenzarCurso extends JFrame {
 				if (respuesta == JOptionPane.OK_OPTION) {
 					JOptionPane.showMessageDialog(null, "El curso se va a impartir.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
+					try {
+						GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_IMPARTIZICION);
+						modelo.removeElement(cursoSeleccionado);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 
-					GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_IMPARTIZICION);
-					modelo.removeElement(cursoSeleccionado);
+					
 
 				}
 			}

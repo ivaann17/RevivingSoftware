@@ -1,5 +1,7 @@
 package main.java.negocio.controllers;
 
+import java.sql.SQLException;
+
 import main.java.persistencia.EdicionDAO;
 
 public class GestorEdiciones {
@@ -9,7 +11,7 @@ public class GestorEdiciones {
 	private GestorEdiciones() {
 	}
 
-	public static void crearEdicion(int id, String nombre, int edi, int idCurso) {
+	public static void crearEdicion(int id, String nombre, int edi, int idCurso) throws SQLException {
 		ediDAO = new EdicionDAO();
 		ediDAO.crearNuevaEdicion(id, nombre, edi, idCurso);
 	}

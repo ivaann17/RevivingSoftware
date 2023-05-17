@@ -26,8 +26,6 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-
 		}
 		return dni;
 
@@ -47,9 +45,7 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-
-		}
+		} 
 		return nom;
 
 	}
@@ -68,8 +64,7 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-		}
+		} 
 		return ape;
 
 	}
@@ -89,8 +84,7 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-		}
+		} 
 		return tipo;
 
 	}

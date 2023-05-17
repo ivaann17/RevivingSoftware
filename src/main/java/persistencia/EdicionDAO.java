@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class EdicionDAO {
 	GestorBD gestorBD = new GestorBD();
 
-	public int crearNuevaEdicion(int id, String nombre, int edi, int id_curso) {
+	public int crearNuevaEdicion(int id, String nombre, int edi, int id_curso) throws SQLException {
 
 		int i = 0;
 		String sql = "INSERT INTO edicion (ID, nombre_curso, edicion_curso, ID_curso) VALUES (?, ?, ?, ?)";
@@ -26,9 +26,7 @@ public class EdicionDAO {
 				i = rs.getInt(1);
 			}
 
-		} catch (SQLException e) {
-
-		}
+		} 
 		return i;
 	}
 
@@ -42,11 +40,10 @@ public class EdicionDAO {
 			ps.setString(2, nombre);
 
 			ResultSet rs = gestorBD.operation(ps);
-			try {
+			
 			    return main.java.persistencia.CursoPropioDAO.isResultSetMayorCero(rs);
-			} catch (SQLException e) {
-			}
-			return false;
+			
+			
 		}
 
 	}

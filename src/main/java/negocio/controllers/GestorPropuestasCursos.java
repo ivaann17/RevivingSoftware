@@ -1,5 +1,7 @@
 package main.java.negocio.controllers;
 
+import java.sql.SQLException;
+
 import main.java.negocio.entities.*;
 import main.java.persistencia.CursoPropioDAO;
 import main.java.persistencia.MatriculaDAO;
@@ -12,23 +14,23 @@ public class GestorPropuestasCursos {
 	private GestorPropuestasCursos() {
 	}
 
-	public static void realizarPropuestaCurso(CursoPropio curso) {
+	public static void realizarPropuestaCurso(CursoPropio curso) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.crearNuevoCurso(curso);
 	}
 
-	public static void editarEstadoCurso(CursoPropio curso, EstadoCurso est) {
+	public static void editarEstadoCurso(CursoPropio curso, EstadoCurso est) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.editarCurso(curso, est, "");
 	}
 
-	public static void aceptarPropuesta(CursoPropio curso) {
+	public static void aceptarPropuesta(CursoPropio curso) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.editarCurso(curso, EstadoCurso.VALIDADO, "");
 
 	}
 
-	public static void rechazarPropuesta(CursoPropio curso, String mensaje) {
+	public static void rechazarPropuesta(CursoPropio curso, String mensaje) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.editarCurso(curso, EstadoCurso.PROPUESTA_RECHAZADA, mensaje);
 
@@ -44,7 +46,7 @@ public class GestorPropuestasCursos {
 		return matDAO.cursoConMatricula(curso);
 	}
 
-	public static void eliminarCurso(CursoPropio curso) {
+	public static void eliminarCurso(CursoPropio curso) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.eliminarCurso(curso);
 	}
