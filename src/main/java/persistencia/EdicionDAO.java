@@ -27,7 +27,7 @@ public class EdicionDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 		return i;
 	}
@@ -42,19 +42,12 @@ public class EdicionDAO {
 			ps.setString(2, nombre);
 
 			ResultSet rs = gestorBD.operation(ps);
-			if (rs.next()) {
-				int count = rs.getInt(1);
-				if (count > 0) {
-					return true;
-				} else {
-					return false;
-				}
+			try {
+			    return main.java.persistencia.CursoPropioDAO.isResultSetMayorCero(rs);
+			} catch (SQLException e) {
 			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
 
 	}
 

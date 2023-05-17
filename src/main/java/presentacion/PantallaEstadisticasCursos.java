@@ -120,7 +120,6 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursos(modelo);
 
 				} catch (Exception e1) {
-					e1.printStackTrace();
 				}
 			}
 		});
@@ -142,7 +141,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEdiciones(modelo);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+
 				}
 			}
 		});
@@ -165,7 +164,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.VALIDADO);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+
 				}
 			}
 		});
@@ -187,7 +186,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.PROPUESTA_RECHAZADA);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+	
 				}
 			}
 		});
@@ -210,7 +209,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 							ingresos.setVisible(true);
 							ingresos.setText((Double.toString(GestorConsultas.consultarIngresos(cursoSeleccionado))));
 						} catch (Exception e) {
-							e.printStackTrace();
+			
 
 						}
 					}

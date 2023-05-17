@@ -142,7 +142,7 @@ public class PantallaMatriculacion extends JFrame {
 							listaCursos.clearSelection();
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+	
 					}
 				}
 			}

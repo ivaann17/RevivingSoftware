@@ -42,7 +42,6 @@ public class CursoPropioDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 
 		return id;
@@ -66,7 +65,6 @@ public class CursoPropioDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return id;
 	}
@@ -81,19 +79,14 @@ public class CursoPropioDAO {
 			ps.setString(2, curso.getTipo().toString());
 
 			ResultSet rs = gestorBD.operation(ps);
-			if (rs.next()) {
-				int count = rs.getInt(1);
-				if (count > 0) {
-					return true;
-				} else {
-					return false;
-				}
-			}
+			try {
+			    return isResultSetMayorCero(rs);
+			} catch (SQLException e) {
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+			}
+			return false;
 		}
-		return false;
+
 
 	}
 
@@ -115,7 +108,6 @@ public class CursoPropioDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return eli;
 	}
@@ -141,7 +133,6 @@ public class CursoPropioDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return mod;
 	}
@@ -176,7 +167,6 @@ public class CursoPropioDAO {
 				cursos.add(curso);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return cursos;
 	}
@@ -211,7 +201,6 @@ public class CursoPropioDAO {
 				cursos.add(curso);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return cursos;
 	}
@@ -246,7 +235,6 @@ public class CursoPropioDAO {
 				cursos.add(curso);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return cursos;
 	}
@@ -283,7 +271,6 @@ public class CursoPropioDAO {
 				cursos.add(curso);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return cursos;
 	}
@@ -317,9 +304,14 @@ public class CursoPropioDAO {
 				cursos.add(curso);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return cursos;
 	}
-
+	protected static boolean isResultSetMayorCero(ResultSet rs) throws SQLException {
+	    if (rs.next()) {
+	        int count = rs.getInt(1);
+	        return count > 0;
+	    }
+	    return false;
+	}
 }

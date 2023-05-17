@@ -52,8 +52,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				
 				}
 
 			}
@@ -107,8 +106,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					p.setVisible(true);
 
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+	
 				}
 
 			}

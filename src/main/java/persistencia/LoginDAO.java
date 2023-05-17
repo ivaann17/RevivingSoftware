@@ -27,7 +27,7 @@ public class LoginDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 		return dni;
 
@@ -48,7 +48,7 @@ public class LoginDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 		return nom;
 
@@ -69,7 +69,6 @@ public class LoginDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return ape;
 
@@ -91,7 +90,6 @@ public class LoginDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return tipo;
 
@@ -106,7 +104,7 @@ public class LoginDAO {
 			ps.setString(1, usuario);
 			rUser = GestorBD.select(ps);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 
@@ -124,7 +122,6 @@ public class LoginDAO {
 			ps.setString(1, contraseña);
 			rPass = GestorBD.select(ps);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 

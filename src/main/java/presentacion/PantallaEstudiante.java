@@ -47,7 +47,7 @@ public class PantallaEstudiante extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+
 				}
 
 			}
@@ -76,7 +76,7 @@ public class PantallaEstudiante extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+	
 				}
 
 			}

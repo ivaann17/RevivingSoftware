@@ -33,7 +33,7 @@ public class MatriculaDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 		return id;
 	}
@@ -48,19 +48,12 @@ public class MatriculaDAO {
 			ps.setString(2, dni);
 
 			ResultSet rs = gestorBD.operation(ps);
-			if (rs.next()) {
-				int count = rs.getInt(1);
-				if (count > 0) {
-					return true;
-				} else {
-					return false;
-				}
+			try {
+			    return main.java.persistencia.CursoPropioDAO.isResultSetMayorCero(rs);
+			} catch (SQLException e) {
 			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+			return false;
 		}
-		return false;
 
 	}
 
@@ -80,7 +73,7 @@ public class MatriculaDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}
 		return ingr;
 	}
@@ -104,7 +97,7 @@ public class MatriculaDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+	
 		}
 		return false;
 
@@ -126,7 +119,7 @@ public class MatriculaDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+	
 		}
 		return count;
 

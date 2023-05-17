@@ -257,7 +257,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 						}
 
 					} catch (Exception e1) {
-						e1.printStackTrace();
+	
 					}
 
 				}

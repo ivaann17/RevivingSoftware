@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -55,7 +56,8 @@ public class PantallaDatosAlumno extends JFrame {
 	main.java.presentacion.PantallaEstudiante p;
 	protected JTextField metoPago;
 	protected Matricula matricula;
-	private static final ThreadLocalRandom random = ThreadLocalRandom.current();
+	private static final SecureRandom random = new SecureRandom();
+
 
 	public PantallaDatosAlumno() {
 		setIconImage(
@@ -101,7 +103,6 @@ public class PantallaDatosAlumno extends JFrame {
 					setVisible(false);
 					m.setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
 				}
 
 			}

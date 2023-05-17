@@ -117,5 +117,7 @@ public class GestorBD {
 	public ResultSet operation(PreparedStatement ps) throws SQLException {
 		return ps.executeQuery();
 	}
+	
+
 
 }

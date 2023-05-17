@@ -51,8 +51,6 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 
 			}

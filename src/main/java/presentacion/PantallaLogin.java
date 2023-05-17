@@ -233,7 +233,7 @@ public class PantallaLogin extends JFrame {
 									new PantallaLogin();
 								}
 							} catch (Exception e1) {
-								e1.printStackTrace();
+						
 							}
 						}
 					});
