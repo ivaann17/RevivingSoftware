@@ -6,6 +6,16 @@ public class Excepciones {
         public ConfigFileException(String message) {
             super(message);
         }
+     
     }
-
+    public static class TypeUserException extends RuntimeException {
+        public TypeUserException(String message) {
+            super(message);
+        }
+    }
+    public class SelectException extends Exception {
+        public SelectException(String message) {
+            super(message);
+        }
+    }
 }

@@ -18,18 +18,20 @@ import java.awt.event.ActionListener;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class PantallaEstudiante extends JFrame {
 
 	private JPanel contentPane;
-	protected final JTextField NombreUsu;
-	protected final JTextField TipoUsuario;
+	protected final JTextField nombreUsu;
+	protected final JTextField tipoUsuario;
+	private static final String tipoLetra = "Tahoma";
 
 	public PantallaEstudiante() {
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -43,12 +45,10 @@ public class PantallaEstudiante extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
-					GestorConsultas.listarCursosMatriculados(p.modelo,
-							main.java.presentacion.PantallaLogin.dni.toString());
+					GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -58,7 +58,7 @@ public class PantallaEstudiante extends JFrame {
 		btnMisCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMisCursos.setForeground(Color.WHITE);
 		btnMisCursos.setBackground(SystemColor.textHighlight);
-		btnMisCursos.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnMisCursos.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnMisCursos.setBounds(45, 253, 228, 76);
 		contentPane.add(btnMisCursos);
 
@@ -78,7 +78,6 @@ public class PantallaEstudiante extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -88,34 +87,34 @@ public class PantallaEstudiante extends JFrame {
 		btnRealizarMatriculacion.setFocusPainted(false);
 		btnRealizarMatriculacion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRealizarMatriculacion.setForeground(Color.WHITE);
-		btnRealizarMatriculacion.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnRealizarMatriculacion.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnRealizarMatriculacion.setBackground(SystemColor.textHighlight);
 		btnRealizarMatriculacion.setBounds(45, 122, 228, 76);
 		contentPane.add(btnRealizarMatriculacion);
 
-		NombreUsu = new JTextField();
-		NombreUsu.setText(main.java.presentacion.PantallaLogin.nom.toString());
-		NombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		NombreUsu.setEditable(false);
-		NombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
-		NombreUsu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		NombreUsu.setColumns(10);
-		NombreUsu.setBorder(null);
-		NombreUsu.setBackground(Color.WHITE);
-		NombreUsu.setBounds(552, 214, 252, 19);
-		contentPane.add(NombreUsu);
+		nombreUsu = new JTextField();
+		nombreUsu.setText(main.java.presentacion.PantallaLogin.nom);
+		nombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		nombreUsu.setEditable(false);
+		nombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
+		nombreUsu.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		nombreUsu.setColumns(10);
+		nombreUsu.setBorder(null);
+		nombreUsu.setBackground(Color.WHITE);
+		nombreUsu.setBounds(552, 214, 252, 19);
+		contentPane.add(nombreUsu);
 
-		TipoUsuario = new JTextField();
-		TipoUsuario.setEditable(false);
-		TipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo.toString());
-		TipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		TipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
-		TipoUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		TipoUsuario.setColumns(10);
-		TipoUsuario.setBorder(null);
-		TipoUsuario.setBackground(Color.WHITE);
-		TipoUsuario.setBounds(552, 253, 252, 19);
-		contentPane.add(TipoUsuario);
+		tipoUsuario = new JTextField();
+		tipoUsuario.setEditable(false);
+		tipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo);
+		tipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		tipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+		tipoUsuario.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		tipoUsuario.setColumns(10);
+		tipoUsuario.setBorder(null);
+		tipoUsuario.setBackground(Color.WHITE);
+		tipoUsuario.setBounds(552, 253, 252, 19);
+		contentPane.add(tipoUsuario);
 
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
@@ -128,14 +127,14 @@ public class PantallaEstudiante extends JFrame {
 		cs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				PantallaLogin p = new PantallaLogin();
+				new PantallaLogin();
 			}
 		});
 		cs.setHorizontalTextPosition(SwingConstants.LEFT);
 		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cs.setBackground(new Color(255, 0, 0));
 		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font("Tahoma", Font.BOLD, 13));
+		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		cs.setIconTextGap(15);
 		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
@@ -144,7 +143,7 @@ public class PantallaEstudiante extends JFrame {
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarResueltos.setForeground(Color.WHITE);
-		btnMostrarResueltos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnMostrarResueltos.setFont(new Font(tipoLetra, Font.BOLD, 15));
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}

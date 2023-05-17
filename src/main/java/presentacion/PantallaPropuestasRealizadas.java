@@ -153,13 +153,13 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		a.id.setText(Integer.toString(cursoSeleccionado.getId()));
 		a.dniProf.setText(cursoSeleccionado.getDniDirector().toString());
 		a.dniSec.setText(cursoSeleccionado.getDniSecretario().toString());
-		a.Edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
-		a.NombreCurso.setText(cursoSeleccionado.getNombre().toString());
-		a.NumCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
+		a.edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
+		a.nombreCurso.setText(cursoSeleccionado.getNombre().toString());
+		a.numCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
 		a.facultad.setText(cursoSeleccionado.getCentro().toString());
 		a.precio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-		a.FechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
-		a.FechaFin.setText(cursoSeleccionado.getFechaFin().toString());
+		a.fechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
+		a.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
 		a.mensaje = cursoSeleccionado.getMensaje().toString();
 	}
 

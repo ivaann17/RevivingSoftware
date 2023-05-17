@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -29,16 +30,18 @@ import java.awt.Cursor;
 
 public class PantallaPropuestasRechazadas extends JFrame {
 
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
-	public CursoPropio cursoSeleccionado;
+	private static final JList<CursoPropio> listaCursos = new JList<>();
+	DefaultListModel<CursoPropio> modelo;
+	private static final String tipoLetra = "Tahoma";
+
+	private transient CursoPropio cursoSeleccionado;
 
 	public PantallaPropuestasRechazadas() {
 
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaPropuestasRechazadas.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -55,7 +58,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 		JLabel lblCursosMatriculados = new JLabel("Propuestas rechazadas");
 		lblCursosMatriculados.setVisible(true);
-		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCursosMatriculados.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		lblCursosMatriculados.setBounds(21, 101, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
@@ -63,11 +66,11 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener((ActionListener) new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
@@ -75,10 +78,9 @@ public class PantallaPropuestasRechazadas extends JFrame {
 			}
 		});
 
-		listaCursos = new JList<CursoPropio>();
 		listaCursos.setBounds(21, 153, 723, 220);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel();
+		modelo = new DefaultListModel<CursoPropio>();
 		listaCursos.setModel(modelo);
 
 		JButton btnEliminar = new JButton("Eliminar");
@@ -101,7 +103,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminar.setForeground(Color.WHITE);
 		btnEliminar.setVisible(false);
-		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnEliminar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnEliminar.setFocusPainted(false);
 		btnEliminar.setBackground(SystemColor.textHighlight);
 		btnEliminar.setBounds(439, 397, 114, 49);
@@ -124,7 +126,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 			}
 		});
 		btnInfo.setForeground(Color.WHITE);
-		btnInfo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnInfo.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnInfo.setFocusPainted(false);
 		btnInfo.setVisible(false);
 		btnInfo.setBackground(SystemColor.textHighlight);
@@ -155,16 +157,16 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 	public void infoCurso(main.java.presentacion.PantallaVisualizarCurso a, CursoPropio cursoSeleccionado) {
 		a.id.setText(Integer.toString(cursoSeleccionado.getId()));
-		a.dniProf.setText(cursoSeleccionado.getDniDirector().toString());
-		a.dniSec.setText(cursoSeleccionado.getDniSecretario().toString());
-		a.Edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
-		a.NombreCurso.setText(cursoSeleccionado.getNombre().toString());
-		a.NumCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
-		a.facultad.setText(cursoSeleccionado.getCentro().toString());
+		a.dniProf.setText(cursoSeleccionado.getDniDirector());
+		a.dniSec.setText(cursoSeleccionado.getDniSecretario());
+		a.edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
+		a.nombreCurso.setText(cursoSeleccionado.getNombre());
+		a.numCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
+		a.facultad.setText(cursoSeleccionado.getCentro());
 		a.precio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-		a.FechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
-		a.FechaFin.setText(cursoSeleccionado.getFechaFin().toString());
-		a.mensaje = cursoSeleccionado.getMensaje().toString();
+		a.fechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
+		a.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
+		a.mensaje = cursoSeleccionado.getMensaje();
 	}
 
 }

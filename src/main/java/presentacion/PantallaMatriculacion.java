@@ -58,7 +58,7 @@ public class PantallaMatriculacion extends JFrame {
 				main.java.presentacion.PantallaDatosAlumno p = new main.java.presentacion.PantallaDatosAlumno();
 				p.metoPago.setText(ModoPago.TARJETA_CREDITO.toString());
 				p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-				p.ID = cursoSeleccionado.getId();
+				p.id = cursoSeleccionado.getId();
 				p.setVisible(true);
 				setVisible(false);
 
@@ -80,7 +80,7 @@ public class PantallaMatriculacion extends JFrame {
 				p.setVisible(true);
 				p.metoPago.setText(ModoPago.TRANSFERENCIA.toString());
 				p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-				p.ID = cursoSeleccionado.getId();
+				p.id = cursoSeleccionado.getId();
 			}
 		});
 		btnTrans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

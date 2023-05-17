@@ -24,19 +24,21 @@ import java.util.Vector;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class PantallaDireccionCursos extends JFrame {
 
 	private JPanel contentPane;
-	protected final JTextField NombreUsu;
-	protected final JTextField TipoUsuario;
+	protected final JTextField nombreUsu;
+	protected final JTextField tipoUsuario;
+	private static final String tipoLetra = "Tahoma";
 
 	public PantallaDireccionCursos() {
 
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -45,17 +47,17 @@ public class PantallaDireccionCursos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		NombreUsu = new JTextField();
-		NombreUsu.setText(main.java.presentacion.PantallaLogin.nom.toString());
-		NombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		NombreUsu.setEditable(false);
-		NombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
-		NombreUsu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		NombreUsu.setColumns(10);
-		NombreUsu.setBorder(null);
-		NombreUsu.setBackground(Color.WHITE);
-		NombreUsu.setBounds(552, 214, 252, 19);
-		contentPane.add(NombreUsu);
+		nombreUsu = new JTextField();
+		nombreUsu.setText(main.java.presentacion.PantallaLogin.nom);
+		nombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		nombreUsu.setEditable(false);
+		nombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
+		nombreUsu.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		nombreUsu.setColumns(10);
+		nombreUsu.setBorder(null);
+		nombreUsu.setBackground(Color.WHITE);
+		nombreUsu.setBounds(552, 214, 252, 19);
+		contentPane.add(nombreUsu);
 
 		JButton btnMostrarHistorial = new JButton("Historial \r\nde \r\npropuestas");
 		btnMostrarHistorial.addActionListener(new ActionListener() {
@@ -63,9 +65,9 @@ public class PantallaDireccionCursos extends JFrame {
 
 				try {
 					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					String nombre = NombreUsu.getText().toString().replaceAll("\\s.*", "");
+					String nombre = nombreUsu.getText().replaceAll("\\s.*", "");
 
-					GestorConsultas.listarHistorial(p.modelo, dni(nombre.toString()));
+					GestorConsultas.listarHistorial(p.modelo, dni(nombre));
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
@@ -78,7 +80,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarHistorial.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarHistorial.setForeground(Color.WHITE);
 		btnMostrarHistorial.setBackground(SystemColor.textHighlight);
-		btnMostrarHistorial.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnMostrarHistorial.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnMostrarHistorial.setBounds(29, 266, 206, 110);
 		contentPane.add(btnMostrarHistorial);
 
@@ -100,22 +102,22 @@ public class PantallaDireccionCursos extends JFrame {
 		btnRealizarPropuesta.setFocusPainted(false);
 		btnRealizarPropuesta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRealizarPropuesta.setForeground(Color.WHITE);
-		btnRealizarPropuesta.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnRealizarPropuesta.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnRealizarPropuesta.setBackground(SystemColor.textHighlight);
 		btnRealizarPropuesta.setBounds(29, 119, 206, 110);
 		contentPane.add(btnRealizarPropuesta);
 
-		TipoUsuario = new JTextField();
-		TipoUsuario.setEditable(false);
-		TipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo.toString());
-		TipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		TipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
-		TipoUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		TipoUsuario.setColumns(10);
-		TipoUsuario.setBorder(null);
-		TipoUsuario.setBackground(Color.WHITE);
-		TipoUsuario.setBounds(552, 253, 252, 19);
-		contentPane.add(TipoUsuario);
+		tipoUsuario = new JTextField();
+		tipoUsuario.setEditable(false);
+		tipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo);
+		tipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		tipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+		tipoUsuario.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		tipoUsuario.setColumns(10);
+		tipoUsuario.setBorder(null);
+		tipoUsuario.setBackground(Color.WHITE);
+		tipoUsuario.setBounds(552, 253, 252, 19);
+		contentPane.add(tipoUsuario);
 
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
@@ -128,14 +130,14 @@ public class PantallaDireccionCursos extends JFrame {
 		cs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				PantallaLogin p = new PantallaLogin();
+				new PantallaLogin();
 			}
 		});
 		cs.setHorizontalTextPosition(SwingConstants.LEFT);
 		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cs.setBackground(new Color(255, 0, 0));
 		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font("Tahoma", Font.BOLD, 13));
+		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		cs.setIconTextGap(15);
 		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
@@ -159,7 +161,7 @@ public class PantallaDireccionCursos extends JFrame {
 
 		});
 		btnRechazados.setForeground(Color.WHITE);
-		btnRechazados.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnRechazados.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnRechazados.setFocusPainted(false);
 		btnRechazados.setBackground(SystemColor.textHighlight);
 		btnRechazados.setBounds(287, 266, 206, 110);
@@ -167,7 +169,7 @@ public class PantallaDireccionCursos extends JFrame {
 
 		JButton btnValidados = new JButton("Empezar matriculacion");
 		btnValidados.setForeground(Color.WHITE);
-		btnValidados.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnValidados.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnValidados.setFocusPainted(false);
 		btnValidados.setBackground(SystemColor.textHighlight);
 		btnValidados.setBounds(287, 119, 206, 110);
@@ -193,7 +195,7 @@ public class PantallaDireccionCursos extends JFrame {
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarResueltos.setForeground(Color.WHITE);
-		btnMostrarResueltos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnMostrarResueltos.setFont(new Font(tipoLetra, Font.BOLD, 15));
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
