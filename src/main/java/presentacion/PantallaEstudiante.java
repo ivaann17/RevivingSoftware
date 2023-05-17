@@ -25,7 +25,7 @@ public class PantallaEstudiante extends JFrame {
 	private JPanel contentPane;
 	protected final JTextField nombreUsu;
 	protected final JTextField tipoUsuario;
-	private static final String tipoLetra = "Tahoma";
+	private String tipoLetra = "Tahoma";
 
 	public PantallaEstudiante() {
 		setTitle("UCLM");

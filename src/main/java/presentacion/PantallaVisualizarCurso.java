@@ -50,7 +50,7 @@ public class PantallaVisualizarCurso extends JFrame {
 	protected JLabel lblDNISec;
 	protected JLabel lblEdi;
 	private String tipoLetra = "Tahoma";
-	private static final String volverText = "Volver";
+	private String volverText = "Volver";
 
 	protected transient CursoPropio curso;
 

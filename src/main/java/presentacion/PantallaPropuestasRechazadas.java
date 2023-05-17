@@ -32,7 +32,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 	private static final JList<CursoPropio> listaCursos = new JList<>();
 	DefaultListModel<CursoPropio> modelo;
-	private static final String tipoLetra = "Tahoma";
+	private String tipoLetra = "Tahoma";
 
 	private transient CursoPropio cursoSeleccionado;
 
@@ -80,7 +80,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 		listaCursos.setBounds(21, 153, 723, 220);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel<CursoPropio>();
+		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
 		JButton btnEliminar = new JButton("Eliminar");
@@ -156,17 +156,17 @@ public class PantallaPropuestasRechazadas extends JFrame {
 	}
 
 	public void infoCurso(main.java.presentacion.PantallaVisualizarCurso a, CursoPropio cursoSeleccionado) {
-		a.id.setText(Integer.toString(cursoSeleccionado.getId()));
-		a.dniProf.setText(cursoSeleccionado.getDniDirector());
-		a.dniSec.setText(cursoSeleccionado.getDniSecretario());
-		a.edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
-		a.nombreCurso.setText(cursoSeleccionado.getNombre());
-		a.numCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
-		a.facultad.setText(cursoSeleccionado.getCentro());
-		a.precio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-		a.fechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
-		a.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
-		a.mensaje = cursoSeleccionado.getMensaje();
+		PantallaVisualizarCurso.id.setText(Integer.toString(cursoSeleccionado.getId()));
+		PantallaVisualizarCurso.dniProf.setText(cursoSeleccionado.getDniDirector());
+		PantallaVisualizarCurso.dniSec.setText(cursoSeleccionado.getDniSecretario());
+		PantallaVisualizarCurso.edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
+		PantallaVisualizarCurso.nombreCurso.setText(cursoSeleccionado.getNombre());
+		PantallaVisualizarCurso.numCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
+		PantallaVisualizarCurso.facultad.setText(cursoSeleccionado.getCentro());
+		PantallaVisualizarCurso.precio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
+		PantallaVisualizarCurso.fechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
+		PantallaVisualizarCurso.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
+		PantallaVisualizarCurso.mensaje = cursoSeleccionado.getMensaje();
 	}
 
 }

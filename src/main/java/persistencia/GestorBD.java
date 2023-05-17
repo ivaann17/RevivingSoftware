@@ -77,10 +77,9 @@ public class GestorBD {
 		while (res.next()) {
 			Vector<Object> v = new Vector<>();
 			for (int i = 1; i <= columns; i++) {
-				try {
-					v.add(res.getObject(i));
-				} catch (SQLException ex) {
-				}
+
+				v.add(res.getObject(i));
+
 			}
 			vectoradevolver.add(v);
 		}

@@ -35,7 +35,7 @@ import javax.swing.WindowConstants;
 public class PantallaEstadisticasCursos extends JFrame {
 	protected JTextField ingresos;
 	private static final JList<CursoPropio> listaCursos = new JList<>();
-	private static final String tipoLetra = "Tahoma";
+	private String tipoLetra = "Tahoma";
 	DefaultListModel<CursoPropio> modelo;
 	private transient CursoPropio cursoSeleccionado;
 
@@ -76,7 +76,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 
 		listaCursos.setBounds(54, 108, 684, 267);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel<CursoPropio>();
+		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
 		ingresos = new JTextField();

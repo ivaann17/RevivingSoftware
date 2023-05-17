@@ -54,6 +54,7 @@ public class PantallaDatosAlumno extends JFrame {
 	main.java.presentacion.PantallaEstudiante p;
 	protected JTextField metoPago;
 	protected Matricula matricula;
+	private static Random random = new Random();
 
 	public PantallaDatosAlumno() {
 		setIconImage(
@@ -237,9 +238,7 @@ public class PantallaDatosAlumno extends JFrame {
 	}
 
 	public int numRand() {
-		Random random = new Random();
-		int numero = random.nextInt(100) + 1;
-		return numero;
+		return random.nextInt(100) + 1;
 	}
 
 }

@@ -33,16 +33,22 @@ import main.java.persistencia.Excepciones.TypeUserException;
 
 public class PantallaLogin extends JFrame {
 
-	protected static JTextField usuarioText;
+	protected static JTextField usuarioText = new JTextField();
 	protected static JTextField user;
 	protected static String tipo = "";
 	protected static String nom = "";
 	protected static String dni = "";
 	protected static String tipoLetra = "Tahoma";
 	protected JPanel panel;
-	protected JButton loginButton, btnRecuperar, btnSiguiente, btnNoAcceder, btnNewButton;
+	protected JButton loginButton;
+	protected JButton btnRecuperar;
+	protected JButton btnSiguiente;
+	protected JButton btnNoAcceder;
+	protected JButton btnNewButton;
 	protected JPasswordField contrasenaText;
-	protected JLabel userLabel, passwordLabel, lblNewLabel;
+	protected JLabel userLabel;
+	protected JLabel passwordLabel;
+	protected JLabel lblNewLabel;
 
 	private static void placeComponents(JPanel panel) {
 
@@ -83,16 +89,16 @@ public class PantallaLogin extends JFrame {
 		contrasenaText = new JPasswordField(20);
 		contrasenaText.setToolTipText("Introduzca su contraseña");
 		contrasenaText.setFont(new Font(tipoLetra, Font.PLAIN, 15));
-		contrasenaText.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+		contrasenaText.setBorder(new MatteBorder(0, 0, 1, 0, SystemColor.textHighlight));
 
 		contrasenaText.setActionCommand("");
 		contrasenaText.setVisible(false);
 		contrasenaText.setBounds(79, 191, 434, 42);
 		panel.add(contrasenaText);
 
-		usuarioText = new JTextField();
+		
 		usuarioText.setFont(new Font(tipoLetra, Font.PLAIN, 15));
-		usuarioText.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
+		usuarioText.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		usuarioText.setName("");
 		usuarioText.setToolTipText("Introduzca su usuario");
 		usuarioText.setBounds(79, 192, 434, 42);
@@ -209,7 +215,9 @@ public class PantallaLogin extends JFrame {
 							Vector<Object> rPass;
 							Vector<Object> rUser;
 							try {
-								rPass = GestorLogin.loginContra(contrasenaText.getText());
+								char[] password = contrasenaText.getPassword();
+								String contrasena = new String(password);
+								rPass = GestorLogin.loginContra(contrasena);
 								rUser = GestorLogin.loginUsuario(usuarioText.getText());
 								if (!rPass.isEmpty() && !rUser.isEmpty()) {
 									try {

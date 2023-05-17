@@ -305,7 +305,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 			}
 		});
 
-		tipoCurso = new JComboBox<TipoCurso>();
+		tipoCurso = new JComboBox<>();
 		tipoCurso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		tipoCurso.setSelectedItem("");
 		DefaultComboBoxModel<TipoCurso> comboBoxModel = new DefaultComboBoxModel<>();
@@ -411,7 +411,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		btnNext.setBounds(594, 490, 114, 49);
 		contentPane.add(btnNext);
 
-		fac = new JComboBox<Facultad>();
+		fac = new JComboBox<>();
 		fac.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		DefaultComboBoxModel<Facultad> comboBoxModelFac = new DefaultComboBoxModel<>();
 
@@ -428,7 +428,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		contentPane.add(fac);
 		fac.setSelectedItem(null);
 
-		dia = new JComboBox<Integer>();
+		dia = new JComboBox<>();
 		dia.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		dia.setBounds(71, 230, 101, 39);
 		dia.setVisible(false);
@@ -438,7 +438,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		}
 		contentPane.add(dia);
 
-		mes = new JComboBox<String>();
+		mes = new JComboBox<>();
 		mes.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		mes.setBounds(263, 230, 181, 39);
 		mes.setVisible(false);
@@ -458,7 +458,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		mes.addItem("Diciembre");
 		contentPane.add(mes);
 
-		ano = new JComboBox<Integer>();
+		ano = new JComboBox<>();
 		ano.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		ano.setBounds(550, 230, 114, 39);
 		ano.setVisible(false);

@@ -31,7 +31,7 @@ public class PantallaDireccionCursos extends JFrame {
 	private JPanel contentPane;
 	protected final JTextField nombreUsu;
 	protected final JTextField tipoUsuario;
-	private static final String tipoLetra = "Tahoma";
+	private String tipoLetra = "Tahoma";
 
 	public PantallaDireccionCursos() {
 
