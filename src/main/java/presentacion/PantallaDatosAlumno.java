@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.Color;
 import javax.swing.JLabel;
 
@@ -54,7 +55,7 @@ public class PantallaDatosAlumno extends JFrame {
 	main.java.presentacion.PantallaEstudiante p;
 	protected JTextField metoPago;
 	protected Matricula matricula;
-	private static Random random = new Random();
+	private static final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 	public PantallaDatosAlumno() {
 		setIconImage(

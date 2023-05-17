@@ -29,9 +29,7 @@ import javax.swing.WindowConstants;
 public class PantallaDireccionCursos extends JFrame {
 
 	private JPanel contentPane;
-	protected final JTextField nombreUsu;
-	protected final JTextField tipoUsuario;
-	private String tipoLetra = "Tahoma";
+	private static final String tipoLetra = "Tahoma";
 
 	public PantallaDireccionCursos() {
 
@@ -47,25 +45,13 @@ public class PantallaDireccionCursos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		nombreUsu = new JTextField();
-		nombreUsu.setText(main.java.presentacion.PantallaLogin.nom);
-		nombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		nombreUsu.setEditable(false);
-		nombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
-		nombreUsu.setFont(new Font(tipoLetra, Font.BOLD, 15));
-		nombreUsu.setColumns(10);
-		nombreUsu.setBorder(null);
-		nombreUsu.setBackground(Color.WHITE);
-		nombreUsu.setBounds(552, 214, 252, 19);
-		contentPane.add(nombreUsu);
-
 		JButton btnMostrarHistorial = new JButton("Historial \r\nde \r\npropuestas");
 		btnMostrarHistorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				try {
 					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					String nombre = nombreUsu.getText().replaceAll("\\s.*", "");
+					String nombre = main.java.presentacion.PantallaEstudiante.createNombreUsuTextField().getText().replaceAll("\\s.*", "");
 
 					GestorConsultas.listarHistorial(p.modelo, dni(nombre));
 					setVisible(false);
@@ -106,18 +92,9 @@ public class PantallaDireccionCursos extends JFrame {
 		btnRealizarPropuesta.setBackground(SystemColor.textHighlight);
 		btnRealizarPropuesta.setBounds(29, 119, 206, 110);
 		contentPane.add(btnRealizarPropuesta);
-
-		tipoUsuario = new JTextField();
-		tipoUsuario.setEditable(false);
-		tipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo);
-		tipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		tipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
-		tipoUsuario.setFont(new Font(tipoLetra, Font.BOLD, 15));
-		tipoUsuario.setColumns(10);
-		tipoUsuario.setBorder(null);
-		tipoUsuario.setBackground(Color.WHITE);
-		tipoUsuario.setBounds(552, 253, 252, 19);
-		contentPane.add(tipoUsuario);
+		
+		contentPane.add(main.java.presentacion.PantallaEstudiante.createNombreUsuTextField());
+		contentPane.add(main.java.presentacion.PantallaEstudiante.createTipoUsuarioTextField());
 
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));

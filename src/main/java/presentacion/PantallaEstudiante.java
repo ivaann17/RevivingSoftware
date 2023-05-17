@@ -23,9 +23,7 @@ import javax.swing.WindowConstants;
 public class PantallaEstudiante extends JFrame {
 
 	private JPanel contentPane;
-	protected final JTextField nombreUsu;
-	protected final JTextField tipoUsuario;
-	private String tipoLetra = "Tahoma";
+	private static String tipoLetra = "Tahoma";
 
 	public PantallaEstudiante() {
 		setTitle("UCLM");
@@ -92,29 +90,9 @@ public class PantallaEstudiante extends JFrame {
 		btnRealizarMatriculacion.setBounds(45, 122, 228, 76);
 		contentPane.add(btnRealizarMatriculacion);
 
-		nombreUsu = new JTextField();
-		nombreUsu.setText(main.java.presentacion.PantallaLogin.nom);
-		nombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		nombreUsu.setEditable(false);
-		nombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
-		nombreUsu.setFont(new Font(tipoLetra, Font.BOLD, 15));
-		nombreUsu.setColumns(10);
-		nombreUsu.setBorder(null);
-		nombreUsu.setBackground(Color.WHITE);
-		nombreUsu.setBounds(552, 214, 252, 19);
-		contentPane.add(nombreUsu);
+		contentPane.add(createNombreUsuTextField());
 
-		tipoUsuario = new JTextField();
-		tipoUsuario.setEditable(false);
-		tipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo);
-		tipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		tipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
-		tipoUsuario.setFont(new Font(tipoLetra, Font.BOLD, 15));
-		tipoUsuario.setColumns(10);
-		tipoUsuario.setBorder(null);
-		tipoUsuario.setBackground(Color.WHITE);
-		tipoUsuario.setBounds(552, 253, 252, 19);
-		contentPane.add(tipoUsuario);
+		contentPane.add(createTipoUsuarioTextField());
 
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
@@ -147,4 +125,33 @@ public class PantallaEstudiante extends JFrame {
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
+
+	protected static JTextField createTipoUsuarioTextField() {
+		JTextField tipoUsuario = new JTextField();
+		tipoUsuario.setEditable(false);
+		tipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo);
+		tipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		tipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+		tipoUsuario.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		tipoUsuario.setColumns(10);
+		tipoUsuario.setBorder(null);
+		tipoUsuario.setBackground(Color.WHITE);
+		tipoUsuario.setBounds(552, 253, 252, 19);
+		return tipoUsuario;
+	}
+
+	protected static JTextField createNombreUsuTextField() {
+		JTextField nombreUsu = new JTextField();
+		nombreUsu.setText(main.java.presentacion.PantallaLogin.nom);
+		nombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		nombreUsu.setEditable(false);
+		nombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
+		nombreUsu.setFont(new Font(tipoLetra, Font.BOLD, 15));
+		nombreUsu.setColumns(10);
+		nombreUsu.setBorder(null);
+		nombreUsu.setBackground(Color.WHITE);
+		nombreUsu.setBounds(552, 214, 252, 19);
+		return nombreUsu;
+	}
+
 }
