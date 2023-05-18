@@ -220,20 +220,16 @@ public class PantallaLogin extends JFrame {
 								rPass = GestorLogin.loginContra(contrasena);
 								rUser = GestorLogin.loginUsuario(usuarioText.getText());
 								if (!rPass.isEmpty() && !rUser.isEmpty()) {
-									try {
-										cambioPantalla(usuarioText.getText());
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
+								  
+								        cambioPantalla(usuarioText.getText());
+								   
 								} else {
-									JOptionPane.showMessageDialog(null,
-											"El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.",
-											"ERROR", JOptionPane.ERROR_MESSAGE);
-									frmUclm.setVisible(false);
-									new PantallaLogin();
+								    mostrarErrorDatosIncorrectos();
+								    reiniciarPantalla();
 								}
+
 							} catch (Exception e1) {
-						
+
 							}
 						}
 					});
@@ -316,5 +312,16 @@ public class PantallaLogin extends JFrame {
 		}
 
 	}
+	private void mostrarErrorDatosIncorrectos() {
+	    JOptionPane.showMessageDialog(null,
+	            "El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.",
+	            "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void reiniciarPantalla() {
+	    setVisible(false);
+	    new PantallaLogin();
+	}
+
 
 }

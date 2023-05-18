@@ -251,7 +251,7 @@ public class PantallaDatosAlumno extends JFrame {
 		return nombreApe[1];
 	}
 
-	public int numRand() {
+	private int numRand() {
 		return random.nextInt(100) + 1;
 	}
 

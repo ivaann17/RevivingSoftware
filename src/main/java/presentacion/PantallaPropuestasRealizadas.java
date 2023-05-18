@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -32,17 +33,18 @@ import java.awt.Cursor;
 
 public class PantallaPropuestasRealizadas extends JFrame {
 
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
-	public CursoPropio cursoSeleccionado;
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	public static final JList<CursoPropio> listaCursos = new JList<>();
+	DefaultListModel<CursoPropio> modelo;
+	protected CursoPropio cursoSeleccionado;
+	private static final Logger logger = Logger.getLogger(PantallaPropuestasRealizadas.class.getName());
+	private String tipoLetra = "Tahoma";
 
 	public PantallaPropuestasRealizadas() {
 
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaPropuestasRealizadas.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -59,7 +61,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 		JLabel lblCursosMatriculados = new JLabel("Historial");
 		lblCursosMatriculados.setVisible(true);
-		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCursosMatriculados.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		lblCursosMatriculados.setBounds(21, 101, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
@@ -67,11 +69,11 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener((ActionListener) new ActionListener() {
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
@@ -79,10 +81,9 @@ public class PantallaPropuestasRealizadas extends JFrame {
 			}
 		});
 
-		listaCursos = new JList<CursoPropio>();
 		listaCursos.setBounds(21, 153, 723, 207);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel();
+		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
 		JButton btnEliminar = new JButton("Eliminar");
@@ -109,7 +110,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminar.setForeground(Color.WHITE);
 		btnEliminar.setVisible(false);
-		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnEliminar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnEliminar.setFocusPainted(false);
 		btnEliminar.setBackground(SystemColor.textHighlight);
 		btnEliminar.setBounds(431, 404, 114, 49);
@@ -130,31 +131,24 @@ public class PantallaPropuestasRealizadas extends JFrame {
 			}
 		});
 		btnInfo.setForeground(Color.WHITE);
-		btnInfo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnInfo.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnInfo.setFocusPainted(false);
 		btnInfo.setVisible(false);
 		btnInfo.setBackground(SystemColor.textHighlight);
 		btnInfo.setBounds(240, 404, 114, 49);
 		contentPane.add(btnInfo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					cursoSeleccionado = listaCursos.getSelectedValue();
-					if (cursoSeleccionado != null) {
-						btnInfo.setVisible(true);
+		listaCursos.addListSelectionListener(arg0 -> {
+			if (!arg0.getValueIsAdjusting()) {
+				cursoSeleccionado = listaCursos.getSelectedValue();
+				if (cursoSeleccionado != null) {
+					btnInfo.setVisible(true);
 
-						if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTO)) {
-							btnEliminar.setVisible(true);
-						} else {
-							btnEliminar.setVisible(false);
-						}
-					}
-
+					btnEliminar.setVisible(cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTO));
 				}
 			}
-
 		});
+
 	}
 
 	public static void infoCurso(main.java.presentacion.PantallaVisualizarCurso a, CursoPropio cursoSeleccionado) {

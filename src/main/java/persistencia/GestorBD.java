@@ -29,7 +29,6 @@ public class GestorBD {
 		try (InputStream input = new FileInputStream("config.properties")) {
 			prop.load(input);
 		} catch (IOException e) {
-			e.printStackTrace();
 			throw new ConfigFileException("Error al cargar el archivo de configuración: " + e.getMessage());
 		}
 
@@ -37,11 +36,13 @@ public class GestorBD {
 		String driverEncriptado = prop.getProperty("driver");
 		String usuarioEncriptado = prop.getProperty("user");
 		String contrasenaEncriptada = prop.getProperty("password");
+		String clave = prop.getProperty("clave");
 
 		try {
-			Class.forName(desencriptarContrasena(driverEncriptado));
-			mBD = DriverManager.getConnection(desencriptarContrasena(urlEncriptada),
-					desencriptarContrasena(usuarioEncriptado), desencriptarContrasena(contrasenaEncriptada));
+			Class.forName(desencriptarContrasena(driverEncriptado, clave));
+			mBD = DriverManager.getConnection(desencriptarContrasena(urlEncriptada, clave),
+					desencriptarContrasena(usuarioEncriptado, clave),
+					desencriptarContrasena(contrasenaEncriptada, clave));
 			mBD.setAutoCommit(true);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexión con la base de datos.", "ERROR",
@@ -50,9 +51,9 @@ public class GestorBD {
 		}
 	}
 
-	public static String desencriptarContrasena(String contrasenaEncriptada) {
+	public static String desencriptarContrasena(String contrasenaEncriptada, String clave) {
 		StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-		encryptor.setPassword("proyectoISO2");
+		encryptor.setPassword(clave);
 		return encryptor.decrypt(contrasenaEncriptada);
 	}
 
@@ -117,7 +118,5 @@ public class GestorBD {
 	public ResultSet operation(PreparedStatement ps) throws SQLException {
 		return ps.executeQuery();
 	}
-	
-
 
 }

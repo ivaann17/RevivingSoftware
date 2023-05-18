@@ -24,8 +24,8 @@ public class CursoPropioDAO {
 			ps.setString(2, curso.getNombre().toString());
 			ps.setString(3, curso.getDniDirector().toString());
 			ps.setString(4, curso.getDniSecretario().toString());
-			ps.setDate(5, new java.sql.Date(curso.getFechaInicio().getTime()));
-			ps.setDate(6, new java.sql.Date(curso.getFechaFin().getTime()));
+			ps.setDate(5, new Date(curso.getFechaInicio().getTime()));
+			ps.setDate(6, new Date(curso.getFechaFin().getTime()));
 			ps.setInt(7, curso.getECTS());
 			ps.setDouble(8, curso.getTasaMatricula());
 			ps.setString(9, curso.getTipo().toString());
@@ -41,7 +41,7 @@ public class CursoPropioDAO {
 				id = rs.getInt(1);
 			}
 
-		} 
+		}
 
 		return id;
 	}
@@ -63,7 +63,7 @@ public class CursoPropioDAO {
 				id = rs.getInt(1);
 			}
 
-		} 
+		}
 		return id;
 	}
 
@@ -77,11 +77,10 @@ public class CursoPropioDAO {
 			ps.setString(2, curso.getTipo().toString());
 
 			ResultSet rs = gestorBD.operation(ps);
-			
-			    return isResultSetMayorCero(rs);
-			
-		}
 
+			return isResultSetMayorCero(rs);
+
+		}
 
 	}
 
@@ -126,7 +125,7 @@ public class CursoPropioDAO {
 				mod = 1;
 			}
 
-		} 
+		}
 		return mod;
 	}
 
@@ -138,28 +137,9 @@ public class CursoPropioDAO {
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			ps.setString(1, dni);
 			Vector<Object> resultado = GestorBD.select(ps);
+			cursos = convertirResultadoEnCursos(resultado);
+		}
 
-			for (int i = 0; i < resultado.size(); i++) {
-				Vector<Object> fila = (Vector<Object>) resultado.get(i);
-				int id = (int) fila.get(0);
-				String nombre = (String) fila.get(1);
-				String dniDirector = (String) fila.get(2);
-				String dniSecretario = (String) fila.get(3);
-				Date fechaInicioCurso = (Date) fila.get(4);
-				Date fechaFinCurso = (Date) fila.get(5);
-				int creditos = (int) fila.get(6);
-				double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
-				TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
-				EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
-				String facultad = (String) fila.get(10);
-				int edicion = (int) fila.get(11);
-				String mensaje = (String) fila.get(12);
-
-				CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
-						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
-				cursos.add(curso);
-			}
-		} 
 		return cursos;
 	}
 
@@ -171,27 +151,8 @@ public class CursoPropioDAO {
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			ps.setString(1, dni);
 			Vector<Object> resultado = GestorBD.select(ps);
+			cursos = convertirResultadoEnCursos(resultado);
 
-			for (int i = 0; i < resultado.size(); i++) {
-				Vector<Object> fila = (Vector<Object>) resultado.get(i);
-				int id = (int) fila.get(0);
-				String nombre = (String) fila.get(1);
-				String dniDirector = (String) fila.get(2);
-				String dniSecretario = (String) fila.get(3);
-				Date fechaInicioCurso = (Date) fila.get(4);
-				Date fechaFinCurso = (Date) fila.get(5);
-				int creditos = (int) fila.get(6);
-				double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
-				TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
-				EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
-				String facultad = (String) fila.get(10);
-				int edicion = (int) fila.get(11);
-				String mensaje = (String) fila.get(12);
-
-				CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
-						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
-				cursos.add(curso);
-			}
 		}
 		return cursos;
 	}
@@ -204,28 +165,8 @@ public class CursoPropioDAO {
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			ps.setString(1, estado.toString());
 			Vector<Object> resultado = GestorBD.select(ps);
-
-			for (int i = 0; i < resultado.size(); i++) {
-				Vector<Object> fila = (Vector<Object>) resultado.get(i);
-				int id = (int) fila.get(0);
-				String nombre = (String) fila.get(1);
-				String dniDirector = (String) fila.get(2);
-				String dniSecretario = (String) fila.get(3);
-				Date fechaInicioCurso = (Date) fila.get(4);
-				Date fechaFinCurso = (Date) fila.get(5);
-				int creditos = (int) fila.get(6);
-				double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
-				TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
-				EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
-				String facultad = (String) fila.get(10);
-				int edicion = (int) fila.get(11);
-				String mensaje = (String) fila.get(12);
-
-				CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
-						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
-				cursos.add(curso);
-			}
-		} 
+			cursos = convertirResultadoEnCursos(resultado);
+		}
 		return cursos;
 	}
 
@@ -239,28 +180,8 @@ public class CursoPropioDAO {
 
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			Vector<Object> resultado = GestorBD.select(ps);
-
-			for (int i = 0; i < resultado.size(); i++) {
-				Vector<Object> fila = (Vector<Object>) resultado.get(i);
-				int id = (int) fila.get(0);
-				String nombre = (String) fila.get(1);
-				String dniDirector = (String) fila.get(2);
-				String dniSecretario = (String) fila.get(3);
-				Date fechaInicioCurso = (Date) fila.get(4);
-				Date fechaFinCurso = (Date) fila.get(5);
-				int creditos = (int) fila.get(6);
-				double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
-				TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
-				EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
-				String facultad = (String) fila.get(10);
-				int edicion = (int) fila.get(11);
-				String mensaje = (String) fila.get(12);
-
-				CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
-						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
-				cursos.add(curso);
-			}
-		} 
+			cursos = convertirResultadoEnCursos(resultado);
+		}
 		return cursos;
 	}
 
@@ -271,35 +192,44 @@ public class CursoPropioDAO {
 
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			Vector<Object> resultado = GestorBD.select(ps);
-
-			for (int i = 0; i < resultado.size(); i++) {
-				Vector<Object> fila = (Vector<Object>) resultado.get(i);
-				int id = (int) fila.get(0);
-				String nombre = (String) fila.get(1);
-				String dniDirector = (String) fila.get(2);
-				String dniSecretario = (String) fila.get(3);
-				Date fechaInicioCurso = (Date) fila.get(4);
-				Date fechaFinCurso = (Date) fila.get(5);
-				int creditos = (int) fila.get(6);
-				double precio = Double.valueOf(fila.get(7).toString()).doubleValue();
-				TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
-				EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
-				String facultad = (String) fila.get(10);
-				int edicion = (int) fila.get(11);
-				String mensaje = (String) fila.get(12);
-
-				CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
-						creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
-				cursos.add(curso);
-			}
-		} 
+			cursos = convertirResultadoEnCursos(resultado);
+		}
 		return cursos;
 	}
+
 	protected static boolean isResultSetMayorCero(ResultSet rs) throws SQLException {
-	    if (rs.next()) {
-	        int count = rs.getInt(1);
-	        return count > 0;
-	    }
-	    return false;
+		if (rs.next()) {
+			int count = rs.getInt(1);
+			return count > 0;
+		}
+		return false;
 	}
+
+	public List<CursoPropio> convertirResultadoEnCursos(Vector<Object> resultado) {
+		List<CursoPropio> cursos = new ArrayList<>();
+
+		for (Object obj : resultado) {
+			Vector<Object> fila = (Vector<Object>) obj;
+			int id = (int) fila.get(0);
+			String nombre = (String) fila.get(1);
+			String dniDirector = (String) fila.get(2);
+			String dniSecretario = (String) fila.get(3);
+			Date fechaInicioCurso = (Date) fila.get(4);
+			Date fechaFinCurso = (Date) fila.get(5);
+			int creditos = (int) fila.get(6);
+			double precio = Double.parseDouble(fila.get(7).toString());
+			TipoCurso tipo = TipoCurso.valueOf((String) fila.get(8));
+			EstadoCurso estadoCurso = EstadoCurso.valueOf((String) fila.get(9));
+			String facultad = (String) fila.get(10);
+			int edicion = (int) fila.get(11);
+			String mensaje = (String) fila.get(12);
+
+			CursoPropio curso = new CursoPropio(facultad, estadoCurso, tipo, dniDirector, dniSecretario, id, nombre,
+					creditos, fechaInicioCurso, fechaFinCurso, precio, edicion, mensaje);
+			cursos.add(curso);
+		}
+
+		return cursos;
+	}
+
 }
