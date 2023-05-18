@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -19,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 import main.java.negocio.controllers.GestorMatriculacion;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.ModoPago;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -31,6 +34,7 @@ public class PantallaMatriculacion extends JFrame {
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	public PantallaMatriculacion() {
 		setIconImage(
@@ -55,12 +59,19 @@ public class PantallaMatriculacion extends JFrame {
 		btnTar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				main.java.presentacion.PantallaDatosAlumno p = new main.java.presentacion.PantallaDatosAlumno();
-				p.metoPago.setText(ModoPago.TARJETA_CREDITO.toString());
-				p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-				p.ID = cursoSeleccionado.getId();
-				p.setVisible(true);
+				main.java.presentacion.PantallaDatosAlumno p;
 				setVisible(false);
+				try {
+					p = new main.java.presentacion.PantallaDatosAlumno();
+					p.metoPago.setText(ModoPago.TARJETA_CREDITO.toString());
+					p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
+					p.id = cursoSeleccionado.getId();
+					p.setVisible(true);
+				} catch (SQLException e1) {
+					logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
+				}
+				
+			
 
 			}
 		});
@@ -76,11 +87,17 @@ public class PantallaMatriculacion extends JFrame {
 		btnTrans.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				main.java.presentacion.PantallaDatosAlumno p = new main.java.presentacion.PantallaDatosAlumno();
-				p.setVisible(true);
-				p.metoPago.setText(ModoPago.TRANSFERENCIA.toString());
-				p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-				p.ID = cursoSeleccionado.getId();
+				main.java.presentacion.PantallaDatosAlumno p;
+				try {
+					p = new main.java.presentacion.PantallaDatosAlumno();
+					p.setVisible(true);
+					p.metoPago.setText(ModoPago.TRANSFERENCIA.toString());
+					p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
+					p.id = cursoSeleccionado.getId();
+				} catch (SQLException e1) {
+					logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
+				}
+				
 			}
 		});
 		btnTrans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -142,7 +159,7 @@ public class PantallaMatriculacion extends JFrame {
 							listaCursos.clearSelection();
 						}
 					} catch (Exception e) {
-						e.printStackTrace();
+						logger.info("Se ha producido un error al comprobar la existencia de la matricula: " + e.getMessage());
 					}
 				}
 			}

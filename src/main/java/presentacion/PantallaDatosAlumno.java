@@ -7,12 +7,18 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.SecureRandom;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JButton;
 import java.awt.Cursor;
 
@@ -23,6 +29,7 @@ import main.java.negocio.entities.EstadoCurso;
 
 import main.java.negocio.entities.Matricula;
 import main.java.negocio.entities.ModoPago;
+import main.java.persistencia.GestorBD;
 
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -47,17 +54,20 @@ public class PantallaDatosAlumno extends JFrame {
 	protected JLabel lblApellido;
 	private String tipoLetra = "Tahoma";
 
-	int ID;
+	int id;
 	protected JLabel lblDNIAlu;
 	main.java.presentacion.PantallaEstudiante p;
 	protected JTextField metoPago;
 	protected Matricula matricula;
+	private static final SecureRandom random = new SecureRandom();
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
-	public PantallaDatosAlumno() {
+
+	public PantallaDatosAlumno() throws SQLException{
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(PantallaDatosAlumno.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM\r\n");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 770, 618);
 		contentPane = new JPanel();
 		contentPane.setFont(new Font(tipoLetra, Font.BOLD, 15));
@@ -67,7 +77,7 @@ public class PantallaDatosAlumno extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel
 				.setIcon(new ImageIcon(PantallaDatosAlumno.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
@@ -75,7 +85,7 @@ public class PantallaDatosAlumno extends JFrame {
 
 		dniAlu = new JTextField();
 		dniAlu.setEditable(false);
-		dniAlu.setText(main.java.presentacion.PantallaLogin.dni.toString());
+		dniAlu.setText(main.java.presentacion.PantallaLogin.dni);
 		dniAlu.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
 		dniAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		dniAlu.setBounds(428, 235, 259, 39);
@@ -86,25 +96,24 @@ public class PantallaDatosAlumno extends JFrame {
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBounds(20, 496, 114, 49);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaMatriculacion p = new main.java.presentacion.PantallaMatriculacion();
+				main.java.presentacion.PantallaMatriculacion m = new main.java.presentacion.PantallaMatriculacion();
 				try {
-					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
+					GestorConsultas.listarCursosPorEstado(m.modelo, EstadoCurso.EN_MATRICULACION);
 					setVisible(false);
-					p.setVisible(true);
+					m.setVisible(true);
 				} catch (Exception e1) {
-					e1.printStackTrace();
 				}
 
 			}
 		});
 
 		nomAlu = new JTextField();
-		nomAlu.setText(devolverNombre(main.java.presentacion.PantallaLogin.nom.toString()));
+		nomAlu.setText(devolverNombre(main.java.presentacion.PantallaLogin.nom));
 		nomAlu.setEditable(false);
 		nomAlu.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
 		nomAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
@@ -113,9 +122,9 @@ public class PantallaDatosAlumno extends JFrame {
 		contentPane.add(nomAlu);
 
 		apeAlu = new JTextField();
-		apeAlu.setText(devolverApellido(main.java.presentacion.PantallaLogin.nom.toString()));
+		apeAlu.setText(devolverApellido(main.java.presentacion.PantallaLogin.nom));
 		apeAlu.setEditable(false);
-		apeAlu.setBorder(new MatteBorder(0, 0, 1, 0, (Color) SystemColor.textHighlight));
+		apeAlu.setBorder(new MatteBorder(0, 0, 1, 0, SystemColor.textHighlight));
 		apeAlu.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		apeAlu.setColumns(10);
 		apeAlu.setBounds(62, 313, 259, 39);
@@ -130,7 +139,7 @@ public class PantallaDatosAlumno extends JFrame {
 		btnPagar = new JButton("Pagar");
 		btnPagar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPagar.setForeground(Color.WHITE);
-		btnPagar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnPagar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnPagar.setBackground(SystemColor.textHighlight);
 		btnPagar.setBounds(594, 490, 114, 49);
 		btnPagar.setVisible(true);
@@ -144,30 +153,38 @@ public class PantallaDatosAlumno extends JFrame {
 					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar con tarjeta?", "ATENCION",
 							JOptionPane.OK_CANCEL_OPTION);
 					if (respuesta == JOptionPane.OK_OPTION) {
-						matricula = new Matricula(numRand(), nomAlu.getText().toString(), apeAlu.getText().toString(),
-								ModoPago.valueOf(ModoPago.TARJETA_CREDITO.toString()), fechaActual,
-								dniAlu.getText().toString(), Double.parseDouble(textPrecio.getText().toString()), ID);
-						GestorMatriculacion.realizarMatriculacion(matricula);
+						matricula = new Matricula(numRand(), nomAlu.getText(), apeAlu.getText(),
+								ModoPago.valueOf(ModoPago.TARJETA_CREDITO.toString()), fechaActual, dniAlu.getText(),
+								Double.parseDouble(textPrecio.getText()), id);
+						try {
+							GestorMatriculacion.realizarMatriculacion(matricula);
+						} catch (SQLException e1) {
+							logger.info("Se ha producido un error al realizar matriculacion: " + e1.getMessage());
+						}
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
 
 						setVisible(false);
-						main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
+						p = new main.java.presentacion.PantallaEstudiante();
 						p.setVisible(true);
 					}
 				} else if (metoPago.getText().equals(ModoPago.TRANSFERENCIA.toString())) {
 					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar mediante transferencia bancaria?",
 							"ATENCION", JOptionPane.OK_CANCEL_OPTION);
 					if (respuesta == JOptionPane.OK_OPTION) {
-						matricula = new Matricula(numRand(), nomAlu.getText().toString(), apeAlu.getText().toString(),
-								ModoPago.valueOf(ModoPago.TRANSFERENCIA.toString()), fechaActual,
-								dniAlu.getText().toString(), Double.parseDouble(textPrecio.getText().toString()), ID);
-						GestorMatriculacion.realizarMatriculacion(matricula);
+						matricula = new Matricula(numRand(), nomAlu.getText(), apeAlu.getText(),
+								ModoPago.valueOf(ModoPago.TRANSFERENCIA.toString()), fechaActual, dniAlu.getText(),
+								Double.parseDouble(textPrecio.getText()), id);
+						try {
+							GestorMatriculacion.realizarMatriculacion(matricula);
+						} catch (SQLException e1) {
+							logger.info("Se ha producido un error al realizar matriculacion: " + e1.getMessage());
+						}
 
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
 						setVisible(false);
-						main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
+						p = new main.java.presentacion.PantallaEstudiante();
 						p.setVisible(true);
 					}
 				}
@@ -209,7 +226,7 @@ public class PantallaDatosAlumno extends JFrame {
 		contentPane.add(lblPrecio);
 
 		metoPago = new JTextField();
-		metoPago.setFont(new Font("Tahoma", Font.BOLD, 13));
+		metoPago.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		metoPago.setEditable(false);
 		metoPago.setColumns(10);
 		metoPago.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
@@ -218,7 +235,7 @@ public class PantallaDatosAlumno extends JFrame {
 
 		JLabel lblMetoPago = new JLabel("Metodo de pago:");
 		lblMetoPago.setForeground(SystemColor.textHighlight);
-		lblMetoPago.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lblMetoPago.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblMetoPago.setBounds(428, 284, 259, 39);
 		contentPane.add(lblMetoPago);
 
@@ -235,8 +252,7 @@ public class PantallaDatosAlumno extends JFrame {
 	}
 
 	public int numRand() {
-		int numero = (int) (Math.random() * 100 + 1);
-		return numero;
+		return random.nextInt(100) + 1;
 	}
 
 }

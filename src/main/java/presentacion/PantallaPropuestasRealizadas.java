@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -21,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -32,6 +35,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	public PantallaPropuestasRealizadas() {
 
@@ -91,7 +95,11 @@ public class PantallaPropuestasRealizadas extends JFrame {
 					JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
 
-					GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+					try {
+						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+					} catch (SQLException e) {
+						logger.info("Se ha producido un error al eliminar el curso: " + e.getMessage());
+					}
 					modelo.removeElement(cursoSeleccionado);
 
 				}
@@ -153,13 +161,13 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		a.id.setText(Integer.toString(cursoSeleccionado.getId()));
 		a.dniProf.setText(cursoSeleccionado.getDniDirector().toString());
 		a.dniSec.setText(cursoSeleccionado.getDniSecretario().toString());
-		a.Edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
-		a.NombreCurso.setText(cursoSeleccionado.getNombre().toString());
-		a.NumCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
+		a.edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
+		a.nombreCurso.setText(cursoSeleccionado.getNombre().toString());
+		a.numCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
 		a.facultad.setText(cursoSeleccionado.getCentro().toString());
 		a.precio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-		a.FechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
-		a.FechaFin.setText(cursoSeleccionado.getFechaFin().toString());
+		a.fechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
+		a.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
 		a.mensaje = cursoSeleccionado.getMensaje().toString();
 	}
 

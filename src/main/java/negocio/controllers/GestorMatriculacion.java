@@ -1,5 +1,7 @@
 package main.java.negocio.controllers;
 
+import java.sql.SQLException;
+
 import main.java.negocio.entities.*;
 import main.java.persistencia.MatriculaDAO;
 
@@ -7,14 +9,17 @@ public class GestorMatriculacion {
 
 	static MatriculaDAO matDAO;
 
-	public static void realizarMatriculacion(Matricula mat) {
+	private GestorMatriculacion() {
+	}
+
+	public static void realizarMatriculacion(Matricula mat) throws SQLException {
 		matDAO = new MatriculaDAO();
 		matDAO.crearNuevaMatricula(mat);
 	}
 
-	public static boolean existe(int id_curso, String dni) throws Exception {
+	public static boolean existe(int idCurso, String dni) throws Exception {
 		matDAO = new MatriculaDAO();
-		return matDAO.existeMatricula(id_curso, dni);
+		return matDAO.existeMatricula(idCurso, dni);
 	}
 
 }

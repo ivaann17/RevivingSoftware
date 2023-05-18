@@ -22,8 +22,6 @@ import javax.swing.SwingConstants;
 public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
-	protected final JTextField NombreUsu;
-	protected final JTextField TipoUsuario;
 
 	public PantallaJefeGabineteVicerrectorado() {
 		setTitle("UCLM");
@@ -54,8 +52,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				
 				}
 
 			}
@@ -68,29 +65,9 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		btnVerCursos.setBounds(45, 122, 228, 76);
 		contentPane.add(btnVerCursos);
 
-		NombreUsu = new JTextField();
-		NombreUsu.setText(main.java.presentacion.PantallaLogin.nom.toString());
-		NombreUsu.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		NombreUsu.setEditable(false);
-		NombreUsu.setHorizontalAlignment(SwingConstants.LEFT);
-		NombreUsu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		NombreUsu.setColumns(10);
-		NombreUsu.setBorder(null);
-		NombreUsu.setBackground(Color.WHITE);
-		NombreUsu.setBounds(552, 214, 252, 19);
-		contentPane.add(NombreUsu);
+		contentPane.add(main.java.presentacion.PantallaEstudiante.createNombreUsuTextField());
 
-		TipoUsuario = new JTextField();
-		TipoUsuario.setEditable(false);
-		TipoUsuario.setText(main.java.presentacion.PantallaLogin.tipo.toString());
-		TipoUsuario.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		TipoUsuario.setHorizontalAlignment(SwingConstants.LEFT);
-		TipoUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		TipoUsuario.setColumns(10);
-		TipoUsuario.setBorder(null);
-		TipoUsuario.setBackground(Color.WHITE);
-		TipoUsuario.setBounds(552, 253, 252, 19);
-		contentPane.add(TipoUsuario);
+		contentPane.add(main.java.presentacion.PantallaEstudiante.createTipoUsuarioTextField());
 
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2
@@ -129,8 +106,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					p.setVisible(true);
 
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+	
 				}
 
 			}
