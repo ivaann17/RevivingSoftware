@@ -5,6 +5,7 @@ on:
       - Master
       - Develop
       - Feature-BBDD
+      - Feature-Calidad
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:

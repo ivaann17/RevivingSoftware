@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -22,6 +24,7 @@ import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -30,13 +33,14 @@ import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class PantallaComenzarCurso extends JFrame {
+public class PantallaComenzarCurso extends JFrame  {
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
 	protected JLabel lblCursosMatriculados;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	public PantallaComenzarCurso() {
 		setIconImage(
@@ -72,9 +76,15 @@ public class PantallaComenzarCurso extends JFrame {
 				if (respuesta == JOptionPane.OK_OPTION) {
 					JOptionPane.showMessageDialog(null, "El curso se va a impartir.", "INFORMACION",
 							JOptionPane.INFORMATION_MESSAGE);
+					try {
+						GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_IMPARTIZICION);
+						modelo.removeElement(cursoSeleccionado);
+					} catch (SQLException e1) {
+						logger.info("Se ha producido un error al editar el estado del curso: " + e1.getMessage());
+					}
+					
 
-					GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_IMPARTIZICION);
-					modelo.removeElement(cursoSeleccionado);
+					
 
 				}
 			}
@@ -157,8 +167,6 @@ public class PantallaComenzarCurso extends JFrame {
 							}
 
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
 
 					}

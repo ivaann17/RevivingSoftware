@@ -3,39 +3,39 @@ package main.java.negocio.entities;
 import java.sql.Date;
 
 public class Matricula {
-	int ID_Matricula;
+	int idMatricula;
 	String nombre;
 	String apellido;
 	ModoPago tipoPago;
 	private java.util.Date fecha;
 	String dni;
 	double precio;
-	int ID_Curso;
+	int idCurso;
 
-	public Matricula(int iD_Matricula, String nombre, String apellido, ModoPago tipoPago, java.util.Date fechaActual,
-			String dni, double precio, int iD_Curso) {
+	public Matricula(int idMatricula, String nombre, String apellido, ModoPago tipoPago, java.util.Date fechaActual,
+			String dni, double precio, int idCurso) {
 		super();
-		ID_Matricula = iD_Matricula;
+		this.idMatricula = idMatricula;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipoPago = tipoPago;
 		this.fecha = fechaActual;
 		this.dni = dni;
 		this.precio = precio;
-		ID_Curso = iD_Curso;
+		this.idCurso = idCurso;
 	}
 
-	public Matricula(int iD_Matricula) {
+	public Matricula(int idMatricula) {
 		super();
-		ID_Matricula = iD_Matricula;
+		this.idMatricula = idMatricula;
 	}
 
 	public int getID_Matricula() {
-		return ID_Matricula;
+		return idMatricula;
 	}
 
-	public void setID_Matricula(int iD_Matricula) {
-		ID_Matricula = iD_Matricula;
+	public void setID_Matricula(int idMatricula) {
+		this.idMatricula = idMatricula;
 	}
 
 	public String getNombre() {
@@ -87,18 +87,18 @@ public class Matricula {
 	}
 
 	public int getID_Curso() {
-		return ID_Curso;
+		return idCurso;
 	}
 
-	public void setID_Curso(int iD_Curso) {
-		ID_Curso = iD_Curso;
+	public void setID_Curso(int idCurso) {
+		this.idCurso = idCurso;
 	}
 
 	@Override
 	public String toString() {
-		return "Matricula [ID_Matricula=" + ID_Matricula + ", nombre=" + nombre + ", apellido=" + apellido
+		return "Matricula [ID_Matricula=" + idMatricula + ", nombre=" + nombre + ", apellido=" + apellido
 				+ ", tipoPago=" + tipoPago + ", fecha=" + fecha + ", dni=" + dni + ", precio=" + precio + ", ID_Curso="
-				+ ID_Curso + "]";
+				+ idCurso + "]";
 	}
 
 }

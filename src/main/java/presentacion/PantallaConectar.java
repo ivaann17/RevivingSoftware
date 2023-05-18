@@ -34,7 +34,6 @@ public class PantallaConectar extends JFrame {
 					PantallaConectar frame = new PantallaConectar();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
 				}
 			}
 		});

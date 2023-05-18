@@ -14,10 +14,10 @@ public class LoginDAO {
 	public String getDNI(String usu) throws Exception {
 
 		String dni = null;
-		try {
-			String sqlDNI = "SELECT DNI FROM usuarios WHERE usuario = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
+		String sqlDNI = "SELECT DNI FROM usuarios WHERE usuario = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setString(1, usu);
 			ResultSet rs = gestorBD.operation(ps);
@@ -26,8 +26,6 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return dni;
 
@@ -36,10 +34,9 @@ public class LoginDAO {
 	public String getNombre(String usu) throws Exception {
 
 		String nom = null;
-		try {
-			String sqlDNI = "SELECT nombre FROM usuarios WHERE usuario = ?";
+		String sql = "SELECT nombre FROM usuarios WHERE usuario = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setString(1, usu);
 			ResultSet rs = gestorBD.operation(ps);
@@ -48,9 +45,7 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} 
 		return nom;
 
 	}
@@ -58,10 +53,9 @@ public class LoginDAO {
 	public String getApellidosLog(String usu) throws Exception {
 
 		String ape = null;
-		try {
-			String sqlDNI = "SELECT apellido FROM usuarios WHERE usuario = ?";
+		String sql = "SELECT apellido FROM usuarios WHERE usuario = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setString(1, usu);
 			ResultSet rs = gestorBD.operation(ps);
@@ -70,9 +64,7 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} 
 		return ape;
 
 	}
@@ -80,10 +72,10 @@ public class LoginDAO {
 	public String getTipoUsuLog(String usu) throws Exception {
 
 		String tipo = null;
-		try {
-			String sqlDNI = "SELECT tipo FROM usuarios WHERE usuario = ?";
 
-			PreparedStatement ps = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
+		String sql = "SELECT tipo FROM usuarios WHERE usuario = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			ps.setString(1, usu);
 			ResultSet rs = gestorBD.operation(ps);
@@ -92,24 +84,21 @@ public class LoginDAO {
 
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} 
 		return tipo;
 
 	}
 
 	public Vector<Object> loginUsuario(String usuario) {
-		String sqlUser = "SELECT * FROM usuarios WHERE usuario = ?";
+		String sql = "SELECT * FROM usuarios WHERE usuario = ?";
 
 		Vector<Object> rUser = null;
-		try {
-			PreparedStatement psU = GestorBD.mBD.prepareStatement(sqlUser, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			psU.setString(1, usuario);
-			rUser = GestorBD.select(psU);
+			ps.setString(1, usuario);
+			rUser = GestorBD.select(ps);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 
@@ -118,17 +107,15 @@ public class LoginDAO {
 
 	public Vector<Object> loginContra(String contraseña) {
 
-		String sqlPass = "SELECT * FROM usuarios WHERE contraseña = ?";
+		String sql = "SELECT * FROM usuarios WHERE contraseña = ?";
 
 		Vector<Object> rPass = null;
-		try {
 
-			PreparedStatement psP = GestorBD.mBD.prepareStatement(sqlPass, Statement.RETURN_GENERATED_KEYS);
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			psP.setString(1, contraseña);
-			rPass = GestorBD.select(psP);
+			ps.setString(1, contraseña);
+			rPass = GestorBD.select(ps);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 
