@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -20,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -34,6 +36,7 @@ public class PantallaEvaluarCurso extends JFrame {
 	protected final JButton btnRechazar;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	public PantallaEvaluarCurso() {
 		setIconImage(
@@ -72,8 +75,7 @@ public class PantallaEvaluarCurso extends JFrame {
 					try {
 						GestorPropuestasCursos.aceptarPropuesta(cursoSeleccionado);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						logger.info("Se ha producido un error al aceptar la propuesta: " + e1.getMessage());
 					}
 					modelo.removeElement(cursoSeleccionado);
 
@@ -109,11 +111,11 @@ public class PantallaEvaluarCurso extends JFrame {
 						else {
 							try {
 								GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado, mensaje);
+								modelo.removeElement(cursoSeleccionado);
 							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								logger.info("Se ha producido un error al rechazar la propuesta: " + e1.getMessage());
 							}
-							modelo.removeElement(cursoSeleccionado);
+						
 						}
 					}
 

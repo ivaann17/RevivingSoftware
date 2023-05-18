@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -38,6 +40,7 @@ public class PantallaComenzarCurso extends JFrame  {
 	protected JLabel lblCursosMatriculados;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	public PantallaComenzarCurso() {
 		setIconImage(
@@ -77,8 +80,7 @@ public class PantallaComenzarCurso extends JFrame  {
 						GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_IMPARTIZICION);
 						modelo.removeElement(cursoSeleccionado);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						logger.info("Se ha producido un error al editar el estado del curso: " + e1.getMessage());
 					}
 					
 

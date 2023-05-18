@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -23,6 +24,7 @@ import javax.swing.event.ListSelectionListener;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -34,6 +36,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 	private static final JList<CursoPropio> listaCursos = new JList<>();
 	DefaultListModel<CursoPropio> modelo;
 	private String tipoLetra = "Tahoma";
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	private transient CursoPropio cursoSeleccionado;
 
@@ -97,8 +100,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 					try {
 						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						logger.info("Se ha producido un error al eliminar el curso: " + e.getMessage());
 					}
 					modelo.removeElement(cursoSeleccionado);
 

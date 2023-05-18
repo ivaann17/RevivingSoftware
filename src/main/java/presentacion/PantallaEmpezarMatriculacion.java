@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -33,6 +35,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	public PantallaEmpezarMatriculacion() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -69,8 +72,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 					try {
 						GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_MATRICULACION);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						logger.info("Se ha producido un error al editar el estado del curso: " + e1.getMessage());
 					}
 					modelo.removeElement(cursoSeleccionado);
 					JOptionPane.showMessageDialog(null, "El curso ha sido dado de alta.", "INFORMACION",
@@ -99,8 +101,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 					try {
 						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						logger.info("Se ha producido un error al eliminar el curso: " + e1.getMessage());
 					}
 					modelo.removeElement(cursoSeleccionado);
 				}

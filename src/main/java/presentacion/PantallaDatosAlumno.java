@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
 
@@ -28,6 +29,7 @@ import main.java.negocio.entities.EstadoCurso;
 
 import main.java.negocio.entities.Matricula;
 import main.java.negocio.entities.ModoPago;
+import main.java.persistencia.GestorBD;
 
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -58,6 +60,7 @@ public class PantallaDatosAlumno extends JFrame {
 	protected JTextField metoPago;
 	protected Matricula matricula;
 	private static final SecureRandom random = new SecureRandom();
+	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 
 	public PantallaDatosAlumno() throws SQLException{
@@ -156,8 +159,7 @@ public class PantallaDatosAlumno extends JFrame {
 						try {
 							GestorMatriculacion.realizarMatriculacion(matricula);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							logger.info("Se ha producido un error al realizar matriculacion: " + e1.getMessage());
 						}
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -176,8 +178,7 @@ public class PantallaDatosAlumno extends JFrame {
 						try {
 							GestorMatriculacion.realizarMatriculacion(matricula);
 						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							logger.info("Se ha producido un error al realizar matriculacion: " + e1.getMessage());
 						}
 
 						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
