@@ -193,47 +193,18 @@ public class PantallaLogin extends JFrame {
 				String usu = usuarioText.getText();
 
 				if (usu.length() == 0) {
-					JOptionPane.showMessageDialog(null, "Debe introducir su usuario.", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
+					mostrarErrorUsuarioVacio();
 				} else {
-					btnRecuperar.setVisible(true);
-					btnSiguiente.setVisible(false);
-					usuarioText.setVisible(false);
-					contrasenaText.setVisible(true);
-					loginButton.setVisible(true);
-					userLabel.setVisible(false);
-					passwordLabel.setVisible(true);
-					btnNoAcceder.setVisible(false);
-					btnNewButton.setVisible(true);
-					user.setVisible(true);
+					mostrarComponentesLogin();
+					configurarBotonLogin(frmUclm);
 					user.setText(" Usuario: " + usuarioText.getText());
-					frmUclm.getRootPane().setDefaultButton(loginButton);
 					contrasenaText.requestFocus();
 
 					loginButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent l) {
-							Vector<Object> rPass;
-							Vector<Object> rUser;
-							try {
-								char[] password = contrasenaText.getPassword();
-								String contrasena = new String(password);
-								rPass = GestorLogin.loginContra(contrasena);
-								rUser = GestorLogin.loginUsuario(usuarioText.getText());
-								if (!rPass.isEmpty() && !rUser.isEmpty()) {
-								  
-								        cambioPantalla(usuarioText.getText());
-								   
-								} else {
-								    mostrarErrorDatosIncorrectos();
-								    reiniciarPantalla();
-								}
-
-							} catch (Exception e1) {
-
-							}
+							validarCredenciales();
 						}
 					});
-
 				}
 			}
 		});
@@ -312,16 +283,56 @@ public class PantallaLogin extends JFrame {
 		}
 
 	}
+
 	private void mostrarErrorDatosIncorrectos() {
-	    JOptionPane.showMessageDialog(null,
-	            "El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.",
-	            "ERROR", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null,
+				"El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.", "ERROR",
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void reiniciarPantalla() {
-	    setVisible(false);
-	    new PantallaLogin();
+		setVisible(false);
+		new PantallaLogin();
+	}
+
+	private void mostrarErrorUsuarioVacio() {
+		JOptionPane.showMessageDialog(null, "Debe introducir su usuario.", "ERROR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void mostrarComponentesLogin() {
+		btnRecuperar.setVisible(true);
+		btnSiguiente.setVisible(false);
+		usuarioText.setVisible(false);
+		contrasenaText.setVisible(true);
+		loginButton.setVisible(true);
+		userLabel.setVisible(false);
+		passwordLabel.setVisible(true);
+		btnNoAcceder.setVisible(false);
+		btnNewButton.setVisible(true);
+		user.setVisible(true);
 	}
 
 
+	private void validarCredenciales() {
+		char[] password = contrasenaText.getPassword();
+		String contrasena = new String(password);
+		Vector<Object> rPass;
+		Vector<Object> rUser;
+
+		try {
+			rPass = GestorLogin.loginContra(contrasena);
+			rUser = GestorLogin.loginUsuario(usuarioText.getText());
+
+			if (!rPass.isEmpty() && !rUser.isEmpty()) {
+				cambioPantalla(usuarioText.getText());
+			} else {
+				mostrarErrorDatosIncorrectos();
+				reiniciarPantalla();
+			}
+		} catch (Exception e1) {
+		}
+	}
+	private void configurarBotonLogin(JFrame frame) {
+	    frame.getRootPane().setDefaultButton(loginButton);
+	}
 }

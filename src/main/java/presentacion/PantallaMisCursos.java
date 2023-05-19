@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -27,13 +28,14 @@ import java.awt.Cursor;
 public class PantallaMisCursos extends JFrame {
 
 	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
-	public CursoPropio cursoSeleccionado;
+	DefaultListModel<CursoPropio> modelo;
+	public transient CursoPropio cursoSeleccionado;
+	private static String tipoLetra = "Tahoma";
 
 	public PantallaMisCursos() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaMisCursos.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -50,15 +52,16 @@ public class PantallaMisCursos extends JFrame {
 
 		JLabel lblCursosMatriculados = new JLabel("Cursos matriculados:");
 		lblCursosMatriculados.setVisible(true);
-		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCursosMatriculados.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		lblCursosMatriculados.setBounds(24, 90, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
 		JButton btnInfo = new JButton("Info");
 		btnInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnInfo.setFocusPainted(false);
+		btnInfo.setVisible(false);
 		btnInfo.setForeground(Color.WHITE);
-		btnInfo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnInfo.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnInfo.setBackground(SystemColor.textHighlight);
 		btnInfo.setBounds(272, 398, 226, 75);
 		contentPane.add(btnInfo);
@@ -70,7 +73,7 @@ public class PantallaMisCursos extends JFrame {
 				a.btnVolver.setVisible(false);
 				a.btnVolver2.setVisible(false);
 				a.btnVolver3.setVisible(true);
-				main.java.presentacion.PantallaPropuestasRealizadas.infoCurso(a, cursoSeleccionado);
+				main.java.presentacion.PantallaPropuestasRealizadas.infoCurso(cursoSeleccionado);
 
 			}
 		});
@@ -79,7 +82,7 @@ public class PantallaMisCursos extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
@@ -91,10 +94,10 @@ public class PantallaMisCursos extends JFrame {
 			}
 		});
 
-		listaCursos = new JList();
+		listaCursos = new JList<>();
 		listaCursos.setBounds(23, 132, 721, 258);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel();
+		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
 		listaCursos.addListSelectionListener(new ListSelectionListener() {

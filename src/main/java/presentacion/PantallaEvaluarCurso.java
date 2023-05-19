@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -36,13 +37,14 @@ public class PantallaEvaluarCurso extends JFrame {
 	protected final JButton btnRechazar;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	private static String tipoLetra = "Tahoma";
+	private static final Logger logger = Logger.getLogger(PantallaEvaluarCurso.class.getName());
 
 	public PantallaEvaluarCurso() {
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(PantallaEvaluarCurso.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -59,7 +61,7 @@ public class PantallaEvaluarCurso extends JFrame {
 
 		propuestas = new JLabel("Propuestas de cursos:");
 		propuestas.setVisible(true);
-		propuestas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		propuestas.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		propuestas.setBounds(54, 98, 379, 42);
 		contentPane.add(propuestas);
 
@@ -84,7 +86,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		});
 		btnAceptar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAceptar.setForeground(Color.WHITE);
-		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnAceptar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnAceptar.setBackground(SystemColor.textHighlight);
 		btnAceptar.setBounds(54, 398, 226, 75);
 		btnAceptar.setVisible(false);
@@ -115,7 +117,7 @@ public class PantallaEvaluarCurso extends JFrame {
 							} catch (SQLException e1) {
 								logger.info("Se ha producido un error al rechazar la propuesta: " + e1.getMessage());
 							}
-						
+
 						}
 					}
 
@@ -125,7 +127,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		});
 		btnRechazar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRechazar.setForeground(Color.WHITE);
-		btnRechazar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnRechazar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnRechazar.setBackground(SystemColor.textHighlight);
 		btnRechazar.setBounds(449, 398, 226, 75);
 		btnRechazar.setVisible(false);
@@ -135,7 +137,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);

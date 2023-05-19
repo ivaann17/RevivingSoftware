@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import main.java.persistencia.*;
@@ -45,7 +46,7 @@ public class PantallaConectar extends JFrame {
 	public PantallaConectar() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PantallaConectar.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(625, 428);
 
 		contentPane = new JPanel();

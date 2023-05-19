@@ -18,16 +18,18 @@ import java.awt.event.ActionListener;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
+	private static String tipoLetra = "Tahoma";
 
 	public PantallaJefeGabineteVicerrectorado() {
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaJefeGabineteVicerrectorado.class.getResource("/IMAGES/descarga.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -52,7 +54,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-				
+
 				}
 
 			}
@@ -60,7 +62,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		btnVerCursos.setFocusPainted(false);
 		btnVerCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVerCursos.setForeground(Color.WHITE);
-		btnVerCursos.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnVerCursos.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnVerCursos.setBackground(SystemColor.textHighlight);
 		btnVerCursos.setBounds(45, 122, 228, 76);
 		contentPane.add(btnVerCursos);
@@ -88,7 +90,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cs.setBackground(new Color(255, 0, 0));
 		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font("Tahoma", Font.BOLD, 13));
+		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		cs.setIconTextGap(15);
 		cs.setIcon(new ImageIcon(PantallaJefeGabineteVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
@@ -106,13 +108,13 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 					p.setVisible(true);
 
 				} catch (Exception e1) {
-	
+
 				}
 
 			}
 		});
 		btnComenzarCursos.setForeground(Color.WHITE);
-		btnComenzarCursos.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnComenzarCursos.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnComenzarCursos.setFocusPainted(false);
 		btnComenzarCursos.setBackground(SystemColor.textHighlight);
 		btnComenzarCursos.setBounds(45, 267, 228, 76);
@@ -121,7 +123,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarResueltos.setForeground(Color.WHITE);
-		btnMostrarResueltos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnMostrarResueltos.setFont(new Font(tipoLetra, Font.BOLD, 15));
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
