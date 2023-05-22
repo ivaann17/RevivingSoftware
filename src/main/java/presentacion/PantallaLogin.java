@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,8 +34,8 @@ import main.java.persistencia.Excepciones.TypeUserException;
 
 public class PantallaLogin extends JFrame {
 
-	protected static JTextField usuarioText;
-	protected static JTextField user;
+	protected static JTextField usuarioText = new JTextField();
+	protected static JTextField user = new JTextField();
 	protected static String tipo = "";
 	protected static String nom = "";
 	protected static String dni = "";
@@ -49,6 +50,7 @@ public class PantallaLogin extends JFrame {
 	protected JLabel userLabel;
 	protected JLabel passwordLabel;
 	protected JLabel lblNewLabel;
+	private static final Logger logger = Logger.getLogger(PantallaLogin.class.getName());
 
 	private static void placeComponents(JPanel panel) {
 
@@ -71,10 +73,8 @@ public class PantallaLogin extends JFrame {
 
 		loginButton = new JButton("Iniciar sesion");
 		loginButton.setFocusPainted(false);
-		loginButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmUclm.dispose();
-			}
+		loginButton.addActionListener(event -> {
+			frmUclm.dispose();
 
 		});
 
@@ -96,7 +96,6 @@ public class PantallaLogin extends JFrame {
 		contrasenaText.setBounds(79, 191, 434, 42);
 		panel.add(contrasenaText);
 
-		usuarioText = new JTextField();
 		usuarioText.setFont(new Font(tipoLetra, Font.PLAIN, 15));
 		usuarioText.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		usuarioText.setName("");
@@ -106,11 +105,9 @@ public class PantallaLogin extends JFrame {
 		usuarioText.setColumns(10);
 
 		btnRecuperar = new JButton("He olvidado mi contraseña");
-		btnRecuperar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				enlaceMan();
+		btnRecuperar.addActionListener(event -> {
+			enlaceMan();
 
-			}
 		});
 		btnRecuperar.setVisible(false);
 		btnRecuperar.setHorizontalAlignment(SwingConstants.LEFT);
@@ -145,7 +142,6 @@ public class PantallaLogin extends JFrame {
 		passwordLabel.setBounds(80, 129, 215, 42);
 		panel.add(passwordLabel);
 
-		user = new JTextField();
 		user.setFont(new Font(tipoLetra, Font.BOLD, 10));
 		user.setBackground(Color.WHITE);
 		user.setBorder(null);
@@ -180,33 +176,32 @@ public class PantallaLogin extends JFrame {
 		btnNewButton.setBounds(44, 316, 114, 49);
 		panel.add(btnNewButton);
 		btnNewButton.setVisible(false);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmUclm.setVisible(false);
-				new main.java.presentacion.PantallaLogin();
+		btnNewButton.addActionListener(event -> {
 
-			}
+			frmUclm.setVisible(false);
+			new main.java.presentacion.PantallaLogin();
+
 		});
 
-		btnSiguiente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String usu = usuarioText.getText();
+		btnSiguiente.addActionListener(event -> {
 
-				if (usu.length() == 0) {
-					mostrarErrorUsuarioVacio();
-				} else {
-					mostrarComponentesLogin();
-					configurarBotonLogin(frmUclm);
-					user.setText(" Usuario: " + usuarioText.getText());
-					contrasenaText.requestFocus();
+			String usu = usuarioText.getText();
 
-					loginButton.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent l) {
-							validarCredenciales();
-						}
-					});
-				}
+			if (usu.length() == 0) {
+				mostrarErrorUsuarioVacio();
+			} else {
+				mostrarComponentesLogin();
+				configurarBotonLogin(frmUclm);
+				user.setText(" Usuario: " + usuarioText.getText());
+				contrasenaText.requestFocus();
+
+				loginButton.addActionListener(ev -> {
+
+					validarCredenciales();
+
+				});
 			}
+
 		});
 
 		lblNewLabel = new JLabel("");
@@ -312,7 +307,6 @@ public class PantallaLogin extends JFrame {
 		user.setVisible(true);
 	}
 
-
 	private void validarCredenciales() {
 		char[] password = contrasenaText.getPassword();
 		String contrasena = new String(password);
@@ -330,9 +324,11 @@ public class PantallaLogin extends JFrame {
 				reiniciarPantalla();
 			}
 		} catch (Exception e1) {
+			logger.info("Se ha producido un error al comprobar la validar credenciales: " + e1.getMessage());
 		}
 	}
+
 	private void configurarBotonLogin(JFrame frame) {
-	    frame.getRootPane().setDefaultButton(loginButton);
+		frame.getRootPane().setDefaultButton(loginButton);
 	}
 }

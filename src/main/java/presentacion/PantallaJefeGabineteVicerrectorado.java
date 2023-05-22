@@ -15,6 +15,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -24,6 +25,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
 	private static String tipoLetra = "Tahoma";
+	private static final Logger logger = Logger.getLogger(PantallaJefeGabineteVicerrectorado.class.getName());
 
 	public PantallaJefeGabineteVicerrectorado() {
 		setTitle("UCLM");
@@ -45,19 +47,17 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton btnVerCursos = new JButton("Estadisticas cursos");
-		btnVerCursos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnVerCursos.addActionListener(event -> {
 
-				try {
-					main.java.presentacion.PantallaEstadisticasCursos p = new main.java.presentacion.PantallaEstadisticasCursos();
-					GestorConsultas.listarCursos(p.modelo);
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-
-				}
-
+			try {
+				main.java.presentacion.PantallaEstadisticasCursos p = new main.java.presentacion.PantallaEstadisticasCursos();
+				GestorConsultas.listarCursos(p.modelo);
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info("Se ha producido un error al mostrar estadisticas: " + e1.getMessage());
 			}
+
 		});
 		btnVerCursos.setFocusPainted(false);
 		btnVerCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -80,11 +80,11 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
-		cs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				PantallaLogin p = new PantallaLogin();
-			}
+		cs.addActionListener(event -> {
+
+			setVisible(false);
+			new PantallaLogin();
+
 		});
 		cs.setHorizontalTextPosition(SwingConstants.LEFT);
 		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -99,19 +99,18 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 		JButton btnComenzarCursos = new JButton("Comenzar cursos");
 		btnComenzarCursos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnComenzarCursos.setVisible(true);
-		btnComenzarCursos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				main.java.presentacion.PantallaComenzarCurso p = new main.java.presentacion.PantallaComenzarCurso();
-				try {
-					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
-					setVisible(false);
-					p.setVisible(true);
+		btnComenzarCursos.addActionListener(event -> {
 
-				} catch (Exception e1) {
+			main.java.presentacion.PantallaComenzarCurso p = new main.java.presentacion.PantallaComenzarCurso();
+			try {
+				GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
+				setVisible(false);
+				p.setVisible(true);
 
-				}
-
+			} catch (Exception e1) {
+				logger.info("Se ha producido un error: " + e1.getMessage());
 			}
+
 		});
 		btnComenzarCursos.setForeground(Color.WHITE);
 		btnComenzarCursos.setFont(new Font(tipoLetra, Font.BOLD, 13));

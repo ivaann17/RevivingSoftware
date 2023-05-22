@@ -71,12 +71,12 @@ public class PantallaEstadisticasCursos extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaJefeGabineteVicerrectorado p = new main.java.presentacion.PantallaJefeGabineteVicerrectorado();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaJefeGabineteVicerrectorado p = new main.java.presentacion.PantallaJefeGabineteVicerrectorado();
+			p.setVisible(true);
+
 		});
 
 		listaCursos.setBounds(54, 108, 684, 267);
@@ -117,16 +117,16 @@ public class PantallaEstadisticasCursos extends JFrame {
 		rdbtnTodos.setBackground(SystemColor.textHighlight);
 		rdbtnTodos.setBounds(280, 434, 109, 39);
 		contentPane.add(rdbtnTodos);
-		rdbtnTodos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					modelo.removeAllElements();
-					GestorConsultas.listarCursos(modelo);
+		rdbtnTodos.addActionListener(event -> {
 
-				} catch (Exception e1) {
-					logger.info(error + e1.getMessage());
-				}
+			try {
+				modelo.removeAllElements();
+				GestorConsultas.listarCursos(modelo);
+
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
+
 		});
 
 		JRadioButton rdbtnFiltrarEdi = new JRadioButton("Ediciones");
@@ -138,17 +138,17 @@ public class PantallaEstadisticasCursos extends JFrame {
 		rdbtnFiltrarEdi.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		rdbtnFiltrarEdi.setBounds(637, 434, 109, 39);
 		contentPane.add(rdbtnFiltrarEdi);
-		rdbtnFiltrarEdi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					listaCursos.clearSelection();
-					modelo.removeAllElements();
-					GestorConsultas.listarCursosPorEdiciones(modelo);
-					rdbtnTodos.setVisible(true);
-				} catch (Exception e1) {
-					logger.info(error + e1.getMessage());
-				}
+		rdbtnFiltrarEdi.addActionListener(event -> {
+
+			try {
+				listaCursos.clearSelection();
+				modelo.removeAllElements();
+				GestorConsultas.listarCursosPorEdiciones(modelo);
+				rdbtnTodos.setVisible(true);
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
+
 		});
 
 		JRadioButton rdbtnFiltrarAcep = new JRadioButton("Aceptados");
@@ -160,18 +160,18 @@ public class PantallaEstadisticasCursos extends JFrame {
 		rdbtnFiltrarAcep.setBackground(SystemColor.textHighlight);
 		rdbtnFiltrarAcep.setBounds(518, 434, 109, 39);
 		contentPane.add(rdbtnFiltrarAcep);
-		rdbtnFiltrarAcep.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					modelo.removeAllElements();
-					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.EN_IMPARTICION);
-					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.EN_MATRICULACION);
-					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.VALIDADO);
-					rdbtnTodos.setVisible(true);
-				} catch (Exception e1) {
-					logger.info(error + e1.getMessage());
-				}
+		rdbtnFiltrarAcep.addActionListener(event -> {
+
+			try {
+				modelo.removeAllElements();
+				GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.EN_IMPARTICION);
+				GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.EN_MATRICULACION);
+				GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.VALIDADO);
+				rdbtnTodos.setVisible(true);
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
+
 		});
 
 		JRadioButton rdbtnFiltrarRecha = new JRadioButton("Rechazados");
@@ -183,17 +183,17 @@ public class PantallaEstadisticasCursos extends JFrame {
 		rdbtnFiltrarRecha.setBackground(SystemColor.textHighlight);
 		rdbtnFiltrarRecha.setBounds(399, 434, 109, 39);
 		contentPane.add(rdbtnFiltrarRecha);
-		rdbtnFiltrarRecha.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
+		rdbtnFiltrarRecha.addActionListener(event -> {
 
-					modelo.removeAllElements();
-					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.PROPUESTA_RECHAZADA);
-					rdbtnTodos.setVisible(true);
-				} catch (Exception e1) {
-					logger.info(error + e1.getMessage());
-				}
+			try {
+
+				modelo.removeAllElements();
+				GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.PROPUESTA_RECHAZADA);
+				rdbtnTodos.setVisible(true);
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
+
 		});
 
 		ButtonGroup buttonGroup = new ButtonGroup();

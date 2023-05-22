@@ -48,22 +48,20 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton btnMostrarHistorial = new JButton("Historial \r\nde \r\npropuestas");
-		btnMostrarHistorial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnMostrarHistorial.addActionListener(event -> {
 
-				try {
-					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					String nombre = main.java.presentacion.PantallaEstudiante.createNombreUsuTextField().getText()
-							.replaceAll("\\s.*", "");
+			try {
+				main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
+				String nombre = main.java.presentacion.PantallaEstudiante.createNombreUsuTextField().getText()
+						.replaceAll("\\s.*", "");
 
-					GestorConsultas.listarHistorial(p.modelo, dni(nombre));
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-					logger.info("Se ha producido un error : " + e1.getMessage());
-				}
-
+				GestorConsultas.listarHistorial(p.modelo, dni(nombre));
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info("Se ha producido un error : " + e1.getMessage());
 			}
+
 		});
 		btnMostrarHistorial.setFocusPainted(false);
 		btnMostrarHistorial.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -80,13 +78,12 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton btnRealizarPropuesta = new JButton("Realizar \r\npropuesta");
-		btnRealizarPropuesta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
-				setVisible(false);
-				p.setVisible(true);
+		btnRealizarPropuesta.addActionListener(event -> {
 
-			}
+			PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
+			setVisible(false);
+			p.setVisible(true);
+
 		});
 		btnRealizarPropuesta.setFocusPainted(false);
 		btnRealizarPropuesta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -107,11 +104,11 @@ public class PantallaDireccionCursos extends JFrame {
 		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
-		cs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				new PantallaLogin();
-			}
+		cs.addActionListener(event -> {
+
+			setVisible(false);
+			new PantallaLogin();
+
 		});
 		cs.setHorizontalTextPosition(SwingConstants.LEFT);
 		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -135,6 +132,7 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
+					logger.info("Se ha producido un error : " + e1.getMessage());
 				}
 			}
 
@@ -164,7 +162,7 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-
+					logger.info("Se ha producido un error : " + e1.getMessage());
 				}
 
 			}

@@ -71,13 +71,12 @@ public class PantallaConectar extends JFrame {
 		contentPane.getRootPane().setDefaultButton(conectBtn);
 		contentPane.add(conectBtn);
 
-		conectBtn.addActionListener((ActionListener) new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		conectBtn.addActionListener(event -> {
 
-				GestorBD.conectarBD();
-				setVisible(false);
-				new main.java.presentacion.PantallaLogin();
-			}
+			GestorBD.conectarBD();
+			setVisible(false);
+			new main.java.presentacion.PantallaLogin();
+
 		});
 	}
 }

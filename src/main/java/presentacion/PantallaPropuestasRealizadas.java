@@ -73,12 +73,12 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
+			p.setVisible(true);
+
 		});
 
 		listaCursos.setBounds(21, 153, 723, 207);
@@ -87,23 +87,20 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		listaCursos.setModel(modelo);
 
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnEliminar.addActionListener(event -> {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
-						JOptionPane.OK_CANCEL_OPTION);
-				if (respuesta == JOptionPane.OK_OPTION) {
-					JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
-							JOptionPane.INFORMATION_MESSAGE);
+			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (respuesta == JOptionPane.OK_OPTION) {
+				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
+						JOptionPane.INFORMATION_MESSAGE);
 
-					try {
-						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
-					} catch (SQLException e) {
-						logger.info("Se ha producido un error al eliminar el curso: " + e.getMessage());
-					}
-					modelo.removeElement(cursoSeleccionado);
-
+				try {
+					GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+				} catch (SQLException e) {
+					logger.info("Se ha producido un error al eliminar el curso: " + e.getMessage());
 				}
+				modelo.removeElement(cursoSeleccionado);
 
 			}
 		});
@@ -118,15 +115,14 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 		JButton btnInfo = new JButton("Info");
 		btnInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
-				setVisible(false);
-				a.setVisible(true);
-				infoCurso(cursoSeleccionado);
-				if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTA_RECHAZADA)) {
-					a.btnMen.setVisible(true);
-				}
+		btnInfo.addActionListener(event -> {
+
+			main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
+			setVisible(false);
+			a.setVisible(true);
+			infoCurso(cursoSeleccionado);
+			if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTA_RECHAZADA)) {
+				a.btnMen.setVisible(true);
 
 			}
 		});

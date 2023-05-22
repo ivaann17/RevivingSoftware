@@ -36,7 +36,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 	private static final JList<CursoPropio> listaCursos = new JList<>();
 	DefaultListModel<CursoPropio> modelo;
 	private String tipoLetra = "Tahoma";
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaPropuestasRechazadas.class.getName());
 
 	private transient CursoPropio cursoSeleccionado;
 
@@ -74,12 +74,12 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
+			p.setVisible(true);
+
 		});
 
 		listaCursos.setBounds(21, 153, 723, 220);
@@ -88,23 +88,20 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		listaCursos.setModel(modelo);
 
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnEliminar.addActionListener(event -> {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
-						JOptionPane.OK_CANCEL_OPTION);
-				if (respuesta == JOptionPane.OK_OPTION) {
-					JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
-							JOptionPane.INFORMATION_MESSAGE);
+			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (respuesta == JOptionPane.OK_OPTION) {
+				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
+						JOptionPane.INFORMATION_MESSAGE);
 
-					try {
-						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
-					} catch (SQLException e) {
-						logger.info("Se ha producido un error al eliminar el curso: " + e.getMessage());
-					}
-					modelo.removeElement(cursoSeleccionado);
-
+				try {
+					GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+				} catch (SQLException e) {
+					logger.info("Se ha producido un error al eliminar el curso: " + e.getMessage());
 				}
+				modelo.removeElement(cursoSeleccionado);
 
 			}
 		});
@@ -119,19 +116,18 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 		JButton btnInfo = new JButton("Info");
 		btnInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
-				setVisible(false);
-				a.setVisible(true);
-				a.btnVolver.setVisible(false);
-				a.btnVolver2.setVisible(true);
-				infoCurso(a, cursoSeleccionado);
-				if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTA_RECHAZADA)) {
-					a.btnMen.setVisible(true);
-				}
+		btnInfo.addActionListener(event -> {
 
+			main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
+			setVisible(false);
+			a.setVisible(true);
+			a.btnVolver.setVisible(false);
+			a.btnVolver2.setVisible(true);
+			infoCurso(a, cursoSeleccionado);
+			if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTA_RECHAZADA)) {
+				a.btnMen.setVisible(true);
 			}
+
 		});
 		btnInfo.setForeground(Color.WHITE);
 		btnInfo.setFont(new Font(tipoLetra, Font.BOLD, 13));
@@ -141,23 +137,21 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		btnInfo.setBounds(220, 397, 114, 49);
 		contentPane.add(btnInfo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					cursoSeleccionado = listaCursos.getSelectedValue();
-					if (cursoSeleccionado != null) {
-						btnInfo.setVisible(true);
+		listaCursos.addListSelectionListener(arg0 -> {
+			if (!arg0.getValueIsAdjusting()) {
+				cursoSeleccionado = listaCursos.getSelectedValue();
+				if (cursoSeleccionado != null) {
+					btnInfo.setVisible(true);
 
-						if (cursoSeleccionado.getEstado().equals(EstadoCurso.EN_IMPARTICION)
-								|| cursoSeleccionado.getEstado().equals(EstadoCurso.EN_MATRICULACION)
-								|| cursoSeleccionado.getEstado().equals(EstadoCurso.VALIDADO)) {
-							btnEliminar.setVisible(false);
-						} else {
-							btnEliminar.setVisible(true);
-						}
+					if (cursoSeleccionado.getEstado().equals(EstadoCurso.EN_IMPARTICION)
+							|| cursoSeleccionado.getEstado().equals(EstadoCurso.EN_MATRICULACION)
+							|| cursoSeleccionado.getEstado().equals(EstadoCurso.VALIDADO)) {
+						btnEliminar.setVisible(false);
+					} else {
+						btnEliminar.setVisible(true);
 					}
-
 				}
+
 			}
 
 		});
