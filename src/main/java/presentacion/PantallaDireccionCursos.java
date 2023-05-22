@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Logger;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -29,7 +30,8 @@ import javax.swing.WindowConstants;
 public class PantallaDireccionCursos extends JFrame {
 
 	private JPanel contentPane;
-	private static final String tipoLetra = "Tahoma";
+	private static String tipoLetra = "Tahoma";
+	private static final Logger logger = Logger.getLogger(PantallaDireccionCursos.class.getName());
 
 	public PantallaDireccionCursos() {
 
@@ -51,13 +53,14 @@ public class PantallaDireccionCursos extends JFrame {
 
 				try {
 					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					String nombre = main.java.presentacion.PantallaEstudiante.createNombreUsuTextField().getText().replaceAll("\\s.*", "");
+					String nombre = main.java.presentacion.PantallaEstudiante.createNombreUsuTextField().getText()
+							.replaceAll("\\s.*", "");
 
 					GestorConsultas.listarHistorial(p.modelo, dni(nombre));
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-
+					logger.info("Se ha producido un error : " + e1.getMessage());
 				}
 
 			}
@@ -92,7 +95,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnRealizarPropuesta.setBackground(SystemColor.textHighlight);
 		btnRealizarPropuesta.setBounds(29, 119, 206, 110);
 		contentPane.add(btnRealizarPropuesta);
-		
+
 		contentPane.add(main.java.presentacion.PantallaEstudiante.createNombreUsuTextField());
 		contentPane.add(main.java.presentacion.PantallaEstudiante.createTipoUsuarioTextField());
 
@@ -161,7 +164,7 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-	
+
 				}
 
 			}

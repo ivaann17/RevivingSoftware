@@ -18,16 +18,18 @@ import java.awt.event.ActionListener;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class PantallaEmpleadosVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
+	private static String tipoLetra = "Tahoma";
 
 	public PantallaEmpleadosVicerrectorado() {
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/descarga.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -58,12 +60,11 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		btnVerPropuestas.setFocusPainted(false);
 		btnVerPropuestas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVerPropuestas.setForeground(Color.WHITE);
-		btnVerPropuestas.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnVerPropuestas.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnVerPropuestas.setBackground(SystemColor.textHighlight);
 		btnVerPropuestas.setBounds(45, 122, 228, 76);
 		contentPane.add(btnVerPropuestas);
 
-		
 		contentPane.add(main.java.presentacion.PantallaEstudiante.createNombreUsuTextField());
 
 		contentPane.add(main.java.presentacion.PantallaEstudiante.createTipoUsuarioTextField());
@@ -86,7 +87,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cs.setBackground(new Color(255, 0, 0));
 		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font("Tahoma", Font.BOLD, 13));
+		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		cs.setIconTextGap(15);
 		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
@@ -95,7 +96,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnMostrarResueltos.setForeground(Color.WHITE);
-		btnMostrarResueltos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnMostrarResueltos.setFont(new Font(tipoLetra, Font.BOLD, 15));
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}

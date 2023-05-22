@@ -32,21 +32,23 @@ import java.awt.Font;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
-public class PantallaComenzarCurso extends JFrame  {
+public class PantallaComenzarCurso extends JFrame {
 	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
+	DefaultListModel<CursoPropio> modelo;
 	public CursoPropio cursoSeleccionado;
 	protected JLabel lblCursosMatriculados;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	private String tipoLetra = "Tahoma";
+	private static final Logger logger = Logger.getLogger(PantallaComenzarCurso.class.getName());
 
 	public PantallaComenzarCurso() {
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(PantallaComenzarCurso.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -63,35 +65,24 @@ public class PantallaComenzarCurso extends JFrame  {
 
 		lblCursosMatriculados = new JLabel("Cursos en matriculacion");
 		lblCursosMatriculados.setVisible(true);
-		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCursosMatriculados.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		lblCursosMatriculados.setBounds(54, 98, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
 		btnAceptar = new JButton("Comenzar imparticion");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea poner en imparticion el curso?", "ATENCION",
-						JOptionPane.OK_CANCEL_OPTION);
+				int respuesta = mostrarConfirmacion();
 				if (respuesta == JOptionPane.OK_OPTION) {
-					JOptionPane.showMessageDialog(null, "El curso se va a impartir.", "INFORMACION",
-							JOptionPane.INFORMATION_MESSAGE);
-					try {
-						GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_IMPARTIZICION);
-						modelo.removeElement(cursoSeleccionado);
-					} catch (SQLException e1) {
-						logger.info("Se ha producido un error al editar el estado del curso: " + e1.getMessage());
-					}
-					
-
-					
-
+					mostrarInformacion();
+					editarEstadoCurso();
+					eliminarCursoSeleccionado();
 				}
 			}
 		});
 		btnAceptar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAceptar.setForeground(Color.WHITE);
-		btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnAceptar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnAceptar.setBackground(SystemColor.textHighlight);
 		btnAceptar.setBounds(54, 398, 226, 75);
 		btnAceptar.setVisible(false);
@@ -101,21 +92,21 @@ public class PantallaComenzarCurso extends JFrame  {
 		lblMatriculado.setVisible(false);
 		lblMatriculado.setForeground(new Color(204, 51, 51));
 		lblMatriculado.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMatriculado.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMatriculado.setFont(new Font(tipoLetra, Font.BOLD, 16));
 		lblMatriculado.setBounds(64, 402, 619, 65);
 		contentPane.add(lblMatriculado);
 
 		JLabel lblMatriculas = new JLabel("Matriculas:");
 		lblMatriculas.setVisible(false);
 		lblMatriculas.setForeground(SystemColor.textHighlight);
-		lblMatriculas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lblMatriculas.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblMatriculas.setBounds(630, 385, 186, 39);
 		contentPane.add(lblMatriculas);
 
 		JTextField matriculas = new JTextField();
 		matriculas.setHorizontalAlignment(SwingConstants.CENTER);
 		matriculas.setVisible(false);
-		matriculas.setFont(new Font("Tahoma", Font.BOLD, 13));
+		matriculas.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		matriculas.setEditable(false);
 		matriculas.setColumns(10);
 		matriculas.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
@@ -126,7 +117,7 @@ public class PantallaComenzarCurso extends JFrame  {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
@@ -138,10 +129,10 @@ public class PantallaComenzarCurso extends JFrame  {
 			}
 		});
 
-		listaCursos = new JList();
+		listaCursos = new JList<>();
 		listaCursos.setBounds(54, 137, 690, 251);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel();
+		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
 		listaCursos.addListSelectionListener(new ListSelectionListener() {
@@ -173,5 +164,27 @@ public class PantallaComenzarCurso extends JFrame  {
 				}
 			}
 		});
+	}
+
+	private int mostrarConfirmacion() {
+		return JOptionPane.showConfirmDialog(null, "¿Desea poner en impartición el curso?", "ATENCION",
+				JOptionPane.OK_CANCEL_OPTION);
+	}
+
+	private void mostrarInformacion() {
+		JOptionPane.showMessageDialog(null, "El curso se va a impartir.", "INFORMACION",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private void editarEstadoCurso() {
+		try {
+			GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_IMPARTICION);
+		} catch (SQLException e1) {
+			logger.info("Se ha producido un error al editar el estado del curso: " + e1.getMessage());
+		}
+	}
+
+	private void eliminarCursoSeleccionado() {
+		modelo.removeElement(cursoSeleccionado);
 	}
 }

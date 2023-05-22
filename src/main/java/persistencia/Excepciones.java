@@ -22,5 +22,11 @@ public class Excepciones {
         public SQLException(String message) {
             super(message);
         }
+       
     }
+    public class FechaComparacionException extends Exception {
+        public FechaComparacionException(String message) {
+            super(message);
+        }
+}
 }

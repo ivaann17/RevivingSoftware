@@ -10,10 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.security.SecureRandom;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
@@ -73,17 +75,16 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	protected JLabel lblAno;
 	private String tipoLetra = "Tahoma";
 	private String fechaIni = "";
-	private String fechaFin = "";
+
 	private String error = "ERROR";
 	protected CursoPropio curso;
 
-	/**
-	 * Create the frame.
-	 */
 	TipoCurso c;
 	Facultad f;
 	String nume;
 	private JLabel tc;
+	private static final SecureRandom random = new SecureRandom();
+	private static final Logger logger = Logger.getLogger(PantallaRealizarPropuestas.class.getName());
 
 	public PantallaRealizarPropuestas() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -202,67 +203,70 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		btnFinalizar.setBounds(594, 490, 114, 49);
 		btnFinalizar.setVisible(false);
 		contentPane.add(btnFinalizar);
-
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (mes.getSelectedItem().toString().equals("") || dia.getSelectedItem().toString().equals("")
-						|| ano.getSelectedItem().toString().equals(""))
+				String selectedMonth = mes.getSelectedItem().toString();
+				String selectedDay = dia.getSelectedItem().toString();
+				String selectedYear = ano.getSelectedItem().toString();
+
+				if (selectedMonth.equals("") || selectedDay.equals("") || selectedYear.equals("")) {
 					JOptionPane.showMessageDialog(null, "Rellene correctamente las fechas del curso.", error,
 							JOptionPane.ERROR_MESSAGE);
-				else {
-					fechaFin = ano.getSelectedItem().toString() + "-" + mesNumero(mes.getSelectedItem().toString())
-							+ "-" + dia.getSelectedItem().toString();
+				} else {
+					String fechaFin = selectedYear + "-" + mesNumero(selectedMonth) + "-" + selectedDay;
 					try {
+						java.util.Date fechaInicio = formatoFecha(fechaIni);
+						java.util.Date fechaFinal = formatoFecha(fechaFin);
+						Date currentDate = new Date(System.currentTimeMillis());
 
-						if (!compararFechas(formatoFecha(fechaIni), formatoFecha(fechaFin),
-								new Date(System.currentTimeMillis()))) {
+						if (!compararFechas(fechaInicio, fechaFinal, currentDate)) {
 							JOptionPane.showMessageDialog(null,
 									"Debe introducir las fechas de forma correcta (posterior a la fecha actual y posterior a la de inicio).",
 									error, JOptionPane.ERROR_MESSAGE);
 							mostrarForm();
-
 						} else {
-							Centro cent = new Centro(fac.getSelectedItem().toString());
+							Centro centro = new Centro(fac.getSelectedItem().toString());
 
-							curso = new CursoPropio(cent.getNombre().toString(), EstadoCurso.PROPUESTO,
-									TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()), dniProf.getText(),
-									dniSec.getText(), numRand(), nombreCurso.getText(),
-									Integer.parseInt(numCreditos.getText()), formatoFecha(fechaIni),
-									formatoFecha(fechaFin), Double.parseDouble(textPrecio.getText()),
-									Integer.parseInt(edicion.getText()), "");
-							boolean existeEdicion;
-							existeEdicion = GestorEdiciones.existeEdicion(curso.getEdicion(), curso.getNombre());
+							CursoPropio nuevoCurso = new CursoPropio(centro.getNombre().toString(),
+									EstadoCurso.PROPUESTO, TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()),
+									dniProf.getText(), dniSec.getText(), numRand(), nombreCurso.getText(),
+									Integer.parseInt(numCreditos.getText()), fechaInicio, fechaFinal,
+									Double.parseDouble(textPrecio.getText()), Integer.parseInt(edicion.getText()), "");
+
+							boolean existeEdicion = GestorEdiciones.existeEdicion(nuevoCurso.getEdicion(),
+									nuevoCurso.getNombre());
+
 							if (!existeEdicion) {
 								int respuesta = JOptionPane.showConfirmDialog(null,
-										"¿Desea enviar su propuesta de curso?", "ATENCIO“N",
+										"¿Desea enviar su propuesta de curso?", "ATENCION",
 										JOptionPane.OK_CANCEL_OPTION);
+
 								if (respuesta == JOptionPane.OK_OPTION) {
 									JOptionPane.showMessageDialog(null,
 											"Su propuesta ha sido enviada de manera correcta.", "INFORMACION",
 											JOptionPane.INFORMATION_MESSAGE);
-									GestorPropuestasCursos.realizarPropuestaCurso(curso);
-									GestorEdiciones.crearEdicion(numRand(), curso.getNombre(), curso.getEdicion(),
-											curso.getId());
-									main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
+									GestorPropuestasCursos.realizarPropuestaCurso(nuevoCurso);
+									GestorEdiciones.crearEdicion(numRand(), nuevoCurso.getNombre(),
+											nuevoCurso.getEdicion(), nuevoCurso.getId());
+
+									main.java.presentacion.PantallaDireccionCursos pantallaDireccionCursos = new main.java.presentacion.PantallaDireccionCursos();
 									setVisible(false);
-									p.setVisible(true);
+									pantallaDireccionCursos.setVisible(true);
 								}
 							} else {
 								JOptionPane.showMessageDialog(null, "La edición ya existe en la base de datos.", error,
 										JOptionPane.ERROR_MESSAGE);
-								main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
+
+								main.java.presentacion.PantallaDireccionCursos pantallaDireccionCursos = new main.java.presentacion.PantallaDireccionCursos();
 								setVisible(false);
-								p.setVisible(true);
+								pantallaDireccionCursos.setVisible(true);
 							}
 						}
-
 					} catch (Exception e1) {
-	
+						logger.info("Se ha producido un error: " + e1.getMessage());
 					}
-
 				}
 			}
-
 		});
 
 		btnSiguiente = new JButton("Siguiente");
@@ -274,40 +278,34 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		contentPane.add(btnSiguiente);
 		contentPane.getRootPane().setDefaultButton(btnSiguiente);
 		btnSiguiente.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
-
 				nume = numCreditos.getText();
 
-				if (!textoVacio(edicion) || !textoVacio(nombreCurso) || !textoVacio(dniProf) || !textoVacio(dniSec)) {
+				if (hayCamposVacios()) {
 					JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para realizar la propuesta.",
 							error, JOptionPane.ERROR_MESSAGE);
+				} else if (numCreditos.getText().isEmpty() || !isNumeric(numCreditos.getText())) {
+					JOptionPane.showMessageDialog(null, "Introduzca los créditos de manera correcta.", error,
+							JOptionPane.ERROR_MESSAGE);
+				} else if (!dniDigi(dniSec)) {
+					JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dígitos.",
+							error, JOptionPane.ERROR_MESSAGE);
+				} else if (tipoCurso.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de curso.", error,
+							JOptionPane.ERROR_MESSAGE);
+				} else if (fac.getSelectedItem() == null) {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar una facultad.", error,
+							JOptionPane.ERROR_MESSAGE);
 				} else {
-					if (numCreditos.getText().isEmpty() || !isNumeric(numCreditos.getText()))
-						JOptionPane.showMessageDialog(null, "Introduzca los creditos de manera correcta.", error,
-								JOptionPane.ERROR_MESSAGE);
-
-					else if (!dniDigi(dniSec)) {
-						JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus digitos.",
-								error, JOptionPane.ERROR_MESSAGE);
-					} else if (tipoCurso.getSelectedItem() == "") {
-						JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de curso.", error,
-								JOptionPane.ERROR_MESSAGE);
-					} else if (fac.getSelectedItem() == "") {
-						JOptionPane.showMessageDialog(null, "Debe seleccionar una facultad.", error,
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						c = (TipoCurso) tipoCurso.getSelectedItem();
-						compruebaCreditos(c);
-
-					}
+					c = (TipoCurso) tipoCurso.getSelectedItem();
+					compruebaCreditos(c);
 				}
 			}
 		});
 
 		tipoCurso = new JComboBox<>();
 		tipoCurso.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		tipoCurso.setSelectedItem("");
+		tipoCurso.setSelectedItem(null);
 		DefaultComboBoxModel<TipoCurso> comboBoxModel = new DefaultComboBoxModel<>();
 
 		comboBoxModel.addElement(null);
@@ -662,11 +660,6 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	}
 
 	@Override
-	public void focusGained(FocusEvent e) {
-
-	}
-
-	@Override
 	public void focusLost(FocusEvent e) {
 		if (e.getSource() == numCreditos) {
 			if (numCreditos.getText().isBlank()) {
@@ -679,15 +672,14 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 
 	}
 
-	public int numRand() {
-		int numero = (int) (Math.random() * 100 + 1);
-		return numero;
+	private int numRand() {
+		return random.nextInt(100) + 1;
 	}
 
 	public static void soloLetras(KeyEvent evt) {
 		if (!Character.isLetter(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_SPACE
-		        && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
-		    evt.consume();
+				&& evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
+			evt.consume();
 		}
 	}
 
@@ -747,18 +739,8 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		}
 	}
 
-	public boolean compararFechas(java.util.Date fecha1, java.util.Date fecha2, java.util.Date fecha3)
-			throws Exception {
-		if (fecha2.before(fecha1)) {
-			return false;
-		} else if (fecha1.equals(fecha2)) {
-			return false;
-		} else if (fecha1.before(fecha3) || fecha2.before(fecha3)) {
-			return false;
-		} else {
-			return true;
-		}
-
+	public boolean compararFechas(java.util.Date fecha1, java.util.Date fecha2, java.util.Date fecha3) {
+		return !(fecha2.before(fecha1) || fecha1.equals(fecha2) || fecha1.before(fecha3) || fecha2.before(fecha3));
 	}
 
 	public java.util.Date formatoFecha(String fech) throws ParseException {
@@ -768,9 +750,18 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 			java.util.Date fecha = formatoFecha.parse(fech);
 			return fecha;
 		} catch (Exception e) {
-			System.out.println("Error al convertir la fecha: " + e.getMessage());
+			logger.info("Se ha producido un error al formatear la fecha: " + e.getMessage());
 		}
 		return null;
+	}
+
+	private boolean hayCamposVacios() {
+		return !textoVacio(edicion) || !textoVacio(nombreCurso) || !textoVacio(dniProf) || !textoVacio(dniSec);
+	}
+
+	@Override
+	public void focusGained(FocusEvent arg0) {
+//No utilizado
 	}
 
 }

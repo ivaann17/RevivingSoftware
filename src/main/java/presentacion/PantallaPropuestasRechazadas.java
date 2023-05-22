@@ -148,7 +148,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 					if (cursoSeleccionado != null) {
 						btnInfo.setVisible(true);
 
-						if (cursoSeleccionado.getEstado().equals(EstadoCurso.EN_IMPARTIZICION)
+						if (cursoSeleccionado.getEstado().equals(EstadoCurso.EN_IMPARTICION)
 								|| cursoSeleccionado.getEstado().equals(EstadoCurso.EN_MATRICULACION)
 								|| cursoSeleccionado.getEstado().equals(EstadoCurso.VALIDADO)) {
 							btnEliminar.setVisible(false);

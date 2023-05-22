@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -21,6 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
+import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -34,10 +36,13 @@ import javax.swing.WindowConstants;
 
 public class PantallaEstadisticasCursos extends JFrame {
 	protected JTextField ingresos;
+	protected static JLabel lblIngresosCurso = new JLabel("Ingresos de curso:\r\n\r\n");
 	private static final JList<CursoPropio> listaCursos = new JList<>();
 	private String tipoLetra = "Tahoma";
+	private String error = "Se ha producido un error al listar los cursos: ";
 	DefaultListModel<CursoPropio> modelo;
 	private transient CursoPropio cursoSeleccionado;
+	private static final Logger logger = Logger.getLogger(PantallaEstadisticasCursos.class.getName());
 
 	public PantallaEstadisticasCursos() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -88,7 +93,6 @@ public class PantallaEstadisticasCursos extends JFrame {
 		ingresos.setBounds(44, 434, 186, 39);
 		contentPane.add(ingresos);
 
-		JLabel lblIngresosCurso = new JLabel("Ingresos de curso:\r\n\r\n");
 		lblIngresosCurso.setVisible(false);
 		lblIngresosCurso.setForeground(SystemColor.textHighlight);
 		lblIngresosCurso.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
@@ -120,6 +124,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursos(modelo);
 
 				} catch (Exception e1) {
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
@@ -141,7 +146,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEdiciones(modelo);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
@@ -159,12 +164,12 @@ public class PantallaEstadisticasCursos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					modelo.removeAllElements();
-					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.EN_IMPARTIZICION);
+					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.EN_IMPARTICION);
 					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.EN_MATRICULACION);
 					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.VALIDADO);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
@@ -186,7 +191,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.PROPUESTA_RECHAZADA);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-	
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
@@ -200,22 +205,27 @@ public class PantallaEstadisticasCursos extends JFrame {
 		listaCursos.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
-
-					cursoSeleccionado = listaCursos.getSelectedValue();
+					cursoSeleccionado = obtenerCursoSeleccionado();
 					if (cursoSeleccionado != null) {
-						try {
-
-							lblIngresosCurso.setVisible(true);
-							ingresos.setVisible(true);
-							ingresos.setText((Double.toString(GestorConsultas.consultarIngresos(cursoSeleccionado))));
-						} catch (Exception e) {
-			
-
-						}
+						mostrarIngresosCurso();
 					}
-
 				}
 			}
 		});
+	}
+
+	private CursoPropio obtenerCursoSeleccionado() {
+		return listaCursos.getSelectedValue();
+	}
+
+	private void mostrarIngresosCurso() {
+		try {
+			double ingresosCurso = GestorConsultas.consultarIngresos(cursoSeleccionado);
+			lblIngresosCurso.setVisible(true);
+			ingresos.setVisible(true);
+			ingresos.setText(Double.toString(ingresosCurso));
+		} catch (Exception e) {
+			logger.info("Se ha producido un error al consultar ingresos: " + e.getMessage());
+		}
 	}
 }
