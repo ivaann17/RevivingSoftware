@@ -29,7 +29,7 @@ public class PantallaMisCursos extends JFrame {
 
 	public JList<CursoPropio> listaCursos;
 	DefaultListModel<CursoPropio> modelo;
-	public transient CursoPropio cursoSeleccionado;
+	public static transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 
 	public PantallaMisCursos() {

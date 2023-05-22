@@ -31,7 +31,7 @@ public class PantallaDireccionCursos extends JFrame {
 
 	private JPanel contentPane;
 	private static String tipoLetra = "Tahoma";
-	private static final Logger logger = Logger.getLogger(PantallaDatosAlumno.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaDireccionCursos.class.getName());
 
 	public PantallaDireccionCursos() {
 

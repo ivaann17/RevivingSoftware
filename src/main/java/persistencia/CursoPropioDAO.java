@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 
 import main.java.negocio.entities.*;
+import main.java.persistencia.Excepciones.SelectException;
 
 public class CursoPropioDAO {
 	GestorBD gestorBD = new GestorBD();
@@ -46,7 +47,7 @@ public class CursoPropioDAO {
 		return id;
 	}
 
-	public int getId(CursoPropio curso) throws Exception {
+	public int getId(CursoPropio curso) throws SQLException, SelectException {
 
 		int id = 0;
 
@@ -67,7 +68,7 @@ public class CursoPropioDAO {
 		return id;
 	}
 
-	public boolean existeCurso(CursoPropio curso) throws Exception {
+	public boolean existeCurso(CursoPropio curso) throws SQLException {
 
 		String sql = "SELECT COUNT(*) FROM edicion WHERE nombre = ? AND tipo = ? ";
 
@@ -129,7 +130,7 @@ public class CursoPropioDAO {
 		return mod;
 	}
 
-	public List<CursoPropio> listarCursosMatriculados(String dni) throws Exception {
+	public List<CursoPropio> listarCursosMatriculados(String dni) throws SQLException, SelectException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT cursos.* FROM cursos INNER JOIN matricula ON cursos.ID = matricula.curso WHERE matricula.DNI = ?";
@@ -143,7 +144,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarHistorialCursos(String dni) throws Exception {
+	public List<CursoPropio> listarHistorialCursos(String dni) throws SQLException, SelectException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos WHERE dniDirector = ? ORDER BY fechaInicio";
@@ -157,7 +158,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws Exception {
+	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws SQLException, SelectException {
 		List<CursoPropio> cursos = new ArrayList<>();
 		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje\r\n"
 				+ "FROM cursos\r\n" + "WHERE estado = ? " + "ORDER BY fechaInicio\r\n" + "";
@@ -170,7 +171,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursosPorEdicion() throws Exception {
+	public List<CursoPropio> listarCursosPorEdicion() throws SQLException, SelectException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT * " + "FROM cursos " + "WHERE nombre IN ( " + "    SELECT nombre " + "    FROM cursos "
@@ -185,7 +186,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursos() throws Exception {
+	public List<CursoPropio> listarCursos() throws SQLException, SelectException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT * FROM cursos";

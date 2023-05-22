@@ -39,9 +39,10 @@ public class PantallaEstadisticasCursos extends JFrame {
 	protected static JLabel lblIngresosCurso = new JLabel("Ingresos de curso:\r\n\r\n");
 	private static final JList<CursoPropio> listaCursos = new JList<>();
 	private String tipoLetra = "Tahoma";
+	private String error = "Se ha producido un error al listar los cursos: ";
 	DefaultListModel<CursoPropio> modelo;
 	private transient CursoPropio cursoSeleccionado;
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaEstadisticasCursos.class.getName());
 
 	public PantallaEstadisticasCursos() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -123,7 +124,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursos(modelo);
 
 				} catch (Exception e1) {
-					logger.info("Se ha producido un error al listar los cursos: " + e1.getMessage());
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
@@ -145,7 +146,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEdiciones(modelo);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-					logger.info("Se ha producido un error al listar los cursos: " + e1.getMessage());
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
@@ -168,7 +169,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.VALIDADO);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-					logger.info("Se ha producido un error al listar los cursos: " + e1.getMessage());
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
@@ -190,7 +191,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 					GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.PROPUESTA_RECHAZADA);
 					rdbtnTodos.setVisible(true);
 				} catch (Exception e1) {
-					logger.info("Se ha producido un error al listar los cursos: " + e1.getMessage());
+					logger.info(error + e1.getMessage());
 				}
 			}
 		});
