@@ -60,10 +60,9 @@ public class PantallaDatosAlumno extends JFrame {
 	protected JTextField metoPago;
 	protected Matricula matricula;
 	private static final SecureRandom random = new SecureRandom();
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaDatosAlumno.class.getName());
 
-
-	public PantallaDatosAlumno() throws SQLException{
+	public PantallaDatosAlumno() throws SQLException {
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(PantallaDatosAlumno.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM\r\n");
@@ -107,6 +106,7 @@ public class PantallaDatosAlumno extends JFrame {
 					setVisible(false);
 					m.setVisible(true);
 				} catch (Exception e1) {
+					logger.info("Se ha producido un error al listar cursos: " + e1.getMessage());
 				}
 
 			}
@@ -147,46 +147,12 @@ public class PantallaDatosAlumno extends JFrame {
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Date fechaActual = new Date();
+				String metodoPago = metoPago.getText();
 
-				if (metoPago.getText().equals(ModoPago.TARJETA_CREDITO.toString())) {
-
-					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar con tarjeta?", "ATENCION",
-							JOptionPane.OK_CANCEL_OPTION);
-					if (respuesta == JOptionPane.OK_OPTION) {
-						matricula = new Matricula(numRand(), nomAlu.getText(), apeAlu.getText(),
-								ModoPago.valueOf(ModoPago.TARJETA_CREDITO.toString()), fechaActual, dniAlu.getText(),
-								Double.parseDouble(textPrecio.getText()), id);
-						try {
-							GestorMatriculacion.realizarMatriculacion(matricula);
-						} catch (SQLException e1) {
-							logger.info("Se ha producido un error al realizar matriculacion: " + e1.getMessage());
-						}
-						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
-								JOptionPane.INFORMATION_MESSAGE);
-
-						setVisible(false);
-						p = new main.java.presentacion.PantallaEstudiante();
-						p.setVisible(true);
-					}
-				} else if (metoPago.getText().equals(ModoPago.TRANSFERENCIA.toString())) {
-					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea pagar mediante transferencia bancaria?",
-							"ATENCION", JOptionPane.OK_CANCEL_OPTION);
-					if (respuesta == JOptionPane.OK_OPTION) {
-						matricula = new Matricula(numRand(), nomAlu.getText(), apeAlu.getText(),
-								ModoPago.valueOf(ModoPago.TRANSFERENCIA.toString()), fechaActual, dniAlu.getText(),
-								Double.parseDouble(textPrecio.getText()), id);
-						try {
-							GestorMatriculacion.realizarMatriculacion(matricula);
-						} catch (SQLException e1) {
-							logger.info("Se ha producido un error al realizar matriculacion: " + e1.getMessage());
-						}
-
-						JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
-								JOptionPane.INFORMATION_MESSAGE);
-						setVisible(false);
-						p = new main.java.presentacion.PantallaEstudiante();
-						p.setVisible(true);
-					}
+				if (metodoPago.equals(ModoPago.TARJETA_CREDITO.toString())) {
+					procesarPagoTarjeta(fechaActual);
+				} else if (metodoPago.equals(ModoPago.TRANSFERENCIA.toString())) {
+					procesarPagoTransferencia(fechaActual);
 				}
 			}
 		});
@@ -251,8 +217,51 @@ public class PantallaDatosAlumno extends JFrame {
 		return nombreApe[1];
 	}
 
-	public int numRand() {
+	private int numRand() {
 		return random.nextInt(100) + 1;
+	}
+
+	private void procesarPagoTarjeta(Date fechaActual) {
+		int respuesta = mostrarConfirmacion("¿Desea pagar con tarjeta?");
+		if (respuesta == JOptionPane.OK_OPTION) {
+			realizarMatriculacion(ModoPago.TARJETA_CREDITO, fechaActual);
+			mostrarMensajeInscripcionExitosa();
+			redirigirAPantallaEstudiante();
+		}
+	}
+
+	private void procesarPagoTransferencia(Date fechaActual) {
+		int respuesta = mostrarConfirmacion("¿Desea pagar mediante transferencia bancaria?");
+		if (respuesta == JOptionPane.OK_OPTION) {
+			realizarMatriculacion(ModoPago.TRANSFERENCIA, fechaActual);
+			mostrarMensajeInscripcionExitosa();
+			redirigirAPantallaEstudiante();
+		}
+	}
+
+	private int mostrarConfirmacion(String mensaje) {
+		return JOptionPane.showConfirmDialog(null, mensaje, "ATENCIÓN", JOptionPane.OK_CANCEL_OPTION);
+	}
+
+	private void realizarMatriculacion(ModoPago modoPago, Date fechaActual) {
+		matricula = new Matricula(numRand(), nomAlu.getText(), apeAlu.getText(), modoPago, fechaActual,
+				dniAlu.getText(), Double.parseDouble(textPrecio.getText()), id);
+		try {
+			GestorMatriculacion.realizarMatriculacion(matricula);
+		} catch (SQLException e1) {
+			logger.info("Se ha producido un error al realizar matriculación: " + e1.getMessage());
+		}
+	}
+
+	private void mostrarMensajeInscripcionExitosa() {
+		JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACIÓN",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	private void redirigirAPantallaEstudiante() {
+		setVisible(false);
+		p = new main.java.presentacion.PantallaEstudiante();
+		p.setVisible(true);
 	}
 
 }

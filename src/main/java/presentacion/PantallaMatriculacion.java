@@ -28,19 +28,21 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Cursor;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 public class PantallaMatriculacion extends JFrame {
 
 	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
+	DefaultListModel<CursoPropio> modelo;
 	public CursoPropio cursoSeleccionado;
+	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
 
 	public PantallaMatriculacion() {
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(PantallaMatriculacion.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -70,14 +72,12 @@ public class PantallaMatriculacion extends JFrame {
 				} catch (SQLException e1) {
 					logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
 				}
-				
-			
 
 			}
 		});
 		btnTar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTar.setForeground(Color.WHITE);
-		btnTar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnTar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnTar.setBackground(SystemColor.textHighlight);
 		btnTar.setBounds(56, 380, 226, 75);
 		btnTar.setVisible(false);
@@ -97,12 +97,12 @@ public class PantallaMatriculacion extends JFrame {
 				} catch (SQLException e1) {
 					logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
 				}
-				
+
 			}
 		});
 		btnTrans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTrans.setForeground(Color.WHITE);
-		btnTrans.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnTrans.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnTrans.setBackground(SystemColor.textHighlight);
 		btnTrans.setBounds(449, 380, 226, 75);
 		btnTrans.setVisible(false);
@@ -112,7 +112,7 @@ public class PantallaMatriculacion extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
@@ -124,10 +124,10 @@ public class PantallaMatriculacion extends JFrame {
 			}
 		});
 
-		listaCursos = new JList();
+		listaCursos = new JList<>();
 		listaCursos.setBounds(54, 108, 690, 251);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel();
+		modelo = new DefaultListModel<>();
 
 		listaCursos.setModel(modelo);
 
@@ -135,7 +135,7 @@ public class PantallaMatriculacion extends JFrame {
 		lblMatriculado.setVisible(false);
 		lblMatriculado.setForeground(new Color(204, 51, 51));
 		lblMatriculado.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMatriculado.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMatriculado.setFont(new Font(tipoLetra, Font.BOLD, 16));
 		lblMatriculado.setBounds(56, 390, 619, 65);
 		contentPane.add(lblMatriculado);
 
@@ -159,7 +159,8 @@ public class PantallaMatriculacion extends JFrame {
 							listaCursos.clearSelection();
 						}
 					} catch (Exception e) {
-						logger.info("Se ha producido un error al comprobar la existencia de la matricula: " + e.getMessage());
+						logger.info("Se ha producido un error al comprobar la existencia de la matricula: "
+								+ e.getMessage());
 					}
 				}
 			}

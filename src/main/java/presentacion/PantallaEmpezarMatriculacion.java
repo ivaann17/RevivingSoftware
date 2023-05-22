@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -36,12 +37,13 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 	DefaultListModel modelo;
 	public CursoPropio cursoSeleccionado;
 	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	private static String tipoLetra = "Tahoma";
 
 	public PantallaEmpezarMatriculacion() {
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(PantallaEmpezarMatriculacion.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -52,7 +54,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 
 		JLabel lblCursosMatriculados = new JLabel("Cursos validados:");
 		lblCursosMatriculados.setVisible(true);
-		lblCursosMatriculados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCursosMatriculados.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		lblCursosMatriculados.setBounds(54, 103, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
@@ -82,7 +84,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		});
 		btnValidar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnValidar.setForeground(Color.WHITE);
-		btnValidar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnValidar.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnValidar.setBackground(SystemColor.textHighlight);
 		btnValidar.setBounds(54, 398, 226, 75);
 		btnValidar.setVisible(false);
@@ -110,7 +112,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		});
 		btnEli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEli.setForeground(Color.WHITE);
-		btnEli.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnEli.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnEli.setBackground(SystemColor.textHighlight);
 		btnEli.setBounds(448, 398, 226, 75);
 		btnEli.setVisible(false);
@@ -120,7 +122,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
