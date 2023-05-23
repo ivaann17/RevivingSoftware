@@ -89,7 +89,7 @@ public class LoginDAO {
 
 	}
 
-	public Vector<Object> loginUsuario(String usuario) {
+	public Vector<Object> loginUsuario(String usuario) throws SQLException {
 		String sql = "SELECT * FROM usuarios WHERE usuario = ?";
 
 		Vector<Object> rUser = null;
@@ -99,13 +99,13 @@ public class LoginDAO {
 			rUser = GestorBD.select(ps);
 		} catch (Exception e) {
 
-			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
+			throw new SQLException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 
 		return rUser;
 	}
 
-	public Vector<Object> loginContra(String contraseña) {
+	public Vector<Object> loginContra(String contrasena) throws SQLException {
 
 		String sql = "SELECT * FROM usuarios WHERE contraseña = ?";
 
@@ -113,10 +113,10 @@ public class LoginDAO {
 
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			ps.setString(1, contraseña);
+			ps.setString(1, contrasena);
 			rPass = GestorBD.select(ps);
 		} catch (Exception e) {
-			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
+			throw new SQLException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 
 		return rPass;

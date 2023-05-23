@@ -738,17 +738,19 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		return !(fecha2.before(fecha1) || fecha1.equals(fecha2) || fecha1.before(fecha3) || fecha2.before(fecha3));
 	}
 
-	public java.util.Date formatoFecha(String fech) throws ParseException {
-		try {
-
-			SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date fecha = formatoFecha.parse(fech);
-			return fecha;
-		} catch (Exception e) {
-			logger.info("Se ha producido un error al formatear la fecha: " + e.getMessage());
-		}
-		return null;
+	public java.sql.Date formatoFecha(String fech) throws ParseException {
+	    try {
+	        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+	        java.util.Date fechaUtil = formatoFecha.parse(fech);
+	        java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
+	        return fechaSql;
+	    } catch (Exception e) {
+	        logger.info("Se ha producido un error al formatear la fecha: " + e.getMessage());
+	    }
+	    return null;
 	}
+
+
 
 	private boolean hayCamposVacios() {
 		return !textoVacio(edicion) || !textoVacio(nombreCurso) || !textoVacio(dniProf) || !textoVacio(dniSec);

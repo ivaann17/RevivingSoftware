@@ -36,7 +36,7 @@ public class GestorPropuestasCursos {
 
 	}
 
-	public static boolean existeCurso(CursoPropio curso) throws Exception {
+	public static boolean existeCurso(CursoPropio curso) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		return cursoDAO.existeCurso(curso);
 	}

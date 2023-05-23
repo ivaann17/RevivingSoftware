@@ -32,9 +32,9 @@ import javax.swing.WindowConstants;
 
 public class PantallaMatriculacion extends JFrame {
 
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel<CursoPropio> modelo;
-	public CursoPropio cursoSeleccionado;
+	protected static JList<CursoPropio> listaCursos;
+	protected static DefaultListModel<CursoPropio> modelo;
+	protected static CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(PantallaMatriculacion.class.getName());
 

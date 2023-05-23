@@ -102,22 +102,20 @@ public class PantallaDireccionCursos extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
-		//contentPane.add(PantallaEstudiante.addCerrarSesionButton());
+		// contentPane.add(PantallaEstudiante.addCerrarSesionButton());
 
 		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRechazados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnRechazados.addActionListener(arg0 -> {
 
-				try {
-					main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
+			try {
+				main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
 
-					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-					logger.info(error + e1.getMessage());
-				}
+				GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
 
 		});
@@ -136,19 +134,16 @@ public class PantallaDireccionCursos extends JFrame {
 		btnValidados.setBounds(287, 119, 206, 110);
 		contentPane.add(btnValidados);
 		btnValidados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnValidados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnValidados.addActionListener(arg0 -> {
 
-				try {
-					main.java.presentacion.PantallaEmpezarMatriculacion p = new main.java.presentacion.PantallaEmpezarMatriculacion();
+			try {
+				main.java.presentacion.PantallaEmpezarMatriculacion p = new main.java.presentacion.PantallaEmpezarMatriculacion();
 
-					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.VALIDADO);
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-					logger.info(error + e1.getMessage());
-				}
-
+				GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.VALIDADO);
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
 
 		});

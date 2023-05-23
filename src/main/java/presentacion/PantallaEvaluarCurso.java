@@ -30,9 +30,9 @@ import java.awt.Font;
 import java.awt.Cursor;
 
 public class PantallaEvaluarCurso extends JFrame {
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
-	public CursoPropio cursoSeleccionado;
+	protected static JList<CursoPropio> listaCursos;
+	DefaultListModel<CursoPropio> modelo;
+	protected static CursoPropio cursoSeleccionado;
 	protected JLabel propuestas;
 	protected final JButton btnRechazar;
 	protected final JButton btnAceptar;
@@ -151,15 +151,15 @@ public class PantallaEvaluarCurso extends JFrame {
 		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					btnAceptar.setVisible(true);
-					btnRechazar.setVisible(true);
-					cursoSeleccionado = listaCursos.getSelectedValue();
+		listaCursos.addListSelectionListener(arg0 -> {
 
-				}
+			if (!arg0.getValueIsAdjusting()) {
+				btnAceptar.setVisible(true);
+				btnRechazar.setVisible(true);
+				cursoSeleccionado = listaCursos.getSelectedValue();
+
 			}
+
 		});
 	}
 }

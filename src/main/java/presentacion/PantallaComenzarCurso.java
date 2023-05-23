@@ -35,9 +35,9 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 public class PantallaComenzarCurso extends JFrame {
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel<CursoPropio> modelo;
-	public CursoPropio cursoSeleccionado;
+	protected static JList<CursoPropio> listaCursos;
+	protected DefaultListModel<CursoPropio> modelo;
+	protected static CursoPropio cursoSeleccionado;
 	protected JLabel lblCursosMatriculados;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;
@@ -134,8 +134,7 @@ public class PantallaComenzarCurso extends JFrame {
 		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
+		listaCursos.addListSelectionListener(arg0 ->{
 				if (!arg0.getValueIsAdjusting()) {
 					cursoSeleccionado = listaCursos.getSelectedValue();
 					if (cursoSeleccionado != null) {
@@ -162,7 +161,7 @@ public class PantallaComenzarCurso extends JFrame {
 
 					}
 				}
-			}
+			
 		});
 	}
 

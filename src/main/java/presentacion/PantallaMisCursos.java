@@ -27,9 +27,9 @@ import java.awt.Cursor;
 
 public class PantallaMisCursos extends JFrame {
 
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel<CursoPropio> modelo;
-	public static transient CursoPropio cursoSeleccionado;
+	protected static JList<CursoPropio> listaCursos;
+	protected static DefaultListModel<CursoPropio> modelo;
+	protected  transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 
 	public PantallaMisCursos() {
@@ -99,14 +99,14 @@ public class PantallaMisCursos extends JFrame {
 		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					cursoSeleccionado = listaCursos.getSelectedValue();
-					if (cursoSeleccionado != null) {
-						btnInfo.setVisible(true);
-					}
+		listaCursos.addListSelectionListener(arg0 -> {
+
+			if (!arg0.getValueIsAdjusting()) {
+				cursoSeleccionado = listaCursos.getSelectedValue();
+				if (cursoSeleccionado != null) {
+					btnInfo.setVisible(true);
 				}
+
 			}
 
 		});

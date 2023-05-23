@@ -202,15 +202,14 @@ public class PantallaEstadisticasCursos extends JFrame {
 		buttonGroup.add(rdbtnFiltrarEdi);
 		buttonGroup.add(rdbtnTodos);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					cursoSeleccionado = obtenerCursoSeleccionado();
-					if (cursoSeleccionado != null) {
-						mostrarIngresosCurso();
-					}
+		listaCursos.addListSelectionListener(arg0 -> {
+			if (!arg0.getValueIsAdjusting()) {
+				cursoSeleccionado = obtenerCursoSeleccionado();
+				if (cursoSeleccionado != null) {
+					mostrarIngresosCurso();
 				}
 			}
+
 		});
 	}
 

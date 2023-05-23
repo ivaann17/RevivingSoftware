@@ -124,18 +124,18 @@ public class PantallaVisualizarCurso extends JFrame {
 		btnVolver2.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnVolver2.setBounds(10, 496, 114, 49);
 		contentPane.add(btnVolver2);
-		btnVolver2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnVolver2.addActionListener(event -> {
+		
 				main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
 				try {
 					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-
+					logger.info("Se ha producido un error: " + e1.getMessage());
 				}
 
-			}
+			
 		});
 
 		numCreditos.setEditable(false);
