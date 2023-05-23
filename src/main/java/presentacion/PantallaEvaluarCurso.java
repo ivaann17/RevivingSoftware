@@ -66,22 +66,20 @@ public class PantallaEvaluarCurso extends JFrame {
 		contentPane.add(propuestas);
 
 		btnAceptar = new JButton("Aceptar propuesta");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAceptar.addActionListener(event -> {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea aceptar la propuesta?", "ATENCION",
-						JOptionPane.OK_CANCEL_OPTION);
-				if (respuesta == JOptionPane.OK_OPTION) {
-					JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACION",
-							JOptionPane.INFORMATION_MESSAGE);
-					try {
-						GestorPropuestasCursos.aceptarPropuesta(cursoSeleccionado);
-					} catch (SQLException e1) {
-						logger.info("Se ha producido un error al aceptar la propuesta: " + e1.getMessage());
-					}
-					modelo.removeElement(cursoSeleccionado);
-
+			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea aceptar la propuesta?", "ATENCION",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (respuesta == JOptionPane.OK_OPTION) {
+				JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACION",
+						JOptionPane.INFORMATION_MESSAGE);
+				try {
+					GestorPropuestasCursos.aceptarPropuesta(cursoSeleccionado);
+				} catch (SQLException e1) {
+					logger.info("Se ha producido un error al aceptar la propuesta: " + e1.getMessage());
 				}
+				modelo.removeElement(cursoSeleccionado);
+
 			}
 		});
 		btnAceptar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -93,32 +91,30 @@ public class PantallaEvaluarCurso extends JFrame {
 		contentPane.add(btnAceptar);
 
 		btnRechazar = new JButton("Rechazar propuesta");
-		btnRechazar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnRechazar.addActionListener(event -> {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea rechazar la propuesta?", "Confirmacion",
-						JOptionPane.OK_CANCEL_OPTION);
-				if (respuesta == JOptionPane.OK_OPTION) {
-					String mensaje = "";
-					while (mensaje.equals("")) {
-						mensaje = JOptionPane.showInputDialog(null, "Escriba los motivos y recomendaciones necesarias.",
-								"Atencion!", JOptionPane.PLAIN_MESSAGE);
-						if (mensaje == null) {
-							return;
-						}
-						if (mensaje.equals("")) {
-							JOptionPane.showMessageDialog(null, "Debe rellenar los motivos del rechazo.");
+			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea rechazar la propuesta?", "Confirmacion",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (respuesta == JOptionPane.OK_OPTION) {
+				String mensaje = "";
+				while (mensaje.equals("")) {
+					mensaje = JOptionPane.showInputDialog(null, "Escriba los motivos y recomendaciones necesarias.",
+							"Atencion!", JOptionPane.PLAIN_MESSAGE);
+					if (mensaje == null) {
+						return;
+					}
+					if (mensaje.equals("")) {
+						JOptionPane.showMessageDialog(null, "Debe rellenar los motivos del rechazo.");
+					}
+
+					else {
+						try {
+							GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado, mensaje);
+							modelo.removeElement(cursoSeleccionado);
+						} catch (SQLException e1) {
+							logger.info("Se ha producido un error al rechazar la propuesta: " + e1.getMessage());
 						}
 
-						else {
-							try {
-								GestorPropuestasCursos.rechazarPropuesta(cursoSeleccionado, mensaje);
-								modelo.removeElement(cursoSeleccionado);
-							} catch (SQLException e1) {
-								logger.info("Se ha producido un error al rechazar la propuesta: " + e1.getMessage());
-							}
-
-						}
 					}
 
 				}
@@ -141,18 +137,18 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener((ActionListener) new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaEmpleadosVicerrectorado p = new main.java.presentacion.PantallaEmpleadosVicerrectorado();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaEmpleadosVicerrectorado p = new main.java.presentacion.PantallaEmpleadosVicerrectorado();
+			p.setVisible(true);
+
 		});
 
-		listaCursos = new JList();
+		listaCursos = new JList<>();
 		listaCursos.setBounds(54, 137, 690, 251);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel();
+		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
 		listaCursos.addListSelectionListener(new ListSelectionListener() {

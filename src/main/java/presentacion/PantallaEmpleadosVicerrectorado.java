@@ -15,6 +15,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -24,6 +25,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
 	private static String tipoLetra = "Tahoma";
+	private static final Logger logger = Logger.getLogger(PantallaEmpleadosVicerrectorado.class.getName());
 
 	public PantallaEmpleadosVicerrectorado() {
 		setTitle("UCLM");
@@ -45,17 +47,17 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton btnVerPropuestas = new JButton("Cursos propuestos\r\n");
-		btnVerPropuestas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaEvaluarCurso p = new main.java.presentacion.PantallaEvaluarCurso();
-				try {
-					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTO);
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-				}
+		btnVerPropuestas.addActionListener(event -> {
 
+			main.java.presentacion.PantallaEvaluarCurso p = new main.java.presentacion.PantallaEvaluarCurso();
+			try {
+				GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTO);
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info("Se ha producido un error al mostrar los cursos propuestos: " + e1.getMessage());
 			}
+
 		});
 		btnVerPropuestas.setFocusPainted(false);
 		btnVerPropuestas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -77,11 +79,11 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
-		cs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				PantallaLogin p = new PantallaLogin();
-			}
+		cs.addActionListener(event -> {
+
+			setVisible(false);
+			new PantallaLogin();
+
 		});
 		cs.setHorizontalTextPosition(SwingConstants.LEFT);
 		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

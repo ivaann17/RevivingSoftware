@@ -33,10 +33,10 @@ import java.awt.Cursor;
 
 public class PantallaEmpezarMatriculacion extends JFrame {
 
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
-	public CursoPropio cursoSeleccionado;
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	protected JList<CursoPropio> listaCursos;
+	DefaultListModel<CursoPropio> modelo;
+	protected CursoPropio cursoSeleccionado;
+	private static final Logger logger = Logger.getLogger(PantallaEmpezarMatriculacion.class.getName());
 	private static String tipoLetra = "Tahoma";
 
 	public PantallaEmpezarMatriculacion() {
@@ -65,21 +65,20 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton btnValidar = new JButton("Empezar matriculacion");
-		btnValidar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnValidar.addActionListener(event -> {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea comenzar la matriculacion de este curso?",
-						"ATENCIÃ“N", JOptionPane.OK_CANCEL_OPTION);
-				if (respuesta == JOptionPane.OK_OPTION) {
-					try {
-						GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_MATRICULACION);
-					} catch (SQLException e1) {
-						logger.info("Se ha producido un error al editar el estado del curso: " + e1.getMessage());
-					}
-					modelo.removeElement(cursoSeleccionado);
-					JOptionPane.showMessageDialog(null, "El curso ha sido dado de alta.", "INFORMACION",
-							JOptionPane.INFORMATION_MESSAGE);
+			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea comenzar la matriculacion de este curso?",
+					"ATENCIÃ“N", JOptionPane.OK_CANCEL_OPTION);
+			if (respuesta == JOptionPane.OK_OPTION) {
+				try {
+					GestorPropuestasCursos.editarEstadoCurso(cursoSeleccionado, EstadoCurso.EN_MATRICULACION);
+				} catch (SQLException e1) {
+					logger.info("Se ha producido un error al editar el estado del curso: " + e1.getMessage());
 				}
+				modelo.removeElement(cursoSeleccionado);
+				JOptionPane.showMessageDialog(null, "El curso ha sido dado de alta.", "INFORMACION",
+						JOptionPane.INFORMATION_MESSAGE);
+
 			}
 		});
 		btnValidar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -91,24 +90,22 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		contentPane.add(btnValidar);
 
 		JButton btnEli = new JButton("Eliminar curso");
-		btnEli.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnEli.addActionListener(event -> {
 
-				int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
-						JOptionPane.OK_CANCEL_OPTION);
-				if (respuesta == JOptionPane.OK_OPTION) {
-					JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
-							JOptionPane.INFORMATION_MESSAGE);
+			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+					JOptionPane.OK_CANCEL_OPTION);
+			if (respuesta == JOptionPane.OK_OPTION) {
+				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
+						JOptionPane.INFORMATION_MESSAGE);
 
-					try {
-						GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
-					} catch (SQLException e1) {
-						logger.info("Se ha producido un error al eliminar el curso: " + e1.getMessage());
-					}
-					modelo.removeElement(cursoSeleccionado);
+				try {
+					GestorPropuestasCursos.eliminarCurso(cursoSeleccionado);
+				} catch (SQLException e1) {
+					logger.info("Se ha producido un error al eliminar el curso: " + e1.getMessage());
 				}
-
+				modelo.removeElement(cursoSeleccionado);
 			}
+
 		});
 		btnEli.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEli.setForeground(Color.WHITE);
@@ -126,29 +123,28 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener((ActionListener) new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaDireccionCursos p = new main.java.presentacion.PantallaDireccionCursos();
+			p.setVisible(true);
+
 		});
 
-		listaCursos = new JList();
+		listaCursos = new JList<>();
 		listaCursos.setBounds(54, 144, 690, 226);
 		contentPane.add(listaCursos);
-		modelo = new DefaultListModel();
+		modelo = new DefaultListModel<>();
 
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				cursoSeleccionado = listaCursos.getSelectedValue();
-				if (cursoSeleccionado != null) {
-					btnEli.setVisible(true);
-					btnValidar.setVisible(true);
+		listaCursos.addListSelectionListener(event -> {
 
-				}
+			cursoSeleccionado = listaCursos.getSelectedValue();
+			if (cursoSeleccionado != null) {
+				btnEli.setVisible(true);
+				btnValidar.setVisible(true);
+
 			}
 
 		});

@@ -98,16 +98,14 @@ public class PantallaDatosAlumno extends JFrame {
 		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnNewButton.setBounds(20, 496, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaMatriculacion m = new main.java.presentacion.PantallaMatriculacion();
-				try {
-					GestorConsultas.listarCursosPorEstado(m.modelo, EstadoCurso.EN_MATRICULACION);
-					setVisible(false);
-					m.setVisible(true);
-				} catch (Exception e1) {
-					logger.info("Se ha producido un error al listar cursos: " + e1.getMessage());
-				}
+		btnNewButton.addActionListener(event -> {
+			main.java.presentacion.PantallaMatriculacion m = new main.java.presentacion.PantallaMatriculacion();
+			try {
+				GestorConsultas.listarCursosPorEstado(m.modelo, EstadoCurso.EN_MATRICULACION);
+				setVisible(false);
+				m.setVisible(true);
+			} catch (Exception e1) {
+				logger.info("Se ha producido un error al listar cursos: " + e1.getMessage());
 
 			}
 		});
@@ -144,17 +142,16 @@ public class PantallaDatosAlumno extends JFrame {
 		btnPagar.setBounds(594, 490, 114, 49);
 		btnPagar.setVisible(true);
 		contentPane.add(btnPagar);
-		btnPagar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Date fechaActual = new Date();
-				String metodoPago = metoPago.getText();
+		btnPagar.addActionListener(event -> {
+			Date fechaActual = new Date();
+			String metodoPago = metoPago.getText();
 
-				if (metodoPago.equals(ModoPago.TARJETA_CREDITO.toString())) {
-					procesarPagoTarjeta(fechaActual);
-				} else if (metodoPago.equals(ModoPago.TRANSFERENCIA.toString())) {
-					procesarPagoTransferencia(fechaActual);
-				}
+			if (metodoPago.equals(ModoPago.TARJETA_CREDITO.toString())) {
+				procesarPagoTarjeta(fechaActual);
+			} else if (metodoPago.equals(ModoPago.TRANSFERENCIA.toString())) {
+				procesarPagoTransferencia(fechaActual);
 			}
+
 		});
 
 		lblDNIAlu = new JLabel("DNI del alumno:\r\n");

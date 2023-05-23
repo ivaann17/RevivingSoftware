@@ -36,7 +36,7 @@ public class PantallaMatriculacion extends JFrame {
 	DefaultListModel<CursoPropio> modelo;
 	public CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
-	private static final Logger logger = Logger.getLogger(GestorBD.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaMatriculacion.class.getName());
 
 	public PantallaMatriculacion() {
 		setIconImage(
@@ -58,22 +58,20 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton btnTar = new JButton("Pago con Tarjeta");
-		btnTar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnTar.addActionListener(event -> {
 
-				main.java.presentacion.PantallaDatosAlumno p;
-				setVisible(false);
-				try {
-					p = new main.java.presentacion.PantallaDatosAlumno();
-					p.metoPago.setText(ModoPago.TARJETA_CREDITO.toString());
-					p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-					p.id = cursoSeleccionado.getId();
-					p.setVisible(true);
-				} catch (SQLException e1) {
-					logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
-				}
-
+			main.java.presentacion.PantallaDatosAlumno p;
+			setVisible(false);
+			try {
+				p = new main.java.presentacion.PantallaDatosAlumno();
+				p.metoPago.setText(ModoPago.TARJETA_CREDITO.toString());
+				p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
+				p.id = cursoSeleccionado.getId();
+				p.setVisible(true);
+			} catch (SQLException e1) {
+				logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
 			}
+
 		});
 		btnTar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTar.setForeground(Color.WHITE);
@@ -84,21 +82,20 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.add(btnTar);
 
 		JButton btnTrans = new JButton("Pago por transferencia");
-		btnTrans.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaDatosAlumno p;
-				try {
-					p = new main.java.presentacion.PantallaDatosAlumno();
-					p.setVisible(true);
-					p.metoPago.setText(ModoPago.TRANSFERENCIA.toString());
-					p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-					p.id = cursoSeleccionado.getId();
-				} catch (SQLException e1) {
-					logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
-				}
+		btnTrans.addActionListener(event -> {
 
+			setVisible(false);
+			main.java.presentacion.PantallaDatosAlumno p;
+			try {
+				p = new main.java.presentacion.PantallaDatosAlumno();
+				p.setVisible(true);
+				p.metoPago.setText(ModoPago.TRANSFERENCIA.toString());
+				p.textPrecio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
+				p.id = cursoSeleccionado.getId();
+			} catch (SQLException e1) {
+				logger.info("Se ha producido un error al obtener los datos de la base: " + e1.getMessage());
 			}
+
 		});
 		btnTrans.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnTrans.setForeground(Color.WHITE);
@@ -116,12 +113,12 @@ public class PantallaMatriculacion extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener((ActionListener) new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
+			p.setVisible(true);
+
 		});
 
 		listaCursos = new JList<>();
@@ -139,29 +136,27 @@ public class PantallaMatriculacion extends JFrame {
 		lblMatriculado.setBounds(56, 390, 619, 65);
 		contentPane.add(lblMatriculado);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				cursoSeleccionado = listaCursos.getSelectedValue();
-				if (cursoSeleccionado != null) {
-					boolean existeMatricula;
-					try {
-						existeMatricula = GestorMatriculacion.existe(cursoSeleccionado.getId(),
-								main.java.presentacion.PantallaLogin.dni.toString());
+		listaCursos.addListSelectionListener(event -> {
+			cursoSeleccionado = listaCursos.getSelectedValue();
+			if (cursoSeleccionado != null) {
+				boolean existeMatricula;
+				try {
+					existeMatricula = GestorMatriculacion.existe(cursoSeleccionado.getId(),
+							main.java.presentacion.PantallaLogin.dni.toString());
 
-						if (!existeMatricula) {
-							lblMatriculado.setVisible(false);
-							btnTar.setVisible(true);
-							btnTrans.setVisible(true);
-						} else {
-							btnTar.setVisible(false);
-							btnTrans.setVisible(false);
-							lblMatriculado.setVisible(true);
-							listaCursos.clearSelection();
-						}
-					} catch (Exception e) {
-						logger.info("Se ha producido un error al comprobar la existencia de la matricula: "
-								+ e.getMessage());
+					if (!existeMatricula) {
+						lblMatriculado.setVisible(false);
+						btnTar.setVisible(true);
+						btnTrans.setVisible(true);
+					} else {
+						btnTar.setVisible(false);
+						btnTrans.setVisible(false);
+						lblMatriculado.setVisible(true);
+						listaCursos.clearSelection();
 					}
+				} catch (Exception e) {
+					logger.info(
+							"Se ha producido un error al comprobar la existencia de la matricula: " + e.getMessage());
 				}
 			}
 
