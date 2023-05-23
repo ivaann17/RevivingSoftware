@@ -287,7 +287,7 @@ public class PantallaVisualizarCurso extends JFrame {
 
 			main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
 			try {
-				GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni);
+				GestorConsultas.listarCursosMatriculados(PantallaMisCursos.modelo, main.java.presentacion.PantallaLogin.dni);
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {

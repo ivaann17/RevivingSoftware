@@ -23,7 +23,7 @@ import java.awt.Cursor;
 
 public class PantallaMisCursos extends JFrame {
 
-	protected static JList<CursoPropio> listaCursos;
+	protected JList<CursoPropio> listaCursos;
 	protected static DefaultListModel<CursoPropio> modelo;
 	protected transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";

@@ -31,9 +31,9 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 public class PantallaComenzarCurso extends JFrame {
-	protected static JList<CursoPropio> listaCursos;
+	protected JList<CursoPropio> listaCursos;
 	protected DefaultListModel<CursoPropio> modelo;
-	protected static CursoPropio cursoSeleccionado;
+	protected CursoPropio cursoSeleccionado;
 	protected JLabel lblCursosMatriculados;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;

@@ -26,9 +26,9 @@ import java.awt.Font;
 import java.awt.Cursor;
 
 public class PantallaEvaluarCurso extends JFrame {
-	protected static JList<CursoPropio> listaCursos;
-	DefaultListModel<CursoPropio> modelo;
-	protected static CursoPropio cursoSeleccionado;
+	protected JList<CursoPropio> listaCursos;
+	protected DefaultListModel<CursoPropio> modelo;
+	protected CursoPropio cursoSeleccionado;
 	protected JLabel propuestas;
 	protected final JButton btnRechazar;
 	protected final JButton btnAceptar;
