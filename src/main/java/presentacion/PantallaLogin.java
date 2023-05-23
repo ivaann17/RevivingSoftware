@@ -34,7 +34,7 @@ import main.java.persistencia.Excepciones.TypeUserException;
 
 public class PantallaLogin extends JFrame {
 
-	protected static JTextField usuarioText = new JTextField();
+	protected static JTextField usuarioText;
 	protected static JTextField user = new JTextField();
 	protected static String tipo = "";
 	protected static String nom = "";
@@ -93,6 +93,7 @@ public class PantallaLogin extends JFrame {
 		contrasenaText.setBounds(79, 191, 434, 42);
 		panel.add(contrasenaText);
 
+		usuarioText = new JTextField();
 		usuarioText.setFont(new Font(tipoLetra, Font.PLAIN, 15));
 		usuarioText.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		usuarioText.setName("");

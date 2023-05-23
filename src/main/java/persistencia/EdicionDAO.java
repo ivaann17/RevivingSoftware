@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class EdicionDAO {
 	GestorBD gestorBD = new GestorBD();
 
-	public int crearNuevaEdicion(int id, String nombre, int edi, int id_curso) throws SQLException {
+	public int crearNuevaEdicion(int id, String nombre, int edi, int idCurso) throws SQLException {
 
 		int i = 0;
 		String sql = "INSERT INTO edicion (ID, nombre_curso, edicion_curso, ID_curso) VALUES (?, ?, ?, ?)";
@@ -18,7 +18,7 @@ public class EdicionDAO {
 			ps.setInt(1, id);
 			ps.setString(2, nombre);
 			ps.setInt(3, edi);
-			ps.setInt(4, id_curso);
+			ps.setInt(4, idCurso);
 			gestorBD.insert(ps);
 
 			ResultSet rs = ps.getGeneratedKeys();
@@ -30,7 +30,7 @@ public class EdicionDAO {
 		return i;
 	}
 
-	public boolean existeEdicion(int edi, String nombre) throws Exception {
+	public boolean existeEdicion(int edi, String nombre) throws SQLException  {
 
 		String sql = "SELECT COUNT(*) FROM edicion WHERE edicion_curso = ? AND nombre_curso = ? ";
 

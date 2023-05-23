@@ -4,8 +4,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -15,8 +13,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.entities.CursoPropio;
 
@@ -27,9 +23,9 @@ import java.awt.Cursor;
 
 public class PantallaMisCursos extends JFrame {
 
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel<CursoPropio> modelo;
-	public static transient CursoPropio cursoSeleccionado;
+	protected JList<CursoPropio> listaCursos;
+	protected static DefaultListModel<CursoPropio> modelo;
+	protected transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 
 	public PantallaMisCursos() {
@@ -99,14 +95,14 @@ public class PantallaMisCursos extends JFrame {
 		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					cursoSeleccionado = listaCursos.getSelectedValue();
-					if (cursoSeleccionado != null) {
-						btnInfo.setVisible(true);
-					}
+		listaCursos.addListSelectionListener(arg0 -> {
+
+			if (!arg0.getValueIsAdjusting()) {
+				cursoSeleccionado = listaCursos.getSelectedValue();
+				if (cursoSeleccionado != null) {
+					btnInfo.setVisible(true);
 				}
+
 			}
 
 		});

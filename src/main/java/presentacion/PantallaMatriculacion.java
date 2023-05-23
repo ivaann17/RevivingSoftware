@@ -3,8 +3,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -15,13 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.controllers.GestorMatriculacion;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.ModoPago;
-import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -32,9 +27,9 @@ import javax.swing.WindowConstants;
 
 public class PantallaMatriculacion extends JFrame {
 
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel<CursoPropio> modelo;
-	public CursoPropio cursoSeleccionado;
+	protected JList<CursoPropio> listaCursos;
+	protected DefaultListModel<CursoPropio> modelo;
+	protected transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(PantallaMatriculacion.class.getName());
 
@@ -142,7 +137,7 @@ public class PantallaMatriculacion extends JFrame {
 				boolean existeMatricula;
 				try {
 					existeMatricula = GestorMatriculacion.existe(cursoSeleccionado.getId(),
-							main.java.presentacion.PantallaLogin.dni.toString());
+							main.java.presentacion.PantallaLogin.dni);
 
 					if (!existeMatricula) {
 						lblMatriculado.setVisible(false);
