@@ -70,14 +70,13 @@ public class PantallaComenzarCurso extends JFrame {
 		contentPane.add(lblCursosMatriculados);
 
 		btnAceptar = new JButton("Comenzar imparticion");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int respuesta = mostrarConfirmacion();
-				if (respuesta == JOptionPane.OK_OPTION) {
-					mostrarInformacion();
-					editarEstadoCurso();
-					eliminarCursoSeleccionado();
-				}
+		btnAceptar.addActionListener(event -> {
+			int respuesta = mostrarConfirmacion();
+			if (respuesta == JOptionPane.OK_OPTION) {
+				mostrarInformacion();
+				editarEstadoCurso();
+				eliminarCursoSeleccionado();
+
 			}
 		});
 		btnAceptar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -121,12 +120,12 @@ public class PantallaComenzarCurso extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener((ActionListener) new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaJefeGabineteVicerrectorado p = new main.java.presentacion.PantallaJefeGabineteVicerrectorado();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaJefeGabineteVicerrectorado p = new main.java.presentacion.PantallaJefeGabineteVicerrectorado();
+			p.setVisible(true);
+
 		});
 
 		listaCursos = new JList<>();
@@ -158,6 +157,7 @@ public class PantallaComenzarCurso extends JFrame {
 							}
 
 						} catch (Exception e) {
+							logger.info("Se ha producido un error al seleccionar el curso: " + e.getMessage());
 						}
 
 					}

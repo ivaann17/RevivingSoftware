@@ -31,6 +31,7 @@ public class PantallaDireccionCursos extends JFrame {
 
 	private JPanel contentPane;
 	private static String tipoLetra = "Tahoma";
+	private static String error = "Se ha producido un error: ";
 	private static final Logger logger = Logger.getLogger(PantallaDireccionCursos.class.getName());
 
 	public PantallaDireccionCursos() {
@@ -48,22 +49,20 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton btnMostrarHistorial = new JButton("Historial \r\nde \r\npropuestas");
-		btnMostrarHistorial.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnMostrarHistorial.addActionListener(event -> {
 
-				try {
-					main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-					String nombre = main.java.presentacion.PantallaEstudiante.createNombreUsuTextField().getText()
-							.replaceAll("\\s.*", "");
+			try {
+				main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
+				String nombre = main.java.presentacion.PantallaEstudiante.createNombreUsuTextField().getText()
+						.replaceAll("\\s.*", "");
 
-					GestorConsultas.listarHistorial(p.modelo, dni(nombre));
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-					logger.info("Se ha producido un error : " + e1.getMessage());
-				}
-
+				GestorConsultas.listarHistorial(p.modelo, dni(nombre));
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
+
 		});
 		btnMostrarHistorial.setFocusPainted(false);
 		btnMostrarHistorial.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -80,13 +79,12 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton btnRealizarPropuesta = new JButton("Realizar \r\npropuesta");
-		btnRealizarPropuesta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
-				setVisible(false);
-				p.setVisible(true);
+		btnRealizarPropuesta.addActionListener(event -> {
 
-			}
+			PantallaRealizarPropuestas p = new PantallaRealizarPropuestas();
+			setVisible(false);
+			p.setVisible(true);
+
 		});
 		btnRealizarPropuesta.setFocusPainted(false);
 		btnRealizarPropuesta.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -104,24 +102,7 @@ public class PantallaDireccionCursos extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
-		JButton cs = new JButton("Cerrar sesion");
-		cs.setBorderPainted(false);
-		cs.setFocusPainted(false);
-		cs.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				new PantallaLogin();
-			}
-		});
-		cs.setHorizontalTextPosition(SwingConstants.LEFT);
-		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		cs.setBackground(new Color(255, 0, 0));
-		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		cs.setIconTextGap(15);
-		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
-		cs.setBounds(552, 303, 176, 39);
-		contentPane.add(cs);
+		//contentPane.add(PantallaEstudiante.addCerrarSesionButton());
 
 		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -135,6 +116,7 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
+					logger.info(error + e1.getMessage());
 				}
 			}
 
@@ -164,7 +146,7 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-
+					logger.info(error + e1.getMessage());
 				}
 
 			}

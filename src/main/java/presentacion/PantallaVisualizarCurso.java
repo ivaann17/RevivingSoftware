@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
 
@@ -51,6 +52,7 @@ public class PantallaVisualizarCurso extends JFrame {
 	protected JLabel lblEdi;
 	private String tipoLetra = "Tahoma";
 	private String volverText = "Volver";
+	private static final Logger logger = Logger.getLogger(PantallaVisualizarCurso.class.getName());
 
 	protected transient CursoPropio curso;
 
@@ -101,18 +103,17 @@ public class PantallaVisualizarCurso extends JFrame {
 		btnVolver.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnVolver.setBounds(10, 496, 114, 49);
 		contentPane.add(btnVolver);
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
-				try {
-					GestorConsultas.listarHistorial(p.modelo, dniProf.getText());
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
+		btnVolver.addActionListener(event -> {
 
-				}
-
+			main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
+			try {
+				GestorConsultas.listarHistorial(p.modelo, dniProf.getText());
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info("Se ha producido un error: " + e1.getMessage());
 			}
+
 		});
 
 		btnVolver2 = new JButton(volverText);
@@ -131,7 +132,7 @@ public class PantallaVisualizarCurso extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-	
+
 				}
 
 			}
@@ -175,12 +176,11 @@ public class PantallaVisualizarCurso extends JFrame {
 		btnMen.setBounds(294, 496, 114, 49);
 		contentPane.add(btnMen);
 		contentPane.getRootPane().setDefaultButton(btnMen);
-		btnMen.addActionListener(new ActionListener() {
+		btnMen.addActionListener(event ->
 
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, mensaje, "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
-			}
-		});
+		JOptionPane.showMessageDialog(null, mensaje, "MENSAJE", JOptionPane.INFORMATION_MESSAGE)
+
+		);
 
 		lblId = new JLabel("ID del curso:");
 		lblId.setForeground(SystemColor.textHighlight);
@@ -285,16 +285,17 @@ public class PantallaVisualizarCurso extends JFrame {
 		btnVolver3.setBackground(SystemColor.textHighlight);
 		btnVolver3.setBounds(10, 496, 114, 49);
 		contentPane.add(btnVolver3);
-		btnVolver3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
-				try {
-					GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni);
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
-				}
+		btnVolver3.addActionListener(event -> {
+
+			main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
+			try {
+				GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni);
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info("Se ha producido un error: " + e1.getMessage());
 			}
+
 		});
 	}
 

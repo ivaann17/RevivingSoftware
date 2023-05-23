@@ -65,17 +65,16 @@ public class PantallaMisCursos extends JFrame {
 		btnInfo.setBackground(SystemColor.textHighlight);
 		btnInfo.setBounds(272, 398, 226, 75);
 		contentPane.add(btnInfo);
-		btnInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
-				setVisible(false);
-				a.setVisible(true);
-				a.btnVolver.setVisible(false);
-				a.btnVolver2.setVisible(false);
-				a.btnVolver3.setVisible(true);
-				main.java.presentacion.PantallaPropuestasRealizadas.infoCurso(cursoSeleccionado);
+		btnInfo.addActionListener(event -> {
 
-			}
+			main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
+			setVisible(false);
+			a.setVisible(true);
+			a.btnVolver.setVisible(false);
+			a.btnVolver2.setVisible(false);
+			a.btnVolver3.setVisible(true);
+			main.java.presentacion.PantallaPropuestasRealizadas.infoCurso(cursoSeleccionado);
+
 		});
 
 		JButton btnNewButton = new JButton("Volver");
@@ -86,12 +85,12 @@ public class PantallaMisCursos extends JFrame {
 		btnNewButton.setBackground(SystemColor.textHighlight);
 		btnNewButton.setBounds(630, 38, 114, 49);
 		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener((ActionListener) new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
-				p.setVisible(true);
-			}
+		btnNewButton.addActionListener(event -> {
+
+			setVisible(false);
+			main.java.presentacion.PantallaEstudiante p = new main.java.presentacion.PantallaEstudiante();
+			p.setVisible(true);
+
 		});
 
 		listaCursos = new JList<>();
