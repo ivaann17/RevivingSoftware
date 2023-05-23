@@ -25,12 +25,12 @@ public class PantallaEstudiante extends JFrame {
 
 	private JPanel contentPane;
 	private static String tipoLetra = "Tahoma";
-	private static final Logger logger = Logger.getLogger(PantallaDireccionCursos.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaEstudiante.class.getName());
 
 	public PantallaEstudiante() {
 		setTitle("UCLM");
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(
+				Toolkit.getDefaultToolkit().getImage(PantallaEstudiante.class.getResource("/IMAGES/descarga.png")));
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
@@ -62,8 +62,8 @@ public class PantallaEstudiante extends JFrame {
 		contentPane.add(btnMisCursos);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(
-				new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel
+				.setIcon(new ImageIcon(PantallaEstudiante.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -93,7 +93,7 @@ public class PantallaEstudiante extends JFrame {
 		contentPane.add(createTipoUsuarioTextField());
 
 		JLabel lblNewLabel2 = new JLabel("");
-		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
+		lblNewLabel2.setIcon(new ImageIcon(PantallaEstudiante.class.getResource("/IMAGES/images2.jpg")));
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
@@ -112,7 +112,7 @@ public class PantallaEstudiante extends JFrame {
 		cs.setForeground(new Color(255, 255, 255));
 		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		cs.setIconTextGap(15);
-		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
+		cs.setIcon(new ImageIcon(PantallaEstudiante.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
 		contentPane.add(cs);
 

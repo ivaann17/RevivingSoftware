@@ -52,7 +52,7 @@ public class PantallaVisualizarCurso extends JFrame {
 	protected JLabel lblEdi;
 	private String tipoLetra = "Tahoma";
 	private String volverText = "Volver";
-	private static final Logger logger = Logger.getLogger(PantallaPropuestasRechazadas.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaVisualizarCurso.class.getName());
 
 	protected transient CursoPropio curso;
 
@@ -176,11 +176,11 @@ public class PantallaVisualizarCurso extends JFrame {
 		btnMen.setBounds(294, 496, 114, 49);
 		contentPane.add(btnMen);
 		contentPane.getRootPane().setDefaultButton(btnMen);
-		btnMen.addActionListener(event -> {
+		btnMen.addActionListener(event ->
 
-			JOptionPane.showMessageDialog(null, mensaje, "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, mensaje, "MENSAJE", JOptionPane.INFORMATION_MESSAGE)
 
-		});
+		);
 
 		lblId = new JLabel("ID del curso:");
 		lblId.setForeground(SystemColor.textHighlight);

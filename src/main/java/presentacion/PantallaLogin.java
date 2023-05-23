@@ -73,10 +73,7 @@ public class PantallaLogin extends JFrame {
 
 		loginButton = new JButton("Iniciar sesion");
 		loginButton.setFocusPainted(false);
-		loginButton.addActionListener(event -> {
-			frmUclm.dispose();
-
-		});
+		loginButton.addActionListener(event -> frmUclm.dispose());
 
 		loginButton.setVisible(false);
 		loginButton.setForeground(Color.WHITE);
@@ -105,10 +102,7 @@ public class PantallaLogin extends JFrame {
 		usuarioText.setColumns(10);
 
 		btnRecuperar = new JButton("He olvidado mi contraseña");
-		btnRecuperar.addActionListener(event -> {
-			enlaceMan();
-
-		});
+		btnRecuperar.addActionListener(event -> enlaceMan());
 		btnRecuperar.setVisible(false);
 		btnRecuperar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnRecuperar.setForeground(SystemColor.textHighlight);
@@ -152,12 +146,7 @@ public class PantallaLogin extends JFrame {
 		user.setColumns(10);
 
 		btnNoAcceder = new JButton("¿No puede acceder a su cuenta?");
-		btnNoAcceder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				enlaceMan();
-
-			}
-		});
+		btnNoAcceder.addActionListener(arg0 -> enlaceMan());
 		btnNoAcceder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNoAcceder.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNoAcceder.setForeground(SystemColor.textHighlight);

@@ -167,7 +167,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 
 		dniProf = new JTextField();
 		dniProf.setEditable(false);
-		dniProf.setText(main.java.presentacion.PantallaLogin.dni.toString());
+		dniProf.setText(main.java.presentacion.PantallaLogin.dni);
 		dniProf.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
 		dniProf.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		dniProf.setColumns(10);

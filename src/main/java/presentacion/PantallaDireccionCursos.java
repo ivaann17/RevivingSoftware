@@ -31,6 +31,7 @@ public class PantallaDireccionCursos extends JFrame {
 
 	private JPanel contentPane;
 	private static String tipoLetra = "Tahoma";
+	private static String error = "Se ha producido un error: ";
 	private static final Logger logger = Logger.getLogger(PantallaDireccionCursos.class.getName());
 
 	public PantallaDireccionCursos() {
@@ -59,7 +60,7 @@ public class PantallaDireccionCursos extends JFrame {
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {
-				logger.info("Se ha producido un error : " + e1.getMessage());
+				logger.info(error + e1.getMessage());
 			}
 
 		});
@@ -132,7 +133,7 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					logger.info("Se ha producido un error : " + e1.getMessage());
+					logger.info(error + e1.getMessage());
 				}
 			}
 
@@ -162,7 +163,7 @@ public class PantallaDireccionCursos extends JFrame {
 					setVisible(false);
 					p.setVisible(true);
 				} catch (Exception e1) {
-					logger.info("Se ha producido un error : " + e1.getMessage());
+					logger.info(error + e1.getMessage());
 				}
 
 			}

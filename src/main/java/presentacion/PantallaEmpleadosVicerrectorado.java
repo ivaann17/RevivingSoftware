@@ -25,7 +25,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 
 	private JPanel contentPane;
 	private static String tipoLetra = "Tahoma";
-	private static final Logger logger = Logger.getLogger(PantallaEmpezarMatriculacion.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaEmpleadosVicerrectorado.class.getName());
 
 	public PantallaEmpleadosVicerrectorado() {
 		setTitle("UCLM");
