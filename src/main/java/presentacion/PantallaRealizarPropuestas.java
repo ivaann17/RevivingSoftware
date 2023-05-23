@@ -119,12 +119,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		nombreCurso.setColumns(10);
 
 		btnNewButton = new JButton("Volver");
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNewButton.setBounds(20, 496, 114, 49);
-		contentPane.add(btnNewButton);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnNewButton));
 		btnNewButton.addActionListener(event -> {
 
 			PantallaDireccionCursos p = new PantallaDireccionCursos();

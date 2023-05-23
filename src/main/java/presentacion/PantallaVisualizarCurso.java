@@ -96,12 +96,7 @@ public class PantallaVisualizarCurso extends JFrame {
 		nombreCurso.setColumns(10);
 
 		btnVolver = new JButton(volverText);
-		btnVolver.setForeground(Color.WHITE);
-		btnVolver.setBackground(SystemColor.textHighlight);
-		btnVolver.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnVolver.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnVolver.setBounds(10, 496, 114, 49);
-		contentPane.add(btnVolver);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnVolver));
 		btnVolver.addActionListener(event -> {
 
 			main.java.presentacion.PantallaPropuestasRealizadas p = new main.java.presentacion.PantallaPropuestasRealizadas();
@@ -116,13 +111,7 @@ public class PantallaVisualizarCurso extends JFrame {
 		});
 
 		btnVolver2 = new JButton(volverText);
-		btnVolver2.setForeground(Color.WHITE);
-		btnVolver2.setVisible(false);
-		btnVolver2.setBackground(SystemColor.textHighlight);
-		btnVolver2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnVolver2.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnVolver2.setBounds(10, 496, 114, 49);
-		contentPane.add(btnVolver2);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnVolver2));
 		btnVolver2.addActionListener(event -> {
 
 			main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
@@ -277,18 +266,13 @@ public class PantallaVisualizarCurso extends JFrame {
 		contentPane.add(lblFechaFin);
 
 		btnVolver3 = new JButton(volverText);
-		btnVolver3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnVolver3.setVisible(false);
-		btnVolver3.setForeground(Color.WHITE);
-		btnVolver3.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnVolver3.setBackground(SystemColor.textHighlight);
-		btnVolver3.setBounds(10, 496, 114, 49);
-		contentPane.add(btnVolver3);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnVolver3));
 		btnVolver3.addActionListener(event -> {
 
 			main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
 			try {
-				GestorConsultas.listarCursosMatriculados(PantallaMisCursos.modelo, main.java.presentacion.PantallaLogin.dni);
+				GestorConsultas.listarCursosMatriculados(PantallaMisCursos.modelo,
+						main.java.presentacion.PantallaLogin.dni);
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {

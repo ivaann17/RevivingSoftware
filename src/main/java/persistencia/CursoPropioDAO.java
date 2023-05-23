@@ -22,16 +22,16 @@ public class CursoPropioDAO {
 
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			ps.setInt(1, curso.getId());
-			ps.setString(2, curso.getNombre().toString());
-			ps.setString(3, curso.getDniDirector().toString());
-			ps.setString(4, curso.getDniSecretario().toString());
+			ps.setString(2, curso.getNombre());
+			ps.setString(3, curso.getDniDirector());
+			ps.setString(4, curso.getDniSecretario());
 			ps.setDate(5, new Date(curso.getFechaInicio().getTime()));
 			ps.setDate(6, new Date(curso.getFechaFin().getTime()));
 			ps.setInt(7, curso.getECTS());
 			ps.setDouble(8, curso.getTasaMatricula());
 			ps.setString(9, curso.getTipo().toString());
 			ps.setString(10, curso.getEstado().toString());
-			ps.setString(11, curso.getCentro().toString());
+			ps.setString(11, curso.getCentro());
 			ps.setInt(12, curso.getEdicion());
 			ps.setString(13, curso.getMensaje());
 

@@ -69,7 +69,7 @@ public class GestorBD {
 		}
 	}
 
-	public static Vector<Object> select(PreparedStatement ps) throws SelectException, SQLException {
+	public static Vector<Object> select(PreparedStatement ps) throws SQLException {
 		Vector<Object> vectoradevolver = new Vector<>();
 		ResultSet res = ps.executeQuery();
 		ResultSetMetaData rsmd = res.getMetaData();

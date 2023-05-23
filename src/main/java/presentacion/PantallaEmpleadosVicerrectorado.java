@@ -13,11 +13,8 @@ import main.java.negocio.entities.EstadoCurso;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 import java.awt.Cursor;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
@@ -77,23 +74,15 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		contentPane.add(lblNewLabel2);
 
 		JButton cs = new JButton("Cerrar sesion");
-		cs.setBorderPainted(false);
-		cs.setFocusPainted(false);
+		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
+		cs = crearBotonCerrarSesion(cs);
+		contentPane.add(cs);
 		cs.addActionListener(event -> {
 
 			setVisible(false);
 			new PantallaLogin();
 
 		});
-		cs.setHorizontalTextPosition(SwingConstants.LEFT);
-		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		cs.setBackground(new Color(255, 0, 0));
-		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		cs.setIconTextGap(15);
-		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
-		cs.setBounds(552, 303, 176, 39);
-		contentPane.add(cs);
 
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -102,4 +91,18 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 		btnMostrarResueltos.setBackground(SystemColor.textHighlight);
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
+
+	protected static JButton crearBotonCerrarSesion(JButton a) {
+		a.setBorderPainted(false);
+		a.setFocusPainted(false);
+		a.setHorizontalTextPosition(SwingConstants.LEFT);
+		a.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		a.setBackground(new Color(255, 0, 0));
+		a.setForeground(new Color(255, 255, 255));
+		a.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		a.setIconTextGap(15);
+		a.setBounds(552, 303, 176, 39);
+		return a;
+	}
+
 }

@@ -7,8 +7,6 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Vector;
@@ -158,13 +156,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(btnNoAcceder);
 
 		btnNewButton = new JButton("Volver");
-		btnNewButton.setFocusPainted(false);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setBounds(44, 316, 114, 49);
-		panel.add(btnNewButton);
+		panel.add(PantallaPropuestasRealizadas.crearBotonVolver(btnNewButton));
 		btnNewButton.setVisible(false);
 		btnNewButton.addActionListener(event -> {
 
@@ -210,7 +202,7 @@ public class PantallaLogin extends JFrame {
 				try {
 					Desktop.getDesktop().browse(e.getURL().toURI());
 				} catch (IOException | URISyntaxException ex) {
-					ex.printStackTrace();
+					logger.info("Se ha producido un error en el enlace al manual: " + ex.getMessage());
 				}
 			}
 		});

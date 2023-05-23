@@ -17,7 +17,7 @@ public class GestorMatriculacion {
 		matDAO.crearNuevaMatricula(mat);
 	}
 
-	public static boolean existe(int idCurso, String dni) throws Exception {
+	public static boolean existe(int idCurso, String dni) throws SQLException {
 		matDAO = new MatriculaDAO();
 		return matDAO.existeMatricula(idCurso, dni);
 	}

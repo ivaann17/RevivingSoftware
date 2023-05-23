@@ -5,13 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -29,7 +25,6 @@ import main.java.negocio.entities.EstadoCurso;
 
 import main.java.negocio.entities.Matricula;
 import main.java.negocio.entities.ModoPago;
-import main.java.persistencia.GestorBD;
 
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -58,7 +53,7 @@ public class PantallaDatosAlumno extends JFrame {
 	protected JLabel lblDNIAlu;
 	main.java.presentacion.PantallaEstudiante p;
 	protected JTextField metoPago;
-	protected Matricula matricula;
+	protected transient Matricula matricula;
 	private static final SecureRandom random = new SecureRandom();
 	private static final Logger logger = Logger.getLogger(PantallaDatosAlumno.class.getName());
 
@@ -92,12 +87,7 @@ public class PantallaDatosAlumno extends JFrame {
 		dniAlu.setColumns(10);
 
 		btnNewButton = new JButton("Volver");
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNewButton.setBounds(20, 496, 114, 49);
-		contentPane.add(btnNewButton);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnNewButton));
 		btnNewButton.addActionListener(event -> {
 			main.java.presentacion.PantallaMatriculacion m = new main.java.presentacion.PantallaMatriculacion();
 			try {
