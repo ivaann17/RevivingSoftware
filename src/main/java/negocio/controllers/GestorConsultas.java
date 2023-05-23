@@ -23,7 +23,7 @@ public class GestorConsultas {
 		return matDAO.ingresosCurso(curso);
 	}
 
-	public static int getIdCurso(CursoPropio curso) throws SQLException, SelectException {
+	public static int getIdCurso(CursoPropio curso) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		return cursoDAO.getId(curso);
 	}
@@ -53,7 +53,7 @@ public class GestorConsultas {
 		return matDAO.getNumMatriculas(curso);
 	}
 
-	public static void listarCursosPorEdiciones(DefaultListModel<CursoPropio> modelo) throws SQLException, SelectException {
+	public static void listarCursosPorEdiciones(DefaultListModel<CursoPropio> modelo) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		List<CursoPropio> cursos = cursoDAO.listarCursosPorEdicion();
 		for (CursoPropio curso : cursos) {
@@ -61,7 +61,7 @@ public class GestorConsultas {
 		}
 	}
 
-	public static void listarCursos(DefaultListModel<CursoPropio> modelo) throws SQLException, SelectException {
+	public static void listarCursos(DefaultListModel<CursoPropio> modelo) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		List<CursoPropio> cursos = cursoDAO.listarCursos();
 		for (CursoPropio curso : cursos) {
@@ -70,7 +70,7 @@ public class GestorConsultas {
 	}
 
 	public static void listarCursosPorEstado(DefaultListModel<CursoPropio> modelo, EstadoCurso estado)
-			throws SQLException, SelectException {
+			throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		List<CursoPropio> cursos = cursoDAO.listarCursosPorEstado(estado);
 		for (CursoPropio curso : cursos) {
@@ -78,7 +78,7 @@ public class GestorConsultas {
 		}
 	}
 
-	public static void listarHistorial(DefaultListModel<CursoPropio> modelo, String dni) throws SQLException, SelectException {
+	public static void listarHistorial(DefaultListModel<CursoPropio> modelo, String dni) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		List<CursoPropio> cursos = cursoDAO.listarHistorialCursos(dni);
 		for (CursoPropio curso : cursos) {
@@ -86,7 +86,7 @@ public class GestorConsultas {
 		}
 	}
 
-	public static void listarCursosMatriculados(DefaultListModel<CursoPropio> modelo, String dni)throws SQLException, SelectException {
+	public static void listarCursosMatriculados(DefaultListModel<CursoPropio> modelo, String dni)throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		List<CursoPropio> cursos = cursoDAO.listarCursosMatriculados(dni);
 		for (CursoPropio curso : cursos) {

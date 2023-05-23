@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Vector;
 
 import main.java.negocio.entities.*;
-import main.java.persistencia.Excepciones.SelectException;
 
 public class CursoPropioDAO {
 	GestorBD gestorBD = new GestorBD();

@@ -11,8 +11,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
-
-import main.java.persistencia.Excepciones.SelectException;
 import main.java.persistencia.GestorBD;
 
 import javax.swing.ImageIcon;

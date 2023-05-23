@@ -71,7 +71,7 @@ public class PantallaEstudiante extends JFrame {
 
 			try {
 				main.java.presentacion.PantallaMatriculacion p = new main.java.presentacion.PantallaMatriculacion();
-				GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
+				GestorConsultas.listarCursosPorEstado(PantallaMatriculacion.modelo, EstadoCurso.EN_MATRICULACION);
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {
