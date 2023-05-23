@@ -5,8 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -77,7 +75,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	private String fechaIni = "";
 
 	private String error = "ERROR";
-	protected CursoPropio curso;
+	protected transient CursoPropio curso;
 
 	TipoCurso c;
 	Facultad f;
@@ -226,7 +224,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 					} else {
 						Centro centro = new Centro(fac.getSelectedItem().toString());
 
-						CursoPropio nuevoCurso = new CursoPropio(centro.getNombre().toString(), EstadoCurso.PROPUESTO,
+						CursoPropio nuevoCurso = new CursoPropio(centro.getNombre(), EstadoCurso.PROPUESTO,
 								TipoCurso.valueOf(tipoCurso.getSelectedItem().toString()), dniProf.getText(),
 								dniSec.getText(), numRand(), nombreCurso.getText(),
 								Integer.parseInt(numCreditos.getText()), fechaInicio, fechaFinal,
@@ -742,14 +740,12 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	    try {
 	        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
 	        java.util.Date fechaUtil = formatoFecha.parse(fech);
-	        java.sql.Date fechaSql = new java.sql.Date(fechaUtil.getTime());
-	        return fechaSql;
+	        return new java.sql.Date(fechaUtil.getTime());
 	    } catch (Exception e) {
 	        logger.info("Se ha producido un error al formatear la fecha: " + e.getMessage());
 	    }
 	    return null;
 	}
-
 
 
 	private boolean hayCamposVacios() {

@@ -10,8 +10,6 @@ import javax.swing.border.EmptyBorder;
 import main.java.persistencia.*;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -24,22 +22,21 @@ import java.awt.Cursor;
 public class PantallaConectar extends JFrame {
 
 	private JPanel contentPane;
-	private static final Logger logger = Logger.getLogger(PantallaComenzarCurso.class.getName());
+	private static final Logger logger = Logger.getLogger(PantallaConectar.class.getName());
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-	    EventQueue.invokeLater(() -> {
-	        try {
-	            PantallaConectar frame = new PantallaConectar();
-	            frame.setVisible(true);
-	        } catch (Exception e) {
-	        	logger.info("Se ha producido un error: " + e.getMessage());
-	        }
-	    });
+		EventQueue.invokeLater(() -> {
+			try {
+				PantallaConectar frame = new PantallaConectar();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				logger.info("Se ha producido un error: " + e.getMessage());
+			}
+		});
 	}
-
 
 	/**
 	 * Create the frame.

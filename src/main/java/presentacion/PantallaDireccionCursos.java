@@ -11,20 +11,19 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
+
+import main.java.persistencia.Excepciones.SelectException;
 import main.java.persistencia.GestorBD;
 
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Logger;
 import java.awt.Cursor;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 public class PantallaDireccionCursos extends JFrame {
@@ -156,22 +155,17 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
 
-	public static String dni(String usu) throws Exception {
-
+	public static String dni(String usu) throws SQLException, SelectException  {
 		String sqlDNI = "SELECT DNI FROM usuarios WHERE UPPER(nombre) = UPPER(?)";
-
-		PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS);
-
-		psD.setString(1, usu);
-		Vector<Object> dni = GestorBD.select(psD);
-
-		String dniUsu = null;
-		if (!dni.isEmpty()) {
-			dniUsu = dni.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
-
+		try (PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS)) {
+			psD.setString(1, usu);
+			Vector<Object> dni = GestorBD.select(psD);
+			String dniUsu = null;
+			if (!dni.isEmpty()) {
+				dniUsu = dni.get(0).toString().replaceAll("[\\[\\]]", "").trim().toUpperCase();
+			}
+			return dniUsu;
 		}
-
-		return dniUsu;
-
 	}
+
 }

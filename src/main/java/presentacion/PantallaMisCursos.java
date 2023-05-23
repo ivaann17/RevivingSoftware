@@ -4,8 +4,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -15,8 +13,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.entities.CursoPropio;
 
@@ -29,7 +25,7 @@ public class PantallaMisCursos extends JFrame {
 
 	protected static JList<CursoPropio> listaCursos;
 	protected static DefaultListModel<CursoPropio> modelo;
-	protected  transient CursoPropio cursoSeleccionado;
+	protected transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 
 	public PantallaMisCursos() {

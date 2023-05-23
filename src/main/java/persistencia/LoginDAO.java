@@ -6,12 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import main.java.negocio.entities.CursoPropio;
-
 public class LoginDAO {
 	GestorBD gestorBD = new GestorBD();
 
-	public String getDNI(String usu) throws Exception {
+	public String getDNI(String usu) throws SQLException {
 
 		String dni = null;
 
@@ -31,7 +29,7 @@ public class LoginDAO {
 
 	}
 
-	public String getNombre(String usu) throws Exception {
+	public String getNombre(String usu) throws SQLException {
 
 		String nom = null;
 		String sql = "SELECT nombre FROM usuarios WHERE usuario = ?";
@@ -45,12 +43,12 @@ public class LoginDAO {
 
 			}
 
-		} 
+		}
 		return nom;
 
 	}
 
-	public String getApellidosLog(String usu) throws Exception {
+	public String getApellidosLog(String usu) throws SQLException {
 
 		String ape = null;
 		String sql = "SELECT apellido FROM usuarios WHERE usuario = ?";
@@ -64,12 +62,12 @@ public class LoginDAO {
 
 			}
 
-		} 
+		}
 		return ape;
 
 	}
 
-	public String getTipoUsuLog(String usu) throws Exception {
+	public String getTipoUsuLog(String usu) throws SQLException {
 
 		String tipo = null;
 
@@ -84,7 +82,7 @@ public class LoginDAO {
 
 			}
 
-		} 
+		}
 		return tipo;
 
 	}
