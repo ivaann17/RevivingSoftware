@@ -277,6 +277,7 @@ public class PantallaVisualizarCurso extends JFrame {
 		contentPane.add(lblFechaFin);
 
 		btnVolver3 = new JButton(volverText);
+		btnVolver3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVolver3.setVisible(false);
 		btnVolver3.setForeground(Color.WHITE);
 		btnVolver3.setFont(new Font(tipoLetra, Font.BOLD, 13));

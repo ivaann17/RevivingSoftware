@@ -96,7 +96,6 @@ public class PantallaEstudiante extends JFrame {
 		lblNewLabel2.setIcon(new ImageIcon(PantallaEstudiante.class.getResource("/IMAGES/images2.jpg")));
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
-
 		JButton cs = new JButton("Cerrar sesion");
 		cs.setBorderPainted(false);
 		cs.setFocusPainted(false);
@@ -112,7 +111,7 @@ public class PantallaEstudiante extends JFrame {
 		cs.setForeground(new Color(255, 255, 255));
 		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		cs.setIconTextGap(15);
-		cs.setIcon(new ImageIcon(PantallaEstudiante.class.getResource("/IMAGES/cerrar-sesion .png")));
+		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
 		cs.setBounds(552, 303, 176, 39);
 		contentPane.add(cs);
 

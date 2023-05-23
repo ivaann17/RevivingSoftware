@@ -29,7 +29,7 @@ public class PantallaMatriculacion extends JFrame {
 
 	protected JList<CursoPropio> listaCursos;
 	protected DefaultListModel<CursoPropio> modelo;
-	protected CursoPropio cursoSeleccionado;
+	protected transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(PantallaMatriculacion.class.getName());
 

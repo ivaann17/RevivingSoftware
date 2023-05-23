@@ -2,6 +2,7 @@ package main.java.presentacion;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import main.java.negocio.controllers.GestorConsultas;
@@ -100,9 +101,25 @@ public class PantallaDireccionCursos extends JFrame {
 		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
+		JButton cs = new JButton("Cerrar sesion");
+		cs.setBorderPainted(false);
+		cs.setFocusPainted(false);
+		cs.addActionListener(event -> {
 
-		// contentPane.add(PantallaEstudiante.addCerrarSesionButton());
+			setVisible(false);
+			new PantallaLogin();
 
+		});
+		cs.setHorizontalTextPosition(SwingConstants.LEFT);
+		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cs.setBackground(new Color(255, 0, 0));
+		cs.setForeground(new Color(255, 255, 255));
+		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		cs.setIconTextGap(15);
+		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
+		cs.setBounds(552, 303, 176, 39);
+		contentPane.add(cs);
+		
 		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRechazados.addActionListener(arg0 -> {

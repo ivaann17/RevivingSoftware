@@ -28,7 +28,7 @@ import java.awt.Cursor;
 public class PantallaEvaluarCurso extends JFrame {
 	protected JList<CursoPropio> listaCursos;
 	protected DefaultListModel<CursoPropio> modelo;
-	protected CursoPropio cursoSeleccionado;
+	protected transient CursoPropio cursoSeleccionado;
 	protected JLabel propuestas;
 	protected final JButton btnRechazar;
 	protected final JButton btnAceptar;
