@@ -102,24 +102,7 @@ public class PantallaDireccionCursos extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
-		JButton cs = new JButton("Cerrar sesion");
-		cs.setBorderPainted(false);
-		cs.setFocusPainted(false);
-		cs.addActionListener(event -> {
-
-			setVisible(false);
-			new PantallaLogin();
-
-		});
-		cs.setHorizontalTextPosition(SwingConstants.LEFT);
-		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		cs.setBackground(new Color(255, 0, 0));
-		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		cs.setIconTextGap(15);
-		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
-		cs.setBounds(552, 303, 176, 39);
-		contentPane.add(cs);
+		//contentPane.add(PantallaEstudiante.addCerrarSesionButton());
 
 		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

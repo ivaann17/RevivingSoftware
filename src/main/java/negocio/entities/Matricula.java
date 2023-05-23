@@ -30,11 +30,11 @@ public class Matricula {
 		this.idMatricula = idMatricula;
 	}
 
-	public int getID_Matricula() {
+	public int getIDMatricula() {
 		return idMatricula;
 	}
 
-	public void setID_Matricula(int idMatricula) {
+	public void setIDMatricula(int idMatricula) {
 		this.idMatricula = idMatricula;
 	}
 
@@ -86,11 +86,11 @@ public class Matricula {
 		this.precio = precio;
 	}
 
-	public int getID_Curso() {
+	public int getIDCurso() {
 		return idCurso;
 	}
 
-	public void setID_Curso(int idCurso) {
+	public void setIDCurso(int idCurso) {
 		this.idCurso = idCurso;
 	}
 

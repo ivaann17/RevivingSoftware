@@ -184,11 +184,9 @@ public class PantallaLogin extends JFrame {
 				user.setText(" Usuario: " + usuarioText.getText());
 				contrasenaText.requestFocus();
 
-				loginButton.addActionListener(ev -> {
+				loginButton.addActionListener(ev ->
 
-					validarCredenciales();
-
-				});
+				validarCredenciales());
 			}
 
 		});
@@ -274,7 +272,7 @@ public class PantallaLogin extends JFrame {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	private void reiniciarPantalla() {
+	protected void reiniciarPantalla() {
 		setVisible(false);
 		new PantallaLogin();
 	}

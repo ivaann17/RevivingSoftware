@@ -17,13 +17,13 @@ public class MatriculaDAO {
 
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			ps.setInt(1, matricula.getID_Matricula());
+			ps.setInt(1, matricula.getIDMatricula());
 			ps.setString(2, matricula.getNombre());
 			ps.setString(3, matricula.getApellido());
 			ps.setString(4, matricula.getDni());
 			ps.setDouble(5, matricula.getPrecio());
 			ps.setString(6, matricula.getTipoPago().toString());
-			ps.setInt(7, matricula.getID_Curso());
+			ps.setInt(7, matricula.getIDCurso());
 			ps.setDate(8, new java.sql.Date(matricula.getFecha().getTime()));
 			gestorBD.insert(ps);
 
