@@ -4,8 +4,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -18,13 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -35,9 +30,9 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 	public static final JList<CursoPropio> listaCursos = new JList<>();
 	DefaultListModel<CursoPropio> modelo;
-	protected CursoPropio cursoSeleccionado;
+	protected transient CursoPropio cursoSeleccionado;
 	private static final Logger logger = Logger.getLogger(PantallaPropuestasRealizadas.class.getName());
-	private String tipoLetra = "Tahoma";
+	private static String tipoLetra = "Tahoma";
 
 	public PantallaPropuestasRealizadas() {
 
@@ -65,14 +60,8 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		lblCursosMatriculados.setBounds(21, 101, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
-		JButton btnNewButton = new JButton("Volver");
-		btnNewButton.setFocusPainted(false);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setBounds(630, 38, 114, 49);
-		contentPane.add(btnNewButton);
+	    JButton btnNewButton = new JButton("Volver");
+		contentPane.add(crearBotonVolver(btnNewButton));
 		btnNewButton.addActionListener(event -> {
 
 			setVisible(false);
@@ -149,16 +138,24 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 	public static void infoCurso(CursoPropio cursoSeleccionado) {
 		PantallaVisualizarCurso.id.setText(Integer.toString(cursoSeleccionado.getId()));
-		PantallaVisualizarCurso.dniProf.setText(cursoSeleccionado.getDniDirector().toString());
-		PantallaVisualizarCurso.dniSec.setText(cursoSeleccionado.getDniSecretario().toString());
+		PantallaVisualizarCurso.dniProf.setText(cursoSeleccionado.getDniDirector());
+		PantallaVisualizarCurso.dniSec.setText(cursoSeleccionado.getDniSecretario());
 		PantallaVisualizarCurso.edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
-		PantallaVisualizarCurso.nombreCurso.setText(cursoSeleccionado.getNombre().toString());
+		PantallaVisualizarCurso.nombreCurso.setText(cursoSeleccionado.getNombre());
 		PantallaVisualizarCurso.numCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
-		PantallaVisualizarCurso.facultad.setText(cursoSeleccionado.getCentro().toString());
+		PantallaVisualizarCurso.facultad.setText(cursoSeleccionado.getCentro());
 		PantallaVisualizarCurso.precio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
 		PantallaVisualizarCurso.fechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
 		PantallaVisualizarCurso.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
-		PantallaVisualizarCurso.mensaje = cursoSeleccionado.getMensaje().toString();
+		PantallaVisualizarCurso.mensaje = cursoSeleccionado.getMensaje();
 	}
-
+	protected static JButton crearBotonVolver(JButton a) {
+        a.setFocusPainted(false);
+        a.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        a.setForeground(Color.WHITE);
+        a.setFont(new Font(tipoLetra, Font.BOLD, 13));
+        a.setBackground(SystemColor.textHighlight);
+        a.setBounds(630, 38, 114, 49);
+        return a;
+    }
 }

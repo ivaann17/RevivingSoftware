@@ -23,7 +23,6 @@ import main.java.negocio.entities.EstadoCurso;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
-import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 import javax.swing.JRadioButton;
@@ -60,13 +59,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton btnNewButton = new JButton("Volver");
-		btnNewButton.setFocusPainted(false);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setBounds(630, 38, 114, 49);
-		contentPane.add(btnNewButton);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnNewButton));
 		btnNewButton.addActionListener(event -> {
 
 			setVisible(false);

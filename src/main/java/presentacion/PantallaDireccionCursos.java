@@ -2,7 +2,6 @@ package main.java.presentacion;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import main.java.negocio.controllers.GestorConsultas;
@@ -12,8 +11,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JLabel;
-
-import main.java.persistencia.Excepciones.SelectException;
 import main.java.persistencia.GestorBD;
 
 import javax.swing.ImageIcon;
@@ -102,23 +99,15 @@ public class PantallaDireccionCursos extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 		JButton cs = new JButton("Cerrar sesion");
-		cs.setBorderPainted(false);
-		cs.setFocusPainted(false);
+		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
+		contentPane.add(PantallaEmpleadosVicerrectorado.crearBotonCerrarSesion(cs));
 		cs.addActionListener(event -> {
 
 			setVisible(false);
 			new PantallaLogin();
 
 		});
-		cs.setHorizontalTextPosition(SwingConstants.LEFT);
-		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		cs.setBackground(new Color(255, 0, 0));
-		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		cs.setIconTextGap(15);
-		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
-		cs.setBounds(552, 303, 176, 39);
-		contentPane.add(cs);
+		
 		
 		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -172,7 +161,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
 
-	public static String dni(String usu) throws SQLException, SelectException  {
+	public static String dni(String usu) throws SQLException  {
 		String sqlDNI = "SELECT DNI FROM usuarios WHERE UPPER(nombre) = UPPER(?)";
 		try (PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS)) {
 			psD.setString(1, usu);

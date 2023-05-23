@@ -16,7 +16,7 @@ public class GestorEdiciones {
 		ediDAO.crearNuevaEdicion(id, nombre, edi, idCurso);
 	}
 
-	public static boolean existeEdicion(int edi, String nombre) throws Exception {
+	public static boolean existeEdicion(int edi, String nombre) throws SQLException {
 		ediDAO = new EdicionDAO();
 		return ediDAO.existeEdicion(edi, nombre);
 	}

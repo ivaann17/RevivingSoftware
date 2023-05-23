@@ -4,8 +4,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -18,13 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -35,7 +30,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 
 	protected JList<CursoPropio> listaCursos;
 	DefaultListModel<CursoPropio> modelo;
-	protected CursoPropio cursoSeleccionado;
+	protected transient CursoPropio cursoSeleccionado;
 	private static final Logger logger = Logger.getLogger(PantallaEmpezarMatriculacion.class.getName());
 	private static String tipoLetra = "Tahoma";
 
@@ -116,13 +111,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		contentPane.add(btnEli);
 
 		JButton btnNewButton = new JButton("Volver");
-		btnNewButton.setFocusPainted(false);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setBounds(630, 38, 114, 49);
-		contentPane.add(btnNewButton);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnNewButton));
 		btnNewButton.addActionListener(event -> {
 
 			setVisible(false);
