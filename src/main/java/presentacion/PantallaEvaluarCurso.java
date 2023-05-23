@@ -3,8 +3,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -17,12 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
-import main.java.persistencia.GestorBD;
+
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -30,9 +26,9 @@ import java.awt.Font;
 import java.awt.Cursor;
 
 public class PantallaEvaluarCurso extends JFrame {
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel modelo;
-	public CursoPropio cursoSeleccionado;
+	protected JList<CursoPropio> listaCursos;
+	protected DefaultListModel<CursoPropio> modelo;
+	protected transient CursoPropio cursoSeleccionado;
 	protected JLabel propuestas;
 	protected final JButton btnRechazar;
 	protected final JButton btnAceptar;
@@ -151,15 +147,15 @@ public class PantallaEvaluarCurso extends JFrame {
 		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					btnAceptar.setVisible(true);
-					btnRechazar.setVisible(true);
-					cursoSeleccionado = listaCursos.getSelectedValue();
+		listaCursos.addListSelectionListener(arg0 -> {
 
-				}
+			if (!arg0.getValueIsAdjusting()) {
+				btnAceptar.setVisible(true);
+				btnRechazar.setVisible(true);
+				cursoSeleccionado = listaCursos.getSelectedValue();
+
 			}
+
 		});
 	}
 }

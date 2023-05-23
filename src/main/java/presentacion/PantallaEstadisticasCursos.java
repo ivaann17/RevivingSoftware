@@ -4,8 +4,7 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
@@ -16,13 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -202,15 +198,14 @@ public class PantallaEstadisticasCursos extends JFrame {
 		buttonGroup.add(rdbtnFiltrarEdi);
 		buttonGroup.add(rdbtnTodos);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()) {
-					cursoSeleccionado = obtenerCursoSeleccionado();
-					if (cursoSeleccionado != null) {
-						mostrarIngresosCurso();
-					}
+		listaCursos.addListSelectionListener(arg0 -> {
+			if (!arg0.getValueIsAdjusting()) {
+				cursoSeleccionado = obtenerCursoSeleccionado();
+				if (cursoSeleccionado != null) {
+					mostrarIngresosCurso();
 				}
 			}
+
 		});
 	}
 

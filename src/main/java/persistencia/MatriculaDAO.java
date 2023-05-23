@@ -36,7 +36,7 @@ public class MatriculaDAO {
 		return id;
 	}
 
-	public boolean existeMatricula(int curso, String dni) throws Exception {
+	public boolean existeMatricula(int curso, String dni) throws SQLException  {
 
 		String sql = "SELECT COUNT(*) FROM matricula WHERE curso = ? AND DNI = ? ";
 
@@ -54,7 +54,7 @@ public class MatriculaDAO {
 
 	}
 
-	public double ingresosCurso(CursoPropio curso) throws Exception {
+	public double ingresosCurso(CursoPropio curso) throws SQLException  {
 
 		double ingr = 0.0;
 
@@ -73,30 +73,24 @@ public class MatriculaDAO {
 		return ingr;
 	}
 
-	public boolean cursoConMatricula(CursoPropio curso) throws Exception {
+	public boolean cursoConMatricula(CursoPropio curso) throws SQLException {
+	    String sql = "SELECT COUNT(curso) FROM matricula WHERE curso = ?";
 
-		String sql = "SELECT COUNT(curso) FROM matricula WHERE curso = ?";
+	    try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+	        ps.setInt(1, curso.getId());
 
-		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+	        ResultSet rs = gestorBD.operation(ps);
+	        if (rs.next()) {
+	            int count = rs.getInt(1);
+	            return count > 0;
+	        }
+	    }
 
-			ps.setInt(1, curso.getId());
-
-			ResultSet rs = gestorBD.operation(ps);
-			if (rs.next()) {
-				int count = rs.getInt(1);
-				if (count > 0) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-
-		} 
-		return false;
-
+	    return false;
 	}
 
-	public int getNumMatriculas(CursoPropio curso) throws Exception {
+
+	public int getNumMatriculas(CursoPropio curso) throws SQLException  {
 		int count = 0;
 
 		String sql = "SELECT COUNT(ID) FROM matricula WHERE curso = ?";

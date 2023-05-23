@@ -3,8 +3,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -17,14 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 
 import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -35,9 +31,9 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 public class PantallaComenzarCurso extends JFrame {
-	public JList<CursoPropio> listaCursos;
-	DefaultListModel<CursoPropio> modelo;
-	public CursoPropio cursoSeleccionado;
+	protected JList<CursoPropio> listaCursos;
+	protected DefaultListModel<CursoPropio> modelo;
+	protected transient CursoPropio cursoSeleccionado;
 	protected JLabel lblCursosMatriculados;
 	protected final JButton btnAceptar;
 	protected JButton btnNewButton;
@@ -134,8 +130,7 @@ public class PantallaComenzarCurso extends JFrame {
 		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
+		listaCursos.addListSelectionListener(arg0 ->{
 				if (!arg0.getValueIsAdjusting()) {
 					cursoSeleccionado = listaCursos.getSelectedValue();
 					if (cursoSeleccionado != null) {
@@ -162,7 +157,7 @@ public class PantallaComenzarCurso extends JFrame {
 
 					}
 				}
-			}
+			
 		});
 	}
 

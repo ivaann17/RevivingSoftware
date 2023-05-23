@@ -4,8 +4,6 @@ package main.java.presentacion;
 import java.awt.Color;
 
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -18,13 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
-import main.java.persistencia.GestorBD;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -123,7 +118,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 			a.setVisible(true);
 			a.btnVolver.setVisible(false);
 			a.btnVolver2.setVisible(true);
-			infoCurso(a, cursoSeleccionado);
+			infoCurso(cursoSeleccionado);
 			if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTA_RECHAZADA)) {
 				a.btnMen.setVisible(true);
 			}
@@ -143,13 +138,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 				if (cursoSeleccionado != null) {
 					btnInfo.setVisible(true);
 
-					if (cursoSeleccionado.getEstado().equals(EstadoCurso.EN_IMPARTICION)
-							|| cursoSeleccionado.getEstado().equals(EstadoCurso.EN_MATRICULACION)
-							|| cursoSeleccionado.getEstado().equals(EstadoCurso.VALIDADO)) {
-						btnEliminar.setVisible(false);
-					} else {
-						btnEliminar.setVisible(true);
-					}
+					btnEliminar.setVisible(!isCursoVisible(cursoSeleccionado.getEstado()));
 				}
 
 			}
@@ -157,7 +146,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		});
 	}
 
-	public void infoCurso(main.java.presentacion.PantallaVisualizarCurso a, CursoPropio cursoSeleccionado) {
+	public void infoCurso(CursoPropio cursoSeleccionado) {
 		PantallaVisualizarCurso.id.setText(Integer.toString(cursoSeleccionado.getId()));
 		PantallaVisualizarCurso.dniProf.setText(cursoSeleccionado.getDniDirector());
 		PantallaVisualizarCurso.dniSec.setText(cursoSeleccionado.getDniSecretario());
@@ -171,4 +160,8 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		PantallaVisualizarCurso.mensaje = cursoSeleccionado.getMensaje();
 	}
 
+	private boolean isCursoVisible(EstadoCurso estado) {
+		return estado.equals(EstadoCurso.EN_IMPARTICION) || estado.equals(EstadoCurso.EN_MATRICULACION)
+				|| estado.equals(EstadoCurso.VALIDADO);
+	}
 }

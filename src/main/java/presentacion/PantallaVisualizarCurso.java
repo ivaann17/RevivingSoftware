@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -52,6 +50,7 @@ public class PantallaVisualizarCurso extends JFrame {
 	protected JLabel lblEdi;
 	private String tipoLetra = "Tahoma";
 	private String volverText = "Volver";
+	private String error = "Se ha producido un error: ";
 	private static final Logger logger = Logger.getLogger(PantallaVisualizarCurso.class.getName());
 
 	protected transient CursoPropio curso;
@@ -111,7 +110,7 @@ public class PantallaVisualizarCurso extends JFrame {
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {
-				logger.info("Se ha producido un error: " + e1.getMessage());
+				logger.info(error + e1.getMessage());
 			}
 
 		});
@@ -124,18 +123,17 @@ public class PantallaVisualizarCurso extends JFrame {
 		btnVolver2.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		btnVolver2.setBounds(10, 496, 114, 49);
 		contentPane.add(btnVolver2);
-		btnVolver2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
-				try {
-					GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
-					setVisible(false);
-					p.setVisible(true);
-				} catch (Exception e1) {
+		btnVolver2.addActionListener(event -> {
 
-				}
-
+			main.java.presentacion.PantallaPropuestasRechazadas p = new main.java.presentacion.PantallaPropuestasRechazadas();
+			try {
+				GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.PROPUESTA_RECHAZADA);
+				setVisible(false);
+				p.setVisible(true);
+			} catch (Exception e1) {
+				logger.info(error + e1.getMessage());
 			}
+
 		});
 
 		numCreditos.setEditable(false);
@@ -279,6 +277,7 @@ public class PantallaVisualizarCurso extends JFrame {
 		contentPane.add(lblFechaFin);
 
 		btnVolver3 = new JButton(volverText);
+		btnVolver3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVolver3.setVisible(false);
 		btnVolver3.setForeground(Color.WHITE);
 		btnVolver3.setFont(new Font(tipoLetra, Font.BOLD, 13));
@@ -289,11 +288,11 @@ public class PantallaVisualizarCurso extends JFrame {
 
 			main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
 			try {
-				GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni);
+				GestorConsultas.listarCursosMatriculados(PantallaMisCursos.modelo, main.java.presentacion.PantallaLogin.dni);
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {
-				logger.info("Se ha producido un error: " + e1.getMessage());
+				logger.info(error + e1.getMessage());
 			}
 
 		});

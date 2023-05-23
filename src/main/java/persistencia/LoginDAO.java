@@ -6,12 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import main.java.negocio.entities.CursoPropio;
-
 public class LoginDAO {
 	GestorBD gestorBD = new GestorBD();
 
-	public String getDNI(String usu) throws Exception {
+	public String getDNI(String usu) throws SQLException {
 
 		String dni = null;
 
@@ -31,7 +29,7 @@ public class LoginDAO {
 
 	}
 
-	public String getNombre(String usu) throws Exception {
+	public String getNombre(String usu) throws SQLException {
 
 		String nom = null;
 		String sql = "SELECT nombre FROM usuarios WHERE usuario = ?";
@@ -45,12 +43,12 @@ public class LoginDAO {
 
 			}
 
-		} 
+		}
 		return nom;
 
 	}
 
-	public String getApellidosLog(String usu) throws Exception {
+	public String getApellidosLog(String usu) throws SQLException {
 
 		String ape = null;
 		String sql = "SELECT apellido FROM usuarios WHERE usuario = ?";
@@ -64,12 +62,12 @@ public class LoginDAO {
 
 			}
 
-		} 
+		}
 		return ape;
 
 	}
 
-	public String getTipoUsuLog(String usu) throws Exception {
+	public String getTipoUsuLog(String usu) throws SQLException {
 
 		String tipo = null;
 
@@ -84,12 +82,12 @@ public class LoginDAO {
 
 			}
 
-		} 
+		}
 		return tipo;
 
 	}
 
-	public Vector<Object> loginUsuario(String usuario) {
+	public Vector<Object> loginUsuario(String usuario) throws SQLException {
 		String sql = "SELECT * FROM usuarios WHERE usuario = ?";
 
 		Vector<Object> rUser = null;
@@ -99,13 +97,13 @@ public class LoginDAO {
 			rUser = GestorBD.select(ps);
 		} catch (Exception e) {
 
-			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
+			throw new SQLException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 
 		return rUser;
 	}
 
-	public Vector<Object> loginContra(String contraseña) {
+	public Vector<Object> loginContra(String contrasena) throws SQLException {
 
 		String sql = "SELECT * FROM usuarios WHERE contraseña = ?";
 
@@ -113,10 +111,10 @@ public class LoginDAO {
 
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			ps.setString(1, contraseña);
+			ps.setString(1, contrasena);
 			rPass = GestorBD.select(ps);
 		} catch (Exception e) {
-			throw new RuntimeException("Error al ejecutar la consulta: " + e.getMessage());
+			throw new SQLException("Error al ejecutar la consulta: " + e.getMessage());
 		}
 
 		return rPass;
