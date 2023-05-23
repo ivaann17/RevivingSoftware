@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import javax.swing.JOptionPane;
 import main.java.persistencia.Excepciones.ConfigFileException;
-import main.java.persistencia.Excepciones.SelectException;
 
 public class GestorBD {
 

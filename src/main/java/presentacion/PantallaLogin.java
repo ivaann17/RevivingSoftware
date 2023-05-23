@@ -9,6 +9,7 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Logger;
 
@@ -211,7 +212,7 @@ public class PantallaLogin extends JFrame {
 
 	}
 
-	public void cambioPantalla(String usu) throws HeadlessException, Exception {
+	public void cambioPantalla(String usu) throws HeadlessException, SQLException {
 		JOptionPane.showMessageDialog(null, "Bienvenido " + GestorConsultas.getTipoUsuLog(usu) + ".", "UCLM",
 				JOptionPane.INFORMATION_MESSAGE);
 		switch (GestorConsultas.getTipoUsuLog(usu)) {
@@ -311,4 +312,6 @@ public class PantallaLogin extends JFrame {
 	private void configurarBotonLogin(JFrame frame) {
 		frame.getRootPane().setDefaultButton(loginButton);
 	}
+
+
 }

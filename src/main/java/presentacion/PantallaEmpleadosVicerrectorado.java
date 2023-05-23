@@ -75,8 +75,7 @@ public class PantallaEmpleadosVicerrectorado extends JFrame {
 
 		JButton cs = new JButton("Cerrar sesion");
 		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
-		cs = crearBotonCerrarSesion(cs);
-		contentPane.add(cs);
+		contentPane.add(crearBotonCerrarSesion(cs));
 		cs.addActionListener(event -> {
 
 			setVisible(false);

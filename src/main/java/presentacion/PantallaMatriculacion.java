@@ -27,8 +27,8 @@ import javax.swing.WindowConstants;
 
 public class PantallaMatriculacion extends JFrame {
 
-	protected JList<CursoPropio> listaCursos;
-	protected DefaultListModel<CursoPropio> modelo;
+	protected static JList<CursoPropio> listaCursos;
+	protected static DefaultListModel<CursoPropio> modelo;
 	protected transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(PantallaMatriculacion.class.getName());

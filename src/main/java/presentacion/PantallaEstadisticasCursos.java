@@ -23,7 +23,6 @@ import main.java.negocio.entities.EstadoCurso;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
-import java.awt.Cursor;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 import javax.swing.JRadioButton;

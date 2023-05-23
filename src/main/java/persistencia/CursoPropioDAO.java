@@ -47,7 +47,7 @@ public class CursoPropioDAO {
 		return id;
 	}
 
-	public int getId(CursoPropio curso) throws SQLException, SelectException {
+	public int getId(CursoPropio curso) throws SQLException {
 
 		int id = 0;
 
@@ -130,7 +130,7 @@ public class CursoPropioDAO {
 		return mod;
 	}
 
-	public List<CursoPropio> listarCursosMatriculados(String dni) throws SQLException, SelectException {
+	public List<CursoPropio> listarCursosMatriculados(String dni) throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT cursos.* FROM cursos INNER JOIN matricula ON cursos.ID = matricula.curso WHERE matricula.DNI = ?";
@@ -144,7 +144,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarHistorialCursos(String dni) throws SQLException, SelectException {
+	public List<CursoPropio> listarHistorialCursos(String dni) throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos WHERE dniDirector = ? ORDER BY fechaInicio";
@@ -158,7 +158,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws SQLException, SelectException {
+	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje\r\n"
 				+ "FROM cursos\r\n" + "WHERE estado = ? " + "ORDER BY fechaInicio\r\n" + "";
@@ -171,7 +171,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursosPorEdicion() throws SQLException, SelectException {
+	public List<CursoPropio> listarCursosPorEdicion() throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT * " + "FROM cursos " + "WHERE nombre IN ( " + "    SELECT nombre " + "    FROM cursos "
@@ -186,7 +186,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursos() throws SQLException, SelectException {
+	public List<CursoPropio> listarCursos() throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT * FROM cursos";

@@ -15,7 +15,6 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.util.logging.Logger;
 import java.awt.Cursor;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 public class PantallaJefeGabineteVicerrectorado extends JFrame {

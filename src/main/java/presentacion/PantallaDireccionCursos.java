@@ -2,7 +2,6 @@ package main.java.presentacion;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import main.java.negocio.controllers.GestorConsultas;
@@ -164,7 +163,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
 
-	public static String dni(String usu) throws SQLException, SelectException  {
+	public static String dni(String usu) throws SQLException  {
 		String sqlDNI = "SELECT DNI FROM usuarios WHERE UPPER(nombre) = UPPER(?)";
 		try (PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS)) {
 			psD.setString(1, usu);
