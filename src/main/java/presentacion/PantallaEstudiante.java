@@ -13,8 +13,6 @@ import main.java.negocio.entities.EstadoCurso;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 import java.awt.Cursor;
 import javax.swing.JTextField;
@@ -45,7 +43,8 @@ public class PantallaEstudiante extends JFrame {
 
 			try {
 				main.java.presentacion.PantallaMisCursos p = new main.java.presentacion.PantallaMisCursos();
-				GestorConsultas.listarCursosMatriculados(p.modelo, main.java.presentacion.PantallaLogin.dni);
+				GestorConsultas.listarCursosMatriculados(PantallaMisCursos.modelo,
+						main.java.presentacion.PantallaLogin.dni);
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {
@@ -72,7 +71,7 @@ public class PantallaEstudiante extends JFrame {
 
 			try {
 				main.java.presentacion.PantallaMatriculacion p = new main.java.presentacion.PantallaMatriculacion();
-				GestorConsultas.listarCursosPorEstado(p.modelo, EstadoCurso.EN_MATRICULACION);
+				GestorConsultas.listarCursosPorEstado(PantallaMatriculacion.modelo, EstadoCurso.EN_MATRICULACION);
 				setVisible(false);
 				p.setVisible(true);
 			} catch (Exception e1) {
@@ -97,23 +96,14 @@ public class PantallaEstudiante extends JFrame {
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 		JButton cs = new JButton("Cerrar sesion");
-		cs.setBorderPainted(false);
-		cs.setFocusPainted(false);
+		cs.setIcon(new ImageIcon(PantallaEstudiante.class.getResource("/IMAGES/cerrar-sesion .png")));
+		contentPane.add(PantallaEmpleadosVicerrectorado.crearBotonCerrarSesion(cs));
 		cs.addActionListener(event -> {
 
 			setVisible(false);
 			new PantallaLogin();
 
 		});
-		cs.setHorizontalTextPosition(SwingConstants.LEFT);
-		cs.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		cs.setBackground(new Color(255, 0, 0));
-		cs.setForeground(new Color(255, 255, 255));
-		cs.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		cs.setIconTextGap(15);
-		cs.setIcon(new ImageIcon(PantallaEmpleadosVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
-		cs.setBounds(552, 303, 176, 39);
-		contentPane.add(cs);
 
 		JButton btnMostrarResueltos = new JButton("Propuestas resueltas");
 		btnMostrarResueltos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

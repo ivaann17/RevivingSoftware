@@ -5,13 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -29,7 +25,6 @@ import main.java.negocio.entities.EstadoCurso;
 
 import main.java.negocio.entities.Matricula;
 import main.java.negocio.entities.ModoPago;
-import main.java.persistencia.GestorBD;
 
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -58,7 +53,7 @@ public class PantallaDatosAlumno extends JFrame {
 	protected JLabel lblDNIAlu;
 	main.java.presentacion.PantallaEstudiante p;
 	protected JTextField metoPago;
-	protected Matricula matricula;
+	protected transient Matricula matricula;
 	private static final SecureRandom random = new SecureRandom();
 	private static final Logger logger = Logger.getLogger(PantallaDatosAlumno.class.getName());
 
@@ -101,7 +96,7 @@ public class PantallaDatosAlumno extends JFrame {
 		btnNewButton.addActionListener(event -> {
 			main.java.presentacion.PantallaMatriculacion m = new main.java.presentacion.PantallaMatriculacion();
 			try {
-				GestorConsultas.listarCursosPorEstado(m.modelo, EstadoCurso.EN_MATRICULACION);
+				GestorConsultas.listarCursosPorEstado(PantallaMatriculacion.modelo, EstadoCurso.EN_MATRICULACION);
 				setVisible(false);
 				m.setVisible(true);
 			} catch (Exception e1) {

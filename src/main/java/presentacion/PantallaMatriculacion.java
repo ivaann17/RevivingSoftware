@@ -27,8 +27,8 @@ import javax.swing.WindowConstants;
 
 public class PantallaMatriculacion extends JFrame {
 
-	protected JList<CursoPropio> listaCursos;
-	protected DefaultListModel<CursoPropio> modelo;
+	protected static JList<CursoPropio> listaCursos;
+	protected static DefaultListModel<CursoPropio> modelo;
 	protected transient CursoPropio cursoSeleccionado;
 	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(PantallaMatriculacion.class.getName());
@@ -101,13 +101,7 @@ public class PantallaMatriculacion extends JFrame {
 		contentPane.add(btnTrans);
 
 		JButton btnNewButton = new JButton("Volver");
-		btnNewButton.setFocusPainted(false);
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNewButton.setBackground(SystemColor.textHighlight);
-		btnNewButton.setBounds(630, 38, 114, 49);
-		contentPane.add(btnNewButton);
+		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnNewButton));
 		btnNewButton.addActionListener(event -> {
 
 			setVisible(false);

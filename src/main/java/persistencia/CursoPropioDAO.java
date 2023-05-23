@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Vector;
 
 import main.java.negocio.entities.*;
-import main.java.persistencia.Excepciones.SelectException;
 
 public class CursoPropioDAO {
 	GestorBD gestorBD = new GestorBD();
@@ -22,16 +21,16 @@ public class CursoPropioDAO {
 
 		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			ps.setInt(1, curso.getId());
-			ps.setString(2, curso.getNombre().toString());
-			ps.setString(3, curso.getDniDirector().toString());
-			ps.setString(4, curso.getDniSecretario().toString());
+			ps.setString(2, curso.getNombre());
+			ps.setString(3, curso.getDniDirector());
+			ps.setString(4, curso.getDniSecretario());
 			ps.setDate(5, new Date(curso.getFechaInicio().getTime()));
 			ps.setDate(6, new Date(curso.getFechaFin().getTime()));
 			ps.setInt(7, curso.getECTS());
 			ps.setDouble(8, curso.getTasaMatricula());
 			ps.setString(9, curso.getTipo().toString());
 			ps.setString(10, curso.getEstado().toString());
-			ps.setString(11, curso.getCentro().toString());
+			ps.setString(11, curso.getCentro());
 			ps.setInt(12, curso.getEdicion());
 			ps.setString(13, curso.getMensaje());
 
@@ -47,7 +46,7 @@ public class CursoPropioDAO {
 		return id;
 	}
 
-	public int getId(CursoPropio curso) throws SQLException, SelectException {
+	public int getId(CursoPropio curso) throws SQLException {
 
 		int id = 0;
 
@@ -130,7 +129,7 @@ public class CursoPropioDAO {
 		return mod;
 	}
 
-	public List<CursoPropio> listarCursosMatriculados(String dni) throws SQLException, SelectException {
+	public List<CursoPropio> listarCursosMatriculados(String dni) throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT cursos.* FROM cursos INNER JOIN matricula ON cursos.ID = matricula.curso WHERE matricula.DNI = ?";
@@ -144,7 +143,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarHistorialCursos(String dni) throws SQLException, SelectException {
+	public List<CursoPropio> listarHistorialCursos(String dni) throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje FROM cursos WHERE dniDirector = ? ORDER BY fechaInicio";
@@ -158,7 +157,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws SQLException, SelectException {
+	public List<CursoPropio> listarCursosPorEstado(EstadoCurso estado) throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 		String sql = "SELECT ID, nombre, dniDirector, dniSecretario, fechaInicio, fechaFin, creditos, precio, tipo, estado, facultad, edicion, mensaje\r\n"
 				+ "FROM cursos\r\n" + "WHERE estado = ? " + "ORDER BY fechaInicio\r\n" + "";
@@ -171,7 +170,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursosPorEdicion() throws SQLException, SelectException {
+	public List<CursoPropio> listarCursosPorEdicion() throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT * " + "FROM cursos " + "WHERE nombre IN ( " + "    SELECT nombre " + "    FROM cursos "
@@ -186,7 +185,7 @@ public class CursoPropioDAO {
 		return cursos;
 	}
 
-	public List<CursoPropio> listarCursos() throws SQLException, SelectException {
+	public List<CursoPropio> listarCursos() throws SQLException {
 		List<CursoPropio> cursos = new ArrayList<>();
 
 		String sql = "SELECT * FROM cursos";
