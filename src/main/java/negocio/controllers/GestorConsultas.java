@@ -5,7 +5,6 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import main.java.negocio.entities.*;
 import main.java.persistencia.CursoPropioDAO;
-import main.java.persistencia.Excepciones.SelectException;
 import main.java.persistencia.LoginDAO;
 import main.java.persistencia.MatriculaDAO;
 
