@@ -33,7 +33,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(PantallaPropuestasRechazadas.class.getName());
 
-	private transient static CursoPropio cursoSeleccionado;
+	protected transient CursoPropio cursoSeleccionado;
 
 	public PantallaPropuestasRechazadas() {
 
