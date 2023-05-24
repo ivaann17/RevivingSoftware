@@ -30,10 +30,10 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 	private static final JList<CursoPropio> listaCursos = new JList<>();
 	DefaultListModel<CursoPropio> modelo;
-	private String tipoLetra = "Tahoma";
+	private static String tipoLetra = "Tahoma";
 	private static final Logger logger = Logger.getLogger(PantallaPropuestasRechazadas.class.getName());
 
-	private transient CursoPropio cursoSeleccionado;
+	protected transient CursoPropio cursoSeleccionado;
 
 	public PantallaPropuestasRechazadas() {
 
@@ -77,6 +77,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		listaCursos.setModel(modelo);
 
 		JButton btnEliminar = new JButton("Eliminar");
+		contentPane.add(PantallaPropuestasRealizadas.datosBtnEliminar(btnEliminar));
 		btnEliminar.addActionListener(event -> {
 
 			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
@@ -94,17 +95,9 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 			}
 		});
-		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminar.setForeground(Color.WHITE);
-		btnEliminar.setVisible(false);
-		btnEliminar.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnEliminar.setFocusPainted(false);
-		btnEliminar.setBackground(SystemColor.textHighlight);
-		btnEliminar.setBounds(439, 397, 114, 49);
-		contentPane.add(btnEliminar);
 
 		JButton btnInfo = new JButton("Info");
-		btnInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		contentPane.add(datosBtnInfo(btnInfo));
 		btnInfo.addActionListener(event -> {
 
 			main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
@@ -112,19 +105,12 @@ public class PantallaPropuestasRechazadas extends JFrame {
 			a.setVisible(true);
 			a.btnVolver.setVisible(false);
 			a.btnVolver2.setVisible(true);
-			infoCurso(cursoSeleccionado);
+			PantallaPropuestasRealizadas.infoCurso(cursoSeleccionado);
 			if (cursoSeleccionado.getEstado().equals(EstadoCurso.PROPUESTA_RECHAZADA)) {
 				a.btnMen.setVisible(true);
 			}
 
 		});
-		btnInfo.setForeground(Color.WHITE);
-		btnInfo.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnInfo.setFocusPainted(false);
-		btnInfo.setVisible(false);
-		btnInfo.setBackground(SystemColor.textHighlight);
-		btnInfo.setBounds(220, 397, 114, 49);
-		contentPane.add(btnInfo);
 
 		listaCursos.addListSelectionListener(arg0 -> {
 			if (!arg0.getValueIsAdjusting()) {
@@ -140,22 +126,20 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		});
 	}
 
-	public void infoCurso(CursoPropio cursoSeleccionado) {
-		PantallaVisualizarCurso.id.setText(Integer.toString(cursoSeleccionado.getId()));
-		PantallaVisualizarCurso.dniProf.setText(cursoSeleccionado.getDniDirector());
-		PantallaVisualizarCurso.dniSec.setText(cursoSeleccionado.getDniSecretario());
-		PantallaVisualizarCurso.edicion.setText(Integer.toString(cursoSeleccionado.getEdicion()));
-		PantallaVisualizarCurso.nombreCurso.setText(cursoSeleccionado.getNombre());
-		PantallaVisualizarCurso.numCreditos.setText(Integer.toString(cursoSeleccionado.getECTS()));
-		PantallaVisualizarCurso.facultad.setText(cursoSeleccionado.getCentro());
-		PantallaVisualizarCurso.precio.setText(Double.toString(cursoSeleccionado.getTasaMatricula()));
-		PantallaVisualizarCurso.fechaIni.setText(cursoSeleccionado.getFechaInicio().toString());
-		PantallaVisualizarCurso.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
-		PantallaVisualizarCurso.mensaje = cursoSeleccionado.getMensaje();
-	}
-
 	private boolean isCursoVisible(EstadoCurso estado) {
 		return estado.equals(EstadoCurso.EN_IMPARTICION) || estado.equals(EstadoCurso.EN_MATRICULACION)
 				|| estado.equals(EstadoCurso.VALIDADO);
 	}
+
+	protected static JButton datosBtnInfo(JButton a) {
+		a.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		a.setForeground(Color.WHITE);
+		a.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		a.setFocusPainted(false);
+		a.setVisible(false);
+		a.setBackground(SystemColor.textHighlight);
+		a.setBounds(220, 397, 114, 49);
+		return a;
+	}
+
 }

@@ -60,7 +60,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		lblCursosMatriculados.setBounds(21, 101, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
-	    JButton btnNewButton = new JButton("Volver");
+		JButton btnNewButton = new JButton("Volver");
 		contentPane.add(crearBotonVolver(btnNewButton));
 		btnNewButton.addActionListener(event -> {
 
@@ -76,6 +76,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		listaCursos.setModel(modelo);
 
 		JButton btnEliminar = new JButton("Eliminar");
+		contentPane.add(datosBtnEliminar(btnEliminar));
 		btnEliminar.addActionListener(event -> {
 
 			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
@@ -93,17 +94,10 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 			}
 		});
-		btnEliminar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnEliminar.setForeground(Color.WHITE);
-		btnEliminar.setVisible(false);
-		btnEliminar.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnEliminar.setFocusPainted(false);
-		btnEliminar.setBackground(SystemColor.textHighlight);
-		btnEliminar.setBounds(431, 404, 114, 49);
-		contentPane.add(btnEliminar);
 
 		JButton btnInfo = new JButton("Info");
-		btnInfo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		contentPane.add(PantallaPropuestasRechazadas.datosBtnInfo(btnInfo));
+
 		btnInfo.addActionListener(event -> {
 
 			main.java.presentacion.PantallaVisualizarCurso a = new main.java.presentacion.PantallaVisualizarCurso();
@@ -115,13 +109,6 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 			}
 		});
-		btnInfo.setForeground(Color.WHITE);
-		btnInfo.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnInfo.setFocusPainted(false);
-		btnInfo.setVisible(false);
-		btnInfo.setBackground(SystemColor.textHighlight);
-		btnInfo.setBounds(240, 404, 114, 49);
-		contentPane.add(btnInfo);
 
 		listaCursos.addListSelectionListener(arg0 -> {
 			if (!arg0.getValueIsAdjusting()) {
@@ -149,13 +136,25 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		PantallaVisualizarCurso.fechaFin.setText(cursoSeleccionado.getFechaFin().toString());
 		PantallaVisualizarCurso.mensaje = cursoSeleccionado.getMensaje();
 	}
+
 	protected static JButton crearBotonVolver(JButton a) {
-        a.setFocusPainted(false);
-        a.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        a.setForeground(Color.WHITE);
-        a.setFont(new Font(tipoLetra, Font.BOLD, 13));
-        a.setBackground(SystemColor.textHighlight);
-        a.setBounds(630, 38, 114, 49);
-        return a;
-    }
+		a.setFocusPainted(false);
+		a.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		a.setForeground(Color.WHITE);
+		a.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		a.setBackground(SystemColor.textHighlight);
+		a.setBounds(630, 38, 114, 49);
+		return a;
+	}
+
+	protected static JButton datosBtnEliminar(JButton a) {
+		a.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		a.setForeground(Color.WHITE);
+		a.setVisible(false);
+		a.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		a.setFocusPainted(false);
+		a.setBackground(SystemColor.textHighlight);
+		a.setBounds(431, 404, 114, 49);
+		return a;
+	}
 }
