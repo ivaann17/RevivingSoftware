@@ -35,7 +35,7 @@ public class PantallaDireccionCursos extends JFrame {
 
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaDireccionCursos.class.getResource("/IMAGES/descarga.png")));
+				.getImage(PantallaDireccionCursos.class.getResource("/resources/IMAGES/descarga.png")));
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
@@ -70,8 +70,8 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.add(btnMostrarHistorial);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(
-				new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(new ImageIcon(
+				PantallaDireccionCursos.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -95,11 +95,11 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.add(main.java.presentacion.PantallaEstudiante.createTipoUsuarioTextField());
 
 		JLabel lblNewLabel2 = new JLabel("");
-		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/images2.jpg")));
+		lblNewLabel2.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/resources/IMAGES/images2.jpg")));
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 		JButton cs = new JButton("Cerrar sesion");
-		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/cerrar-sesion .png")));
+		cs.setIcon(new ImageIcon(PantallaDireccionCursos.class.getResource("/resources/IMAGES/cerrar-sesion .png")));
 		contentPane.add(PantallaEmpleadosVicerrectorado.crearBotonCerrarSesion(cs));
 		cs.addActionListener(event -> {
 
@@ -107,8 +107,7 @@ public class PantallaDireccionCursos extends JFrame {
 			new PantallaLogin();
 
 		});
-		
-		
+
 		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRechazados.addActionListener(arg0 -> {
@@ -161,7 +160,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
 
-	public static String dni(String usu) throws SQLException  {
+	public static String dni(String usu) throws SQLException {
 		String sqlDNI = "SELECT DNI FROM usuarios WHERE UPPER(nombre) = UPPER(?)";
 		try (PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS)) {
 			psD.setString(1, usu);

@@ -37,7 +37,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 	public PantallaPropuestasRealizadas() {
 
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaPropuestasRealizadas.class.getResource("/IMAGES/descarga.png")));
+				.getImage(PantallaPropuestasRealizadas.class.getResource("/resources/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -50,7 +50,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
-				new ImageIcon(PantallaPropuestasRealizadas.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaPropuestasRealizadas.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -79,7 +79,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		contentPane.add(datosBtnEliminar(btnEliminar));
 		btnEliminar.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+			int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea eliminar el curso?", "ATENCION",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",

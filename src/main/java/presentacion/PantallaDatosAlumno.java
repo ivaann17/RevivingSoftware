@@ -58,8 +58,8 @@ public class PantallaDatosAlumno extends JFrame {
 	private static final Logger logger = Logger.getLogger(PantallaDatosAlumno.class.getName());
 
 	public PantallaDatosAlumno() throws SQLException {
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(PantallaDatosAlumno.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(PantallaDatosAlumno.class.getResource("/resources/IMAGES/descarga.png")));
 		setTitle("UCLM\r\n");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 770, 618);
@@ -72,8 +72,8 @@ public class PantallaDatosAlumno extends JFrame {
 		contentPane.setLayout(null);
 
 		lblNewLabel = new JLabel("");
-		lblNewLabel
-				.setIcon(new ImageIcon(PantallaDatosAlumno.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(new ImageIcon(
+				PantallaDatosAlumno.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -214,7 +214,7 @@ public class PantallaDatosAlumno extends JFrame {
 	}
 
 	private void procesarPagoTarjeta(Date fechaActual) {
-		int respuesta = mostrarConfirmacion("¿Desea pagar con tarjeta?");
+		int respuesta = mostrarConfirmacion("Desea pagar con tarjeta?");
 		if (respuesta == JOptionPane.OK_OPTION) {
 			realizarMatriculacion(ModoPago.TARJETA_CREDITO, fechaActual);
 			mostrarMensajeInscripcionExitosa();
@@ -223,7 +223,7 @@ public class PantallaDatosAlumno extends JFrame {
 	}
 
 	private void procesarPagoTransferencia(Date fechaActual) {
-		int respuesta = mostrarConfirmacion("¿Desea pagar mediante transferencia bancaria?");
+		int respuesta = mostrarConfirmacion("Desea pagar mediante transferencia bancaria?");
 		if (respuesta == JOptionPane.OK_OPTION) {
 			realizarMatriculacion(ModoPago.TRANSFERENCIA, fechaActual);
 			mostrarMensajeInscripcionExitosa();
@@ -232,7 +232,7 @@ public class PantallaDatosAlumno extends JFrame {
 	}
 
 	private int mostrarConfirmacion(String mensaje) {
-		return JOptionPane.showConfirmDialog(null, mensaje, "ATENCIÓN", JOptionPane.OK_CANCEL_OPTION);
+		return JOptionPane.showConfirmDialog(null, mensaje, "ATENCION", JOptionPane.OK_CANCEL_OPTION);
 	}
 
 	private void realizarMatriculacion(ModoPago modoPago, Date fechaActual) {
@@ -241,12 +241,12 @@ public class PantallaDatosAlumno extends JFrame {
 		try {
 			GestorMatriculacion.realizarMatriculacion(matricula);
 		} catch (SQLException e1) {
-			logger.info("Se ha producido un error al realizar matriculación: " + e1.getMessage());
+			logger.info("Se ha producido un error al realizar matriculacion: " + e1.getMessage());
 		}
 	}
 
 	private void mostrarMensajeInscripcionExitosa() {
-		JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACIÓN",
+		JOptionPane.showMessageDialog(null, "Se ha inscrito de forma correcta.", "INFORMACION",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 

@@ -36,7 +36,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 
 	public PantallaEmpezarMatriculacion() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaEmpezarMatriculacion.class.getResource("/IMAGES/descarga.png")));
+				.getImage(PantallaEmpezarMatriculacion.class.getResource("/resources/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -55,14 +55,14 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
-				new ImageIcon(PantallaEmpezarMatriculacion.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaEmpezarMatriculacion.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
 		JButton btnValidar = new JButton("Empezar matriculacion");
 		btnValidar.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea comenzar la matriculacion de este curso?",
+			int respuesta = JOptionPane.showConfirmDialog(null, "Desea comenzar la matriculacion de este curso?",
 					"ATENCIÃ“N", JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				try {
@@ -87,7 +87,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		JButton btnEli = new JButton("Eliminar curso");
 		btnEli.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+			int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar el curso?", "ATENCION",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",

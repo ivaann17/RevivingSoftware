@@ -19,7 +19,6 @@ import javax.swing.border.EmptyBorder;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
 
-
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -37,8 +36,8 @@ public class PantallaEvaluarCurso extends JFrame {
 	private static final Logger logger = Logger.getLogger(PantallaEvaluarCurso.class.getName());
 
 	public PantallaEvaluarCurso() {
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(PantallaEvaluarCurso.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(PantallaEvaluarCurso.class.getResource("/resources/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -50,8 +49,8 @@ public class PantallaEvaluarCurso extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(
-				new ImageIcon(PantallaEvaluarCurso.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(new ImageIcon(
+				PantallaEvaluarCurso.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -64,7 +63,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnAceptar = new JButton("Aceptar propuesta");
 		btnAceptar.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea aceptar la propuesta?", "ATENCION",
+			int respuesta = JOptionPane.showConfirmDialog(null, "Desea aceptar la propuesta?", "ATENCION",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				JOptionPane.showMessageDialog(null, "El curso se ha dado de alta.", "INFORMACION",
@@ -89,7 +88,7 @@ public class PantallaEvaluarCurso extends JFrame {
 		btnRechazar = new JButton("Rechazar propuesta");
 		btnRechazar.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea rechazar la propuesta?", "Confirmacion",
+			int respuesta = JOptionPane.showConfirmDialog(null, "Desea rechazar la propuesta?", "Confirmacion",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				String mensaje = "";

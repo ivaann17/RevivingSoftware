@@ -38,7 +38,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 	public PantallaPropuestasRechazadas() {
 
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaPropuestasRechazadas.class.getResource("/IMAGES/descarga.png")));
+				.getImage(PantallaPropuestasRechazadas.class.getResource("/resources/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -51,7 +51,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
-				new ImageIcon(PantallaPropuestasRechazadas.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaPropuestasRechazadas.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -80,7 +80,7 @@ public class PantallaPropuestasRechazadas extends JFrame {
 		contentPane.add(PantallaPropuestasRealizadas.datosBtnEliminar(btnEliminar));
 		btnEliminar.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+			int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea eliminar el curso?", "ATENCION",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",
