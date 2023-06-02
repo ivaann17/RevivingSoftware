@@ -6,6 +6,7 @@ on:
       - Develop
       - Feature-BBDD
       - Feature-Calidad
+      - Feature-Testing
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
