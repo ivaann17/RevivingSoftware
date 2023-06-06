@@ -34,64 +34,32 @@ public class Matricula {
 		return idMatricula;
 	}
 
-	public void setIDMatricula(int idMatricula) {
-		this.idMatricula = idMatricula;
-	}
-
 	public String getNombre() {
 		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getApellido() {
 		return apellido;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
 	public ModoPago getTipoPago() {
 		return tipoPago;
-	}
-
-	public void setTipoPago(ModoPago tipoPago) {
-		this.tipoPago = tipoPago;
 	}
 
 	public java.util.Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
 	public String getDni() {
 		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
 	}
 
 	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
-	}
-
 	public int getIDCurso() {
 		return idCurso;
-	}
-
-	public void setIDCurso(int idCurso) {
-		this.idCurso = idCurso;
 	}
 
 	@Override

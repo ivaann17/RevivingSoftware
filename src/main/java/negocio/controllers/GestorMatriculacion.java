@@ -21,5 +21,9 @@ public class GestorMatriculacion {
 		matDAO = new MatriculaDAO();
 		return matDAO.existeMatricula(idCurso, dni);
 	}
+	public static void eliminarMat(int idCurso, String dni) throws SQLException {
+		matDAO = new MatriculaDAO();
+		matDAO.eliMatricula(idCurso, dni);
+	}
 
 }

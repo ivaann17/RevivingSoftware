@@ -109,5 +109,26 @@ public class MatriculaDAO {
 		return count;
 
 	}
+	public int eliMatricula(int curso, String dni) throws SQLException {
+
+		int eli = 0;
+
+		String sql = "DELETE FROM matricula WHERE curso = ? AND DNI = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+			ps.setInt(1, curso);
+			ps.setString(2, dni);
+
+			gestorBD.delete(ps);
+
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				eli = 1;
+			}
+
+		}
+		return eli;
+	}
 
 }

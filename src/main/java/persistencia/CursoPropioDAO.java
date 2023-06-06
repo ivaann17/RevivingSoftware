@@ -47,24 +47,35 @@ public class CursoPropioDAO {
 	}
 
 	public int getId(CursoPropio curso) throws SQLException {
-
 		int id = 0;
-
 		String sql = "SELECT ID FROM cursos WHERE nombre = ? AND tipo = ?";
-
-		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
 			ps.setString(1, curso.getNombre());
 			ps.setString(2, curso.getTipo().toString());
-
-			GestorBD.select(ps);
-
-			ResultSet rs = ps.getGeneratedKeys();
+			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				id = rs.getInt(1);
 			}
-
 		}
 		return id;
+	}
+
+	public String getEstado(CursoPropio curso) throws SQLException {
+		String estado = null;
+
+		String sql = "SELECT estado FROM cursos WHERE nombre = ? AND tipo = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql)) {
+			ps.setString(1, curso.getNombre());
+			ps.setString(2, curso.getTipo().toString());
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				estado = rs.getString(1);
+			}
+		}
+
+		return estado;
 	}
 
 	public boolean existeCurso(CursoPropio curso) throws SQLException {
@@ -230,6 +241,23 @@ public class CursoPropioDAO {
 		}
 
 		return cursos;
+	}
+
+	public boolean existeSoloCurso(CursoPropio curso) throws SQLException {
+
+		String sql = "SELECT COUNT(*) FROM cursos WHERE nombre = ? AND ID = ? ";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+			ps.setString(1, curso.getNombre());
+			ps.setInt(2, curso.getId());
+
+			ResultSet rs = gestorBD.operation(ps);
+
+			return isResultSetMayorCero(rs);
+
+		}
+
 	}
 
 }
