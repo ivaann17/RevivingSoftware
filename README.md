@@ -82,7 +82,7 @@ Las metricas para nuestro analisis de calidad son las siguientes:
 ![Calidad](IMAGENES_MEMORIA/Metricas.png)
 
 ## Testing<a name="testing"></a>
-Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas]() creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
+Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas](https://github.com/ivaann17/RevivingSoftware/tree/Release/PLAN%20DE%20PRUEBAS) creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
 
 Por otra parte, se genera de forma automatica un informe (target/site) sobre el proyecto mediante la herramienta de "Surefire" y también en particular sobre los test con la herramienta de cobertura de "Jacoco". El informe se puede observar en este [enlace](PLAN DE PRUEBAS) 
 
