@@ -1,8 +1,0 @@
-test\java\negocio\controllers\GestorMatriculacionTest.class
-test\java\negocio\controllers\GestorPropuestasCursosTest.class
-test\java\negocio\entities\MatriculaTest.class
-test\java\negocio\controllers\GestorEdicionesTest.class
-test\java\negocio\controllers\GestorLoginTest.class
-test\java\negocio\entities\CursoPropioTest.class
-test\java\negocio\entities\CentroTest.class
-test\java\negocio\controllers\GestorConsultasTest.class
