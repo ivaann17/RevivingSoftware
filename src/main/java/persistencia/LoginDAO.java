@@ -105,7 +105,7 @@ public class LoginDAO {
 
 	public Vector<Object> loginContra(String contrasena) throws SQLException {
 
-		String sql = "SELECT * FROM usuarios WHERE contraseña = ?";
+		String sql = "SELECT * FROM usuarios WHERE contrasena = ?";
 
 		Vector<Object> rPass = null;
 

@@ -70,8 +70,8 @@ public class PantallaDireccionCursos extends JFrame {
 		contentPane.add(btnMostrarHistorial);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(
-				new ImageIcon(PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(new ImageIcon(
+				PantallaDireccionCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -107,8 +107,7 @@ public class PantallaDireccionCursos extends JFrame {
 			new PantallaLogin();
 
 		});
-		
-		
+
 		JButton btnRechazados = new JButton("Propuestas \r\nrechazadas");
 		btnRechazados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRechazados.addActionListener(arg0 -> {
@@ -161,7 +160,7 @@ public class PantallaDireccionCursos extends JFrame {
 		btnMostrarResueltos.setBounds(103, 146, 228, 99);
 	}
 
-	public static String dni(String usu) throws SQLException  {
+	public static String dni(String usu) throws SQLException {
 		String sqlDNI = "SELECT DNI FROM usuarios WHERE UPPER(nombre) = UPPER(?)";
 		try (PreparedStatement psD = GestorBD.mBD.prepareStatement(sqlDNI, Statement.RETURN_GENERATED_KEYS)) {
 			psD.setString(1, usu);

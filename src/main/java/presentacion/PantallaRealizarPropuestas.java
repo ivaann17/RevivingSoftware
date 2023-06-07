@@ -234,7 +234,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 								nuevoCurso.getNombre());
 
 						if (!existeEdicion) {
-							int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea enviar su propuesta de curso?",
+							int respuesta = JOptionPane.showConfirmDialog(null, "Desea enviar su propuesta de curso?",
 									"ATENCION", JOptionPane.OK_CANCEL_OPTION);
 
 							if (respuesta == JOptionPane.OK_OPTION) {
@@ -249,7 +249,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 								pantallaDireccionCursos.setVisible(true);
 							}
 						} else {
-							JOptionPane.showMessageDialog(null, "La edición ya existe en la base de datos.", error,
+							JOptionPane.showMessageDialog(null, "La edicion ya existe en la base de datos.", error,
 									JOptionPane.ERROR_MESSAGE);
 
 							main.java.presentacion.PantallaDireccionCursos pantallaDireccionCursos = new main.java.presentacion.PantallaDireccionCursos();
@@ -280,10 +280,10 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 				JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para realizar la propuesta.", error,
 						JOptionPane.ERROR_MESSAGE);
 			} else if (numCreditos.getText().isEmpty() || !isNumeric(numCreditos.getText())) {
-				JOptionPane.showMessageDialog(null, "Introduzca los créditos de manera correcta.", error,
+				JOptionPane.showMessageDialog(null, "Introduzca los crï¿½ditos de manera correcta.", error,
 						JOptionPane.ERROR_MESSAGE);
 			} else if (!dniDigi(dniSec)) {
-				JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dígitos.", error,
+				JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dï¿½gitos.", error,
 						JOptionPane.ERROR_MESSAGE);
 			} else if (tipoCurso.getSelectedItem() == null) {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de curso.", error,
@@ -359,66 +359,6 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		lblDuracinDelCurso.setBounds(454, 347, 259, 39);
 		contentPane.add(lblDuracinDelCurso);
 
-		textPrecio = new JTextField();
-		textPrecio.setEditable(false);
-		textPrecio.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		textPrecio.setColumns(10);
-		textPrecio.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
-		textPrecio.setBounds(232, 502, 259, 39);
-		contentPane.add(textPrecio);
-
-		lblPrecio = new JLabel("Precio de la matricula:");
-		lblPrecio.setForeground(SystemColor.textHighlight);
-		lblPrecio.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-		lblPrecio.setBounds(232, 453, 259, 39);
-		contentPane.add(lblPrecio);
-
-		btnNext = new JButton("Siguiente");
-		btnNext.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-		btnNext.addActionListener(event -> {
-
-			if (mes.getSelectedItem().toString().equals("") || dia.getSelectedItem().toString().equals("")
-					|| ano.getSelectedItem().toString().equals(""))
-				JOptionPane.showMessageDialog(null, "Rellene correctamente las fechas del curso.", error,
-						JOptionPane.ERROR_MESSAGE);
-			else {
-				btnFinalizar.setVisible(true);
-				btnNext.setVisible(false);
-				fechaIni = ano.getSelectedItem().toString() + "-" + mesNumero(mes.getSelectedItem().toString()) + "-"
-						+ dia.getSelectedItem().toString();
-				label.setText("Seleccione la fecha de fin:");
-
-				mes.setSelectedItem("");
-				dia.setSelectedItem("");
-				ano.setSelectedItem("");
-				contentPane.getRootPane().setDefaultButton(btnFinalizar);
-			}
-
-		});
-		btnNext.setForeground(Color.WHITE);
-		btnNext.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		btnNext.setBackground(SystemColor.textHighlight);
-		btnNext.setBounds(594, 490, 114, 49);
-		contentPane.add(btnNext);
-
-		fac = new JComboBox<>();
-		fac.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		DefaultComboBoxModel<Facultad> comboBoxModelFac = new DefaultComboBoxModel<>();
-
-		comboBoxModelFac.addElement(null);
-		comboBoxModelFac.addElement(Facultad.CAMPUS_ALBACETE);
-		comboBoxModelFac.addElement(Facultad.CAMPUS_ALMADEN);
-		comboBoxModelFac.addElement(Facultad.CAMPUS_CIUDAD_REAL);
-		comboBoxModelFac.addElement(Facultad.CAMPUS_CUENCA);
-		comboBoxModelFac.addElement(Facultad.CAMPUS_TALAVERA);
-		comboBoxModelFac.addElement(Facultad.CAMPUS_TOLEDO);
-		fac.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		fac.setBounds(454, 308, 259, 39);
-		fac.setModel(comboBoxModelFac);
-		contentPane.add(fac);
-		fac.setSelectedItem(null);
-
 		dia = new JComboBox<>();
 		dia.setFont(new Font(tipoLetra, Font.BOLD, 13));
 		dia.setBounds(71, 230, 101, 39);
@@ -456,6 +396,66 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		Calendar cal = Calendar.getInstance();
 		int actual = cal.get(Calendar.YEAR);
 
+		textPrecio = new JTextField();
+		textPrecio.setEditable(false);
+		textPrecio.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		textPrecio.setColumns(10);
+		textPrecio.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
+		textPrecio.setBounds(232, 502, 259, 39);
+		contentPane.add(textPrecio);
+
+		lblPrecio = new JLabel("Precio de la matricula:");
+		lblPrecio.setForeground(SystemColor.textHighlight);
+		lblPrecio.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
+		lblPrecio.setBounds(232, 453, 259, 39);
+		contentPane.add(lblPrecio);
+
+		btnNext = new JButton("Siguiente");
+		btnNext.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		btnNext.addActionListener(event -> {
+
+			if (mes.getSelectedItem().toString().equals("") || dia.getSelectedItem().toString().equals("")
+					|| ano.getSelectedItem().toString().equals(""))
+				JOptionPane.showMessageDialog(null, "Rellene correctamente las fechas del curso.", error,
+						JOptionPane.ERROR_MESSAGE);
+			else {
+				btnFinalizar.setVisible(true);
+				btnNext.setVisible(false);
+				fechaIni = ano.getSelectedItem().toString() + "-" + mesNumero(mes.getSelectedItem().toString()) + "-"
+						+ dia.getSelectedItem().toString();
+				label.setText("Seleccione la fecha de fin:");
+
+				mes.setSelectedItem("");
+				dia.setSelectedItem(null);
+				ano.setSelectedItem(null);
+				contentPane.getRootPane().setDefaultButton(btnFinalizar);
+			}
+
+		});
+		btnNext.setForeground(Color.WHITE);
+		btnNext.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		btnNext.setBackground(SystemColor.textHighlight);
+		btnNext.setBounds(594, 490, 114, 49);
+		contentPane.add(btnNext);
+
+		fac = new JComboBox<>();
+		fac.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		DefaultComboBoxModel<Facultad> comboBoxModelFac = new DefaultComboBoxModel<>();
+
+		comboBoxModelFac.addElement(null);
+		comboBoxModelFac.addElement(Facultad.CAMPUS_ALBACETE);
+		comboBoxModelFac.addElement(Facultad.CAMPUS_ALMADEN);
+		comboBoxModelFac.addElement(Facultad.CAMPUS_CIUDAD_REAL);
+		comboBoxModelFac.addElement(Facultad.CAMPUS_CUENCA);
+		comboBoxModelFac.addElement(Facultad.CAMPUS_TALAVERA);
+		comboBoxModelFac.addElement(Facultad.CAMPUS_TOLEDO);
+		fac.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		fac.setBounds(454, 308, 259, 39);
+		fac.setModel(comboBoxModelFac);
+		contentPane.add(fac);
+		fac.setSelectedItem(null);
+
 		DefaultComboBoxModel<Integer> comboBoxModelAno = new DefaultComboBoxModel<>();
 
 		comboBoxModelAno.addElement(null);
@@ -482,7 +482,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		lblMes.setVisible(false);
 		contentPane.add(lblMes);
 
-		lblAno = new JLabel("Año:");
+		lblAno = new JLabel("Ano:");
 		lblAno.setForeground(SystemColor.textHighlight);
 		lblAno.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblAno.setBounds(548, 195, 259, 39);
@@ -737,16 +737,15 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 	}
 
 	public java.sql.Date formatoFecha(String fech) throws ParseException {
-	    try {
-	        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-	        java.util.Date fechaUtil = formatoFecha.parse(fech);
-	        return new java.sql.Date(fechaUtil.getTime());
-	    } catch (Exception e) {
-	        logger.info("Se ha producido un error al formatear la fecha: " + e.getMessage());
-	    }
-	    return null;
+		try {
+			SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date fechaUtil = formatoFecha.parse(fech);
+			return new java.sql.Date(fechaUtil.getTime());
+		} catch (Exception e) {
+			logger.info("Se ha producido un error al formatear la fecha: " + e.getMessage());
+		}
+		return null;
 	}
-
 
 	private boolean hayCamposVacios() {
 		return !textoVacio(edicion) || !textoVacio(nombreCurso) || !textoVacio(dniProf) || !textoVacio(dniSec);

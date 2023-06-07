@@ -1,2 +1,0 @@
-# RevivingSoftware
-Rama de interfaces
