@@ -13,108 +13,122 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class CursoPropioTest {
-
-	private CursoPropio curso() {
+class CursoPropioTest {
+	// CP1
+	CursoPropio curso() {
 		return new CursoPropio(new Centro("Centro Ejemplo").getNombre(), EstadoCurso.PROPUESTO, TipoCurso.MASTER,
 				"12345678P", "98765432S", 1, "Curso Test", 120, new Date(), new Date(), 100.0, 1, "Mensaje 1");
 	}
 
+	// D1
 	@Test
-	private void testGetCentro() {
+	void testGetCentro() {
 		CursoPropio curso = curso();
 
 		assertEquals("Centro Ejemplo", curso.getCentro());
 	}
 
+	// D2
 	@Test
-	private void testGetEstado() {
+	void testGetEstado() {
 		CursoPropio curso = curso();
 
 		assertEquals(EstadoCurso.PROPUESTO, curso.getEstado());
 	}
 
+	// D3
 	@Test
-	private void testGetTipo() {
+	void testGetTipo() {
 		CursoPropio curso = curso();
 
 		assertEquals(TipoCurso.MASTER, curso.getTipo());
 	}
 
+	// D4
 	@Test
-	private void testGetDniDirector() {
+	void testGetDniDirector() {
 		CursoPropio curso = curso();
 
 		assertEquals("12345678P", curso.getDniDirector());
 	}
 
+	// D5
 	@Test
-	private void testGetDniSecretario() {
+	void testGetDniSecretario() {
 		CursoPropio curso = curso();
 
 		assertEquals("98765432S", curso.getDniSecretario());
 	}
 
+	// D6
 	@Test
-	private void testGetId() {
+	void testGetId() {
 		CursoPropio curso = curso();
 
 		assertEquals(1, curso.getId());
 	}
 
+	// D7
 	@Test
-	private void testGetNombre() {
+	void testGetNombre() {
 		CursoPropio curso = curso();
 
 		assertEquals("Curso Test", curso.getNombre());
 	}
 
+	// D8
 	@Test
-	private void testGetECTS() {
+	void testGetECTS() {
 		CursoPropio curso = curso();
 
 		assertEquals(120, curso.getECTS());
 	}
 
+	// D9
 	@Test
-	private void testGetFechaInicio() {
+	void testGetFechaInicio() {
 		Date fechaInicio = new Date();
 		CursoPropio curso = curso();
 
 		assertEquals(fechaInicio, curso.getFechaInicio());
 	}
 
+	// D10
 	@Test
-	private void testGetFechaFin() {
+	void testGetFechaFin() {
 		Date fechaFin = new Date();
 		CursoPropio curso = curso();
 
 		assertEquals(fechaFin, curso.getFechaFin());
 	}
 
+	// D11
 	@Test
-	private void testGetTasaMatricula() {
+	void testGetTasaMatricula() {
 		CursoPropio curso = curso();
 
 		assertEquals(100.0, curso.getTasaMatricula());
 	}
 
+	// D12
 	@Test
-	private void testGetEdicion() {
+	void testGetEdicion() {
 		CursoPropio curso = curso();
 
 		assertEquals(1, curso.getEdicion());
 	}
 
+	// D13
 	@Test
-	private void testGetMensaje() {
+	void testGetMensaje() {
 		CursoPropio curso = curso();
 
 		assertEquals("Mensaje 1", curso.getMensaje());
 	}
 
+	// D14
 	@Test
-	private void testToString() {
+	void testToString() {
 		CursoPropio curso = curso();
 
 		String expectedString = "ID del curso: {1}  Nombre del curso: {Curso Test}  Estado del curso: {PROPUESTO}  Edicion: {1}";

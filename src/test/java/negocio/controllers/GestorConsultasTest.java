@@ -26,26 +26,26 @@ import main.java.negocio.entities.ModoPago;
 import main.java.negocio.entities.TipoCurso;
 import main.java.persistencia.GestorBD;
 
-public class GestorConsultasTest {
+class GestorConsultasTest {
 
-	private Matricula matricula1() {
+	Matricula matricula1() {
 		return new Matricula(1, "Iván", "Muñoz", ModoPago.TARJETA_CREDITO, Date.valueOf("2023-05-01"), "12345678P",
 				100.0, 91);
 	}
 
-	private CursoPropio curso1() {
+	CursoPropio curso1() {
 		return new CursoPropio(new Centro("CAMPUS_TALAVERA").getNombre(), EstadoCurso.PROPUESTO, TipoCurso.MASTER,
 				"12345675P", "98765432S", 91, "Curso Test", 120, Date.valueOf("2023-05-01"), Date.valueOf("2023-06-01"),
 				100.0, 1, "Mensaje 1");
 	}
 
-	private CursoPropio curso2() {
+	CursoPropio curso2() {
 		return new CursoPropio(new Centro("CAMPUS_TALAVERA").getNombre(), EstadoCurso.EN_IMPARTICION, TipoCurso.MASTER,
 				"12345677P", "98765432S", 90, "Curso Test", 120, Date.valueOf("2023-05-01"), Date.valueOf("2023-06-01"),
 				100.0, 2, "Mensaje 1");
 	}
 
-	private static final Map<String, String> DNI_ESPERADO = new HashMap<>();
+	static final Map<String, String> DNI_ESPERADO = new HashMap<>();
 
 	static {
 		DNI_ESPERADO.put("profesor", "12345678R");
@@ -54,7 +54,7 @@ public class GestorConsultasTest {
 		DNI_ESPERADO.put("jefe", "89897123P");
 	}
 
-	private static final Map<String, String> NOMBRE_ESPERADO = new HashMap<>();
+	static final Map<String, String> NOMBRE_ESPERADO = new HashMap<>();
 
 	static {
 		NOMBRE_ESPERADO.put("profesor", "MANUEL");
@@ -62,7 +62,7 @@ public class GestorConsultasTest {
 		NOMBRE_ESPERADO.put("vicerrector", "JOSE");
 		NOMBRE_ESPERADO.put("jefe", "ANA");
 	}
-	private static final Map<String, String> APELLIDO_ESPERADO = new HashMap<>();
+	static final Map<String, String> APELLIDO_ESPERADO = new HashMap<>();
 
 	static {
 		APELLIDO_ESPERADO.put("profesor", "GONZALEZ");
@@ -70,7 +70,7 @@ public class GestorConsultasTest {
 		APELLIDO_ESPERADO.put("vicerrector", "PEREZ");
 		APELLIDO_ESPERADO.put("jefe", "GOMEZ");
 	}
-	private static final Map<String, String> TIPO_USU_ESPERADO = new HashMap<>();
+	static final Map<String, String> TIPO_USU_ESPERADO = new HashMap<>();
 
 	static {
 		TIPO_USU_ESPERADO.put("profesor", "PROFESOR");
@@ -80,24 +80,24 @@ public class GestorConsultasTest {
 	}
 
 	@BeforeAll
-	private static void setUpClass() {
+	static void setUpClass() {
 		GestorBD.conectarBD();
 	}
 
-	private static Stream<String> usuarios() {
+	static Stream<String> usuarios() {
 		return Stream.of("profesor", "estudiante", "vicerrector", "jefe");
 	}
 
 	@ParameterizedTest
 	@MethodSource("usuarios")
-	private void testGetDNILog(String usuario) throws SQLException {
+	void testGetDNILog(String usuario) throws SQLException {
 		String actual = GestorConsultas.getDNILog(usuario);
 		String expected = DNI_ESPERADO.get(usuario);
 		assertEquals(expected, actual);
 	}
 
 	@Test
-	private void testConsultarIngresos() throws SQLException {
+	void testConsultarIngresos() throws SQLException {
 		CursoPropio c = curso1();
 		GestorPropuestasCursos.realizarPropuestaCurso(c);
 		Matricula m = matricula1();
@@ -110,7 +110,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	private void testGetIdCurso() throws SQLException {
+	void testGetIdCurso() throws SQLException {
 		CursoPropio c = curso1();
 		GestorPropuestasCursos.realizarPropuestaCurso(c);
 		int expectedId = c.getId();
@@ -121,7 +121,7 @@ public class GestorConsultasTest {
 
 	@ParameterizedTest
 	@MethodSource("usuarios")
-	private void testGetNombreLog(String usuario) throws SQLException {
+	void testGetNombreLog(String usuario) throws SQLException {
 		String actual = GestorConsultas.getNombreLog(usuario);
 		String expected = NOMBRE_ESPERADO.get(usuario);
 		assertEquals(expected, actual);
@@ -129,7 +129,7 @@ public class GestorConsultasTest {
 
 	@ParameterizedTest
 	@MethodSource("usuarios")
-	private void testGetApellidoLog(String usuario) throws SQLException {
+	void testGetApellidoLog(String usuario) throws SQLException {
 		String actual = GestorConsultas.getApellidoLog(usuario);
 		String expected = APELLIDO_ESPERADO.get(usuario);
 		assertEquals(expected, actual);
@@ -137,14 +137,14 @@ public class GestorConsultasTest {
 
 	@ParameterizedTest
 	@MethodSource("usuarios")
-	private void testGetTipoUsuLog(String usuario) throws SQLException {
+	void testGetTipoUsuLog(String usuario) throws SQLException {
 		String actual = GestorConsultas.getTipoUsuLog(usuario);
 		String expected = TIPO_USU_ESPERADO.get(usuario);
 		assertEquals(expected, actual);
 	}
 
 	@Test
-	private void testGetNumMatriculas() throws SQLException {
+	void testGetNumMatriculas() throws SQLException {
 		CursoPropio c = curso1();
 		GestorPropuestasCursos.realizarPropuestaCurso(c);
 		Matricula m = matricula1();
@@ -158,7 +158,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	private void testListarCursosPorEdiciones() throws SQLException {
+	void testListarCursosPorEdiciones() throws SQLException {
 		DefaultListModel<CursoPropio> modelo = new DefaultListModel<>();
 		GestorConsultas.listarCursosPorEdiciones(modelo);
 		int inicialSize = modelo.getSize();
@@ -177,7 +177,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	private void testListarCursos() throws SQLException {
+	void testListarCursos() throws SQLException {
 		DefaultListModel<CursoPropio> modelo = new DefaultListModel<>();
 
 		GestorConsultas.listarCursos(modelo);
@@ -195,7 +195,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	private void testListarCursosPorEstado() throws SQLException {
+	void testListarCursosPorEstado() throws SQLException {
 		DefaultListModel<CursoPropio> modelo = new DefaultListModel<>();
 		GestorConsultas.listarCursosPorEstado(modelo, EstadoCurso.PROPUESTO);
 		int inicialSize = modelo.getSize();
@@ -214,7 +214,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	private void testListarHistorial() throws SQLException {
+	void testListarHistorial() throws SQLException {
 		DefaultListModel<CursoPropio> modelo = new DefaultListModel<>();
 		CursoPropio c1 = curso1();
 
@@ -232,7 +232,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	private void testListarCursosMatriculados() throws SQLException {
+	void testListarCursosMatriculados() throws SQLException {
 		DefaultListModel<CursoPropio> modelo = new DefaultListModel<>();
 		CursoPropio c1 = curso1();
 		Matricula m = matricula1();

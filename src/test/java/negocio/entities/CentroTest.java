@@ -8,13 +8,13 @@ import main.java.negocio.entities.Centro;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class CentroTest {
-
+class CentroTest {
+	// D1
 	@Test
-	private void testGetNombre() {
-
+	void testGetNombre() {
+		// CP1
 		Centro centro = new Centro("Centro de Prueba");
-
+		// A
 		assertEquals("Centro de Prueba", centro.getNombre());
 	}
 }

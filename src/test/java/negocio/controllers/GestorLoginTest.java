@@ -14,43 +14,45 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GestorLoginTest {
+class GestorLoginTest {
 
-    private static final Map<String, String> RESULTADOS_ESPERADOS = new HashMap<>();
+	static final Map<String, String> RESULTADOS_ESPERADOS = new HashMap<>();
 
-    static {
-        RESULTADOS_ESPERADOS.put("profesor", "[profesor, profesor, Profesor, 12345678R, Manuel, Gonzalez]");
-        RESULTADOS_ESPERADOS.put("estudiante", "[estudiante, estudiante, Estudiante, 98765432L, Ivan, Muñoz]");
-        RESULTADOS_ESPERADOS.put("vicerrector", "[vicerrector, vicerrector, Vicerrector, 89765643W, Jose, Perez]");
-        RESULTADOS_ESPERADOS.put("jefe", "[jefe, jefe, Jefe_Gabinete, 89897123P, Ana, Gomez]");
-    }
+	static {
+		RESULTADOS_ESPERADOS.put("profesor", "[profesor, profesor, Profesor, 12345678R, Manuel, Gonzalez]");
+		RESULTADOS_ESPERADOS.put("estudiante", "[estudiante, estudiante, Estudiante, 98765432L, Ivan, Muñoz]");
+		RESULTADOS_ESPERADOS.put("vicerrector", "[vicerrector, vicerrector, Vicerrector, 89765643W, Jose, Perez]");
+		RESULTADOS_ESPERADOS.put("jefe", "[jefe, jefe, Jefe_Gabinete, 89897123P, Ana, Gomez]");
+	}
 
-    @BeforeAll
-    private static void setUpClass() {
-        GestorBD.conectarBD();
-    }
+	@BeforeAll
+	static void setUpClass() {
+		GestorBD.conectarBD();
+	}
 
-    private static Stream<String> usuarios() {
-        return Stream.of("profesor", "estudiante", "vicerrector", "jefe");
-    }
+	static Stream<String> usuarios() {
+		return Stream.of("profesor", "estudiante", "vicerrector", "jefe");
+	}
 
-    @ParameterizedTest
-    @MethodSource("usuarios")
-    private void testLoginUsuario(String usuario) throws SQLException {
-        Vector<Object> result = GestorLogin.loginUsuario(usuario);
-        String resultString = result.get(0).toString();
+	// D1(A,B,C,D)
+	@ParameterizedTest
+	@MethodSource("usuarios")
+	void testLoginUsuario(String usuario) throws SQLException {
+		Vector<Object> result = GestorLogin.loginUsuario(usuario);
+		String resultString = result.get(0).toString();
 
-        String expected = RESULTADOS_ESPERADOS.get(usuario);
-        assertEquals(expected, resultString);
-    }
+		String expected = RESULTADOS_ESPERADOS.get(usuario);
+		assertEquals(expected, resultString);
+	}
 
-    @ParameterizedTest
-    @MethodSource("usuarios")
-    private void testLoginContra(String usuario) throws SQLException {
-        Vector<Object> result = GestorLogin.loginContra(usuario);
-        String resultString = result.get(0).toString();
+	// D2(A,B,C,D)
+	@ParameterizedTest
+	@MethodSource("usuarios")
+	void testLoginContra(String usuario) throws SQLException {
+		Vector<Object> result = GestorLogin.loginContra(usuario);
+		String resultString = result.get(0).toString();
 
-        String expected = RESULTADOS_ESPERADOS.get(usuario);
-        assertEquals(expected, resultString);
-    }
+		String expected = RESULTADOS_ESPERADOS.get(usuario);
+		assertEquals(expected, resultString);
+	}
 }

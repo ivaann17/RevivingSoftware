@@ -9,71 +9,80 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MatriculaTest {
-
-	private Matricula matricula() {
+class MatriculaTest {
+	// CP1
+	Matricula matricula() {
 
 		return new Matricula(1, "Ivan", "Muñoz", ModoPago.TARJETA_CREDITO, new Date(), "12345678P", 100.0, 2);
 	}
 
+	// D1
 	@Test
-	private void testGetID() {
+	void testGetID() {
 		Matricula m = matricula();
 
 		assertEquals(1, m.getIDMatricula());
 	}
 
+	// D2
 	@Test
-	private void testGetNombre() {
+	void testGetNombre() {
 		Matricula m = matricula();
 
 		assertEquals("Ivan", m.getNombre());
 	}
 
+	// D3
 	@Test
-	private void testGetApellido() {
+	void testGetApellido() {
 		Matricula m = matricula();
 
 		assertEquals("Muñoz", m.getApellido());
 	}
 
+	// D4
 	@Test
-	private void testGetTipoPago() {
+	void testGetTipoPago() {
 		Matricula m = matricula();
 
 		assertEquals(ModoPago.TARJETA_CREDITO, m.getTipoPago());
 	}
 
+	// D5
 	@Test
-	private void testGetFecha() {
+	void testGetFecha() {
 		Matricula m = matricula();
 		Date fecha = new Date();
 
 		assertEquals(fecha, m.getFecha());
 	}
 
+	// D6
 	@Test
-	private void testGetDni() {
+	void testGetDni() {
 		Matricula m = matricula();
 
 		assertEquals("12345678P", m.getDni());
 	}
 
+	// D7
 	@Test
-	private void testGetPrecio() {
+	void testGetPrecio() {
 		Matricula m = matricula();
 		assertEquals(100.0, m.getPrecio());
 	}
 
+	// D8
 	@Test
-	private void testGetIdCurso() {
+	void testGetIdCurso() {
 		Matricula m = matricula();
 
 		assertEquals(2, m.getIDCurso());
 	}
 
+	// D9
 	@Test
-	private void testToString() {
+	void testToString() {
 		Matricula m = matricula();
 		String expectedToString = "Matricula [ID_Matricula=1, nombre=Ivan, apellido=Muñoz, tipoPago=TARJETA_CREDITO, fecha="
 				+ new Date() + ", dni=12345678P, precio=100.0, ID_Curso=2]";
