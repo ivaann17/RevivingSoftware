@@ -23,35 +23,35 @@ import main.java.persistencia.GestorBD;
 public class GestorPropuestasCursosTest {
 	
 	@BeforeEach
-	public void setUp() {
+	private void setUp() {
 		GestorBD.conectarBD();
 	}
 
-	public CursoPropio curso1() {
+	private CursoPropio curso1() {
 		return new CursoPropio(new Centro("CAMPUS_TALAVERA").getNombre(), EstadoCurso.PROPUESTO, TipoCurso.MASTER,
 				"12345678P", "98765432S", 1, "Curso Test", 120, new Date(1 / 5 / 2023), new Date(1 / 6 / 2023), 100.0,
 				1, "Mensaje 1");
 	}
 
-	public CursoPropio curso2() {
+	private CursoPropio curso2() {
 		return new CursoPropio(new Centro("CAMPUS_TALAVERA").getNombre(), EstadoCurso.PROPUESTO, TipoCurso.MASTER,
 				"12345678P", "98765432S", -12, "Curso Test2", 120, new Date(1 / 5 / 2023), new Date(1 / 6 / 2023),
 				100.0, 1, "Mensaje 1");
 	}
 
-	public CursoPropio curso3() {
+	private CursoPropio curso3() {
 		return new CursoPropio(new Centro("CAMPUS_TALAVERA").getNombre(), EstadoCurso.EN_IMPARTICION, TipoCurso.MASTER,
 				"12345678P", "98765432S", 123, "Curso Test3", 120, new Date(1 / 5 / 2023), new Date(1 / 6 / 2023),
 				-100.0, 1, "Mensaje 1");
 	}
 
-	public CursoPropio curso4() {
+	private CursoPropio curso4() {
 		return new CursoPropio(new Centro("CAMPUS_TALAVERA").getNombre(), EstadoCurso.EN_IMPARTICION, TipoCurso.MASTER,
 				"12345678P", "98765432S", 1234, "Curso Test4", 120, new Date(1 / 5 / 2023), new Date(1 / 6 / 2023),
 				100.0, -1, "Mensaje 1");
 	}
 
-	public boolean cursoCorrecto(CursoPropio curso) {
+	private boolean cursoCorrecto(CursoPropio curso) {
 		if (curso.getNombre().equals("Curso Test") && curso.getId() == 1) {
 			return true;
 		} else
@@ -59,7 +59,7 @@ public class GestorPropuestasCursosTest {
 	}
 
 	@Test
-	public void testRealizarPropuestaCurso() throws SQLException {
+	private void testRealizarPropuestaCurso() throws SQLException {
 		// CP1
 		CursoPropio c = curso1();
 		GestorPropuestasCursos.realizarPropuestaCurso(c);
@@ -81,7 +81,7 @@ public class GestorPropuestasCursosTest {
 		assertFalse(GestorPropuestasCursos.existeSoloCurso(c));
 	}
 	@Test
-	public void testEditarPropuestaCurso() throws SQLException {
+	private void testEditarPropuestaCurso() throws SQLException {
 
 		// CP1
 		CursoPropio c = curso1();
@@ -93,7 +93,7 @@ public class GestorPropuestasCursosTest {
 
 	}
 	@Test
-	public void testAceptarPropuestaCurso() throws SQLException {
+	private void testAceptarPropuestaCurso() throws SQLException {
 
 		// CP1
 		CursoPropio c = curso1();
@@ -105,7 +105,7 @@ public class GestorPropuestasCursosTest {
 
 	}
 	@Test
-	public void testRechazarPropuestaCurso() throws SQLException {
+	private void testRechazarPropuestaCurso() throws SQLException {
 
 		// CP1
 		CursoPropio c = curso1();
@@ -117,7 +117,7 @@ public class GestorPropuestasCursosTest {
 
 	}
 	@Test
-	public void testExisteSoloCurso() throws SQLException {
+	private void testExisteSoloCurso() throws SQLException {
 
 		// CP1
 		CursoPropio c = curso1();
@@ -132,7 +132,7 @@ public class GestorPropuestasCursosTest {
 
 	}
 	@Test
-	public void testEstadoCurso() throws SQLException {
+	private void testEstadoCurso() throws SQLException {
 
 		// CP1
 		CursoPropio c = curso1();
@@ -142,7 +142,7 @@ public class GestorPropuestasCursosTest {
 
 	}
 	@Test
-	public void testEliminarCurso() throws SQLException {
+	private void testEliminarCurso() throws SQLException {
 
 		// CP1
 		CursoPropio c = curso1();

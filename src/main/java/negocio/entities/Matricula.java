@@ -1,7 +1,5 @@
 package main.java.negocio.entities;
 
-import java.sql.Date;
-
 public class Matricula {
 	int idMatricula;
 	String nombre;

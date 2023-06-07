@@ -20,12 +20,12 @@ public class GestorEdicionesTest {
 	final int idCurso = 86;
 
 	@BeforeEach
-	public void setUp() {
+	private void setUp() {
 		GestorBD.conectarBD();
 	}
 
 	@Test
-	public void testCrearEdicion() throws SQLException {
+	private void testCrearEdicion() throws SQLException {
 
 		GestorEdiciones.crearEdicion(id, nombre, edi, idCurso);
 
@@ -35,7 +35,7 @@ public class GestorEdicionesTest {
 	}
 
 	@Test
-	public void testExisteEdicion() throws SQLException {
+	private void testExisteEdicion() throws SQLException {
 
 		GestorEdiciones.crearEdicion(id, nombre, edi, idCurso);
 
@@ -48,7 +48,7 @@ public class GestorEdicionesTest {
 	}
 
 	@Test
-	public void testEliminarEdicion() throws SQLException {
+	private void testEliminarEdicion() throws SQLException {
 
 		GestorEdiciones.crearEdicion(id, nombre, edi, idCurso);
 

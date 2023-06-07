@@ -17,12 +17,12 @@ import main.java.persistencia.GestorBD;
 
 public class GestorMatriculacionTest {
 
-    public Matricula mat1() {
+	private Matricula mat1() {
         return new Matricula(1, "Ivan", "Muñoz", ModoPago.TRANSFERENCIA, Date.valueOf("2023-05-01"), "02023784L",
                 1233.08, 86);
     }
 
-    public boolean matCorrecta(Matricula mat) {
+	private boolean matCorrecta(Matricula mat) {
         if (mat.getDni().equals("02023784L") && mat.getIDMatricula() == 1) {
             return true;
         } else {
@@ -30,23 +30,23 @@ public class GestorMatriculacionTest {
         }
     }
 
-    public Matricula mat2() {
+	private Matricula mat2() {
         return new Matricula(2, "Ivan", "Muñoz", ModoPago.TARJETA_CREDITO, Date.valueOf("2023-05-01"), "02023784L",
                 1233.08, 85);
     }
 
-    public Matricula mat3() {
+	private Matricula mat3() {
         return new Matricula(-15, "Ivan", "Muñoz", ModoPago.TRANSFERENCIA, Date.valueOf("2023-05-01"), "02023784L",
                 1233.08, 86);
     }
 
     @BeforeEach
-    public void setUp() {
+    private void setUp() {
         GestorBD.conectarBD();
     }
 
     @Test
-    public void testRealizarMatriculacion() throws SQLException {
+    private void testRealizarMatriculacion() throws SQLException {
         // CP1
         Matricula mat = mat1();
         GestorMatriculacion.realizarMatriculacion(mat);
@@ -65,7 +65,7 @@ public class GestorMatriculacionTest {
     }
 
     @Test
-    public void testExisteMatricula() throws SQLException {
+    private void testExisteMatricula() throws SQLException {
         // CP1
         Matricula mat = mat1();
         GestorMatriculacion.realizarMatriculacion(mat);
@@ -84,7 +84,7 @@ public class GestorMatriculacionTest {
     }
 
     @Test
-    public void testEliminarMatricula() throws SQLException {
+    private void testEliminarMatricula() throws SQLException {
         // CP1
         Matricula mat = mat1();
         GestorMatriculacion.realizarMatriculacion(mat);

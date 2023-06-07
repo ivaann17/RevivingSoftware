@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CentroTest {
 
 	@Test
-	public void testGetNombre() {
+	private void testGetNombre() {
 
 		Centro centro = new Centro("Centro de Prueba");
 

@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import main.java.negocio.entities.CursoPropio;
 
 public class EdicionDAO {
 	GestorBD gestorBD = new GestorBD();

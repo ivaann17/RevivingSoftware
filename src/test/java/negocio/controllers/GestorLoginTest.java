@@ -26,17 +26,17 @@ public class GestorLoginTest {
     }
 
     @BeforeAll
-    public static void setUpClass() {
+    private static void setUpClass() {
         GestorBD.conectarBD();
     }
 
-    public static Stream<String> usuarios() {
+    private static Stream<String> usuarios() {
         return Stream.of("profesor", "estudiante", "vicerrector", "jefe");
     }
 
     @ParameterizedTest
     @MethodSource("usuarios")
-    public void testLoginUsuario(String usuario) throws SQLException {
+    private void testLoginUsuario(String usuario) throws SQLException {
         Vector<Object> result = GestorLogin.loginUsuario(usuario);
         String resultString = result.get(0).toString();
 
@@ -46,7 +46,7 @@ public class GestorLoginTest {
 
     @ParameterizedTest
     @MethodSource("usuarios")
-    public void testLoginContra(String usuario) throws SQLException {
+    private void testLoginContra(String usuario) throws SQLException {
         Vector<Object> result = GestorLogin.loginContra(usuario);
         String resultString = result.get(0).toString();
 
