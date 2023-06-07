@@ -83,7 +83,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(loginButton);
 
 		contrasenaText = new JPasswordField(20);
-		contrasenaText.setToolTipText("Introduzca su contrase�a");
+		contrasenaText.setToolTipText("Introduzca su contrasena");
 		contrasenaText.setFont(new Font(tipoLetra, Font.PLAIN, 15));
 		contrasenaText.setBorder(new MatteBorder(0, 0, 1, 0, SystemColor.textHighlight));
 
@@ -101,7 +101,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(usuarioText);
 		usuarioText.setColumns(10);
 
-		btnRecuperar = new JButton("He olvidado mi contrase�a");
+		btnRecuperar = new JButton("He olvidado mi contrasena");
 		btnRecuperar.addActionListener(event -> enlaceMan());
 		btnRecuperar.setVisible(false);
 		btnRecuperar.setHorizontalAlignment(SwingConstants.LEFT);

@@ -40,8 +40,8 @@ public class PantallaComenzarCurso extends JFrame {
 	private static final Logger logger = Logger.getLogger(PantallaComenzarCurso.class.getName());
 
 	public PantallaComenzarCurso() {
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaComenzarCurso.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(
+				Toolkit.getDefaultToolkit().getImage(PantallaComenzarCurso.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -53,8 +53,8 @@ public class PantallaComenzarCurso extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(
-				PantallaComenzarCurso.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(
+				new ImageIcon(PantallaComenzarCurso.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -64,6 +64,23 @@ public class PantallaComenzarCurso extends JFrame {
 		lblCursosMatriculados.setBounds(54, 98, 379, 42);
 		contentPane.add(lblCursosMatriculados);
 
+		JLabel lblMatriculas = new JLabel("Matriculas:");
+		lblMatriculas.setVisible(false);
+		lblMatriculas.setForeground(SystemColor.textHighlight);
+		lblMatriculas.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
+		lblMatriculas.setBounds(630, 385, 186, 39);
+		contentPane.add(lblMatriculas);
+
+		JTextField matriculas = new JTextField();
+		matriculas.setHorizontalAlignment(SwingConstants.CENTER);
+		matriculas.setVisible(false);
+		matriculas.setFont(new Font(tipoLetra, Font.BOLD, 13));
+		matriculas.setEditable(false);
+		matriculas.setColumns(10);
+		matriculas.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
+		matriculas.setBounds(630, 434, 114, 39);
+		contentPane.add(matriculas);
+
 		btnAceptar = new JButton("Comenzar imparticion");
 		btnAceptar.addActionListener(event -> {
 			int respuesta = mostrarConfirmacion();
@@ -71,6 +88,8 @@ public class PantallaComenzarCurso extends JFrame {
 				mostrarInformacion();
 				editarEstadoCurso();
 				eliminarCursoSeleccionado();
+				lblMatriculas.setVisible(false);
+				matriculas.setVisible(false);
 
 			}
 		});
@@ -89,23 +108,6 @@ public class PantallaComenzarCurso extends JFrame {
 		lblMatriculado.setFont(new Font(tipoLetra, Font.BOLD, 16));
 		lblMatriculado.setBounds(64, 402, 619, 65);
 		contentPane.add(lblMatriculado);
-
-		JLabel lblMatriculas = new JLabel("Matriculas:");
-		lblMatriculas.setVisible(false);
-		lblMatriculas.setForeground(SystemColor.textHighlight);
-		lblMatriculas.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-		lblMatriculas.setBounds(630, 385, 186, 39);
-		contentPane.add(lblMatriculas);
-
-		JTextField matriculas = new JTextField();
-		matriculas.setHorizontalAlignment(SwingConstants.CENTER);
-		matriculas.setVisible(false);
-		matriculas.setFont(new Font(tipoLetra, Font.BOLD, 13));
-		matriculas.setEditable(false);
-		matriculas.setColumns(10);
-		matriculas.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 120, 215)));
-		matriculas.setBounds(630, 434, 114, 39);
-		contentPane.add(matriculas);
 
 		btnNewButton = new JButton("Volver");
 		contentPane.add(PantallaPropuestasRealizadas.crearBotonVolver(btnNewButton));
