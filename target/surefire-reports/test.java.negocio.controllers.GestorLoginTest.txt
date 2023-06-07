@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: test.java.negocio.controllers.GestorLoginTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.022 s - in test.java.negocio.controllers.GestorLoginTest
