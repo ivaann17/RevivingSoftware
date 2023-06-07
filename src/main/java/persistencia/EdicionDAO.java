@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class EdicionDAO {
 	GestorBD gestorBD = new GestorBD();
 
@@ -46,6 +47,27 @@ public class EdicionDAO {
 			
 		}
 
+	}
+	public int eliminarEdi(int edi, String nombre) throws SQLException {
+
+		int eli = 0;
+
+		String sql = "DELETE FROM edicion WHERE ID = ? AND nombre_curso = ?";
+
+		try (PreparedStatement ps = GestorBD.mBD.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+			ps.setInt(1, edi);
+			ps.setString(2, nombre);
+
+			gestorBD.delete(ps);
+
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				eli = 1;
+			}
+
+		}
+		return eli;
 	}
 
 }

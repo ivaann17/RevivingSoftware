@@ -20,4 +20,8 @@ public class GestorEdiciones {
 		ediDAO = new EdicionDAO();
 		return ediDAO.existeEdicion(edi, nombre);
 	}
+	public static void eliminarEdicion(int edi, String nombre) throws SQLException {
+		ediDAO = new EdicionDAO();
+		ediDAO.eliminarEdi(edi, nombre);
+	}
 }

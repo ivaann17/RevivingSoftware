@@ -62,7 +62,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		JButton btnValidar = new JButton("Empezar matriculacion");
 		btnValidar.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea comenzar la matriculacion de este curso?",
+			int respuesta = JOptionPane.showConfirmDialog(null, "Desea comenzar la matriculacion de este curso?",
 					"ATENCIÃ“N", JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				try {
@@ -87,7 +87,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 		JButton btnEli = new JButton("Eliminar curso");
 		btnEli.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+			int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar el curso?", "ATENCION",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",

@@ -79,7 +79,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 		contentPane.add(datosBtnEliminar(btnEliminar));
 		btnEliminar.addActionListener(event -> {
 
-			int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar el curso?", "ATENCION",
+			int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea eliminar el curso?", "ATENCION",
 					JOptionPane.OK_CANCEL_OPTION);
 			if (respuesta == JOptionPane.OK_OPTION) {
 				JOptionPane.showMessageDialog(null, "El curso ha sido eliminado de manera correcta.", "INFORMACION",

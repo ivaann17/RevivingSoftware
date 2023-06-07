@@ -234,7 +234,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 								nuevoCurso.getNombre());
 
 						if (!existeEdicion) {
-							int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea enviar su propuesta de curso?",
+							int respuesta = JOptionPane.showConfirmDialog(null, "ï¿½Desea enviar su propuesta de curso?",
 									"ATENCION", JOptionPane.OK_CANCEL_OPTION);
 
 							if (respuesta == JOptionPane.OK_OPTION) {
@@ -249,7 +249,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 								pantallaDireccionCursos.setVisible(true);
 							}
 						} else {
-							JOptionPane.showMessageDialog(null, "La edición ya existe en la base de datos.", error,
+							JOptionPane.showMessageDialog(null, "La ediciï¿½n ya existe en la base de datos.", error,
 									JOptionPane.ERROR_MESSAGE);
 
 							main.java.presentacion.PantallaDireccionCursos pantallaDireccionCursos = new main.java.presentacion.PantallaDireccionCursos();
@@ -280,10 +280,10 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 				JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos para realizar la propuesta.", error,
 						JOptionPane.ERROR_MESSAGE);
 			} else if (numCreditos.getText().isEmpty() || !isNumeric(numCreditos.getText())) {
-				JOptionPane.showMessageDialog(null, "Introduzca los créditos de manera correcta.", error,
+				JOptionPane.showMessageDialog(null, "Introduzca los crï¿½ditos de manera correcta.", error,
 						JOptionPane.ERROR_MESSAGE);
 			} else if (!dniDigi(dniSec)) {
-				JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dígitos.", error,
+				JOptionPane.showMessageDialog(null, "Introduzca el DNI del secretario con todos sus dï¿½gitos.", error,
 						JOptionPane.ERROR_MESSAGE);
 			} else if (tipoCurso.getSelectedItem() == null) {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de curso.", error,
@@ -482,7 +482,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 		lblMes.setVisible(false);
 		contentPane.add(lblMes);
 
-		lblAno = new JLabel("Año:");
+		lblAno = new JLabel("Aï¿½o:");
 		lblAno.setForeground(SystemColor.textHighlight);
 		lblAno.setFont(new Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 		lblAno.setBounds(548, 195, 259, 39);

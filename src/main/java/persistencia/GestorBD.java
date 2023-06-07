@@ -28,7 +28,7 @@ public class GestorBD {
 		try (InputStream input = new FileInputStream("config.properties")) {
 			prop.load(input);
 		} catch (IOException e) {
-			throw new ConfigFileException("Error al cargar el archivo de configuración: " + e.getMessage());
+			throw new ConfigFileException("Error al cargar el archivo de configuracion: " + e.getMessage());
 		}
 
 		String urlEncriptada = prop.getProperty("url");
@@ -44,7 +44,7 @@ public class GestorBD {
 					desencriptarContrasena(contrasenaEncriptada, clave));
 			mBD.setAutoCommit(true);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexión con la base de datos.", "ERROR",
+			JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexion con la base de datos.", "ERROR",
 					JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
@@ -60,10 +60,10 @@ public class GestorBD {
 		try {
 			if (mBD != null && !mBD.isClosed()) {
 				mBD.close();
-				logger.info("Conexión cerrada correctamente.");
+				logger.info("Conexion cerrada correctamente.");
 			}
 		} catch (SQLException e) {
-			logger.info("Se ha producido un error al cerrar la conexión: " + e.getMessage());
+			logger.info("Se ha producido un error al cerrar la conexion: " + e.getMessage());
 			System.exit(1);
 		}
 	}
@@ -91,7 +91,7 @@ public class GestorBD {
 
 			return sql.executeUpdate();
 		} catch (SQLException e) {
-			logger.info("Se ha producido un error al ejecutar la inserción: " + e.getMessage());
+			logger.info("Se ha producido un error al ejecutar la insercion: " + e.getMessage());
 		}
 		return 0;
 	}
@@ -100,7 +100,7 @@ public class GestorBD {
 		try {
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			logger.info("Se ha producido un error al ejecutar la actualización: " + e.getMessage());
+			logger.info("Se ha producido un error al ejecutar la actualizacion: " + e.getMessage());
 			return 0;
 		}
 	}

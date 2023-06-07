@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-
 import main.java.negocio.controllers.GestorConsultas;
 import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.CursoPropio;
@@ -41,8 +40,8 @@ public class PantallaComenzarCurso extends JFrame {
 	private static final Logger logger = Logger.getLogger(PantallaComenzarCurso.class.getName());
 
 	public PantallaComenzarCurso() {
-		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(PantallaComenzarCurso.class.getResource("/IMAGES/descarga.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(PantallaComenzarCurso.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -54,8 +53,8 @@ public class PantallaComenzarCurso extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(
-				new ImageIcon(PantallaComenzarCurso.class.getResource("/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(new ImageIcon(
+				PantallaComenzarCurso.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -124,39 +123,38 @@ public class PantallaComenzarCurso extends JFrame {
 		modelo = new DefaultListModel<>();
 		listaCursos.setModel(modelo);
 
-		listaCursos.addListSelectionListener(arg0 ->{
-				if (!arg0.getValueIsAdjusting()) {
-					cursoSeleccionado = listaCursos.getSelectedValue();
-					if (cursoSeleccionado != null) {
-						try {
-							boolean existeMat;
-							existeMat = GestorPropuestasCursos.existeCursoConMatricula(cursoSeleccionado);
-							if (existeMat) {
-								lblMatriculado.setVisible(false);
-								btnAceptar.setVisible(true);
-								matriculas.setVisible(true);
-								lblMatriculas.setVisible(true);
-								matriculas
-										.setText(Integer.toString(GestorConsultas.getNumMatricula(cursoSeleccionado)));
-							} else {
-								btnAceptar.setVisible(false);
-								lblMatriculado.setVisible(true);
-								matriculas.setVisible(false);
-								lblMatriculas.setVisible(false);
-							}
-
-						} catch (Exception e) {
-							logger.info("Se ha producido un error al seleccionar el curso: " + e.getMessage());
+		listaCursos.addListSelectionListener(arg0 -> {
+			if (!arg0.getValueIsAdjusting()) {
+				cursoSeleccionado = listaCursos.getSelectedValue();
+				if (cursoSeleccionado != null) {
+					try {
+						boolean existeMat;
+						existeMat = GestorPropuestasCursos.existeCursoConMatricula(cursoSeleccionado);
+						if (existeMat) {
+							lblMatriculado.setVisible(false);
+							btnAceptar.setVisible(true);
+							matriculas.setVisible(true);
+							lblMatriculas.setVisible(true);
+							matriculas.setText(Integer.toString(GestorConsultas.getNumMatricula(cursoSeleccionado)));
+						} else {
+							btnAceptar.setVisible(false);
+							lblMatriculado.setVisible(true);
+							matriculas.setVisible(false);
+							lblMatriculas.setVisible(false);
 						}
 
+					} catch (Exception e) {
+						logger.info("Se ha producido un error al seleccionar el curso: " + e.getMessage());
 					}
+
 				}
-			
+			}
+
 		});
 	}
 
 	private int mostrarConfirmacion() {
-		return JOptionPane.showConfirmDialog(null, "¿Desea poner en impartición el curso?", "ATENCION",
+		return JOptionPane.showConfirmDialog(null, "Desea poner en imparticion el curso?", "ATENCION",
 				JOptionPane.OK_CANCEL_OPTION);
 	}
 

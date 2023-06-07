@@ -40,12 +40,20 @@ public class GestorPropuestasCursos {
 		cursoDAO = new CursoPropioDAO();
 		return cursoDAO.existeCurso(curso);
 	}
+	public static boolean existeSoloCurso(CursoPropio curso) throws SQLException {
+		cursoDAO = new CursoPropioDAO();
+		return cursoDAO.existeSoloCurso(curso);
+	}
 
 	public static boolean existeCursoConMatricula(CursoPropio curso) throws SQLException  {
 		matDAO = new MatriculaDAO();
 		return matDAO.cursoConMatricula(curso);
 	}
-
+	public static String estadoCurso(CursoPropio curso) throws SQLException  {
+		cursoDAO = new CursoPropioDAO();
+		return cursoDAO.getEstado(curso);
+	}
+	
 	public static void eliminarCurso(CursoPropio curso) throws SQLException {
 		cursoDAO = new CursoPropioDAO();
 		cursoDAO.eliminarCurso(curso);

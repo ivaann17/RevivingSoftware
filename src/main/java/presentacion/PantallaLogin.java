@@ -83,7 +83,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(loginButton);
 
 		contrasenaText = new JPasswordField(20);
-		contrasenaText.setToolTipText("Introduzca su contraseña");
+		contrasenaText.setToolTipText("Introduzca su contraseï¿½a");
 		contrasenaText.setFont(new Font(tipoLetra, Font.PLAIN, 15));
 		contrasenaText.setBorder(new MatteBorder(0, 0, 1, 0, SystemColor.textHighlight));
 
@@ -101,7 +101,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(usuarioText);
 		usuarioText.setColumns(10);
 
-		btnRecuperar = new JButton("He olvidado mi contraseña");
+		btnRecuperar = new JButton("He olvidado mi contraseï¿½a");
 		btnRecuperar.addActionListener(event -> enlaceMan());
 		btnRecuperar.setVisible(false);
 		btnRecuperar.setHorizontalAlignment(SwingConstants.LEFT);
@@ -130,7 +130,7 @@ public class PantallaLogin extends JFrame {
 		userLabel.setBounds(80, 138, 148, 25);
 		panel.add(userLabel);
 
-		passwordLabel = new JLabel("Escribir Contraseña");
+		passwordLabel = new JLabel("Escribir Contrasena");
 		passwordLabel.setVisible(false);
 		passwordLabel.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		passwordLabel.setBounds(80, 129, 215, 42);
@@ -145,7 +145,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(user);
 		user.setColumns(10);
 
-		btnNoAcceder = new JButton("¿No puede acceder a su cuenta?");
+		btnNoAcceder = new JButton("No puede acceder a su cuenta?");
 		btnNoAcceder.addActionListener(arg0 -> enlaceMan());
 		btnNoAcceder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNoAcceder.setHorizontalAlignment(SwingConstants.LEFT);
@@ -262,7 +262,7 @@ public class PantallaLogin extends JFrame {
 
 	private void mostrarErrorDatosIncorrectos() {
 		JOptionPane.showMessageDialog(null,
-				"El usuario o la contraseña son incorrectos. Por favor, introduzca correctamente los datos.", "ERROR",
+				"El usuario o la contraseï¿½a son incorrectos. Por favor, introduzca correctamente los datos.", "ERROR",
 				JOptionPane.ERROR_MESSAGE);
 	}
 

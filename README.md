@@ -1,2 +1,2 @@
 # RevivingSoftware
-Rama de interfaces
+Rama de creacion de pruebas para el sistema
