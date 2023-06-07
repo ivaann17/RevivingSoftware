@@ -15,6 +15,7 @@
 5. [Calidad](#calidad)
 6. [Testing](#testing)
 7. [Mantenimiento](#mantenimiento)
+8. [Manual de usuario](#manual)
 
 
 
@@ -90,6 +91,9 @@ Por otra parte, se genera de forma automatica un informe (target/site) sobre el 
 El mantenimiento se ha realizado de forma conjunta a la gestión de la calidad principalmente mediante la eliminación de code smells, tanto en la parte del codigo como en los test. En la siguiente imagen se puede observar la clara disminución de los code smells durante el tiempo.
 
 ![Mantenimiento](ruta/a/la/imagen.png)
+
+## Manual de usuario<a name="manual"></a>
+Si desea conocer como utilizar el software acceda al [manual de usuario](https://github.com/ivaann17/RevivingSoftware/blob/Release/ManualUsuario.md)
 
 
 
