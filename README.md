@@ -85,12 +85,12 @@ Las metricas para nuestro analisis de calidad son las siguientes:
 ## Testing<a name="testing"></a>
 Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas](https://github.com/ivaann17/RevivingSoftware/tree/Release/PLAN%20DE%20PRUEBAS) creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
 
-Por otra parte, se genera de forma automatica un informe (target/site) sobre el proyecto mediante la herramienta de "Surefire" y también en particular sobre los test con la herramienta de cobertura de "Jacoco". El informe se puede observar en este [enlace]() 
+Por otra parte, se genera de forma automatica un informe (target/site) sobre el proyecto mediante la herramienta de "Surefire" y también en particular sobre los test con la herramienta de cobertura de "Jacoco". 
 
 ## Mantenimiento<a name="mantenimiento"></a>
 El mantenimiento se ha realizado de forma conjunta a la gestión de la calidad principalmente mediante la eliminación de code smells, tanto en la parte del codigo como en los test. En la siguiente imagen se puede observar la clara disminución de los code smells durante el tiempo.
 
-![Mantenimiento](ruta/a/la/imagen.png)
+![Mantenimiento](IMAGENES_MEMORIA/SONAR.png)
 
 ## Manual de usuario<a name="manual"></a>
 Si desea conocer como utilizar el software acceda al [manual de usuario](https://github.com/ivaann17/RevivingSoftware/blob/Release/ManualUsuario.md)
