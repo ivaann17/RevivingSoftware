@@ -242,7 +242,7 @@
 <a class="jxr_linenumber" name="L234" href="#L234">234</a> 								nuevoCurso.getNombre());
 <a class="jxr_linenumber" name="L235" href="#L235">235</a> 
 <a class="jxr_linenumber" name="L236" href="#L236">236</a> 						<strong class="jxr_keyword">if</strong> (!existeEdicion) {
-<a class="jxr_linenumber" name="L237" href="#L237">237</a> 							<strong class="jxr_keyword">int</strong> respuesta = JOptionPane.showConfirmDialog(<strong class="jxr_keyword">null</strong>, <span class="jxr_string">"�Desea enviar su propuesta de curso?"</span>,
+<a class="jxr_linenumber" name="L237" href="#L237">237</a> 							<strong class="jxr_keyword">int</strong> respuesta = JOptionPane.showConfirmDialog(<strong class="jxr_keyword">null</strong>, <span class="jxr_string">"Desea enviar su propuesta de curso?"</span>,
 <a class="jxr_linenumber" name="L238" href="#L238">238</a> 									<span class="jxr_string">"ATENCION"</span>, JOptionPane.OK_CANCEL_OPTION);
 <a class="jxr_linenumber" name="L239" href="#L239">239</a> 
 <a class="jxr_linenumber" name="L240" href="#L240">240</a> 							<strong class="jxr_keyword">if</strong> (respuesta == JOptionPane.OK_OPTION) {
@@ -257,7 +257,7 @@
 <a class="jxr_linenumber" name="L249" href="#L249">249</a> 								pantallaDireccionCursos.setVisible(<strong class="jxr_keyword">true</strong>);
 <a class="jxr_linenumber" name="L250" href="#L250">250</a> 							}
 <a class="jxr_linenumber" name="L251" href="#L251">251</a> 						} <strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L252" href="#L252">252</a> 							JOptionPane.showMessageDialog(<strong class="jxr_keyword">null</strong>, <span class="jxr_string">"La edici�n ya existe en la base de datos."</span>, error,
+<a class="jxr_linenumber" name="L252" href="#L252">252</a> 							JOptionPane.showMessageDialog(<strong class="jxr_keyword">null</strong>, <span class="jxr_string">"La edicion ya existe en la base de datos."</span>, error,
 <a class="jxr_linenumber" name="L253" href="#L253">253</a> 									JOptionPane.ERROR_MESSAGE);
 <a class="jxr_linenumber" name="L254" href="#L254">254</a> 
 <a class="jxr_linenumber" name="L255" href="#L255">255</a> 							main.java.presentacion.PantallaDireccionCursos pantallaDireccionCursos = <strong class="jxr_keyword">new</strong> main.java.presentacion.PantallaDireccionCursos();
@@ -367,102 +367,102 @@
 <a class="jxr_linenumber" name="L359" href="#L359">359</a> 		lblDuracinDelCurso.setBounds(454, 347, 259, 39);
 <a class="jxr_linenumber" name="L360" href="#L360">360</a> 		contentPane.add(lblDuracinDelCurso);
 <a class="jxr_linenumber" name="L361" href="#L361">361</a> 
-<a class="jxr_linenumber" name="L362" href="#L362">362</a> 		textPrecio = <strong class="jxr_keyword">new</strong> JTextField();
-<a class="jxr_linenumber" name="L363" href="#L363">363</a> 		textPrecio.setEditable(false);
-<a class="jxr_linenumber" name="L364" href="#L364">364</a> 		textPrecio.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
-<a class="jxr_linenumber" name="L365" href="#L365">365</a> 		textPrecio.setColumns(10);
-<a class="jxr_linenumber" name="L366" href="#L366">366</a> 		textPrecio.setBorder(<strong class="jxr_keyword">new</strong> MatteBorder(0, 0, 1, 0, <strong class="jxr_keyword">new</strong> Color(0, 120, 215)));
-<a class="jxr_linenumber" name="L367" href="#L367">367</a> 		textPrecio.setBounds(232, 502, 259, 39);
-<a class="jxr_linenumber" name="L368" href="#L368">368</a> 		contentPane.add(textPrecio);
-<a class="jxr_linenumber" name="L369" href="#L369">369</a> 
-<a class="jxr_linenumber" name="L370" href="#L370">370</a> 		lblPrecio = <strong class="jxr_keyword">new</strong> JLabel(<span class="jxr_string">"Precio de la matricula:"</span>);
-<a class="jxr_linenumber" name="L371" href="#L371">371</a> 		lblPrecio.setForeground(SystemColor.textHighlight);
-<a class="jxr_linenumber" name="L372" href="#L372">372</a> 		lblPrecio.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
-<a class="jxr_linenumber" name="L373" href="#L373">373</a> 		lblPrecio.setBounds(232, 453, 259, 39);
-<a class="jxr_linenumber" name="L374" href="#L374">374</a> 		contentPane.add(lblPrecio);
-<a class="jxr_linenumber" name="L375" href="#L375">375</a> 
-<a class="jxr_linenumber" name="L376" href="#L376">376</a> 		btnNext = <strong class="jxr_keyword">new</strong> JButton(<span class="jxr_string">"Siguiente"</span>);
-<a class="jxr_linenumber" name="L377" href="#L377">377</a> 		btnNext.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-<a class="jxr_linenumber" name="L378" href="#L378">378</a> 
-<a class="jxr_linenumber" name="L379" href="#L379">379</a> 		btnNext.addActionListener(event -&gt; {
-<a class="jxr_linenumber" name="L380" href="#L380">380</a> 
-<a class="jxr_linenumber" name="L381" href="#L381">381</a> 			<strong class="jxr_keyword">if</strong> (mes.getSelectedItem().toString().equals(<span class="jxr_string">""</span>) || dia.getSelectedItem().toString().equals(<span class="jxr_string">""</span>)
-<a class="jxr_linenumber" name="L382" href="#L382">382</a> 					|| ano.getSelectedItem().toString().equals(<span class="jxr_string">""</span>))
-<a class="jxr_linenumber" name="L383" href="#L383">383</a> 				JOptionPane.showMessageDialog(<strong class="jxr_keyword">null</strong>, <span class="jxr_string">"Rellene correctamente las fechas del curso."</span>, error,
-<a class="jxr_linenumber" name="L384" href="#L384">384</a> 						JOptionPane.ERROR_MESSAGE);
-<a class="jxr_linenumber" name="L385" href="#L385">385</a> 			<strong class="jxr_keyword">else</strong> {
-<a class="jxr_linenumber" name="L386" href="#L386">386</a> 				btnFinalizar.setVisible(<strong class="jxr_keyword">true</strong>);
-<a class="jxr_linenumber" name="L387" href="#L387">387</a> 				btnNext.setVisible(false);
-<a class="jxr_linenumber" name="L388" href="#L388">388</a> 				fechaIni = ano.getSelectedItem().toString() + <span class="jxr_string">"-"</span> + mesNumero(mes.getSelectedItem().toString()) + <span class="jxr_string">"-"</span>
-<a class="jxr_linenumber" name="L389" href="#L389">389</a> 						+ dia.getSelectedItem().toString();
-<a class="jxr_linenumber" name="L390" href="#L390">390</a> 				label.setText(<span class="jxr_string">"Seleccione la fecha de fin:"</span>);
+<a class="jxr_linenumber" name="L362" href="#L362">362</a> 		dia = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
+<a class="jxr_linenumber" name="L363" href="#L363">363</a> 		dia.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
+<a class="jxr_linenumber" name="L364" href="#L364">364</a> 		dia.setBounds(71, 230, 101, 39);
+<a class="jxr_linenumber" name="L365" href="#L365">365</a> 		dia.setVisible(false);
+<a class="jxr_linenumber" name="L366" href="#L366">366</a> 		dia.addItem(<strong class="jxr_keyword">null</strong>);
+<a class="jxr_linenumber" name="L367" href="#L367">367</a> 		<strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> a = 1; a &lt;= 31; a++) {
+<a class="jxr_linenumber" name="L368" href="#L368">368</a> 			dia.addItem(a);
+<a class="jxr_linenumber" name="L369" href="#L369">369</a> 		}
+<a class="jxr_linenumber" name="L370" href="#L370">370</a> 		contentPane.add(dia);
+<a class="jxr_linenumber" name="L371" href="#L371">371</a> 
+<a class="jxr_linenumber" name="L372" href="#L372">372</a> 		mes = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
+<a class="jxr_linenumber" name="L373" href="#L373">373</a> 		mes.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
+<a class="jxr_linenumber" name="L374" href="#L374">374</a> 		mes.setBounds(263, 230, 181, 39);
+<a class="jxr_linenumber" name="L375" href="#L375">375</a> 		mes.setVisible(false);
+<a class="jxr_linenumber" name="L376" href="#L376">376</a> 		mes.setSelectedItem(<span class="jxr_string">""</span>);
+<a class="jxr_linenumber" name="L377" href="#L377">377</a> 		mes.addItem(<span class="jxr_string">""</span>);
+<a class="jxr_linenumber" name="L378" href="#L378">378</a> 		mes.addItem(<span class="jxr_string">"Enero"</span>);
+<a class="jxr_linenumber" name="L379" href="#L379">379</a> 		mes.addItem(<span class="jxr_string">"Febrero"</span>);
+<a class="jxr_linenumber" name="L380" href="#L380">380</a> 		mes.addItem(<span class="jxr_string">"Marzo"</span>);
+<a class="jxr_linenumber" name="L381" href="#L381">381</a> 		mes.addItem(<span class="jxr_string">"Abril"</span>);
+<a class="jxr_linenumber" name="L382" href="#L382">382</a> 		mes.addItem(<span class="jxr_string">"Mayo"</span>);
+<a class="jxr_linenumber" name="L383" href="#L383">383</a> 		mes.addItem(<span class="jxr_string">"Junio"</span>);
+<a class="jxr_linenumber" name="L384" href="#L384">384</a> 		mes.addItem(<span class="jxr_string">"Julio"</span>);
+<a class="jxr_linenumber" name="L385" href="#L385">385</a> 		mes.addItem(<span class="jxr_string">"Agosto"</span>);
+<a class="jxr_linenumber" name="L386" href="#L386">386</a> 		mes.addItem(<span class="jxr_string">"Septiembre"</span>);
+<a class="jxr_linenumber" name="L387" href="#L387">387</a> 		mes.addItem(<span class="jxr_string">"Octubre"</span>);
+<a class="jxr_linenumber" name="L388" href="#L388">388</a> 		mes.addItem(<span class="jxr_string">"Noviembre"</span>);
+<a class="jxr_linenumber" name="L389" href="#L389">389</a> 		mes.addItem(<span class="jxr_string">"Diciembre"</span>);
+<a class="jxr_linenumber" name="L390" href="#L390">390</a> 		contentPane.add(mes);
 <a class="jxr_linenumber" name="L391" href="#L391">391</a> 
-<a class="jxr_linenumber" name="L392" href="#L392">392</a> 				mes.setSelectedItem(<span class="jxr_string">""</span>);
-<a class="jxr_linenumber" name="L393" href="#L393">393</a> 				dia.setSelectedItem(<span class="jxr_string">""</span>);
-<a class="jxr_linenumber" name="L394" href="#L394">394</a> 				ano.setSelectedItem(<span class="jxr_string">""</span>);
-<a class="jxr_linenumber" name="L395" href="#L395">395</a> 				contentPane.getRootPane().setDefaultButton(btnFinalizar);
-<a class="jxr_linenumber" name="L396" href="#L396">396</a> 			}
-<a class="jxr_linenumber" name="L397" href="#L397">397</a> 
-<a class="jxr_linenumber" name="L398" href="#L398">398</a> 		});
-<a class="jxr_linenumber" name="L399" href="#L399">399</a> 		btnNext.setForeground(Color.WHITE);
-<a class="jxr_linenumber" name="L400" href="#L400">400</a> 		btnNext.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
-<a class="jxr_linenumber" name="L401" href="#L401">401</a> 		btnNext.setBackground(SystemColor.textHighlight);
-<a class="jxr_linenumber" name="L402" href="#L402">402</a> 		btnNext.setBounds(594, 490, 114, 49);
-<a class="jxr_linenumber" name="L403" href="#L403">403</a> 		contentPane.add(btnNext);
-<a class="jxr_linenumber" name="L404" href="#L404">404</a> 
-<a class="jxr_linenumber" name="L405" href="#L405">405</a> 		fac = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
-<a class="jxr_linenumber" name="L406" href="#L406">406</a> 		fac.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-<a class="jxr_linenumber" name="L407" href="#L407">407</a> 		DefaultComboBoxModel&lt;Facultad&gt; comboBoxModelFac = <strong class="jxr_keyword">new</strong> DefaultComboBoxModel&lt;&gt;();
-<a class="jxr_linenumber" name="L408" href="#L408">408</a> 
-<a class="jxr_linenumber" name="L409" href="#L409">409</a> 		comboBoxModelFac.addElement(<strong class="jxr_keyword">null</strong>);
-<a class="jxr_linenumber" name="L410" href="#L410">410</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_ALBACETE);
-<a class="jxr_linenumber" name="L411" href="#L411">411</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_ALMADEN);
-<a class="jxr_linenumber" name="L412" href="#L412">412</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_CIUDAD_REAL);
-<a class="jxr_linenumber" name="L413" href="#L413">413</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_CUENCA);
-<a class="jxr_linenumber" name="L414" href="#L414">414</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_TALAVERA);
-<a class="jxr_linenumber" name="L415" href="#L415">415</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_TOLEDO);
-<a class="jxr_linenumber" name="L416" href="#L416">416</a> 		fac.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
-<a class="jxr_linenumber" name="L417" href="#L417">417</a> 		fac.setBounds(454, 308, 259, 39);
-<a class="jxr_linenumber" name="L418" href="#L418">418</a> 		fac.setModel(comboBoxModelFac);
-<a class="jxr_linenumber" name="L419" href="#L419">419</a> 		contentPane.add(fac);
-<a class="jxr_linenumber" name="L420" href="#L420">420</a> 		fac.setSelectedItem(<strong class="jxr_keyword">null</strong>);
-<a class="jxr_linenumber" name="L421" href="#L421">421</a> 
-<a class="jxr_linenumber" name="L422" href="#L422">422</a> 		dia = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
-<a class="jxr_linenumber" name="L423" href="#L423">423</a> 		dia.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
-<a class="jxr_linenumber" name="L424" href="#L424">424</a> 		dia.setBounds(71, 230, 101, 39);
-<a class="jxr_linenumber" name="L425" href="#L425">425</a> 		dia.setVisible(false);
-<a class="jxr_linenumber" name="L426" href="#L426">426</a> 		dia.addItem(<strong class="jxr_keyword">null</strong>);
-<a class="jxr_linenumber" name="L427" href="#L427">427</a> 		<strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> a = 1; a &lt;= 31; a++) {
-<a class="jxr_linenumber" name="L428" href="#L428">428</a> 			dia.addItem(a);
-<a class="jxr_linenumber" name="L429" href="#L429">429</a> 		}
-<a class="jxr_linenumber" name="L430" href="#L430">430</a> 		contentPane.add(dia);
-<a class="jxr_linenumber" name="L431" href="#L431">431</a> 
-<a class="jxr_linenumber" name="L432" href="#L432">432</a> 		mes = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
-<a class="jxr_linenumber" name="L433" href="#L433">433</a> 		mes.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
-<a class="jxr_linenumber" name="L434" href="#L434">434</a> 		mes.setBounds(263, 230, 181, 39);
-<a class="jxr_linenumber" name="L435" href="#L435">435</a> 		mes.setVisible(false);
-<a class="jxr_linenumber" name="L436" href="#L436">436</a> 		mes.setSelectedItem(<span class="jxr_string">""</span>);
-<a class="jxr_linenumber" name="L437" href="#L437">437</a> 		mes.addItem(<span class="jxr_string">""</span>);
-<a class="jxr_linenumber" name="L438" href="#L438">438</a> 		mes.addItem(<span class="jxr_string">"Enero"</span>);
-<a class="jxr_linenumber" name="L439" href="#L439">439</a> 		mes.addItem(<span class="jxr_string">"Febrero"</span>);
-<a class="jxr_linenumber" name="L440" href="#L440">440</a> 		mes.addItem(<span class="jxr_string">"Marzo"</span>);
-<a class="jxr_linenumber" name="L441" href="#L441">441</a> 		mes.addItem(<span class="jxr_string">"Abril"</span>);
-<a class="jxr_linenumber" name="L442" href="#L442">442</a> 		mes.addItem(<span class="jxr_string">"Mayo"</span>);
-<a class="jxr_linenumber" name="L443" href="#L443">443</a> 		mes.addItem(<span class="jxr_string">"Junio"</span>);
-<a class="jxr_linenumber" name="L444" href="#L444">444</a> 		mes.addItem(<span class="jxr_string">"Julio"</span>);
-<a class="jxr_linenumber" name="L445" href="#L445">445</a> 		mes.addItem(<span class="jxr_string">"Agosto"</span>);
-<a class="jxr_linenumber" name="L446" href="#L446">446</a> 		mes.addItem(<span class="jxr_string">"Septiembre"</span>);
-<a class="jxr_linenumber" name="L447" href="#L447">447</a> 		mes.addItem(<span class="jxr_string">"Octubre"</span>);
-<a class="jxr_linenumber" name="L448" href="#L448">448</a> 		mes.addItem(<span class="jxr_string">"Noviembre"</span>);
-<a class="jxr_linenumber" name="L449" href="#L449">449</a> 		mes.addItem(<span class="jxr_string">"Diciembre"</span>);
-<a class="jxr_linenumber" name="L450" href="#L450">450</a> 		contentPane.add(mes);
-<a class="jxr_linenumber" name="L451" href="#L451">451</a> 
-<a class="jxr_linenumber" name="L452" href="#L452">452</a> 		ano = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
-<a class="jxr_linenumber" name="L453" href="#L453">453</a> 		ano.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
-<a class="jxr_linenumber" name="L454" href="#L454">454</a> 		ano.setBounds(550, 230, 114, 39);
-<a class="jxr_linenumber" name="L455" href="#L455">455</a> 		ano.setVisible(false);
-<a class="jxr_linenumber" name="L456" href="#L456">456</a> 		Calendar cal = Calendar.getInstance();
-<a class="jxr_linenumber" name="L457" href="#L457">457</a> 		<strong class="jxr_keyword">int</strong> actual = cal.get(Calendar.YEAR);
+<a class="jxr_linenumber" name="L392" href="#L392">392</a> 		ano = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
+<a class="jxr_linenumber" name="L393" href="#L393">393</a> 		ano.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
+<a class="jxr_linenumber" name="L394" href="#L394">394</a> 		ano.setBounds(550, 230, 114, 39);
+<a class="jxr_linenumber" name="L395" href="#L395">395</a> 		ano.setVisible(false);
+<a class="jxr_linenumber" name="L396" href="#L396">396</a> 		Calendar cal = Calendar.getInstance();
+<a class="jxr_linenumber" name="L397" href="#L397">397</a> 		<strong class="jxr_keyword">int</strong> actual = cal.get(Calendar.YEAR);
+<a class="jxr_linenumber" name="L398" href="#L398">398</a> 
+<a class="jxr_linenumber" name="L399" href="#L399">399</a> 		textPrecio = <strong class="jxr_keyword">new</strong> JTextField();
+<a class="jxr_linenumber" name="L400" href="#L400">400</a> 		textPrecio.setEditable(false);
+<a class="jxr_linenumber" name="L401" href="#L401">401</a> 		textPrecio.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
+<a class="jxr_linenumber" name="L402" href="#L402">402</a> 		textPrecio.setColumns(10);
+<a class="jxr_linenumber" name="L403" href="#L403">403</a> 		textPrecio.setBorder(<strong class="jxr_keyword">new</strong> MatteBorder(0, 0, 1, 0, <strong class="jxr_keyword">new</strong> Color(0, 120, 215)));
+<a class="jxr_linenumber" name="L404" href="#L404">404</a> 		textPrecio.setBounds(232, 502, 259, 39);
+<a class="jxr_linenumber" name="L405" href="#L405">405</a> 		contentPane.add(textPrecio);
+<a class="jxr_linenumber" name="L406" href="#L406">406</a> 
+<a class="jxr_linenumber" name="L407" href="#L407">407</a> 		lblPrecio = <strong class="jxr_keyword">new</strong> JLabel(<span class="jxr_string">"Precio de la matricula:"</span>);
+<a class="jxr_linenumber" name="L408" href="#L408">408</a> 		lblPrecio.setForeground(SystemColor.textHighlight);
+<a class="jxr_linenumber" name="L409" href="#L409">409</a> 		lblPrecio.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
+<a class="jxr_linenumber" name="L410" href="#L410">410</a> 		lblPrecio.setBounds(232, 453, 259, 39);
+<a class="jxr_linenumber" name="L411" href="#L411">411</a> 		contentPane.add(lblPrecio);
+<a class="jxr_linenumber" name="L412" href="#L412">412</a> 
+<a class="jxr_linenumber" name="L413" href="#L413">413</a> 		btnNext = <strong class="jxr_keyword">new</strong> JButton(<span class="jxr_string">"Siguiente"</span>);
+<a class="jxr_linenumber" name="L414" href="#L414">414</a> 		btnNext.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+<a class="jxr_linenumber" name="L415" href="#L415">415</a> 
+<a class="jxr_linenumber" name="L416" href="#L416">416</a> 		btnNext.addActionListener(event -&gt; {
+<a class="jxr_linenumber" name="L417" href="#L417">417</a> 
+<a class="jxr_linenumber" name="L418" href="#L418">418</a> 			<strong class="jxr_keyword">if</strong> (mes.getSelectedItem().toString().equals(<span class="jxr_string">""</span>) || dia.getSelectedItem().toString().equals(<span class="jxr_string">""</span>)
+<a class="jxr_linenumber" name="L419" href="#L419">419</a> 					|| ano.getSelectedItem().toString().equals(<span class="jxr_string">""</span>))
+<a class="jxr_linenumber" name="L420" href="#L420">420</a> 				JOptionPane.showMessageDialog(<strong class="jxr_keyword">null</strong>, <span class="jxr_string">"Rellene correctamente las fechas del curso."</span>, error,
+<a class="jxr_linenumber" name="L421" href="#L421">421</a> 						JOptionPane.ERROR_MESSAGE);
+<a class="jxr_linenumber" name="L422" href="#L422">422</a> 			<strong class="jxr_keyword">else</strong> {
+<a class="jxr_linenumber" name="L423" href="#L423">423</a> 				btnFinalizar.setVisible(<strong class="jxr_keyword">true</strong>);
+<a class="jxr_linenumber" name="L424" href="#L424">424</a> 				btnNext.setVisible(false);
+<a class="jxr_linenumber" name="L425" href="#L425">425</a> 				fechaIni = ano.getSelectedItem().toString() + <span class="jxr_string">"-"</span> + mesNumero(mes.getSelectedItem().toString()) + <span class="jxr_string">"-"</span>
+<a class="jxr_linenumber" name="L426" href="#L426">426</a> 						+ dia.getSelectedItem().toString();
+<a class="jxr_linenumber" name="L427" href="#L427">427</a> 				label.setText(<span class="jxr_string">"Seleccione la fecha de fin:"</span>);
+<a class="jxr_linenumber" name="L428" href="#L428">428</a> 
+<a class="jxr_linenumber" name="L429" href="#L429">429</a> 				mes.setSelectedItem(<span class="jxr_string">""</span>);
+<a class="jxr_linenumber" name="L430" href="#L430">430</a> 				dia.setSelectedItem(<strong class="jxr_keyword">null</strong>);
+<a class="jxr_linenumber" name="L431" href="#L431">431</a> 				ano.setSelectedItem(<strong class="jxr_keyword">null</strong>);
+<a class="jxr_linenumber" name="L432" href="#L432">432</a> 				contentPane.getRootPane().setDefaultButton(btnFinalizar);
+<a class="jxr_linenumber" name="L433" href="#L433">433</a> 			}
+<a class="jxr_linenumber" name="L434" href="#L434">434</a> 
+<a class="jxr_linenumber" name="L435" href="#L435">435</a> 		});
+<a class="jxr_linenumber" name="L436" href="#L436">436</a> 		btnNext.setForeground(Color.WHITE);
+<a class="jxr_linenumber" name="L437" href="#L437">437</a> 		btnNext.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
+<a class="jxr_linenumber" name="L438" href="#L438">438</a> 		btnNext.setBackground(SystemColor.textHighlight);
+<a class="jxr_linenumber" name="L439" href="#L439">439</a> 		btnNext.setBounds(594, 490, 114, 49);
+<a class="jxr_linenumber" name="L440" href="#L440">440</a> 		contentPane.add(btnNext);
+<a class="jxr_linenumber" name="L441" href="#L441">441</a> 
+<a class="jxr_linenumber" name="L442" href="#L442">442</a> 		fac = <strong class="jxr_keyword">new</strong> JComboBox&lt;&gt;();
+<a class="jxr_linenumber" name="L443" href="#L443">443</a> 		fac.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+<a class="jxr_linenumber" name="L444" href="#L444">444</a> 		DefaultComboBoxModel&lt;Facultad&gt; comboBoxModelFac = <strong class="jxr_keyword">new</strong> DefaultComboBoxModel&lt;&gt;();
+<a class="jxr_linenumber" name="L445" href="#L445">445</a> 
+<a class="jxr_linenumber" name="L446" href="#L446">446</a> 		comboBoxModelFac.addElement(<strong class="jxr_keyword">null</strong>);
+<a class="jxr_linenumber" name="L447" href="#L447">447</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_ALBACETE);
+<a class="jxr_linenumber" name="L448" href="#L448">448</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_ALMADEN);
+<a class="jxr_linenumber" name="L449" href="#L449">449</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_CIUDAD_REAL);
+<a class="jxr_linenumber" name="L450" href="#L450">450</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_CUENCA);
+<a class="jxr_linenumber" name="L451" href="#L451">451</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_TALAVERA);
+<a class="jxr_linenumber" name="L452" href="#L452">452</a> 		comboBoxModelFac.addElement(Facultad.CAMPUS_TOLEDO);
+<a class="jxr_linenumber" name="L453" href="#L453">453</a> 		fac.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD, 13));
+<a class="jxr_linenumber" name="L454" href="#L454">454</a> 		fac.setBounds(454, 308, 259, 39);
+<a class="jxr_linenumber" name="L455" href="#L455">455</a> 		fac.setModel(comboBoxModelFac);
+<a class="jxr_linenumber" name="L456" href="#L456">456</a> 		contentPane.add(fac);
+<a class="jxr_linenumber" name="L457" href="#L457">457</a> 		fac.setSelectedItem(<strong class="jxr_keyword">null</strong>);
 <a class="jxr_linenumber" name="L458" href="#L458">458</a> 
 <a class="jxr_linenumber" name="L459" href="#L459">459</a> 		DefaultComboBoxModel&lt;Integer&gt; comboBoxModelAno = <strong class="jxr_keyword">new</strong> DefaultComboBoxModel&lt;&gt;();
 <a class="jxr_linenumber" name="L460" href="#L460">460</a> 
@@ -490,7 +490,7 @@
 <a class="jxr_linenumber" name="L482" href="#L482">482</a> 		lblMes.setVisible(false);
 <a class="jxr_linenumber" name="L483" href="#L483">483</a> 		contentPane.add(lblMes);
 <a class="jxr_linenumber" name="L484" href="#L484">484</a> 
-<a class="jxr_linenumber" name="L485" href="#L485">485</a> 		lblAno = <strong class="jxr_keyword">new</strong> JLabel(<span class="jxr_string">"A�o:"</span>);
+<a class="jxr_linenumber" name="L485" href="#L485">485</a> 		lblAno = <strong class="jxr_keyword">new</strong> JLabel(<span class="jxr_string">"Ano:"</span>);
 <a class="jxr_linenumber" name="L486" href="#L486">486</a> 		lblAno.setForeground(SystemColor.textHighlight);
 <a class="jxr_linenumber" name="L487" href="#L487">487</a> 		lblAno.setFont(<strong class="jxr_keyword">new</strong> Font(tipoLetra, Font.BOLD | Font.ITALIC, 13));
 <a class="jxr_linenumber" name="L488" href="#L488">488</a> 		lblAno.setBounds(548, 195, 259, 39);
@@ -745,27 +745,26 @@
 <a class="jxr_linenumber" name="L737" href="#L737">737</a> 	}
 <a class="jxr_linenumber" name="L738" href="#L738">738</a> 
 <a class="jxr_linenumber" name="L739" href="#L739">739</a> 	<strong class="jxr_keyword">public</strong> java.sql.Date formatoFecha(String fech) <strong class="jxr_keyword">throws</strong> ParseException {
-<a class="jxr_linenumber" name="L740" href="#L740">740</a> 	    <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L741" href="#L741">741</a> 	        SimpleDateFormat formatoFecha = <strong class="jxr_keyword">new</strong> SimpleDateFormat(<span class="jxr_string">"yyyy-MM-dd"</span>);
-<a class="jxr_linenumber" name="L742" href="#L742">742</a> 	        java.util.Date fechaUtil = formatoFecha.parse(fech);
-<a class="jxr_linenumber" name="L743" href="#L743">743</a> 	        <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> java.sql.Date(fechaUtil.getTime());
-<a class="jxr_linenumber" name="L744" href="#L744">744</a> 	    } <strong class="jxr_keyword">catch</strong> (Exception e) {
-<a class="jxr_linenumber" name="L745" href="#L745">745</a> 	        logger.info(<span class="jxr_string">"Se ha producido un error al formatear la fecha: "</span> + e.getMessage());
-<a class="jxr_linenumber" name="L746" href="#L746">746</a> 	    }
-<a class="jxr_linenumber" name="L747" href="#L747">747</a> 	    <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="L740" href="#L740">740</a> 		<strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L741" href="#L741">741</a> 			SimpleDateFormat formatoFecha = <strong class="jxr_keyword">new</strong> SimpleDateFormat(<span class="jxr_string">"yyyy-MM-dd"</span>);
+<a class="jxr_linenumber" name="L742" href="#L742">742</a> 			java.util.Date fechaUtil = formatoFecha.parse(fech);
+<a class="jxr_linenumber" name="L743" href="#L743">743</a> 			<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> java.sql.Date(fechaUtil.getTime());
+<a class="jxr_linenumber" name="L744" href="#L744">744</a> 		} <strong class="jxr_keyword">catch</strong> (Exception e) {
+<a class="jxr_linenumber" name="L745" href="#L745">745</a> 			logger.info(<span class="jxr_string">"Se ha producido un error al formatear la fecha: "</span> + e.getMessage());
+<a class="jxr_linenumber" name="L746" href="#L746">746</a> 		}
+<a class="jxr_linenumber" name="L747" href="#L747">747</a> 		<strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L748" href="#L748">748</a> 	}
 <a class="jxr_linenumber" name="L749" href="#L749">749</a> 
-<a class="jxr_linenumber" name="L750" href="#L750">750</a> 
-<a class="jxr_linenumber" name="L751" href="#L751">751</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> hayCamposVacios() {
-<a class="jxr_linenumber" name="L752" href="#L752">752</a> 		<strong class="jxr_keyword">return</strong> !textoVacio(edicion) || !textoVacio(nombreCurso) || !textoVacio(dniProf) || !textoVacio(dniSec);
-<a class="jxr_linenumber" name="L753" href="#L753">753</a> 	}
-<a class="jxr_linenumber" name="L754" href="#L754">754</a> 
-<a class="jxr_linenumber" name="L755" href="#L755">755</a> 	@Override
-<a class="jxr_linenumber" name="L756" href="#L756">756</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> focusGained(FocusEvent arg0) {
-<a class="jxr_linenumber" name="L757" href="#L757">757</a> <em class="jxr_comment">//No utilizado</em>
-<a class="jxr_linenumber" name="L758" href="#L758">758</a> 	}
-<a class="jxr_linenumber" name="L759" href="#L759">759</a> 
-<a class="jxr_linenumber" name="L760" href="#L760">760</a> }
+<a class="jxr_linenumber" name="L750" href="#L750">750</a> 	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> hayCamposVacios() {
+<a class="jxr_linenumber" name="L751" href="#L751">751</a> 		<strong class="jxr_keyword">return</strong> !textoVacio(edicion) || !textoVacio(nombreCurso) || !textoVacio(dniProf) || !textoVacio(dniSec);
+<a class="jxr_linenumber" name="L752" href="#L752">752</a> 	}
+<a class="jxr_linenumber" name="L753" href="#L753">753</a> 
+<a class="jxr_linenumber" name="L754" href="#L754">754</a> 	@Override
+<a class="jxr_linenumber" name="L755" href="#L755">755</a> 	<strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> focusGained(FocusEvent arg0) {
+<a class="jxr_linenumber" name="L756" href="#L756">756</a> <em class="jxr_comment">//No utilizado</em>
+<a class="jxr_linenumber" name="L757" href="#L757">757</a> 	}
+<a class="jxr_linenumber" name="L758" href="#L758">758</a> 
+<a class="jxr_linenumber" name="L759" href="#L759">759</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2023. All rights reserved.</div>

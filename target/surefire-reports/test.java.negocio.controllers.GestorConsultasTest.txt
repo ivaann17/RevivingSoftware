@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: test.java.negocio.controllers.GestorConsultasTest
 -------------------------------------------------------------------------------
-Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.289 s - in test.java.negocio.controllers.GestorConsultasTest
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.176 s - in test.java.negocio.controllers.GestorConsultasTest
