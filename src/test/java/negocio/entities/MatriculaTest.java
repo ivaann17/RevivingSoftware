@@ -1,6 +1,9 @@
-package main.java.negocio.entities;
+package test.java.negocio.entities;
 
 import org.junit.jupiter.api.Test;
+
+import main.java.negocio.entities.Matricula;
+import main.java.negocio.entities.ModoPago;
 
 import java.util.Date;
 

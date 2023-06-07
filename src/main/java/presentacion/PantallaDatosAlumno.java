@@ -59,7 +59,7 @@ public class PantallaDatosAlumno extends JFrame {
 
 	public PantallaDatosAlumno() throws SQLException {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaDatosAlumno.class.getResource("/resources/IMAGES/descarga.png")));
+				.getImage(PantallaDatosAlumno.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM\r\n");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 770, 618);
@@ -73,7 +73,7 @@ public class PantallaDatosAlumno extends JFrame {
 
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(
-				PantallaDatosAlumno.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+				PantallaDatosAlumno.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 

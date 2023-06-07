@@ -1,7 +1,9 @@
-package main.java.negocio.entities;
+package test.java.negocio.entities;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+
+import main.java.negocio.entities.Centro;
 
 import static org.junit.jupiter.api.Assertions.*;
 

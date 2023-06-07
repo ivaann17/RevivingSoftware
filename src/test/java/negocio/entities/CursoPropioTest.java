@@ -1,9 +1,13 @@
-package main.java.negocio.entities;
+package test.java.negocio.entities;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.time.LocalDate;
+import main.java.negocio.entities.Centro;
+import main.java.negocio.entities.CursoPropio;
+import main.java.negocio.entities.EstadoCurso;
+import main.java.negocio.entities.TipoCurso;
+
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -92,7 +96,7 @@ public class CursoPropioTest {
 	public void testGetTasaMatricula() {
 		CursoPropio curso = curso();
 
-		assertEquals(100.0, curso.getTasaMatricula(), 0.001);
+		assertEquals(100.0, curso.getTasaMatricula());
 	}
 
 	@Test

@@ -41,7 +41,7 @@ public class PantallaComenzarCurso extends JFrame {
 
 	public PantallaComenzarCurso() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaComenzarCurso.class.getResource("/resources/IMAGES/descarga.png")));
+				.getImage(PantallaComenzarCurso.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -54,7 +54,7 @@ public class PantallaComenzarCurso extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(
-				PantallaComenzarCurso.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+				PantallaComenzarCurso.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 

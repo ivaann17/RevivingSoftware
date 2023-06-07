@@ -60,7 +60,7 @@ public class PantallaLogin extends JFrame {
 	public PantallaLogin() {
 		final JFrame frmUclm = new JFrame("Demo application");
 		frmUclm.setIconImage(
-				Toolkit.getDefaultToolkit().getImage(PantallaLogin.class.getResource("/resources/IMAGES/descarga.png")));
+				Toolkit.getDefaultToolkit().getImage(PantallaLogin.class.getResource("/IMAGES/descarga.png")));
 		frmUclm.setTitle("UCLM");
 		frmUclm.setSize(625, 428);
 		frmUclm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -130,7 +130,7 @@ public class PantallaLogin extends JFrame {
 		userLabel.setBounds(80, 138, 148, 25);
 		panel.add(userLabel);
 
-		passwordLabel = new JLabel("Escribir Contrase�a");
+		passwordLabel = new JLabel("Escribir Contrasena");
 		passwordLabel.setVisible(false);
 		passwordLabel.setFont(new Font(tipoLetra, Font.BOLD, 20));
 		passwordLabel.setBounds(80, 129, 215, 42);
@@ -145,7 +145,7 @@ public class PantallaLogin extends JFrame {
 		panel.add(user);
 		user.setColumns(10);
 
-		btnNoAcceder = new JButton("�No puede acceder a su cuenta?");
+		btnNoAcceder = new JButton("No puede acceder a su cuenta?");
 		btnNoAcceder.addActionListener(arg0 -> enlaceMan());
 		btnNoAcceder.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNoAcceder.setHorizontalAlignment(SwingConstants.LEFT);
@@ -186,7 +186,7 @@ public class PantallaLogin extends JFrame {
 		});
 
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PantallaLogin.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+		lblNewLabel.setIcon(new ImageIcon(PantallaLogin.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		panel.add(lblNewLabel);
 

@@ -36,7 +36,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 
 	public PantallaEmpezarMatriculacion() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaEmpezarMatriculacion.class.getResource("/resources/IMAGES/descarga.png")));
+				.getImage(PantallaEmpezarMatriculacion.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -55,7 +55,7 @@ public class PantallaEmpezarMatriculacion extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
-				new ImageIcon(PantallaEmpezarMatriculacion.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaEmpezarMatriculacion.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 

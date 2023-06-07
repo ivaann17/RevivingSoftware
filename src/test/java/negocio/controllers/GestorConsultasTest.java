@@ -1,4 +1,4 @@
-package main.java.negocio.controllers;
+package test.java.negocio.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,6 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import main.java.negocio.controllers.GestorConsultas;
+import main.java.negocio.controllers.GestorMatriculacion;
+import main.java.negocio.controllers.GestorPropuestasCursos;
 import main.java.negocio.entities.Centro;
 import main.java.negocio.entities.CursoPropio;
 import main.java.negocio.entities.EstadoCurso;
@@ -94,7 +97,7 @@ public class GestorConsultasTest {
 	}
 
 	@Test
-	public void consultarIngresosTest() throws SQLException {
+	public void testConsultarIngresos() throws SQLException {
 		CursoPropio c = curso1();
 		GestorPropuestasCursos.realizarPropuestaCurso(c);
 		Matricula m = matricula1();

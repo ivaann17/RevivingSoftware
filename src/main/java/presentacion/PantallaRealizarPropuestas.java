@@ -86,7 +86,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 
 	public PantallaRealizarPropuestas() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaRealizarPropuestas.class.getResource("/resources/IMAGES/descarga.png")));
+				.getImage(PantallaRealizarPropuestas.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM\r\n");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 770, 618);
@@ -100,7 +100,7 @@ public class PantallaRealizarPropuestas extends JFrame implements FocusListener 
 
 		img = new JLabel("");
 		img.setIcon(
-				new ImageIcon(PantallaRealizarPropuestas.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaRealizarPropuestas.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		img.setBounds(44, 10, 310, 99);
 		contentPane.add(img);
 

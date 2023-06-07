@@ -37,7 +37,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 	public PantallaPropuestasRealizadas() {
 
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaPropuestasRealizadas.class.getResource("/resources/IMAGES/descarga.png")));
+				.getImage(PantallaPropuestasRealizadas.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -50,7 +50,7 @@ public class PantallaPropuestasRealizadas extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
-				new ImageIcon(PantallaPropuestasRealizadas.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaPropuestasRealizadas.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 

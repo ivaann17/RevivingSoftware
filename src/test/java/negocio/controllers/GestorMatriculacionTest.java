@@ -65,7 +65,7 @@ public class GestorMatriculacionTest {
     }
 
     @Test
-    public void testExisteEdicion() throws SQLException {
+    public void testExisteMatricula() throws SQLException {
         // CP1
         Matricula mat = mat1();
         GestorMatriculacion.realizarMatriculacion(mat);
@@ -84,7 +84,7 @@ public class GestorMatriculacionTest {
     }
 
     @Test
-    public void testEliminarEdicion() throws SQLException {
+    public void testEliminarMatricula() throws SQLException {
         // CP1
         Matricula mat = mat1();
         GestorMatriculacion.realizarMatriculacion(mat);

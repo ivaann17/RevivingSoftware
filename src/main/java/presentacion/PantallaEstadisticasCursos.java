@@ -41,7 +41,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 
 	public PantallaEstadisticasCursos() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaEstadisticasCursos.class.getResource("/resources/IMAGES/descarga.png")));
+				.getImage(PantallaEstadisticasCursos.class.getResource("/IMAGES/descarga.png")));
 		setTitle("UCLM");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
@@ -54,7 +54,7 @@ public class PantallaEstadisticasCursos extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(
-				new ImageIcon(PantallaEstadisticasCursos.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+				new ImageIcon(PantallaEstadisticasCursos.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(44, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 

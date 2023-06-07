@@ -59,7 +59,7 @@ public class GestorPropuestasCursosTest {
 	}
 
 	@Test
-	public void testRealizarPropuetaCurso() throws SQLException {
+	public void testRealizarPropuestaCurso() throws SQLException {
 		// CP1
 		CursoPropio c = curso1();
 		GestorPropuestasCursos.realizarPropuestaCurso(c);

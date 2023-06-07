@@ -26,7 +26,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 	public PantallaJefeGabineteVicerrectorado() {
 		setTitle("UCLM");
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(PantallaJefeGabineteVicerrectorado.class.getResource("/resources/IMAGES/descarga.png")));
+				.getImage(PantallaJefeGabineteVicerrectorado.class.getResource("/IMAGES/descarga.png")));
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 520);
 		contentPane = new JPanel();
@@ -38,7 +38,7 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(
-				PantallaJefeGabineteVicerrectorado.class.getResource("/resources/IMAGES/Captura de pantalla (188).png")));
+				PantallaJefeGabineteVicerrectorado.class.getResource("/IMAGES/Captura de pantalla (188).png")));
 		lblNewLabel.setBounds(10, 10, 310, 99);
 		contentPane.add(lblNewLabel);
 
@@ -69,12 +69,12 @@ public class PantallaJefeGabineteVicerrectorado extends JFrame {
 
 		JLabel lblNewLabel2 = new JLabel("");
 		lblNewLabel2
-				.setIcon(new ImageIcon(PantallaJefeGabineteVicerrectorado.class.getResource("/resources/IMAGES/images2.jpg")));
+				.setIcon(new ImageIcon(PantallaJefeGabineteVicerrectorado.class.getResource("/IMAGES/images2.jpg")));
 		lblNewLabel2.setBounds(549, 55, 142, 143);
 		contentPane.add(lblNewLabel2);
 
 		JButton cs = new JButton("Cerrar sesion");
-		cs.setIcon(new ImageIcon(PantallaJefeGabineteVicerrectorado.class.getResource("/resources/IMAGES/cerrar-sesion .png")));
+		cs.setIcon(new ImageIcon(PantallaJefeGabineteVicerrectorado.class.getResource("/IMAGES/cerrar-sesion .png")));
 		contentPane.add(PantallaEmpleadosVicerrectorado.crearBotonCerrarSesion(cs));
 		cs.addActionListener(event -> {
 
