@@ -96,4 +96,3 @@ El mantenimiento se ha realizado de forma conjunta a la gestión de la calidad p
 Si desea conocer como utilizar el software acceda al [manual de usuario](https://github.com/ivaann17/RevivingSoftware/blob/Release/ManualUsuario.md)
 
 
-

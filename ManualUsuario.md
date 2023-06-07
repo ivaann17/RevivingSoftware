@@ -1,3 +1,4 @@
+
 ![Imagen de encabezado](IMAGENES_MEMORIA/RevivingSoftware.png)
 
 # Manual de usuario-Prácticas ISO II
@@ -53,6 +54,5 @@ Una vez identificado como estudiante, aparecen las opciones de "Realizar matricu
 Una vez identificado como jefe, aparecen las opciones de "Estadisticas cursos" (resumen de estadisticas de todos los cursos)  y "Comenzar cursos" (se comienzan a impartir los cursos en matriculación).
 
 ![Profesor](IMAGENES_MEMORIA/Jefe.png)
-
 
 
