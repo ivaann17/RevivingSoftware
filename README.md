@@ -72,8 +72,7 @@ La construcción del software se ha realizado utilizando la herramienta Maven y 
 ![Dependencia2](IMAGENES_MEMORIA/DEPENDENCIAS2.png)
 
 En cuanto a la base de datos, se ha creado una base de datos online mediante db4free y phpMyAdmin. Al no ser el objetivo fundamental de dicho proyecto, se trata de una base de datos muy simplificada y creada de forma rápida. Su esquema es el siguiente:
-
-![EsquemaBBDD](IMAGENES_MEMORIA/Base Datos esquema.png)
+![EsquemaBBDD](https://github.com/ivaann17/RevivingSoftware/blob/Master/IMAGENES_MEMORIA/Base%20Datos%20esquema.png)
 
 ## Calidad<a name="calidad"></a>
 La gestión de la calidad se ha realizado mediante la herramienta SonarCloud. Se ha creado una automatización en la realización de analisis de calidad al realizar commits y pull requests.
