@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: test.java.negocio.controllers.GestorMatriculacionTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 12.149 s <<< FAILURE! - in test.java.negocio.controllers.GestorMatriculacionTest
-test.java.negocio.controllers.GestorMatriculacionTest.testEliminarMatricula  Time elapsed: 5.662 s  <<< FAILURE!
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 15.303 s <<< FAILURE! - in test.java.negocio.controllers.GestorMatriculacionTest
+test.java.negocio.controllers.GestorMatriculacionTest.testEliminarMatricula  Time elapsed: 8.726 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -79,7 +79,7 @@ org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-test.java.negocio.controllers.GestorMatriculacionTest.testRealizarMatriculacion  Time elapsed: 0.751 s  <<< FAILURE!
+test.java.negocio.controllers.GestorMatriculacionTest.testRealizarMatriculacion  Time elapsed: 0.735 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -157,7 +157,7 @@ org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-test.java.negocio.controllers.GestorMatriculacionTest.testExisteMatricula  Time elapsed: 5.728 s  <<< FAILURE!
+test.java.negocio.controllers.GestorMatriculacionTest.testExisteMatricula  Time elapsed: 5.833 s  <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)

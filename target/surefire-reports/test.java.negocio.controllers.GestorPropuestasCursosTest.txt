@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: test.java.negocio.controllers.GestorPropuestasCursosTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 34.504 s - in test.java.negocio.controllers.GestorPropuestasCursosTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.363 s - in test.java.negocio.controllers.GestorPropuestasCursosTest
