@@ -1,4 +1,4 @@
-# Título de la Memoria
+# RevivingSoftware-Prácticas ISO II
 
 ![Imagen de encabezado](ruta/a/la/imagen.png)
 
@@ -11,20 +11,10 @@
     - [2.4. Sprint4](#sprint4)
     - [2.5. Sprint5](#sprint5)
 3. [Codificación](#codificacion)
-    - [3.1 Resultados de codificación](#resultados-codificacion)
-    - [3.2 Lecciones aprendidas en codificación](#lecciones-aprendidas-codificacion)
 4. [Configuración](#configuracion)
-    - [4.1 Resultados de configuración](#resultados-configuracion)
-    - [4.2 Lecciones aprendidas en configuración](#lecciones-aprendidas-configuracion)
 5. [Calidad](#calidad)
-   - [5.1 Resultados de calidad](#resultados-calidad)
-   - [5.2 Lecciones aprendidas en calidad](#lecciones-aprendidas-calidad)
 6. [Testing](#testing)
-   - [6.1 Resultados de testing](#resultados-testing)
-   - [6.2 Lecciones aprendidas en testing](#lecciones-aprendidas-testing)
 7. [Mantenimiento](#mantenimiento)
-   - [7.1 Resultados de mantenimiento](#resultados-mantenimiento)
-   - [7.2 Lecciones aprendidas en mantenimiento](#lecciones-aprendidas-mantenimiento)
 
 
 
@@ -36,30 +26,70 @@ Para la planificación y gestión del proyecto se ha seguido una metodología ag
 ### Sprint1<a name="sprint1"></a>
 Su objetivo principal era la configuración del proyecto y avance en la capa "Presentación". Se realizo en unas fechas comprendidas entre el día 01-03-2023 y el día 22-03-2023. En general los objetivos fueron completados, aunque el avance en la capa "Presentación" no fue muy significativo.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](http://www.ejemplo.com)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%201)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/jVvZVQfw/sprint-1)
 ### Sprint2<a name="sprint2"></a>
 Su objetivo principal era la finalización de la capa "Presentación y la creación del "Plan de Gestión de la Configuración". Se realizo en unas fechas comprendidas entre el día 23-03-2023 y el día 13-04-2023. En general los objetivos no fueron completados debido a la carga de trabajo en dicho periodo del sprint y la imposibilidad de trabajar en este proyecto.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](http://www.ejemplo.com)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%202)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/Xp75PwJj/sprint-2)
 ### Sprint3<a name="sprint3"></a>
 Su objetivo principal era avanzar en el retraso producido en el sprint 2. Se realizo en unas fechas comprendidas entre el día 14-04-2023 y el día 05-05-2023. En general los objetivos fueron completados de forma satisfactoria aunque aun quedaron para el siguiente sprint las dos tareas del sprint2: "Creación base de datos (tarea continua)" y "Creación del Plan de Gestión de la Configuración".
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](http://www.ejemplo.com)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%203)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/MsY4DWdP/sprint-3)
 ### Sprint4<a name="sprint4"></a>
 Su objetivo principal era la finalización del proyecto. Se realizo en unas fechas comprendidas entre el día 08-05-2023 y el día 20-05-2023. En general los objetivos fueron completados pero no se pudieron realizar de forma completa los últimos pasos del proyecto, como el testing o la gestión de la calidad.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](http://www.ejemplo.com)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%204)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/kiRyT5mS/sprint-4)
 ### Sprint5<a name="sprint5"></a>
 Su objetivo principal era de nuevo la finalización del proyecto completo. Se realizo en unas fechas comprendidas entre el día 22-05-2023 y el día 06-06-2023. Los objetivos fueron completados y el proyecto finalizado de forma correcta.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](http://www.ejemplo.com)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%205)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/XRbclyOe/sprint-5)
+
+## Codificación<a name="codificacion"></a>
+El proyecto esta comprendido en tres capas: negocio, persistencia y presentación. En la capa de negocio se encuentran los gestores y entidades del software. En la capa de persistencia se encuentran las clases que hacen de enlace entre la base de datos y el software. En la capa de presentación se encuentran todas las interfaces gráficas (GUIs).
+
+Se puede observar la estructura y el código en el siguiente [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/src)
+
+## Configuración<a name="configuracion"></a>
+En cuanto a la gestión de la configuración del proyecto, en primer lugar cabe destacar que se ha creado un "Plan de Gestión de la Configuración" que se puede revisar en el siguiente [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/PLAN%20DE%20GESTI%C3%93N%20DE%20CONFIGURACI%C3%93N).
+
+El proyecto se ha gestionado en GitHub con la creación de diferentes ramas para dividir el trabajo.
+
+La construcción del software se ha realizado utilizando la herramienta Maven y a través del archivo pom.xml. Las dependencias utilizadas en el proyecto son las siguientes:
+
+![Dependencia1](ruta/a/la/imagen.png)
+
+![Dependencia2](ruta/a/la/imagen.png)
+
+En cuanto a la base de datos, se ha creado una base de datos online mediante db4free y phpMyAdmin. Al no ser el objetivo fundamental de dicho proyecto, se trata de una base de datos muy simplificada y creada de forma rápida. Su esquema es el siguiente:
+
+![EsquemaBBDD](ruta/a/la/imagen.png)
+
+## Calidad<a name="calidad"></a>
+La gestión de la calidad se ha realizado mediante la herramienta SonarCloud. Se ha creado una automatización en la realización de analisis de calidad al realizar commits y pull requests.
+
+Los requisitos para un analisis de calidad adecuado son los siguientes: 
+
+![Calidad](ruta/a/la/imagen.png)
+
+## Testing<a name="testing"></a>
+Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas]() creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
+
+Por otra parte, se genera de forma automatica un informe (target/site) sobre el proyecto mediante la herramienta de "Surefire" y también en particular sobre los test con la herramienta de cobertura de "Jacoco". El informe se puede observar en este [enlace]() 
+
+## Mantenimiento<a name="mantenimiento"></a>
+El mantenimiento se ha realizado de forma conjunta a la gestión de la calidad principalmente mediante la eliminación de code smells, tanto en la parte del codigo como en los test. En la siguiente imagen se puede observar la clara disminución de los code smells durante el tiempo.
+
+![Mantenimiento](ruta/a/la/imagen.png)
+
+
+
