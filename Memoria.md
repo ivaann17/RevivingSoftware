@@ -1,7 +1,7 @@
+
+![Imagen de encabezado](IMAGENES_MEMORIA/RevivingSoftware.png)
+
 # RevivingSoftware-Prácticas ISO II
-
-![Imagen de encabezado](ruta/a/la/imagen.png)
-
 ## Índice
 1. [Introducción](#introducción)
 2. [Planificación y gestión](#planificacion)
@@ -15,6 +15,7 @@
 5. [Calidad](#calidad)
 6. [Testing](#testing)
 7. [Mantenimiento](#mantenimiento)
+8. [Manual de usuario](#manual)
 
 
 
@@ -66,30 +67,33 @@ El proyecto se ha gestionado en GitHub con la creación de diferentes ramas para
 
 La construcción del software se ha realizado utilizando la herramienta Maven y a través del archivo pom.xml. Las dependencias utilizadas en el proyecto son las siguientes:
 
-![Dependencia1](ruta/a/la/imagen.png)
+![Dependencia1](IMAGENES_MEMORIA/DEPENDENCIAS.png)
 
-![Dependencia2](ruta/a/la/imagen.png)
+![Dependencia2](IMAGENES_MEMORIA/DEPENDENCIAS2.png)
 
 En cuanto a la base de datos, se ha creado una base de datos online mediante db4free y phpMyAdmin. Al no ser el objetivo fundamental de dicho proyecto, se trata de una base de datos muy simplificada y creada de forma rápida. Su esquema es el siguiente:
 
-![EsquemaBBDD](ruta/a/la/imagen.png)
+![EsquemaBBDD](IMAGENES_MEMORIA/Base Datos esquema.png)
 
 ## Calidad<a name="calidad"></a>
 La gestión de la calidad se ha realizado mediante la herramienta SonarCloud. Se ha creado una automatización en la realización de analisis de calidad al realizar commits y pull requests.
 
-Los requisitos para un analisis de calidad adecuado son los siguientes: 
+Las metricas para nuestro analisis de calidad son las siguientes: 
 
-![Calidad](ruta/a/la/imagen.png)
+![Calidad](IMAGENES_MEMORIA/Metricas.png)
 
 ## Testing<a name="testing"></a>
-Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas]() creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
+Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas](https://github.com/ivaann17/RevivingSoftware/tree/Release/PLAN%20DE%20PRUEBAS) creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
 
-Por otra parte, se genera de forma automatica un informe (target/site) sobre el proyecto mediante la herramienta de "Surefire" y también en particular sobre los test con la herramienta de cobertura de "Jacoco". El informe se puede observar en este [enlace]() 
+Por otra parte, se genera de forma automatica un informe (target/site) sobre el proyecto mediante la herramienta de "Surefire" y también en particular sobre los test con la herramienta de cobertura de "Jacoco". El informe se puede observar en este [enlace](PLAN DE PRUEBAS) 
 
 ## Mantenimiento<a name="mantenimiento"></a>
 El mantenimiento se ha realizado de forma conjunta a la gestión de la calidad principalmente mediante la eliminación de code smells, tanto en la parte del codigo como en los test. En la siguiente imagen se puede observar la clara disminución de los code smells durante el tiempo.
 
 ![Mantenimiento](ruta/a/la/imagen.png)
+
+## Manual de usuario<a name="manual"></a>
+Si desea conocer como utilizar el software acceda al [manual de usuario](https://github.com/ivaann17/RevivingSoftware/blob/Release/ManualUsuario.md)
 
 
 
