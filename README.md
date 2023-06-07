@@ -27,41 +27,41 @@ Para la planificación y gestión del proyecto se ha seguido una metodología ag
 ### Sprint1<a name="sprint1"></a>
 Su objetivo principal era la configuración del proyecto y avance en la capa "Presentación". Se realizo en unas fechas comprendidas entre el día 01-03-2023 y el día 22-03-2023. En general los objetivos fueron completados, aunque el avance en la capa "Presentación" no fue muy significativo.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%201)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Master/SPRINTS/SPRINT%201)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/jVvZVQfw/sprint-1)
 ### Sprint2<a name="sprint2"></a>
 Su objetivo principal era la finalización de la capa "Presentación y la creación del "Plan de Gestión de la Configuración". Se realizo en unas fechas comprendidas entre el día 23-03-2023 y el día 13-04-2023. En general los objetivos no fueron completados debido a la carga de trabajo en dicho periodo del sprint y la imposibilidad de trabajar en este proyecto.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%202)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Master/SPRINTS/SPRINT%202)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/Xp75PwJj/sprint-2)
 ### Sprint3<a name="sprint3"></a>
 Su objetivo principal era avanzar en el retraso producido en el sprint 2. Se realizo en unas fechas comprendidas entre el día 14-04-2023 y el día 05-05-2023. En general los objetivos fueron completados de forma satisfactoria aunque aun quedaron para el siguiente sprint las dos tareas del sprint2: "Creación base de datos (tarea continua)" y "Creación del Plan de Gestión de la Configuración".
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%203)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Master/SPRINTS/SPRINT%203)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/MsY4DWdP/sprint-3)
 ### Sprint4<a name="sprint4"></a>
 Su objetivo principal era la finalización del proyecto. Se realizo en unas fechas comprendidas entre el día 08-05-2023 y el día 20-05-2023. En general los objetivos fueron completados pero no se pudieron realizar de forma completa los últimos pasos del proyecto, como el testing o la gestión de la calidad.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%204)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Master/SPRINTS/SPRINT%204)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/kiRyT5mS/sprint-4)
 ### Sprint5<a name="sprint5"></a>
 Su objetivo principal era de nuevo la finalización del proyecto completo. Se realizo en unas fechas comprendidas entre el día 22-05-2023 y el día 06-06-2023. Los objetivos fueron completados y el proyecto finalizado de forma correcta.
 
-Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/SPRINTS/SPRINT%205)
+Se puede ver el avance del sprint paso a paso pulse este [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Master/SPRINTS/SPRINT%205)
 
 Para mayor información del sprint en Trello pulse este [enlace](https://trello.com/b/XRbclyOe/sprint-5)
 
 ## Codificación<a name="codificacion"></a>
 El proyecto esta comprendido en tres capas: negocio, persistencia y presentación. En la capa de negocio se encuentran los gestores y entidades del software. En la capa de persistencia se encuentran las clases que hacen de enlace entre la base de datos y el software. En la capa de presentación se encuentran todas las interfaces gráficas (GUIs).
 
-Se puede observar la estructura y el código en el siguiente [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/src)
+Se puede observar la estructura y el código en el siguiente [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Master/src)
 
 ## Configuración<a name="configuracion"></a>
-En cuanto a la gestión de la configuración del proyecto, en primer lugar cabe destacar que se ha creado un "Plan de Gestión de la Configuración" que se puede revisar en el siguiente [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Release/PLAN%20DE%20GESTI%C3%93N%20DE%20CONFIGURACI%C3%93N).
+En cuanto a la gestión de la configuración del proyecto, en primer lugar cabe destacar que se ha creado un "Plan de Gestión de la Configuración" que se puede revisar en el siguiente [enlace](https://github.com/ivaann17/RevivingSoftware/tree/Master/PLAN%20DE%20GESTI%C3%93N%20DE%20CONFIGURACI%C3%93N).
 
 El proyecto se ha gestionado en GitHub con la creación de diferentes ramas para dividir el trabajo.
 
@@ -83,7 +83,7 @@ Las metricas para nuestro analisis de calidad son las siguientes:
 ![Calidad](IMAGENES_MEMORIA/Metricas.png)
 
 ## Testing<a name="testing"></a>
-Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas](https://github.com/ivaann17/RevivingSoftware/tree/Release/PLAN%20DE%20PRUEBAS) creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
+Para la realización de pruebas de software se ha seguido lo estipulado en el [Plan de Pruebas](https://github.com/ivaann17/RevivingSoftware/tree/Master/PLAN%20DE%20PRUEBAS) creado. Se realizan mediante "JUnit5" y también utilizando el plugin de Eclipse "MoreUnit". El código para la realización de test se aloja en el paquete test.java.negocio.
 
 Por otra parte, se genera de forma automatica un informe (target/site) sobre el proyecto mediante la herramienta de "Surefire" y también en particular sobre los test con la herramienta de cobertura de "Jacoco". 
 
@@ -93,6 +93,6 @@ El mantenimiento se ha realizado de forma conjunta a la gestión de la calidad p
 ![Mantenimiento](IMAGENES_MEMORIA/SONAR.png)
 
 ## Manual de usuario<a name="manual"></a>
-Si desea conocer como utilizar el software acceda al [manual de usuario](https://github.com/ivaann17/RevivingSoftware/blob/Release/ManualUsuario.md)
+Si desea conocer como utilizar el software acceda al [manual de usuario](https://github.com/ivaann17/RevivingSoftware/blob/Master/ManualUsuario.md)
 
 
